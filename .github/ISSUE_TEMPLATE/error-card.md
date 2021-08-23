@@ -1,7 +1,7 @@
 ---
 name: error card
 about: "✏️ 에러 기록"
-title: "[❗️Error Handling] [Workspace - Chat]"
+title: "[❗️Error Handling] []"
 labels: ''
 assignees: ''
 
