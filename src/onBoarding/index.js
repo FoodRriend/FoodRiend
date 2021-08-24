@@ -1,7 +1,7 @@
-export { default as Splash } from './Splash';
-export { default as AddFavFood } from './components/AddFavFood';
-export { default as AddFriends } from './components/AddFriends';
-export { default as AddStyle } from './components/AddStyle';
-export { default as Login } from './components/Login';
-export { default as Signup } from './components/Signup';
-export { default as SignupComplete } from './components/SignupComplete';
+export { default as SplashScreen } from './SplashScreen';
+export { default as AddFavFoodScreen } from './AddFavFoodScreen';
+export { default as AddFriendsScreen } from './AddFriendsScreen';
+export { default as AddStyleScreen } from './AddStyleScreen';
+export { default as LoginScreen } from './LoginScreen';
+export { default as SignupScreen } from './SignupScreen';
+export { default as SignupCompleteScreen } from './SignupCompleteScreen';
