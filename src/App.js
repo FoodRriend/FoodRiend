@@ -1,12 +1,25 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Touchable } from 'react-native';
 
 const App = () => {
   return (
-    <View>
-      <Text>Hello world</Text>
-    </View>
+    <TouchableOpacity style={styles.header} onPress={() => alert('hi')}>
+      <View>
+        <Text>touch</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  header: {
+    flex: 1,
+    backgroundColor: 'pink',
+    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+});
