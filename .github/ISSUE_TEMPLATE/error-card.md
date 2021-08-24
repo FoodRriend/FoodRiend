@@ -4,7 +4,6 @@ about: "✏️ 에러 기록"
 title: "[❗️Error Handling] []"
 labels: ''
 assignees: jeongro123, fz7948
-
 ---
 
 ### 어떤 에러인가요?
