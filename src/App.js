@@ -1,25 +1,37 @@
-import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Touchable } from 'react-native';
+import 'react-native-gesture-handler';
+import React, { useState, useEffect } from 'react';
+
+// import {} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import { SignupScreen, SplashScreen, LoginScreen } from '@/onBoarding';
+import test from './shared/hooks/test';
+
+const Stack = createStackNavigator();
 
 const App = () => {
+  // const [loding, setLoding] = useState(false);
+  // const isTrue = () => {
+  //   setLoding(true);
+  // };
+  // const loding = test();
+  // setTimeout(isTrue, 3000);
   return (
-    <TouchableOpacity style={styles.header} onPress={() => alert('hi')}>
-      <View>
-        <Text>touch</Text>
-      </View>
-    </TouchableOpacity>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+        headerMode="screen"
+        // initialRouteName={loding ? 'Login' : 'Splash'}
+      >
+        <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Signup" component={SignupScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    backgroundColor: 'pink',
-    padding: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-  },
-});
