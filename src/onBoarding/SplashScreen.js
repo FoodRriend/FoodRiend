@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 const SplashScreen = () => {
   const navigation = useNavigation();
 
-  setTimeout(() => navigation.navigate('Login'), 5000);
+  setTimeout(() => navigation.navigate('Login'), 2000);
   return (
     <View>
       <Image

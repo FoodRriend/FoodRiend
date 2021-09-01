@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text, View, Pressable } from 'react-native';
+import { Text, View, Pressable, StyleSheet } from 'react-native';
 
 const SignupScreen = () => {
   return (
