@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/native';
-import { Text, View, Pressable, StyleSheet, Image } from 'react-native';
+import { Text, Pressable, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {

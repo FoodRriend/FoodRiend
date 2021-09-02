@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { SignupScreen, SplashScreen, LoginScreen } from '@/onBoarding';
+import { SignupScreen, SplashScreen, LoginScreen, AddStyleScreen } from '@/onBoarding';
 import test from './shared/hooks/test';
 
 const Stack = createStackNavigator();
@@ -29,6 +29,7 @@ const App = () => {
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
+        <Stack.Screen name="AddStyle" component={AddStyleScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
