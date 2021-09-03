@@ -1,9 +1,8 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput } from 'react-native';
+import { Text, View, Pressable, StyleSheet, TextInput, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-// import Icon from 'react-native-vector-icons/Ionicons';
 
 const SignupScreen = () => {
   const navigation = useNavigation();
@@ -21,15 +20,15 @@ const SignupScreen = () => {
     navigation.setOptions({
       headerShown: true,
       title: '회원가입',
-      headerBackTitleVisible: false,
-      // headerLeft: () => (
-      //   <Icon
-      //     name="ios-person"
-      //     size={25}
-      //     onPress={() => {
-      //       navigation.navigate('Login');
-      //     }}></Icon>
-      // ),
+      headerLeft: () => (
+        <Pressable
+          style={styles.BackIcon}
+          onPress={() => {
+            navigation.navigate('Login');
+          }}>
+          <Image source={require(`../assets/icons/Left.png`)}></Image>
+        </Pressable>
+      ),
     });
   };
 
@@ -135,6 +134,15 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     fontStyle: 'normal',
     color: '#ffffff',
+  },
+  BackIcon: {
+    width: 50,
+    height: 30,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 13,
+    paddingRight: 20,
   },
 });
 

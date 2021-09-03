@@ -1,1 +1,1 @@
-// 추후 사용
+export { default as AddStyleData } from './AddStyleData';
