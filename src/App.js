@@ -12,6 +12,7 @@ import {
   AddStyleScreen,
   AddFavFoodScreen,
   AddFriendsScreen,
+  SignupCompleteScreen,
 } from '@/onBoarding';
 // import test from './shared/hooks/test';
 
@@ -42,6 +43,7 @@ const App = () => {
         <Stack.Screen name="AddStyle" component={AddStyleScreen} />
         <Stack.Screen name="AddFavFood" component={AddFavFoodScreen} />
         <Stack.Screen name="AddFriends" component={AddFriendsScreen} />
+        <Stack.Screen name="SignupComplete" component={SignupCompleteScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

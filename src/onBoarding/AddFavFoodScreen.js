@@ -13,7 +13,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import favFoodData from './components/FavFoodData';
+import favFoodData from './constants/FavFoodData';
 
 const fomatFavFoodData = (favFoodData, numColumns) => {
   const numberOfFullRows = Math.floor(favFoodData.length / numColumns);
@@ -69,6 +69,7 @@ const AddFavFoodScreen = () => {
     if (item.empty === true) {
       return <View style={[styles.favFoodItem, styles.itemInvisible]} />;
     }
+    console.log(item);
     if (item.title === foodSelect) {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
