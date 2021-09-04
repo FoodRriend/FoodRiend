@@ -69,7 +69,6 @@ const AddFavFoodScreen = () => {
     if (item.empty === true) {
       return <View style={[styles.favFoodItem, styles.itemInvisible]} />;
     }
-    console.log(item);
     if (item.title === foodSelect) {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
