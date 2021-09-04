@@ -5,8 +5,19 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { SignupScreen, SplashScreen, LoginScreen } from '@/onBoarding';
-import test from './shared/hooks/test';
+import {
+  SignupScreen,
+  SplashScreen,
+  LoginScreen,
+  AddStyleScreen,
+  AddFavFoodScreen,
+  AddFriendsScreen,
+  SignupCompleteScreen,
+} from '@/onBoarding';
+// import test from './shared/hooks/test';
+
+// 아이콘 사용 시
+// import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +40,10 @@ const App = () => {
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
+        <Stack.Screen name="AddStyle" component={AddStyleScreen} />
+        <Stack.Screen name="AddFavFood" component={AddFavFoodScreen} />
+        <Stack.Screen name="AddFriends" component={AddFriendsScreen} />
+        <Stack.Screen name="SignupComplete" component={SignupCompleteScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
