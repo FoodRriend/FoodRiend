@@ -1,2 +1,1 @@
-export { default as AddStyleData } from './AddStyleData';
-export { default as FavFoodData } from './FavFoodData';
+// 추후 작성
