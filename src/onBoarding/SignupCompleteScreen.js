@@ -33,7 +33,7 @@ const SignupCompleteScreen = () => {
       </SignupEndTextContainer>
       <Pressable
         onPress={() => {
-          navigation.navigate('Login');
+          navigation.navigate('Feed');
         }}
         style={styles.signupEndButton}>
         <Text style={styles.signupEndButtonText}>이용하러 가기</Text>
