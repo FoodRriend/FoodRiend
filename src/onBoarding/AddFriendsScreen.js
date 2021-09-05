@@ -329,7 +329,11 @@ const AddFriendsScreen = () => {
       <Text style={styles.textTitle}>친구 추가하기</Text>
       <AddFriendsContainer>
         <AddFriendsItemContainer>
-          <FlatList data={friendsData} renderItem={renderItem} />
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={friendsData}
+            renderItem={renderItem}
+          />
         </AddFriendsItemContainer>
         <PhoneNumberConnectContainer>
           <Text style={styles.phoneNumberConnectTitle}>
