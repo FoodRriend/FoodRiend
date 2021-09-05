@@ -16,13 +16,15 @@ import {
   SignupCompleteScreen,
 } from '@/onBoarding';
 import { FeedScreen } from '@/feed';
+import { MyEditScreen, Test1 } from '@/profile';
 
 // import test from './shared/hooks/test';
 
 // 아이콘 사용 시
-import Ionicons from 'react-native-vector-icons/dist/Ionicons';
+// import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 
 const Stack = createStackNavigator();
+const MyPageStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const TabBarIcon = (focused, name) => {
@@ -66,8 +68,16 @@ const BottomTap = () => {
       })}>
       <Tab.Screen name="Feed" component={FeedScreen} />
       <Tab.Screen name="Search" component={FeedScreen} />
-      <Tab.Screen name="MyPage" component={FeedScreen} />
+      <Tab.Screen name="MyPage" component={MyPageStackScreen} />
     </Tab.Navigator>
+  );
+};
+
+const MyPageStackScreen = () => {
+  return (
+    <MyPageStack.Navigator>
+      <MyPageStack.Screen name="MyPage" component={Test1} />
+    </MyPageStack.Navigator>
   );
 };
 
@@ -91,8 +101,9 @@ const App = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
 
         <Stack.Screen name="Signup" component={SignupContainer} />
-
         <Stack.Screen name="Feed" component={BottomTap} />
+
+        <Stack.Screen name="MyEdit" component={MyEditScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
