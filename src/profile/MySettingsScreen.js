@@ -1,3 +1,171 @@
-const MySettings = () => {};
+import React, { useState, useCallback, useRef, useEffect } from 'react';
+import styled from '@emotion/native';
+
+import { Text, View, Pressable, StyleSheet, TextInput, Image, FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+const MySettings = () => {
+  const navigation = useNavigation();
+
+  const headerStyle = () => {
+    navigation.setOptions({
+      headerShown: true,
+      title: '설정',
+      headerLeft: () => (
+        <Pressable
+          style={styles.backIcon}
+          onPress={() => {
+            navigation.navigate('MyPage');
+          }}>
+          <Image source={require(`../assets/icons/Left.png`)}></Image>
+        </Pressable>
+      ),
+    });
+  };
+
+  headerStyle();
+
+  return (
+    <View style={{ display: 'flex' }}>
+      <MySettingTopCover>
+        <View
+          style={{
+            width: '100%',
+            height: 50,
+            marginTop: 17,
+            justifyContent: 'center',
+          }}>
+          <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+            <Text style={styles.mySettingCatagory}>계정</Text>
+            <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
+          </Pressable>
+        </View>
+      </MySettingTopCover>
+      <View
+        style={{
+          width: '100%',
+          height: 50,
+          marginTop: 13,
+          backgroundColor: '#fff',
+        }}>
+        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+          <Text style={styles.mySettingCatagory}>알림</Text>
+          <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
+        </Pressable>
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 50,
+          marginTop: 10,
+          backgroundColor: '#fff',
+          borderBottomColor: '#dfe2e5',
+          borderBottomWidth: 0.6,
+        }}>
+        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+          <Text style={styles.mySettingCatagory}>공지사항</Text>
+          <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
+        </Pressable>
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 50,
+          backgroundColor: '#fff',
+          borderBottomColor: '#dfe2e5',
+          borderBottomWidth: 0.6,
+        }}>
+        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+          <Text style={styles.mySettingCatagory}>고객센터</Text>
+          <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
+        </Pressable>
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 50,
+          backgroundColor: '#fff',
+        }}>
+        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+          <Text style={styles.mySettingCatagory}>도움말</Text>
+          <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
+        </Pressable>
+      </View>
+      <MySettingBottomCover>
+        <View
+          style={{
+            width: '100%',
+            height: 50,
+            borderBottomColor: '#dfe2e5',
+            borderBottomWidth: 0.6,
+          }}>
+          <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+            <Text style={styles.mySettingCatagory}>약관 및 정책</Text>
+            <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
+          </Pressable>
+        </View>
+        <View
+          style={{
+            width: '100%',
+            height: 50,
+            borderBottomColor: '#dfe2e5',
+            borderBottomWidth: 0.6,
+          }}>
+          <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+            <Text style={styles.mySettingCatagory}>접근권한 설정</Text>
+            <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
+          </Pressable>
+        </View>
+        <View
+          style={{
+            width: '100%',
+            height: 50,
+          }}>
+          <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+            <Text style={styles.mySettingCatagory}>정보</Text>
+            <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
+          </Pressable>
+        </View>
+      </MySettingBottomCover>
+    </View>
+  );
+};
 
 export default MySettings;
+
+const styles = StyleSheet.create({
+  backIcon: {
+    width: 50,
+    height: 30,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 13,
+    paddingRight: 20,
+  },
+  mySettingCatagory: {
+    fontWeight: '400',
+    fontSize: 15,
+    marginLeft: 35,
+    marginVertical: 16,
+  },
+  mySettingButton: {
+    width: 8,
+    height: 15,
+    marginTop: 16,
+    marginRight: 15,
+  },
+});
+
+const MySettingTopCover = styled.View({
+  width: '100%',
+  height: 67,
+  backgroundColor: '#fff',
+});
+
+const MySettingBottomCover = styled.View({
+  width: '100%',
+  height: '60%',
+  marginTop: 10,
+  backgroundColor: '#fff',
+});

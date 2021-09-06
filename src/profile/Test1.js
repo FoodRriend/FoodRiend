@@ -25,6 +25,10 @@ const Test1 = () => {
     navigation.navigate('MyFriendList');
   };
 
+  const onPress3 = () => {
+    navigation.navigate('MySettings');
+  };
+
   return (
     <Wrapper>
       <Pressable onPress={onPress1}>
@@ -32,6 +36,9 @@ const Test1 = () => {
       </Pressable>
       <Pressable onPress={onPress2}>
         <Text style={{ paddingTop: 30 }}>친구 목록</Text>
+      </Pressable>
+      <Pressable onPress={onPress3}>
+        <Text style={{ paddingTop: 30 }}>설정</Text>
       </Pressable>
     </Wrapper>
   );
