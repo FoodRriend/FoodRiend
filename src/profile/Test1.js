@@ -10,21 +10,28 @@ const Test1 = () => {
   const headerStyle = () => {
     navigation.setOptions({
       headerShown: true,
-      title: '프로필 수정',
+      title: '테스트 화면',
       headerLeft: () => <></>,
     });
   };
 
   headerStyle();
 
-  const onPress = () => {
+  const onPress1 = () => {
     navigation.navigate('MyEdit');
+  };
+
+  const onPress2 = () => {
+    navigation.navigate('MyFriendList');
   };
 
   return (
     <Wrapper>
-      <Pressable onPress={onPress}>
+      <Pressable onPress={onPress1}>
         <Text>마이페이지 수정</Text>
+      </Pressable>
+      <Pressable onPress={onPress2}>
+        <Text style={{ paddingTop: 30 }}>친구 목록</Text>
       </Pressable>
     </Wrapper>
   );
