@@ -4,7 +4,7 @@ import styled from '@emotion/native';
 import { Text, View, Pressable, StyleSheet, TextInput, Image, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const MySettings = () => {
+const SettingsScreen = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
@@ -131,7 +131,7 @@ const MySettings = () => {
   );
 };
 
-export default MySettings;
+export default SettingsScreen;
 
 const styles = StyleSheet.create({
   backIcon: {

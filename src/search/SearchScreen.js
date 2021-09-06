@@ -42,7 +42,7 @@ const SearchScreen = () => {
         />
         <TextInput
           autoCapitalize={'none'}
-          placeholder="이름/닉네임/연락처 검색"
+          placeholder="음식점/ 닉네임 검색"
           value={searchInput}
           onChangeText={handleSearchInput}
           style={styles.searchInputText}
@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
     width: '80%',
     height: '100%',
     marginLeft: 10,
-    fontSize: 15,
-    fontWeight: '600',
+    fontSize: 14,
+    fontWeight: '500',
     color: '#2a3037',
   },
 });
