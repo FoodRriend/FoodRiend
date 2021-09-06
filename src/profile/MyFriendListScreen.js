@@ -120,7 +120,7 @@ const MyFriendListScreen = () => {
         <TextInput
           autoCapitalize={'none'}
           style={styles.myFriendSheachInput}
-          placeholder="이름/닉네임/연락처 검색"
+          placeholder="이름/ 닉네임/ 연락처 검색"
           value={myFriendSearchInput}
           onChangeText={handleFriendSearchInput}
         />
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     width: '80%',
     height: '100%',
     marginLeft: 16,
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: 'normal',
     color: '#2A3037',
   },
@@ -271,7 +271,6 @@ const MyFriendListItem = styled.View({
   width: 280,
   height: 80,
   justifyContent: 'center',
-  flexWrap: 'wrap',
   flexWrap: 'wrap',
   alignContent: 'space-between',
 });

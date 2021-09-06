@@ -16,8 +16,9 @@ import {
   SignupCompleteScreen,
 } from '@/onBoarding';
 import { FeedScreen } from '@/feed';
-import { MyEditScreen, Test1, MyFriendListScreen, MySettingsScreen } from '@/profile';
+import { MyEditScreen, Test1, MyFriendListScreen } from '@/profile';
 import { SearchScreen } from '@/search';
+import { SettingsScreen } from '@/setting';
 
 // import test from './shared/hooks/test';
 
@@ -27,6 +28,7 @@ import { SearchScreen } from '@/search';
 const Stack = createStackNavigator();
 const MyPageStack = createStackNavigator();
 const SearchStack = createStackNavigator();
+const SettingStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const TabBarIcon = (focused, name) => {
@@ -80,7 +82,7 @@ const MyPageStackScreen = () => {
     <MyPageStack.Navigator>
       <MyPageStack.Screen name="MyPage" component={Test1} />
       <MyPageStack.Screen name="MyFriendList" component={MyFriendListScreen} />
-      <MyPageStack.Screen name="MySettings" component={MySettingsScreen} />
+      <MyPageStack.Screen name="Setting" component={SettingsScreen} />
     </MyPageStack.Navigator>
   );
 };

@@ -26,7 +26,7 @@ const Test1 = () => {
   };
 
   const onPress3 = () => {
-    navigation.navigate('MySettings');
+    navigation.navigate('Setting');
   };
 
   return (
@@ -46,17 +46,7 @@ const Test1 = () => {
 
 export default Test1;
 
-const styles = StyleSheet.create({
-  BackIcon: {
-    width: 50,
-    height: 30,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingLeft: 13,
-    paddingRight: 20,
-  },
-});
+const styles = StyleSheet.create({});
 
 const Wrapper = styled.View({
   paddingTop: 36,

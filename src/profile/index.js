@@ -6,6 +6,6 @@ export { default as MyEditStyleScreen } from './MyEditStyleScreen';
 export { default as MyFriendListScreen } from './MyFriendListScreen';
 export { default as MyPostReviewScreen } from './MyPostReviewScreen';
 export { default as MyScreen } from './MyScreen';
-export { default as MySettingsScreen } from './MySettingsScreen';
+export { default as MySettingsScreen } from '../setting/SettingsScreen';
 
 export { default as Test1 } from './Test1';
