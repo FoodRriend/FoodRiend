@@ -16,7 +16,7 @@ import {
   SignupCompleteScreen,
 } from '@/onBoarding';
 import { FeedScreen } from '@/feed';
-import { MyEditScreen, Test1 } from '@/profile';
+import { MyEditScreen, Test1, MyFriendListScreen } from '@/profile';
 
 // import test from './shared/hooks/test';
 
@@ -60,7 +60,7 @@ const BottomTap = () => {
     <Tab.Navigator
       initialRouteName="Feed"
       tabBarOptions={{
-        style: { height: 85, paddingTop: 25 },
+        style: { height: 85, paddingTop: 25, marginTop: 1 },
       }}
       screenOptions={({ route }) => ({
         tabBarLabel: '',
@@ -77,6 +77,7 @@ const MyPageStackScreen = () => {
   return (
     <MyPageStack.Navigator>
       <MyPageStack.Screen name="MyPage" component={Test1} />
+      <MyPageStack.Screen name="MyFriendList" component={MyFriendListScreen} />
     </MyPageStack.Navigator>
   );
 };
