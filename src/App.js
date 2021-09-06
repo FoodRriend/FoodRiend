@@ -17,6 +17,7 @@ import {
 } from '@/onBoarding';
 import { FeedScreen } from '@/feed';
 import { MyEditScreen, Test1, MyFriendListScreen, MySettingsScreen } from '@/profile';
+import { SearchScreen } from '@/search';
 
 // import test from './shared/hooks/test';
 
@@ -25,6 +26,7 @@ import { MyEditScreen, Test1, MyFriendListScreen, MySettingsScreen } from '@/pro
 
 const Stack = createStackNavigator();
 const MyPageStack = createStackNavigator();
+const SearchStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const TabBarIcon = (focused, name) => {
@@ -67,7 +69,7 @@ const BottomTap = () => {
         tabBarIcon: ({ focused }) => TabBarIcon(focused, route.name),
       })}>
       <Tab.Screen name="Feed" component={FeedScreen} />
-      <Tab.Screen name="Search" component={FeedScreen} />
+      <Tab.Screen name="Search" component={SearchStackScreen} />
       <Tab.Screen name="MyPage" component={MyPageStackScreen} />
     </Tab.Navigator>
   );
@@ -80,6 +82,14 @@ const MyPageStackScreen = () => {
       <MyPageStack.Screen name="MyFriendList" component={MyFriendListScreen} />
       <MyPageStack.Screen name="MySettings" component={MySettingsScreen} />
     </MyPageStack.Navigator>
+  );
+};
+
+const SearchStackScreen = () => {
+  return (
+    <SearchStack.Navigator>
+      <SearchStack.Screen name="Search" component={SearchScreen} />
+    </SearchStack.Navigator>
   );
 };
 

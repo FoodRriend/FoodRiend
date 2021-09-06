@@ -27,7 +27,7 @@ const MyFriendListScreen = () => {
 
   const [myFriendSearchInput, setMyFriendSearchInput] = useState('');
 
-  const handleSearchInput = useCallback(
+  const handleFriendSearchInput = useCallback(
     (e) => {
       setMyFriendSearchInput(e);
       console.log(e);
@@ -122,7 +122,7 @@ const MyFriendListScreen = () => {
           style={styles.myFriendSheachInput}
           placeholder="이름/닉네임/연락처 검색"
           value={myFriendSearchInput}
-          onChangeText={handleSearchInput}
+          onChangeText={handleFriendSearchInput}
         />
       </MyFriendListSearchBox>
       <MyFriendListContainer>
