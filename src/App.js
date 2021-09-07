@@ -16,7 +16,7 @@ import {
   SignupCompleteScreen,
 } from '@/onBoarding';
 import { FeedScreen } from '@/feed';
-import { MyEditScreen, MyFriendListScreen, MyScreen } from '@/profile';
+import { MyEditScreen, MyFriendListScreen, MyScreen, MyPostReviewScreen } from '@/profile';
 import { SearchScreen } from '@/search';
 import { SettingsScreen } from '@/setting';
 
@@ -81,6 +81,17 @@ const MyPageStackScreen = () => {
     <MyPageStack.Navigator>
       <MyPageStack.Screen name="MyPage" component={MyScreen} />
       <MyPageStack.Screen name="MyFriendList" component={MyFriendListScreen} />
+      <MyPageStack.Screen
+        options={{
+          headerStyle: {
+            elevation: 0, //  android
+            shadowOpacity: 0, // ios
+            borderBottomWidth: 0,
+          },
+        }}
+        name="MyPostReview"
+        component={MyPostReviewScreen}
+      />
       <MyPageStack.Screen name="Setting" component={SettingsScreen} />
     </MyPageStack.Navigator>
   );

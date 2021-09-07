@@ -35,7 +35,16 @@ const MyScreen = () => {
     if (index === 0) {
       return (
         <View style={styles.myScreenRestaurantCover}>
-          <View style={{ width: '100%', height: 37 }}></View>
+          <View style={{ width: '100%', height: 37, justifyContent: 'center' }}>
+            <Pressable
+              style={styles.myScreenReviewButton}
+              onPress={() => navigation.navigate('MyPostReview')}>
+              <Image
+                style={{ width: 18, height: 18, borderRadius: 16 }}
+                source={require(`../assets/icons/write.png`)}
+              />
+            </Pressable>
+          </View>
           <View style={{ width: 160 }}>
             <Image
               style={{ width: '100%', height: 153, borderRadius: 16 }}
@@ -98,7 +107,6 @@ const MyScreen = () => {
         </View>
       );
     }
-    console.log(item.name);
     return (
       <View style={styles.myScreenRestaurantCover}>
         <View style={{ width: 160 }}>
@@ -156,13 +164,53 @@ const MyScreen = () => {
           </View>
         </View>
         <View style={styles.myScreenInfoFriendItem}>
-          <Image style={styles.myScreenInfoAlertImage} />
+          <View
+            style={{
+              width: 86,
+              height: 20,
+              flexWrap: 'wrap',
+              position: 'relative',
+              bottom: 20,
+              alignContent: 'space-between',
+            }}>
+            <Pressable
+              onPress={() => alert('알림')}
+              style={{
+                width: 40,
+                height: 40,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Image
+                style={styles.myScreenInfoAlertImage}
+                source={require(`../assets/icons/alarm(n).png`)}
+              />
+            </Pressable>
+            <Pressable
+              onPress={() => navigation.navigate('Setting')}
+              style={{
+                width: 40,
+                height: 40,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Image
+                style={styles.myScreenInfoAlertImage}
+                source={require(`../assets/icons/setting.png`)}
+              />
+            </Pressable>
+          </View>
           <View style={styles.myScreenInfoFriend}>
             <Text style={{ fontSize: 14, fontWeight: '500', color: '#2a3037' }}>친구</Text>
           </View>
           <Pressable
             onPress={() => navigation.navigate('MyFriendList')}
-            style={{ position: 'relative', bottom: 5 }}>
+            style={{
+              width: 60,
+              height: 40,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
             <Text style={{ fontSize: 17, fontWeight: '500', color: '#3e5481' }}>5</Text>
           </Pressable>
         </View>
@@ -182,7 +230,6 @@ const MyScreen = () => {
         </View>
       </MyScreenFavInfoContainer>
       <MyScreenRestaurantContainer>
-        {/* <View style={{ width: '100%', height: 37, borderWidth: 1, borderColor: 'blue' }}></View> */}
         <FlatList
           showsVerticalScrollIndicator={false}
           data={myScreenData}
@@ -216,10 +263,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   myScreenInfoAlertImage: {
-    width: 28,
-    height: 28,
-    borderColor: 'blue',
-    borderWidth: 1,
+    width: 16,
+    height: 18,
   },
   myScreenInfoFriend: {
     width: 64,
@@ -228,6 +273,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#dfe2e5',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 11,
   },
   myScreenFavInfoItem: {
     height: 43,
@@ -276,6 +322,15 @@ const styles = StyleSheet.create({
     height: 30,
     justifyContent: 'center',
     flexWrap: 'wrap',
+  },
+  myScreenReviewButton: {
+    width: 30,
+    height: 30,
+    marginLeft: 10,
+    position: 'relative',
+    bottom: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
