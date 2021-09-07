@@ -91,7 +91,7 @@ const AddFriendsScreen = () => {
                   setFriendChecked1(false);
                 }}>
                 <View style={styles.friendButtonChecked}>
-                  <Text style={styles.friendButtonCheckedText}>친구요청</Text>
+                  <Text style={styles.friendButtonCheckedText}>요청완료</Text>
                 </View>
               </Pressable>
             ) : (
@@ -134,7 +134,7 @@ const AddFriendsScreen = () => {
                   setFriendChecked2(false);
                 }}>
                 <View style={styles.friendButtonChecked}>
-                  <Text style={styles.friendButtonCheckedText}>친구요청</Text>
+                  <Text style={styles.friendButtonCheckedText}>요청완료</Text>
                 </View>
               </Pressable>
             ) : (
@@ -177,7 +177,7 @@ const AddFriendsScreen = () => {
                   setFriendChecked3(false);
                 }}>
                 <View style={styles.friendButtonChecked}>
-                  <Text style={styles.friendButtonCheckedText}>친구요청</Text>
+                  <Text style={styles.friendButtonCheckedText}>요청완료</Text>
                 </View>
               </Pressable>
             ) : (
@@ -220,7 +220,7 @@ const AddFriendsScreen = () => {
                   setFriendChecked4(false);
                 }}>
                 <View style={styles.friendButtonChecked}>
-                  <Text style={styles.friendButtonCheckedText}>친구요청</Text>
+                  <Text style={styles.friendButtonCheckedText}>요청완료</Text>
                 </View>
               </Pressable>
             ) : (
@@ -263,7 +263,7 @@ const AddFriendsScreen = () => {
                   setFriendChecked5(false);
                 }}>
                 <View style={styles.friendButtonChecked}>
-                  <Text style={styles.friendButtonCheckedText}>친구요청</Text>
+                  <Text style={styles.friendButtonCheckedText}>요청완료</Text>
                 </View>
               </Pressable>
             ) : (
@@ -306,7 +306,7 @@ const AddFriendsScreen = () => {
                 setFriendChecked6(false);
               }}>
               <View style={styles.friendButtonChecked}>
-                <Text style={styles.friendButtonCheckedText}>친구요청</Text>
+                <Text style={styles.friendButtonCheckedText}>요청완료</Text>
               </View>
             </Pressable>
           ) : (
