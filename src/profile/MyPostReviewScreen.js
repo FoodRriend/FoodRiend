@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image, FlatList } from 'react-native';
+import { Text, View, Pressable, StyleSheet, Image, FlatList, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const FriendPostReviewScreen = () => {
@@ -9,17 +9,9 @@ const FriendPostReviewScreen = () => {
 
   const headerStyle = () => {
     navigation.setOptions({
-      headerShown: true,
+      headerShown: false,
       title: '',
-      headerLeft: () => (
-        <Pressable
-          style={styles.BackIcon}
-          onPress={() => {
-            navigation.navigate('MyPage');
-          }}>
-          <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
-      ),
+      headerLeft: () => <></>,
     });
   };
 
@@ -49,76 +41,119 @@ const FriendPostReviewScreen = () => {
     },
   ];
 
+  // 스크롤 이벤트
+
+  const scrollY = new Animated.Value(0);
+  const diffClamp = Animated.diffClamp(scrollY, 0, 45);
+  const translateY = diffClamp.interpolate({
+    inputRange: [0, 45],
+    outputRange: [0, -45],
+  });
+
   const renderItem = ({ item, index }) => {
     return (
-      <MyReviewContainer>
-        <MyReviewProfileItem>
-          <Image
-            source={require(`../assets/images/onBoading/friends/friend6.png`)}
-            style={{ width: 48, height: 48 }}
-          />
-          <View
-            style={{
-              width: 250,
-              height: '100%',
-              marginLeft: 10,
-              paddingVertical: 4,
-            }}>
-            <Text style={styles.myReviewProfileName}>{item.name}</Text>
-            <View style={{ flexWrap: 'wrap', marginTop: 4 }}>
-              <Image
-                source={require(`../assets/images/onBoading/favFood/chop.png`)}
-                style={{ width: 24, height: 24 }}
-              />
-              <Image
-                source={require(`../assets/images/onBoading/addStyle/addStyleImage0.png`)}
-                style={{ width: 24, height: 24, marginLeft: 3.5 }}
-              />
-            </View>
-          </View>
-          <Pressable onPress={() => alert('Share')} style={styles.myReviewShareButton}>
+      <>
+        {index === 0 ? <View style={{ width: '100%', height: 50 }}></View> : <></>}
+        <MyReviewContainer>
+          <MyReviewProfileItem>
             <Image
-              source={require(`../assets/icons/share.png`)}
-              style={{ width: 20, height: 18 }}
+              source={require(`../assets/images/onBoading/friends/friend6.png`)}
+              style={{ width: 48, height: 48 }}
             />
-          </Pressable>
-        </MyReviewProfileItem>
-        <MyReviewRestaurantItem>
-          <Image
-            source={require(`../assets/images/profile/Rectangle5.png`)}
-            style={{ width: 187, height: 187, borderRadius: 15 }}
-          />
-          <View style={{ width: 173, height: 187, paddingLeft: 7 }}>
-            <View style={styles.MyReviewRestaurantBox}>
-              <Text style={styles.myReviewRestaurantTitle}>{item.title}</Text>
-              <Pressable onPress={() => alert('Edit')} style={styles.MyReviewRestaurantShare}>
+            <View
+              style={{
+                width: 250,
+                height: '100%',
+                marginLeft: 10,
+                paddingVertical: 4,
+              }}>
+              <Text style={styles.myReviewProfileName}>{item.name}</Text>
+              <View style={{ flexWrap: 'wrap', marginTop: 4 }}>
                 <Image
-                  source={require(`../assets/icons/dot.png`)}
+                  source={require(`../assets/images/onBoading/favFood/chop.png`)}
+                  style={{ width: 24, height: 24 }}
+                />
+                <Image
+                  source={require(`../assets/images/onBoading/addStyle/addStyleImage0.png`)}
+                  style={{ width: 24, height: 24, marginLeft: 3.5 }}
+                />
+              </View>
+            </View>
+            <Pressable onPress={() => alert('Share')} style={styles.myReviewShareButton}>
+              <Image
+                source={require(`../assets/icons/share.png`)}
+                style={{ width: 20, height: 18 }}
+              />
+            </Pressable>
+          </MyReviewProfileItem>
+          <MyReviewRestaurantItem>
+            <Image
+              source={require(`../assets/images/profile/Rectangle5.png`)}
+              style={{ width: 187, height: 187, borderRadius: 15 }}
+            />
+            <View style={{ width: 173, height: 187, paddingLeft: 7 }}>
+              <View style={styles.MyReviewRestaurantBox}>
+                <Text style={styles.myReviewRestaurantTitle}>{item.title}</Text>
+                <Pressable onPress={() => alert('Edit')} style={styles.MyReviewRestaurantShare}>
+                  <Image
+                    source={require(`../assets/icons/dot.png`)}
+                    style={{ width: 18, height: 18 }}
+                  />
+                </Pressable>
+              </View>
+              <Text style={styles.myReviewRestaurantAdress}>{item.adress}</Text>
+              <Text style={styles.myReviewRestaurantTag}>{item.tag}</Text>
+              <View style={{ width: 40, height: 20, flexWrap: 'wrap', marginTop: 10 }}>
+                <Image
+                  source={require(`../assets/icons/star.png`)}
                   style={{ width: 18, height: 18 }}
                 />
-              </Pressable>
+                <Text style={styles.myReviewRestaurantScore}>1</Text>
+              </View>
             </View>
-            <Text style={styles.myReviewRestaurantAdress}>{item.adress}</Text>
-            <Text style={styles.myReviewRestaurantTag}>{item.tag}</Text>
-            <View style={{ width: 40, height: 20, flexWrap: 'wrap', marginTop: 10 }}>
-              <Image
-                source={require(`../assets/icons/star.png`)}
-                style={{ width: 18, height: 18 }}
-              />
-              <Text style={styles.myReviewRestaurantScore}>1</Text>
-            </View>
+          </MyReviewRestaurantItem>
+          <View style={styles.myReviewContent}>
+            <Text style={styles.myReviewContentText}>{item.content}</Text>
           </View>
-        </MyReviewRestaurantItem>
-        <View style={styles.myReviewContent}>
-          <Text style={styles.myReviewContentText}>{item.content}</Text>
-        </View>
-      </MyReviewContainer>
+        </MyReviewContainer>
+      </>
     );
   };
 
   return (
     <Wrapper>
-      <FlatList showsVerticalScrollIndicator={false} data={myReviewData} renderItem={renderItem} />
+      <View style={{ zIndex: 200, width: '100%', height: 45, backgroundColor: '#fff' }}></View>
+      <Animated.View
+        style={{
+          transform: [{ translateY: translateY }],
+          zIndex: 100,
+          elevation: 4,
+          width: '100%',
+          height: 45,
+          backgroundColor: '#fff',
+          position: 'absolute',
+          top: 45,
+          bottom: 0,
+          right: 0,
+        }}>
+        <Pressable
+          style={styles.BackIcon}
+          onPress={() => {
+            navigation.navigate('MyPage');
+          }}>
+          <Image source={require(`../assets/icons/Left.png`)}></Image>
+        </Pressable>
+      </Animated.View>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={myReviewData}
+        renderItem={renderItem}
+        onScroll={(e) => {
+          scrollY.setValue(e.nativeEvent.contentOffset.y);
+          console.log(scrollY._value);
+        }}
+        bounces={scrollY <= 0 ? true : false}
+      />
     </Wrapper>
   );
 };
@@ -138,7 +173,7 @@ const styles = StyleSheet.create({
   myReviewContent: {
     width: '100%',
     height: 94,
-    paddingHorizontal: 13,
+    paddingHorizontal: 10,
     paddingTop: 8,
   },
   myReviewContentText: {
@@ -199,10 +234,18 @@ const styles = StyleSheet.create({
     color: '#424242',
     marginLeft: 6,
   },
+  BackIcon: {
+    width: 50,
+    height: 30,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 13,
+    paddingRight: 20,
+  },
 });
 
 const Wrapper = styled.View({
-  paddingTop: 36,
   backgroundColor: '#fff',
   width: '100%',
   height: '100%',
