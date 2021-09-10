@@ -35,7 +35,9 @@ const SettingsScreen = () => {
             marginTop: 17,
             justifyContent: 'center',
           }}>
-          <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+          <Pressable
+            onPress={() => navigation.navigate('Account')}
+            style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
             <Text style={styles.mySettingCatagory}>계정</Text>
             <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
           </Pressable>
@@ -48,7 +50,9 @@ const SettingsScreen = () => {
           marginTop: 13,
           backgroundColor: '#fff',
         }}>
-        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+        <Pressable
+          onPress={() => navigation.navigate('SettingAlert')}
+          style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <Text style={styles.mySettingCatagory}>알림</Text>
           <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
         </Pressable>
