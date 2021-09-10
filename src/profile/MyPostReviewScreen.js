@@ -150,9 +150,8 @@ const FriendPostReviewScreen = () => {
         renderItem={renderItem}
         onScroll={(e) => {
           scrollY.setValue(e.nativeEvent.contentOffset.y);
-          console.log(scrollY._value);
         }}
-        bounces={scrollY <= 0 ? true : false}
+        bounces={false}
       />
     </Wrapper>
   );
