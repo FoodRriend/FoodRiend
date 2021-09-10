@@ -24,7 +24,7 @@ import {
   AlertScreen,
 } from '@/profile';
 import { SearchScreen } from '@/search';
-import { SettingsScreen } from '@/setting';
+import { SettingsScreen, AccountScreen, SettingAlertScreen } from '@/setting';
 
 // import test from './shared/hooks/test';
 
@@ -98,8 +98,8 @@ const MyPageStackScreen = () => {
         name="MyPostReview"
         component={MyPostReviewScreen}
       />
-      <MyPageStack.Screen name="Setting" component={SettingsScreen} />
       <MyPageStack.Screen name="Alert" component={AlertScreen} />
+      <MyPageStack.Screen name="Setting" component={SettingsScreen} />
     </MyPageStack.Navigator>
   );
 };
@@ -135,6 +135,8 @@ const App = () => {
         <Stack.Screen name="Feed" component={BottomTap} />
 
         <Stack.Screen name="MyEdit" component={MyEditScreen} />
+        <Stack.Screen name="Account" component={AccountScreen} />
+        <Stack.Screen name="SettingAlert" component={SettingAlertScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
