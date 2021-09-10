@@ -16,7 +16,13 @@ import {
   SignupCompleteScreen,
 } from '@/onBoarding';
 import { FeedScreen } from '@/feed';
-import { MyEditScreen, MyFriendListScreen, MyScreen, MyPostReviewScreen } from '@/profile';
+import {
+  MyEditScreen,
+  MyFriendListScreen,
+  MyScreen,
+  MyPostReviewScreen,
+  AlertScreen,
+} from '@/profile';
 import { SearchScreen } from '@/search';
 import { SettingsScreen } from '@/setting';
 
@@ -93,6 +99,7 @@ const MyPageStackScreen = () => {
         component={MyPostReviewScreen}
       />
       <MyPageStack.Screen name="Setting" component={SettingsScreen} />
+      <MyPageStack.Screen name="Alert" component={AlertScreen} />
     </MyPageStack.Navigator>
   );
 };

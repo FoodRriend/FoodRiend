@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, StyleSheet, Image, FlatList } from 'react-native';
+import { Text, View, StyleSheet, Image, FlatList, Dimensions, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { feedData } from './constants';
+import { feedData, feedDataFirst } from './constants';
 
 const FeedScreen = () => {
   const navigation = useNavigation();
@@ -15,6 +15,8 @@ const FeedScreen = () => {
   };
 
   headerStyle();
+
+  const [bounce, setBounce] = useState(0);
 
   const renderItem = ({ item, index }) => {
     if (index === 0) {
@@ -139,7 +141,30 @@ const FeedScreen = () => {
         source={require(`../assets/images/onBoading/login/FoodRiend.png`)}
       />
       <FeedListContainer>
-        <FlatList showsVerticalScrollIndicator={false} data={feedData} renderItem={renderItem} />
+        {Object.keys(feedData[0]).length === 0 ? (
+          <View style={styles.rederItemFirstCover}>
+            <Text style={{ fontSize: 18, fontWeight: '600' }}>
+              FoodRiend에 오신 것을 환영합니다.
+            </Text>
+            <Text style={{ marginTop: 20, fontSize: 15, fontWeight: '500' }}>
+              친구를 초대하면 피드에서 친구가 방문한 가게와
+            </Text>
+            <Text style={{ fontSize: 15, fontWeight: '500' }}>리뷰를 볼 수 있습니다.</Text>
+            <Pressable onPress={() => alert('초대하기')} style={styles.renderItemFirstBtn}>
+              <Text style={{ fontSize: 15, fontWeight: '900', color: '#ffffff' }}>초대하기</Text>
+            </Pressable>
+          </View>
+        ) : (
+          <FlatList
+            onScroll={(e) => {
+              setBounce(e.nativeEvent.contentOffset.y);
+            }}
+            bounces={bounce <= 10 ? true : false}
+            showsVerticalScrollIndicator={false}
+            data={feedData}
+            renderItem={renderItem}
+          />
+        )}
       </FeedListContainer>
     </Wrapper>
   );
@@ -194,6 +219,22 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 220,
     top: 11,
+  },
+  rederItemFirstCover: {
+    display: 'flex',
+    width: '100%',
+    height: Dimensions.get('window').height / 2,
+    alignItems: 'center',
+    paddingTop: 60,
+  },
+  renderItemFirstBtn: {
+    marginTop: 60,
+    width: 277,
+    height: 56,
+    borderRadius: 32,
+    backgroundColor: '#fe554a',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
