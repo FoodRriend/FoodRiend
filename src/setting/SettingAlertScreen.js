@@ -28,10 +28,10 @@ const SettingAlertScreen = () => {
   headerStyle();
 
   const [toggleValue1, setToggleValue1] = useState(false);
-  const [toggleValue2, setToggleValue2] = useState(false);
+  const [toggleValue2, setToggleValue2] = useState(true);
   const [toggleValue3, setToggleValue3] = useState(false);
-  const [toggleValue4, setToggleValue4] = useState(false);
-  const [toggleValue5, setToggleValue5] = useState(false);
+  const [toggleValue4, setToggleValue4] = useState(true);
+  const [toggleValue5, setToggleValue5] = useState(true);
   const [toggleValue6, setToggleValue6] = useState(false);
 
   return (
