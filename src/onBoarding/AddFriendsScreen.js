@@ -11,6 +11,20 @@ const AddFriendsScreen = () => {
     navigation.setOptions({
       headerShown: true,
       title: '친구추가',
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        ...Platform.select({
+          ios: {
+            fontWeight: '600',
+            fontSize: 17,
+          },
+          android: {
+            fontWeight: 'bold',
+            fontSize: 15,
+          },
+        }),
+      },
+      headerStyle: { borderBottomWidth: 0.2, borderColor: '#dfe2e5' },
       headerLeft: () => (
         <Pressable
           style={styles.BackIcon}
@@ -69,7 +83,10 @@ const AddFriendsScreen = () => {
       return (
         <AddFriendsItems>
           <View style={styles.friendImageItem}>
-            <Image source={require(`../assets/images/onBoading/friends/friend1.png`)} />
+            <Image
+              style={{ width: '100%', height: '100%' }}
+              source={require(`../assets/images/onBoading/friends/friend1.png`)}
+            />
           </View>
           <AddFriendsInfo>
             <Text style={styles.friendInfoText}>{item.name}</Text>
@@ -112,7 +129,10 @@ const AddFriendsScreen = () => {
       return (
         <AddFriendsItems>
           <View style={styles.friendImageItem}>
-            <Image source={require(`../assets/images/onBoading/friends/friend2.png`)} />
+            <Image
+              style={{ width: '100%', height: '100%' }}
+              source={require(`../assets/images/onBoading/friends/friend2.png`)}
+            />
           </View>
           <AddFriendsInfo>
             <Text style={styles.friendInfoText}>{item.name}</Text>
@@ -155,7 +175,10 @@ const AddFriendsScreen = () => {
       return (
         <AddFriendsItems>
           <View style={styles.friendImageItem}>
-            <Image source={require(`../assets/images/onBoading/friends/friend3.png`)} />
+            <Image
+              style={{ width: '100%', height: '100%' }}
+              source={require(`../assets/images/onBoading/friends/friend3.png`)}
+            />
           </View>
           <AddFriendsInfo>
             <Text style={styles.friendInfoText}>{item.name}</Text>
@@ -198,7 +221,10 @@ const AddFriendsScreen = () => {
       return (
         <AddFriendsItems>
           <View style={styles.friendImageItem}>
-            <Image source={require(`../assets/images/onBoading/friends/friend4.png`)} />
+            <Image
+              style={{ width: '100%', height: '100%' }}
+              source={require(`../assets/images/onBoading/friends/friend4.png`)}
+            />
           </View>
           <AddFriendsInfo>
             <Text style={styles.friendInfoText}>{item.name}</Text>
@@ -241,7 +267,10 @@ const AddFriendsScreen = () => {
       return (
         <AddFriendsItems>
           <View style={styles.friendImageItem}>
-            <Image source={require(`../assets/images/onBoading/friends/friend5.png`)} />
+            <Image
+              style={{ width: '100%', height: '100%' }}
+              source={require(`../assets/images/onBoading/friends/friend5.png`)}
+            />
           </View>
           <AddFriendsInfo>
             <Text style={styles.friendInfoText}>{item.name}</Text>
@@ -352,7 +381,7 @@ const AddFriendsScreen = () => {
               <Text style={styles.phoneNumberItemTitle}>연락처 연결</Text>
               <Text style={styles.phoneNumberItemcontent}>내 친구를 연결해보세요</Text>
             </View>
-            <Pressable style={styles.phoneNumberButton}>
+            <Pressable onPress={() => alert('연결해줭')} style={styles.phoneNumberButton}>
               <Text style={styles.phoneNumberButtonText}>연결</Text>
             </Pressable>
           </PhoneNumberConnectItem>
@@ -392,13 +421,29 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     fontSize: 24,
+    ...Platform.select({
+      ios: {
+        fontSize: 24,
+      },
+      android: {
+        fontSize: 20,
+      },
+    }),
     fontWeight: 'bold',
     alignSelf: 'center',
     color: '#2a3037',
   },
   addFriendsButton: {
-    width: 126,
-    height: 36,
+    ...Platform.select({
+      ios: {
+        width: 126,
+        height: 36,
+      },
+      android: {
+        width: 120,
+        height: 32,
+      },
+    }),
     borderRadius: 10,
     backgroundColor: '#fe554a',
     display: 'flex',
@@ -407,20 +452,44 @@ const styles = StyleSheet.create({
     marginLeft: 28,
   },
   addFriendsButtonText: {
-    fontSize: 15,
-    fontWeight: '600',
+    ...Platform.select({
+      ios: {
+        fontSize: 15,
+        fontWeight: '600',
+      },
+      android: {
+        fontSize: 14,
+        fontWeight: '500',
+      },
+    }),
     fontStyle: 'normal',
     color: '#fcfcfc',
   },
   friendImageItem: {
-    width: 56,
-    height: 56,
+    ...Platform.select({
+      ios: {
+        width: 56,
+        height: 56,
+      },
+      android: {
+        width: 48,
+        height: 48,
+      },
+    }),
   },
   friendInfoText: {
     width: 158,
     height: 25,
-    fontSize: 15,
-    fontWeight: 'normal',
+    ...Platform.select({
+      ios: {
+        fontSize: 15,
+        fontWeight: '500',
+      },
+      android: {
+        fontSize: 13,
+        fontWeight: '600',
+      },
+    }),
     fontStyle: 'normal',
     color: '#2a3037',
     paddingTop: 3,
@@ -432,20 +501,44 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   friendInfoImage: {
-    width: 24,
-    height: 24,
+    ...Platform.select({
+      ios: {
+        width: 24,
+        height: 24,
+      },
+      android: {
+        width: 20,
+        height: 20,
+      },
+    }),
     marginTop: 1,
     marginLeft: 10,
   },
   friendInfoImageTwo: {
-    width: 24,
-    height: 24,
+    ...Platform.select({
+      ios: {
+        width: 24,
+        height: 24,
+      },
+      android: {
+        width: 20,
+        height: 20,
+      },
+    }),
     marginTop: 1,
     marginLeft: 5,
   },
   friendButtonUnChecked: {
-    width: 66,
-    height: 30,
+    ...Platform.select({
+      ios: {
+        width: 66,
+        height: 30,
+      },
+      android: {
+        width: 63,
+        height: 25,
+      },
+    }),
     borderRadius: 18,
     backgroundColor: '#f0f0f0',
     display: 'flex',
@@ -453,8 +546,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   friendButtonChecked: {
-    width: 66,
-    height: 30,
+    ...Platform.select({
+      ios: {
+        width: 66,
+        height: 30,
+      },
+      android: {
+        width: 63,
+        height: 25,
+      },
+    }),
     borderRadius: 18,
     backgroundColor: '#fe554a',
     display: 'flex',
@@ -462,30 +563,64 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   friendButtonUnCheckedText: {
-    fontSize: 13,
-    fontWeight: '500',
     fontStyle: 'normal',
     color: '#2a3037',
+    ...Platform.select({
+      ios: {
+        fontSize: 13,
+        fontWeight: '500',
+      },
+      android: {
+        fontSize: 12,
+        fontWeight: '600',
+      },
+    }),
   },
   friendButtonCheckedText: {
-    fontSize: 13,
-    fontWeight: '500',
     fontStyle: 'normal',
     color: '#fcfcfc',
+    ...Platform.select({
+      ios: {
+        fontSize: 13,
+        fontWeight: '500',
+      },
+      android: {
+        fontSize: 12,
+        fontWeight: '600',
+      },
+    }),
   },
   phoneNumberConnectTitle: {
     width: 311,
     height: 50,
-    fontSize: 15,
     fontWeight: '500',
+    ...Platform.select({
+      ios: {
+        fontSize: 15,
+        fontWeight: '500',
+        paddingTop: 20,
+      },
+      android: {
+        fontSize: 14,
+        fontWeight: '600',
+        paddingTop: 15,
+      },
+    }),
     fontStyle: 'normal',
     color: '#2a3037',
-    paddingTop: 20,
     paddingLeft: 2,
   },
   phoneNumberItemImage: {
-    width: 36,
-    height: 36,
+    ...Platform.select({
+      ios: {
+        width: 36,
+        height: 36,
+      },
+      android: {
+        width: 33,
+        height: 33,
+      },
+    }),
     borderWidth: 1,
     borderColor: 'black',
     marginLeft: 10,
@@ -493,39 +628,78 @@ const styles = StyleSheet.create({
   phoneNumberItemTitle: {
     width: 170,
     height: 22,
-    fontSize: 15,
-    fontWeight: '700',
+    ...Platform.select({
+      ios: {
+        fontSize: 15,
+        fontWeight: '700',
+      },
+      android: {
+        fontSize: 14,
+        fontWeight: '800',
+      },
+    }),
     fontStyle: 'normal',
     color: '#2a3037',
   },
   phoneNumberItemcontent: {
     width: 170,
     height: 20,
-    fontSize: 13,
-    fontWeight: '500',
+    ...Platform.select({
+      ios: {
+        fontSize: 13,
+        fontWeight: '500',
+      },
+      android: {
+        fontSize: 12,
+        fontWeight: '600',
+      },
+    }),
     fontStyle: 'normal',
     color: '#7E8389',
   },
   phoneNumberButton: {
-    width: 41,
-    height: 30,
+    ...Platform.select({
+      ios: {
+        width: 41,
+        height: 30,
+        marginLeft: 9,
+      },
+      android: {
+        width: 38,
+        height: 27,
+        marginLeft: 22,
+      },
+    }),
     marginTop: 5,
-    marginLeft: 9,
     borderRadius: 18,
     backgroundColor: '#f0f0f0',
     justifyContent: 'center',
     alignItems: 'center',
   },
   phoneNumberButtonText: {
-    fontSize: 12,
-    fontWeight: '500',
     fontStyle: 'normal',
     color: '#424242',
+    fontSize: 12,
+    ...Platform.select({
+      ios: {
+        fontWeight: '500',
+      },
+      android: {
+        fontWeight: '600',
+      },
+    }),
   },
 });
 
 const Wrapper = styled.View({
-  paddingTop: 36,
+  ...Platform.select({
+    ios: {
+      paddingTop: 36,
+    },
+    android: {
+      paddingTop: 16,
+    },
+  }),
   backgroundColor: '#fff',
   width: '100%',
   height: '100%',
@@ -540,7 +714,14 @@ const AddFriendsContainer = styled.View({
   borderColor: '#fe554a75',
   backgroundColor: '#ffffff',
   width: 335,
-  height: 525,
+  ...Platform.select({
+    ios: {
+      height: 525,
+    },
+    android: {
+      height: 460,
+    },
+  }),
   borderRadius: 10,
   display: 'flex',
   shadowColor: '#fe554a',
@@ -555,23 +736,47 @@ const AddFriendsContainer = styled.View({
 });
 
 const AddFriendsItemContainer = styled.View({
-  width: 335,
-  height: 400,
+  ...Platform.select({
+    ios: {
+      width: 335,
+      height: 400,
+    },
+    android: {
+      width: 335,
+      height: 350,
+    },
+  }),
 });
 
 const AddFriendsItems = styled.View({
   marginHorizontal: 14,
   borderBottomWidth: 1,
   borderBottomColor: '#DFE2E6',
-  width: 280,
-  height: 80,
+  ...Platform.select({
+    ios: {
+      width: 280,
+      height: 80,
+    },
+    android: {
+      width: 290,
+      height: 70,
+    },
+  }),
   justifyContent: 'center',
   flexWrap: 'wrap',
 });
 
 const AddFriendsInfo = styled.View({
-  width: 158,
-  height: 56,
+  ...Platform.select({
+    ios: {
+      width: 158,
+      height: 56,
+    },
+    android: {
+      width: 178,
+      height: 56,
+    },
+  }),
 });
 
 const PhoneNumberConnectContainer = styled.View({
@@ -584,7 +789,14 @@ const PhoneNumberConnectItem = styled.View({
   width: 311,
   height: 68,
   flexWrap: 'wrap',
-  paddingTop: 7,
+  ...Platform.select({
+    ios: {
+      paddingTop: 7,
+    },
+    android: {
+      paddingTop: 1,
+    },
+  }),
 });
 
 const FriendButtonItem = styled.View({
@@ -596,7 +808,14 @@ const FriendButtonItem = styled.View({
 });
 
 const AddFriendsButton = styled.View({
-  marginTop: 31,
+  ...Platform.select({
+    ios: {
+      marginTop: 31,
+    },
+    android: {
+      marginTop: 25,
+    },
+  }),
   width: 336,
   height: 36,
   borderRadius: 10,

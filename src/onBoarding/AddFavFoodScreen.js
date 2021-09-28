@@ -1,17 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import {
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
-  Image,
-  Button,
-  Pressable,
-  FlatList,
-  Dimensions,
-} from 'react-native';
+import { Text, View, StyleSheet, Image, Pressable, FlatList, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import favFoodData from './constants/FavFoodData';
 
@@ -36,6 +26,20 @@ const AddFavFoodScreen = () => {
     navigation.setOptions({
       headerShown: true,
       title: '취향선택',
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        ...Platform.select({
+          ios: {
+            fontWeight: '600',
+            fontSize: 17,
+          },
+          android: {
+            fontWeight: 'bold',
+            fontSize: 15,
+          },
+        }),
+      },
+      headerStyle: { borderBottomWidth: 0.2, borderColor: '#dfe2e5' },
       headerLeft: () => (
         <Pressable
           style={styles.backIcon}
@@ -83,7 +87,10 @@ const AddFavFoodScreen = () => {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
           <View style={styles.itemImage}>
-            <Image source={require(`../assets/images/onBoading/favFood/grapes.png`)} />
+            <Image
+              style={styles.platformImage}
+              source={require(`../assets/images/onBoading/favFood/grapes.png`)}
+            />
           </View>
           <Text style={styles.itemLargeText}>{item.title}</Text>
         </Pressable>
@@ -93,7 +100,10 @@ const AddFavFoodScreen = () => {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
           <View style={styles.itemImage}>
-            <Image source={require(`../assets/images/onBoading/favFood/coffee.png`)} />
+            <Image
+              style={styles.platformImage}
+              source={require(`../assets/images/onBoading/favFood/coffee.png`)}
+            />
           </View>
           <Text style={styles.itemLargeText}>{item.title}</Text>
         </Pressable>
@@ -103,7 +113,10 @@ const AddFavFoodScreen = () => {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
           <View style={styles.itemImage}>
-            <Image source={require(`../assets/images/onBoading/favFood/pudding.png`)} />
+            <Image
+              style={styles.platformImage}
+              source={require(`../assets/images/onBoading/favFood/pudding.png`)}
+            />
           </View>
           <Text style={styles.itemSmallText}>{item.title}</Text>
         </Pressable>
@@ -113,7 +126,10 @@ const AddFavFoodScreen = () => {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
           <View style={styles.itemImage}>
-            <Image source={require(`../assets/images/onBoading/favFood/octopus.png`)} />
+            <Image
+              style={styles.platformImage}
+              source={require(`../assets/images/onBoading/favFood/octopus.png`)}
+            />
           </View>
           <Text style={styles.itemLargeText}>{item.title}</Text>
         </Pressable>
@@ -123,7 +139,10 @@ const AddFavFoodScreen = () => {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
           <View style={styles.itemImage}>
-            <Image source={require(`../assets/images/onBoading/favFood/friedChicken.png`)} />
+            <Image
+              style={styles.platformImage}
+              source={require(`../assets/images/onBoading/favFood/friedChicken.png`)}
+            />
           </View>
           <Text style={styles.itemLargeText}>{item.title}</Text>
         </Pressable>
@@ -133,7 +152,10 @@ const AddFavFoodScreen = () => {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
           <View style={styles.itemImage}>
-            <Image source={require(`../assets/images/onBoading/favFood/pizza.png`)} />
+            <Image
+              style={styles.platformImage}
+              source={require(`../assets/images/onBoading/favFood/pizza.png`)}
+            />
           </View>
           <Text style={styles.itemLargeText}>{item.title}</Text>
         </Pressable>
@@ -143,7 +165,10 @@ const AddFavFoodScreen = () => {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
           <View style={styles.itemImage}>
-            <Image source={require(`../assets/images/onBoading/favFood/noodles.png`)} />
+            <Image
+              style={styles.platformImage}
+              source={require(`../assets/images/onBoading/favFood/noodles.png`)}
+            />
           </View>
           <Text style={styles.itemLargeText}>{item.title}</Text>
         </Pressable>
@@ -153,7 +178,10 @@ const AddFavFoodScreen = () => {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
           <View style={styles.itemImage}>
-            <Image source={require(`../assets/images/onBoading/favFood/tteokbokki.png`)} />
+            <Image
+              style={styles.platformImage}
+              source={require(`../assets/images/onBoading/favFood/tteokbokki.png`)}
+            />
           </View>
           <Text style={styles.itemLargeText}>{item.title}</Text>
         </Pressable>
@@ -163,7 +191,10 @@ const AddFavFoodScreen = () => {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
           <View style={styles.itemImage}>
-            <Image source={require(`../assets/images/onBoading/favFood/salad.png`)} />
+            <Image
+              style={styles.platformImage}
+              source={require(`../assets/images/onBoading/favFood/salad.png`)}
+            />
           </View>
           <Text style={styles.itemLargeText}>{item.title}</Text>
         </Pressable>
@@ -173,7 +204,10 @@ const AddFavFoodScreen = () => {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
           <View style={styles.itemImage}>
-            <Image source={require(`../assets/images/onBoading/favFood/riceSoup.png`)} />
+            <Image
+              style={styles.platformImage}
+              source={require(`../assets/images/onBoading/favFood/riceSoup.png`)}
+            />
           </View>
           <Text style={styles.itemLargeText}>{item.title}</Text>
         </Pressable>
@@ -183,7 +217,10 @@ const AddFavFoodScreen = () => {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
           <View style={styles.itemImage}>
-            <Image source={require(`../assets/images/onBoading/favFood/stew.png`)} />
+            <Image
+              style={styles.platformImage}
+              source={require(`../assets/images/onBoading/favFood/stew.png`)}
+            />
           </View>
           <Text style={styles.itemLargeText}>{item.title}</Text>
         </Pressable>
@@ -193,7 +230,10 @@ const AddFavFoodScreen = () => {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
           <View style={styles.itemImage}>
-            <Image source={require(`../assets/images/onBoading/favFood/chop.png`)} />
+            <Image
+              style={styles.platformImage}
+              source={require(`../assets/images/onBoading/favFood/chop.png`)}
+            />
           </View>
           <Text style={styles.itemLargeText}>{item.title}</Text>
         </Pressable>
@@ -244,57 +284,123 @@ const styles = StyleSheet.create({
     paddingRight: 13,
   },
   textTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    ...Platform.select({
+      ios: {
+        color: '#2a3037',
+        fontSize: 24,
+        fontWeight: 'bold',
+      },
+      android: {
+        color: '#000000',
+        fontSize: 22,
+        fontWeight: 'bold',
+      },
+    }),
     alignSelf: 'center',
-    color: '#2a3037',
   },
   favFoodItem: {
-    width: (Dimensions.get('window').width - 46) / 3,
-    height: 146,
+    ...Platform.select({
+      ios: { width: (Dimensions.get('window').width - 46) / 3, height: 146 },
+      android: {
+        width: (Dimensions.get('window').width - 56) / 3,
+        height: 126,
+      },
+    }),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 20,
+    // paddingBottom: 20,
+    // borderColor: 'red',
+    // borderWidth: 1,
   },
   itemImage: {
     backgroundColor: '#fe554a20',
     borderRadius: 50,
-    padding: 10,
+    // padding: 10,
+    ...Platform.select({
+      ios: { width: '86%', height: '70%', alignItems: 'center', justifyContent: 'center' },
+      android: {
+        width: '80%',
+        height: '70%',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    }),
   },
   itemSelectImage: {
     backgroundColor: '#00000020',
     borderRadius: 0,
     padding: 10,
+    ...Platform.select({
+      ios: { width: '86%', height: '70%', alignItems: 'center', justifyContent: 'center' },
+      android: {
+        width: '80%',
+        height: '70%',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    }),
   },
   itemInvisible: {
     backgroundColor: 'transparent',
   },
   favFoodContainer: {
-    marginTop: 61,
+    ...Platform.select({
+      ios: {
+        marginTop: 61,
+      },
+      android: {
+        marginTop: 31,
+      },
+    }),
   },
   itemLargeText: {
     paddingTop: 8,
-    fontSize: 18,
-    fontWeight: '500',
     fontStyle: 'normal',
     color: '#2a3037',
+    ...Platform.select({
+      ios: { fontSize: 18, fontWeight: '500' },
+      android: {
+        fontSize: 16,
+        fontWeight: '600',
+      },
+    }),
   },
   itemSmallText: {
     paddingTop: 8,
-    fontSize: 16,
-    fontWeight: '500',
     fontStyle: 'normal',
     color: '#2a3037',
+    ...Platform.select({
+      ios: { fontSize: 16, fontWeight: '500' },
+      android: {
+        fontSize: 14,
+        fontWeight: '600',
+      },
+    }),
+  },
+  platformImage: {
+    ...Platform.select({
+      ios: { resizeMode: 'contain' },
+      android: {
+        width: '80%',
+        height: '80%',
+        resizeMode: 'contain',
+      },
+    }),
   },
 });
 
 const Wrapper = styled.View({
-  paddingTop: 36,
+  ...Platform.select({
+    ios: {
+      paddingTop: 36,
+    },
+    android: {
+      paddingTop: 20,
+    },
+  }),
   backgroundColor: '#fff',
-  width: '100%',
-  height: '100%',
-  display: 'flex',
+  flex: 1,
   alignItems: 'center',
   paddingHorizontal: 23,
 });

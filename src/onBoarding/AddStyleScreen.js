@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, StyleSheet, TextInput, Image, Button, Pressable } from 'react-native';
+import { Text, View, StyleSheet, Image, Pressable, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 // import AddStyleData from './components/AddStyleData';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
@@ -16,6 +16,20 @@ const AddStyleScreen = () => {
     navigation.setOptions({
       headerShown: true,
       title: '취향선택',
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        ...Platform.select({
+          ios: {
+            fontWeight: '600',
+            fontSize: 17,
+          },
+          android: {
+            fontWeight: 'bold',
+            fontSize: 15,
+          },
+        }),
+      },
+      headerStyle: { borderBottomWidth: 0.2, borderColor: '#dfe2e5' },
       headerLeft: () => (
         <Pressable
           style={styles.BackIcon}
@@ -43,11 +57,17 @@ const AddStyleScreen = () => {
     <Wrapper>
       <Text style={styles.TextTitle}>나의 맛집 스타일 선택</Text>
 
-      <StyleListContainer>
+      <View style={styles.styleListContainer}>
         <StyleListItem>
           <View style={styles.StyleImage}>
             <Image
-              source={require(`../assets/images/onBoading/addStyle/addStyleImage0.png`)}></Image>
+              source={require(`../assets/images/onBoading/addStyle/addStyleImage0.png`)}
+              style={{
+                width: '80%',
+                height: '80%',
+                resizeMode: 'contain',
+              }}
+            />
           </View>
           <View style={styles.StyleText}>
             <View style={{ flexDirection: 'row' }}>
@@ -63,15 +83,17 @@ const AddStyleScreen = () => {
               />
             </View>
             <Text style={styles.StyleItemContent}>
-              새로운 곳에 갔으면 그 지역 맛집을 찾아야지! 전국 8도 그 지역에 있는 맛집을 먹어보는
-              것을 좋아해요.
+              새로운 곳에 갔으면 그 지역 맛집을 찾아야지! {'\n'}전국 8도 그 지역에 있는 맛집을
+              먹어보는 것을 좋아해요.
             </Text>
           </View>
         </StyleListItem>
         <StyleListItem>
           <View style={styles.StyleImage}>
             <Image
-              source={require('../assets/images/onBoading/addStyle/addStyleImage1.png')}></Image>
+              source={require('../assets/images/onBoading/addStyle/addStyleImage4.png')}
+              style={{ width: '80%', height: '80%', resizeMode: 'contain' }}
+            />
           </View>
           <View style={styles.StyleText}>
             <View style={{ flexDirection: 'row' }}>
@@ -87,15 +109,17 @@ const AddStyleScreen = () => {
               />
             </View>
             <Text style={styles.StyleItemContent}>
-              세상에 얼마나 많은 음식이 있는데... 어떻게 같은 것만 먹어! 평소에 먹어보지 못한 음식을
-              먹는 것을 좋아해요.
+              세상에 얼마나 많은 음식이 있는데... {'\n'}어떻게 같은 것만 먹어! {'\n'}평소에 먹어보지
+              못한 음식을 먹는 것을 좋아해요.
             </Text>
           </View>
         </StyleListItem>
         <StyleListItem>
           <View style={styles.StyleImage}>
             <Image
-              source={require('../assets/images/onBoading/addStyle/addStyleImage2.png')}></Image>
+              source={require('../assets/images/onBoading/addStyle/addStyleImage1.png')}
+              style={{ width: '80%', height: '80%', resizeMode: 'contain' }}
+            />
           </View>
           <View style={styles.StyleText}>
             <View style={{ flexDirection: 'row' }}>
@@ -119,7 +143,9 @@ const AddStyleScreen = () => {
         <StyleListItem>
           <View style={styles.StyleImage}>
             <Image
-              source={require('../assets/images/onBoading/addStyle/addStyleImage3.png')}></Image>
+              source={require('../assets/images/onBoading/addStyle/addStyleImage2.png')}
+              style={{ width: '80%', height: '80%', resizeMode: 'contain' }}
+            />
           </View>
           <View style={styles.StyleText}>
             <View style={{ flexDirection: 'row' }}>
@@ -135,15 +161,17 @@ const AddStyleScreen = () => {
               />
             </View>
             <Text style={styles.StyleItemContent}>
-              내가 좋아하는 음식의 끝판왕을 만나고 싶어 특정 음식의 매니아로 한 음식만 먹는 것을
-              좋아해요.
+              TV, SNS에 나오는 맛집 말고{'\n'} 진짜 맛집을 찾고 싶어{'\n'} 유명하지 않아도 진짜
+              맛집을 찾는 것을 좋아해요
             </Text>
           </View>
         </StyleListItem>
         <StyleListItem>
           <View style={styles.StyleImage}>
             <Image
-              source={require('../assets/images/onBoading/addStyle/addStyleImage4.png')}></Image>
+              source={require('../assets/images/onBoading/addStyle/addStyleImage3.png')}
+              style={{ width: '80%', height: '80%', resizeMode: 'contain' }}
+            />
           </View>
           <View style={styles.StyleText}>
             <View style={{ flexDirection: 'row' }}>
@@ -159,11 +187,11 @@ const AddStyleScreen = () => {
               />
             </View>
             <Text style={styles.StyleItemContent}>
-              맛에 취하고 분위기에 취한다. 맛집을 찾을 때 분위기도 중요하게 생각해요.
+              맛에 취하고 분위기에 취한다. {'\n'}맛집을 찾을 때 분위기도 중요하게 생각해요.
             </Text>
           </View>
         </StyleListItem>
-      </StyleListContainer>
+      </View>
     </Wrapper>
   );
 };
@@ -172,14 +200,31 @@ export default AddStyleScreen;
 
 const styles = StyleSheet.create({
   TextTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    ...Platform.select({
+      ios: {
+        color: '#2a3037',
+        fontSize: 24,
+        fontWeight: '600',
+      },
+      android: {
+        color: '#000000',
+        fontSize: 22,
+        fontWeight: 'bold',
+      },
+    }),
     alignSelf: 'center',
-    color: '#2a3037',
   },
   StyleImage: {
-    width: 80,
-    height: 80,
+    ...Platform.select({
+      ios: {
+        width: '23%',
+        height: '80%',
+      },
+      android: {
+        width: '23%',
+        height: '90%',
+      },
+    }),
     borderRadius: 10,
     backgroundColor: '#f2f2f2',
     display: 'flex',
@@ -192,18 +237,20 @@ const styles = StyleSheet.create({
     marginLeft: 22,
   },
   StyleItemTitle: {
-    fontSize: 20,
-    fontWeight: '500',
     fontStyle: 'normal',
-    color: '#000000',
-    width: '90%',
+    color: '#2a3037',
+    ...Platform.select({
+      ios: { width: '95%', fontSize: 20, fontWeight: '500' },
+      android: { width: '100%', fontSize: 19, fontWeight: '600' },
+    }),
   },
   StyleItemContent: {
-    fontSize: 12,
-    fontWeight: 'normal',
     fontStyle: 'normal',
     color: '#7e8389',
-    marginTop: 12,
+    ...Platform.select({
+      ios: { marginTop: 12, fontSize: 12, fontWeight: 'normal' },
+      android: { marginTop: 9, fontSize: 11, fontWeight: '600' },
+    }),
   },
   BackIcon: {
     width: 50,
@@ -223,26 +270,40 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 13,
   },
+  styleListContainer: {
+    ...Platform.select({
+      ios: {
+        paddingTop: '5%',
+        height: '88%',
+        width: '100%',
+        alignItems: 'center',
+      },
+      android: {
+        paddingTop: '5.5%',
+        height: '100%',
+        width: '100%',
+        alignItems: 'center',
+      },
+    }),
+  },
 });
 
 const Wrapper = styled.View({
-  paddingTop: 36,
+  ...Platform.select({
+    ios: { paddingTop: '7%' },
+    android: { paddingTop: '4.5%' },
+  }),
   backgroundColor: '#fff',
-  width: '100%',
-  height: '100%',
-  display: 'flex',
+  flex: 1,
   alignItems: 'center',
 });
 
-const StyleListContainer = styled.View({
-  paddingTop: 36,
-});
-
 const StyleListItem = styled.View({
-  marginTop: 9,
-  paddingBottom: 10,
-  width: 336,
-  height: 102,
+  ...Platform.select({
+    ios: { height: '16%', marginTop: 9 },
+    android: { height: '16.5%', marginTop: 7, paddingBottom: 5 },
+  }),
+  width: '90%',
   borderBottomWidth: 1,
   borderColor: '#dfe2e5',
   display: 'flex',

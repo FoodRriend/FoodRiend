@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image } from 'react-native';
+import { Text, View, Pressable, StyleSheet, TextInput, Image, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const SignupScreen = () => {
@@ -20,6 +20,20 @@ const SignupScreen = () => {
     navigation.setOptions({
       headerShown: true,
       title: '회원가입',
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        ...Platform.select({
+          ios: {
+            fontWeight: '600',
+            fontSize: 17,
+          },
+          android: {
+            fontWeight: 'bold',
+            fontSize: 15,
+          },
+        }),
+      },
+      headerStyle: { borderBottomWidth: 0.2, borderColor: '#dfe2e5' },
       headerLeft: () => (
         <Pressable
           style={styles.BackIcon}
@@ -99,10 +113,17 @@ const styles = StyleSheet.create({
   },
   InPutID: {
     paddingLeft: 58,
-    fontSize: 15,
-    fontWeight: '500',
     fontStyle: 'normal',
     color: '#2a3037',
+    fontSize: 15,
+    ...Platform.select({
+      ios: {
+        fontWeight: '500',
+      },
+      android: {
+        fontWeight: '600',
+      },
+    }),
   },
   InPutNickname: {
     width: '75%',
@@ -113,11 +134,19 @@ const styles = StyleSheet.create({
     color: '#2a3037',
   },
   NicknameCheck: {
-    fontSize: 15,
-    fontWeight: '500',
     fontStyle: 'normal',
-    color: '#2a3037',
     color: '#7e8389',
+    alignSelf: 'center',
+    ...Platform.select({
+      ios: {
+        fontWeight: '500',
+        fontSize: 15,
+      },
+      android: {
+        fontWeight: '600',
+        fontSize: 14,
+      },
+    }),
   },
   SignupComplete: {
     width: 327,
@@ -149,9 +178,7 @@ const styles = StyleSheet.create({
 const Wrapper = styled.View({
   paddingTop: 36,
   backgroundColor: '#fff',
-  width: '100%',
-  height: '100%',
-  display: 'flex',
+  flex: 1,
   alignItems: 'center',
 });
 

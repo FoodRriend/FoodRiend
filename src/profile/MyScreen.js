@@ -288,7 +288,7 @@ const MyScreen = () => {
         </Pressable>
       </MyScreenFavInfoContainer>
       <MyScreenRestaurantContainer>
-        {fomatRenderItem(myScreenFirstData) === '먹어봤어요' && (
+        {fomatRenderItem(myScreenData) === '먹어봤어요' && (
           <FlatList
             showsVerticalScrollIndicator={false}
             data={myScreenData}
@@ -296,7 +296,7 @@ const MyScreen = () => {
             numColumns={numColumns}
           />
         )}
-        {fomatRenderItem(myScreenFirstData) === '먹어봤어요_null' && (
+        {fomatRenderItem(myScreenData) === '먹어봤어요_null' && (
           <>
             <View style={{ width: '100%', height: 37, justifyContent: 'center' }}>
               <Pressable
