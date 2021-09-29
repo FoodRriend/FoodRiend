@@ -29,7 +29,14 @@ const AddStyleScreen = () => {
           },
         }),
       },
-      headerStyle: { borderBottomWidth: 0.2, borderColor: '#dfe2e5' },
+      headerStyle: {
+        ...Platform.select({
+          android: {
+            borderWidth: 0.8,
+          },
+        }),
+        borderColor: '#dfe2e5',
+      },
       headerLeft: () => (
         <Pressable
           style={styles.BackIcon}

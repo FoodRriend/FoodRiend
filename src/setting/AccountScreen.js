@@ -11,6 +11,27 @@ const AccountScreen = () => {
     navigation.setOptions({
       headerShown: true,
       title: '계정',
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        ...Platform.select({
+          ios: {
+            fontWeight: '600',
+            fontSize: 17,
+          },
+          android: {
+            fontWeight: 'bold',
+            fontSize: 15,
+          },
+        }),
+      },
+      headerStyle: {
+        ...Platform.select({
+          android: {
+            borderWidth: 0.8,
+          },
+        }),
+        borderColor: '#dfe2e5',
+      },
       headerLeft: () => (
         <Pressable
           style={styles.backIcon}
@@ -100,7 +121,14 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   accountCatagory: {
-    fontWeight: '400',
+    ...Platform.select({
+      ios: {
+        fontWeight: '400',
+      },
+      android: {
+        fontWeight: '500',
+      },
+    }),
     fontSize: 15,
     marginLeft: 35,
     marginVertical: 16,
