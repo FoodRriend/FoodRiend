@@ -53,6 +53,8 @@ const AddFriendsScreen = () => {
   const [friendChecked5, setFriendChecked5] = useState(false);
   const [friendChecked6, setFriendChecked6] = useState(false);
 
+  const [friendCheckedBtn, setFriendCheckedBtn] = useState(false);
+
   const friendsData = [
     { name: '최현', checked: false },
     { name: '김대먼', checked: false },
@@ -64,6 +66,30 @@ const AddFriendsScreen = () => {
     { name: '소녀', checked: false },
     { name: '소년', checked: false },
   ];
+
+  useEffect(() => {
+    if (
+      friendChecked1 ||
+      friendChecked2 ||
+      friendChecked3 ||
+      friendChecked4 ||
+      friendChecked5 ||
+      friendChecked6
+    ) {
+      console.log('요청');
+      setFriendCheckedBtn(true);
+    } else {
+      console.log('요청 안함');
+      setFriendCheckedBtn(false);
+    }
+  }, [
+    friendChecked1,
+    friendChecked2,
+    friendChecked3,
+    friendChecked4,
+    friendChecked5,
+    friendChecked6,
+  ]);
 
   // const onUnChecked = (index) => {
   //   friendsData[index].checked = true;
@@ -402,13 +428,23 @@ const AddFriendsScreen = () => {
           style={styles.addFriendsButton}>
           <Text style={styles.addFriendsButtonText}>다음에 하기</Text>
         </Pressable>
-        <Pressable
-          onPress={() => {
-            navigation.navigate('SignupComplete');
-          }}
-          style={styles.addFriendsButton}>
-          <Text style={styles.addFriendsButtonText}>완료</Text>
-        </Pressable>
+        {friendCheckedBtn ? (
+          <Pressable
+            onPress={() => {
+              navigation.navigate('SignupComplete');
+            }}
+            style={styles.addFriendsButton}>
+            <Text style={styles.addFriendsButtonText}>완료</Text>
+          </Pressable>
+        ) : (
+          <Pressable
+            onPress={() => {
+              alert('친구를 추가해주세요.');
+            }}
+            style={styles.addFriendsButton}>
+            <Text style={styles.addFriendsButtonText}>완료</Text>
+          </Pressable>
+        )}
       </AddFriendsButton>
     </Wrapper>
   );

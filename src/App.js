@@ -40,8 +40,6 @@ import {
 const Stack = createStackNavigator();
 const MyPageStack = createStackNavigator();
 const SearchStack = createStackNavigator();
-const TermsStack = createStackNavigator();
-const SettingStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 // 탭 아이콘 함수
@@ -111,6 +109,10 @@ const MyPageStackScreen = () => {
         component={MyPostReviewScreen}
       />
       <MyPageStack.Screen name="Alert" component={AlertScreen} />
+
+      <MyPageStack.Screen name="Setting" component={SettingsScreen} />
+      <MyPageStack.Screen name="SettingAlert" component={SettingAlertScreen} />
+      <MyPageStack.Screen name="TermsPolicy" component={TermsPolicyScreen} />
     </MyPageStack.Navigator>
   );
 };
@@ -121,28 +123,6 @@ const SearchStackScreen = () => {
     <SearchStack.Navigator>
       <SearchStack.Screen name="Search" component={SearchScreen} />
     </SearchStack.Navigator>
-  );
-};
-
-// 설정
-const SettingStackScreen = () => {
-  return (
-    <SettingStack.Navigator>
-      <SettingStack.Screen name="Setting" component={SettingsScreen} />
-      <SettingStack.Screen name="SettingAlert" component={SettingAlertScreen} />
-    </SettingStack.Navigator>
-  );
-};
-
-// 개인정보 약관
-const TermsStackScreen = () => {
-  return (
-    <TermsStack.Navigator>
-      <TermsStack.Screen name="Terms" component={TermsAgreementScreen} />
-      <TermsStack.Screen name="TermsDetail" component={TermsDetailScreen} />
-      <TermsStack.Screen name="PersonalInfo" component={PersonalInfoScreen} />
-      <TermsStack.Screen name="InfoProcess" component={InfoProcessScreen} />
-    </TermsStack.Navigator>
   );
 };
 
@@ -173,10 +153,10 @@ const App = () => {
 
         <Stack.Screen name="Account" component={AccountScreen} />
 
-        <Stack.Screen name="Setting" component={SettingStackScreen} />
-        <Stack.Screen name="TermsPolicy" component={TermsPolicyScreen} />
-
-        <Stack.Screen name="Terms" component={TermsStackScreen} />
+        <Stack.Screen name="Terms" component={TermsAgreementScreen} />
+        <Stack.Screen name="TermsDetail" component={TermsDetailScreen} />
+        <Stack.Screen name="PersonalInfo" component={PersonalInfoScreen} />
+        <Stack.Screen name="InfoProcess" component={InfoProcessScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
