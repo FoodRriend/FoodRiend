@@ -91,7 +91,7 @@ const SignupScreen = () => {
       <InputContainer>
         <View style={styles.inputImage}>
           <Image
-            style={{ width: 24, height: 24, borderRadius: 8 }}
+            style={{ width: 24, height: 24, borderRadius: 12 }}
             source={require(`../assets/icons/profile_black.png`)}
           />
         </View>
@@ -107,7 +107,7 @@ const SignupScreen = () => {
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
           <View style={styles.inputImage}>
             <Image
-              style={{ width: 24, height: 24, borderRadius: 8 }}
+              style={{ width: 24, height: 24, borderRadius: 12 }}
               source={require(`../assets/icons/profile_black.png`)}
             />
           </View>
@@ -122,6 +122,13 @@ const SignupScreen = () => {
           {/* <Text style={styles.NicknameCheck}>중복확인</Text> */}
         </View>
       </InputContainer>
+      <View style={styles.inputValidity}>
+        {inputCheck ? (
+          <Text style={styles.inputValidityText}>닉네임을 사용할 수 있습니다.</Text>
+        ) : (
+          <Text style={styles.inputValidityFalseText}>닉네임을 사용 중입니다.</Text>
+        )}
+      </View>
       {inputCheck ? (
         <Pressable onPress={onPress} style={styles.SignupComplete}>
           <Text style={styles.SignupCompleteText}>완료</Text>
@@ -186,7 +193,6 @@ const styles = StyleSheet.create({
     height: 56,
     borderRadius: 32,
     backgroundColor: '#fe554a',
-    marginTop: 32,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -196,7 +202,6 @@ const styles = StyleSheet.create({
     height: 56,
     borderRadius: 32,
     backgroundColor: '#DFE2E6',
-    marginTop: 32,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -221,6 +226,43 @@ const styles = StyleSheet.create({
     height: 44,
     justifyContent: 'center',
     alignItems: 'flex-end',
+  },
+  inputValidity: {
+    width: '100%',
+    height: 40,
+    justifyContent: 'center',
+    ...Platform.select({
+      ios: {
+        paddingLeft: 55,
+      },
+      android: {
+        paddingLeft: 65,
+      },
+    }),
+  },
+  inputValidityText: {
+    fontSize: 12,
+    ...Platform.select({
+      ios: {
+        fontWeight: '500',
+      },
+      android: {
+        fontWeight: '600',
+      },
+    }),
+    color: '#04E85F',
+  },
+  inputValidityFalseText: {
+    fontSize: 12,
+    ...Platform.select({
+      ios: {
+        fontWeight: '500',
+      },
+      android: {
+        fontWeight: '600',
+      },
+    }),
+    color: '#FA4A0C',
   },
 });
 

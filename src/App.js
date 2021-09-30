@@ -24,7 +24,15 @@ import {
   AlertScreen,
 } from '@/profile';
 import { SearchScreen } from '@/search';
-import { SettingsScreen, AccountScreen, SettingAlertScreen, TermsPolicyScreen } from '@/setting';
+import {
+  SettingsScreen,
+  AccountScreen,
+  SettingAlertScreen,
+  TermsPolicyScreen,
+  CustomerServiceScreen,
+  NoticeScreen,
+  NoticeDetailScreen,
+} from '@/setting';
 import {
   TermsAgreementScreen,
   TermsDetailScreen,
@@ -112,6 +120,9 @@ const MyPageStackScreen = () => {
 
       <MyPageStack.Screen name="Setting" component={SettingsScreen} />
       <MyPageStack.Screen name="SettingAlert" component={SettingAlertScreen} />
+      <MyPageStack.Screen name="Notice" component={NoticeScreen} />
+      <MyPageStack.Screen name="NoticeDetail" component={NoticeDetailScreen} />
+      <MyPageStack.Screen name="CustomerService" component={CustomerServiceScreen} />
       <MyPageStack.Screen name="TermsPolicy" component={TermsPolicyScreen} />
     </MyPageStack.Navigator>
   );

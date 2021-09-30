@@ -87,7 +87,9 @@ const SettingsScreen = () => {
           borderBottomColor: '#dfe2e5',
           borderBottomWidth: 0.6,
         }}>
-        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+        <Pressable
+          onPress={() => navigation.navigate('Notice')}
+          style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <Text style={styles.mySettingCatagory}>공지사항</Text>
           <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
         </Pressable>
@@ -100,7 +102,9 @@ const SettingsScreen = () => {
           borderBottomColor: '#dfe2e5',
           borderBottomWidth: 0.6,
         }}>
-        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+        <Pressable
+          onPress={() => navigation.navigate('CustomerService')}
+          style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <Text style={styles.mySettingCatagory}>고객센터</Text>
           <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
         </Pressable>
