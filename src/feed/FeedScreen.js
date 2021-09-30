@@ -1,7 +1,16 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, StyleSheet, Image, FlatList, Dimensions, Pressable } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  FlatList,
+  Dimensions,
+  Pressable,
+  Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { feedData, feedDataFirst } from './constants';
 
@@ -176,11 +185,29 @@ const styles = StyleSheet.create({
   feedTitleImage: {
     width: 120,
     height: 46,
+    ...Platform.select({
+      ios: {
+        height: 46,
+      },
+      android: {
+        width: 130,
+        height: 50,
+        marginBottom: 2,
+      },
+    }),
     position: 'relative',
     right: 120,
   },
   feedListImage: {
     marginTop: 30,
+    ...Platform.select({
+      ios: {
+        marginTop: 30,
+      },
+      android: {
+        marginTop: 20,
+      },
+    }),
     width: '100%',
     height: 150,
     borderRadius: 10,
@@ -194,7 +221,15 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 38,
     fontSize: 12,
-    fontWeight: 'normal',
+    ...Platform.select({
+      ios: {
+        fontWeight: 'normal',
+      },
+      android: {
+        fontWeight: '500',
+        marginTop: 1,
+      },
+    }),
     color: '#7e8389',
   },
   feedListInfoName: {
@@ -207,18 +242,33 @@ const styles = StyleSheet.create({
   },
   feedListInfoNumber: {
     fontSize: 14,
-    fontWeight: '500',
+    ...Platform.select({
+      ios: {
+        fontWeight: '500',
+      },
+      android: {
+        fontWeight: '600',
+      },
+    }),
     color: '#2a3037',
     marginLeft: 7,
     marginTop: 3,
   },
   feedListInfoTime: {
     fontSize: 12,
-    fontWeight: '300',
     color: '#111111',
     position: 'absolute',
-    left: 220,
     top: 11,
+    ...Platform.select({
+      ios: {
+        fontWeight: '300',
+        left: 220,
+      },
+      android: {
+        fontWeight: '400',
+        left: 238,
+      },
+    }),
   },
   rederItemFirstCover: {
     display: 'flex',
@@ -239,7 +289,14 @@ const styles = StyleSheet.create({
 });
 
 const Wrapper = styled.View({
-  paddingTop: 46,
+  ...Platform.select({
+    ios: {
+      paddingTop: 46,
+    },
+    android: {
+      paddingTop: 10,
+    },
+  }),
   backgroundColor: '#fff',
   width: '100%',
   height: '100%',
@@ -248,13 +305,28 @@ const Wrapper = styled.View({
 });
 
 const FeedListContainer = styled.View({
-  width: 350,
-  height: 660,
+  ...Platform.select({
+    ios: {
+      width: 350,
+      height: 660,
+    },
+    android: {
+      width: 360,
+      height: 618,
+    },
+  }),
 });
 
 const FeedListItem = styled.View({
   width: '100%',
-  height: 250,
+  ...Platform.select({
+    ios: {
+      height: 250,
+    },
+    android: {
+      height: 240,
+    },
+  }),
 });
 
 const FeedListInfoContainer = styled.View({

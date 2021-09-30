@@ -24,7 +24,14 @@ const AddFriendsScreen = () => {
           },
         }),
       },
-      headerStyle: { borderBottomWidth: 0.2, borderColor: '#dfe2e5' },
+      headerStyle: {
+        ...Platform.select({
+          android: {
+            borderWidth: 0.8,
+          },
+        }),
+        borderColor: '#dfe2e5',
+      },
       headerLeft: () => (
         <Pressable
           style={styles.BackIcon}
@@ -420,13 +427,12 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   textTitle: {
-    fontSize: 24,
     ...Platform.select({
       ios: {
         fontSize: 24,
       },
       android: {
-        fontSize: 20,
+        fontSize: 22,
       },
     }),
     fontWeight: 'bold',
@@ -434,16 +440,8 @@ const styles = StyleSheet.create({
     color: '#2a3037',
   },
   addFriendsButton: {
-    ...Platform.select({
-      ios: {
-        width: 126,
-        height: 36,
-      },
-      android: {
-        width: 120,
-        height: 32,
-      },
-    }),
+    width: 126,
+    height: 36,
     borderRadius: 10,
     backgroundColor: '#fe554a',
     display: 'flex',
@@ -466,16 +464,8 @@ const styles = StyleSheet.create({
     color: '#fcfcfc',
   },
   friendImageItem: {
-    ...Platform.select({
-      ios: {
-        width: 56,
-        height: 56,
-      },
-      android: {
-        width: 48,
-        height: 48,
-      },
-    }),
+    width: 56,
+    height: 56,
   },
   friendInfoText: {
     width: 158,
@@ -486,7 +476,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
       },
       android: {
-        fontSize: 13,
+        fontSize: 14,
         fontWeight: '600',
       },
     }),
@@ -507,8 +497,8 @@ const styles = StyleSheet.create({
         height: 24,
       },
       android: {
-        width: 20,
-        height: 20,
+        width: 22,
+        height: 22,
       },
     }),
     marginTop: 1,
@@ -521,8 +511,8 @@ const styles = StyleSheet.create({
         height: 24,
       },
       android: {
-        width: 20,
-        height: 20,
+        width: 22,
+        height: 22,
       },
     }),
     marginTop: 1,
@@ -713,13 +703,14 @@ const AddFriendsContainer = styled.View({
   borderWidth: 1,
   borderColor: '#fe554a75',
   backgroundColor: '#ffffff',
-  width: 335,
   ...Platform.select({
     ios: {
+      width: 335,
       height: 525,
     },
     android: {
-      height: 460,
+      width: 355,
+      height: 520,
     },
   }),
   borderRadius: 10,
@@ -742,8 +733,8 @@ const AddFriendsItemContainer = styled.View({
       height: 400,
     },
     android: {
-      width: 335,
-      height: 350,
+      width: '100%',
+      height: '78%',
     },
   }),
 });
@@ -758,12 +749,13 @@ const AddFriendsItems = styled.View({
       height: 80,
     },
     android: {
-      width: 290,
-      height: 70,
+      width: '89%',
+      height: 80,
     },
   }),
   justifyContent: 'center',
   flexWrap: 'wrap',
+  alignSelf: 'center',
 });
 
 const AddFriendsInfo = styled.View({

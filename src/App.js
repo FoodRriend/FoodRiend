@@ -24,7 +24,13 @@ import {
   AlertScreen,
 } from '@/profile';
 import { SearchScreen } from '@/search';
-import { SettingsScreen, AccountScreen, SettingAlertScreen } from '@/setting';
+import { SettingsScreen, AccountScreen, SettingAlertScreen, TermsPolicyScreen } from '@/setting';
+import {
+  TermsAgreementScreen,
+  TermsDetailScreen,
+  PersonalInfoScreen,
+  InfoProcessScreen,
+} from '@/termsAgreement';
 
 // import test from './shared/hooks/test';
 
@@ -34,8 +40,11 @@ import { SettingsScreen, AccountScreen, SettingAlertScreen } from '@/setting';
 const Stack = createStackNavigator();
 const MyPageStack = createStackNavigator();
 const SearchStack = createStackNavigator();
+const TermsStack = createStackNavigator();
+const SettingStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+// 탭 아이콘 함수
 const TabBarIcon = (focused, name) => {
   let iconImagePath;
   if (name === 'Feed') {
@@ -52,6 +61,7 @@ const TabBarIcon = (focused, name) => {
   return <Image source={iconImagePath} style={{ width: 22, height: 22 }} />;
 };
 
+// 회원가입
 const SignupContainer = () => {
   return (
     <Stack.Navigator initialRouteName="Signup">
@@ -64,6 +74,7 @@ const SignupContainer = () => {
   );
 };
 
+// tap 메뉴
 const BottomTap = () => {
   return (
     <Tab.Navigator
@@ -82,6 +93,7 @@ const BottomTap = () => {
   );
 };
 
+// 프로팔
 const MyPageStackScreen = () => {
   return (
     <MyPageStack.Navigator>
@@ -99,16 +111,38 @@ const MyPageStackScreen = () => {
         component={MyPostReviewScreen}
       />
       <MyPageStack.Screen name="Alert" component={AlertScreen} />
-      <MyPageStack.Screen name="Setting" component={SettingsScreen} />
     </MyPageStack.Navigator>
   );
 };
 
+// map 가게 상세정보
 const SearchStackScreen = () => {
   return (
     <SearchStack.Navigator>
       <SearchStack.Screen name="Search" component={SearchScreen} />
     </SearchStack.Navigator>
+  );
+};
+
+// 설정
+const SettingStackScreen = () => {
+  return (
+    <SettingStack.Navigator>
+      <SettingStack.Screen name="Setting" component={SettingsScreen} />
+      <SettingStack.Screen name="SettingAlert" component={SettingAlertScreen} />
+    </SettingStack.Navigator>
+  );
+};
+
+// 개인정보 약관
+const TermsStackScreen = () => {
+  return (
+    <TermsStack.Navigator>
+      <TermsStack.Screen name="Terms" component={TermsAgreementScreen} />
+      <TermsStack.Screen name="TermsDetail" component={TermsDetailScreen} />
+      <TermsStack.Screen name="PersonalInfo" component={PersonalInfoScreen} />
+      <TermsStack.Screen name="InfoProcess" component={InfoProcessScreen} />
+    </TermsStack.Navigator>
   );
 };
 
@@ -132,11 +166,17 @@ const App = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
 
         <Stack.Screen name="Signup" component={SignupContainer} />
+
         <Stack.Screen name="Feed" component={BottomTap} />
 
         <Stack.Screen name="MyEdit" component={MyEditScreen} />
+
         <Stack.Screen name="Account" component={AccountScreen} />
-        <Stack.Screen name="SettingAlert" component={SettingAlertScreen} />
+
+        <Stack.Screen name="Setting" component={SettingStackScreen} />
+        <Stack.Screen name="TermsPolicy" component={TermsPolicyScreen} />
+
+        <Stack.Screen name="Terms" component={TermsStackScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

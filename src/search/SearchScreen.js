@@ -11,6 +11,27 @@ const SearchScreen = () => {
     navigation.setOptions({
       headerShown: true,
       title: '검색하기',
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        ...Platform.select({
+          ios: {
+            fontWeight: '600',
+            fontSize: 17,
+          },
+          android: {
+            fontWeight: 'bold',
+            fontSize: 15,
+          },
+        }),
+      },
+      headerStyle: {
+        ...Platform.select({
+          android: {
+            borderWidth: 0.8,
+          },
+        }),
+        borderColor: '#dfe2e5',
+      },
       headerLeft: () => <></>,
     });
   };
@@ -57,8 +78,22 @@ export default SearchScreen;
 
 const styles = StyleSheet.create({
   searchInputItem: {
-    width: 309,
-    height: 36,
+    ...Platform.select({
+      ios: {
+        width: 309,
+      },
+      android: {
+        width: 320,
+      },
+    }),
+    ...Platform.select({
+      ios: {
+        height: 37,
+      },
+      android: {
+        height: 41,
+      },
+    }),
     borderRadius: 10,
     backgroundColor: '#f0f0f0',
     flexWrap: 'wrap',
@@ -74,7 +109,14 @@ const styles = StyleSheet.create({
     height: '100%',
     marginLeft: 10,
     fontSize: 14,
-    fontWeight: '500',
+    ...Platform.select({
+      ios: {
+        fontWeight: '500',
+      },
+      android: {
+        fontWeight: '600',
+      },
+    }),
     color: '#2a3037',
   },
 });
