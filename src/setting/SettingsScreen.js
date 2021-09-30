@@ -124,7 +124,9 @@ const SettingsScreen = () => {
             borderBottomColor: '#dfe2e5',
             borderBottomWidth: 0.6,
           }}>
-          <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+          <Pressable
+            onPress={() => navigation.navigate('TermsPolicy')}
+            style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
             <Text style={styles.mySettingCatagory}>약관 및 정책</Text>
             <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
           </Pressable>

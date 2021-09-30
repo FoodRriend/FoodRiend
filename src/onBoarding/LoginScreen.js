@@ -7,7 +7,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   const onPress = () => {
-    navigation.navigate('Signup');
+    navigation.navigate('Terms');
   };
   return (
     <Wrapper>
