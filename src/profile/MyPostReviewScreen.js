@@ -1,7 +1,16 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, Image, FlatList, Animated } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  Image,
+  FlatList,
+  Animated,
+  Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const FriendPostReviewScreen = () => {
@@ -46,7 +55,7 @@ const FriendPostReviewScreen = () => {
   const scrollY = new Animated.Value(0);
   const diffClamp = Animated.diffClamp(scrollY, 0, 45);
   const translateY = diffClamp.interpolate({
-    inputRange: [0, 45],
+    inputRange: [0, 25],
     outputRange: [0, -45],
   });
 
@@ -122,19 +131,47 @@ const FriendPostReviewScreen = () => {
 
   return (
     <Wrapper>
-      <View style={{ zIndex: 200, width: '100%', height: 45, backgroundColor: '#fff' }}></View>
+      <View
+        style={{
+          zIndex: 200,
+          width: '100%',
+          ...Platform.select({
+            ios: {
+              height: 43,
+            },
+            android: {
+              height: 0,
+            },
+          }),
+        }}></View>
       <Animated.View
         style={{
           transform: [{ translateY: translateY }],
           zIndex: 100,
-          elevation: 4,
           width: '100%',
           height: 45,
           backgroundColor: '#fff',
           position: 'absolute',
-          top: 45,
+          ...Platform.select({
+            ios: {
+              top: 40,
+            },
+            android: {
+              top: 0,
+            },
+          }),
+          display: 'flex',
+          justifyContent: 'center',
           bottom: 0,
           right: 0,
+          ...Platform.select({
+            ios: {
+              left: 0,
+            },
+            android: {
+              left: 8,
+            },
+          }),
         }}>
         <Pressable
           style={styles.BackIcon}
