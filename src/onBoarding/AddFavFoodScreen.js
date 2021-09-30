@@ -39,7 +39,14 @@ const AddFavFoodScreen = () => {
           },
         }),
       },
-      headerStyle: { borderBottomWidth: 0.2, borderColor: '#dfe2e5' },
+      headerStyle: {
+        ...Platform.select({
+          android: {
+            borderWidth: 0.8,
+          },
+        }),
+        borderColor: '#dfe2e5',
+      },
       headerLeft: () => (
         <Pressable
           style={styles.backIcon}
@@ -302,8 +309,8 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: { width: (Dimensions.get('window').width - 46) / 3, height: 146 },
       android: {
-        width: (Dimensions.get('window').width - 56) / 3,
-        height: 126,
+        width: (Dimensions.get('window').width - 46) / 3,
+        height: 146,
       },
     }),
     display: 'flex',

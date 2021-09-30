@@ -7,7 +7,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   const onPress = () => {
-    navigation.navigate('Signup');
+    navigation.navigate('Terms');
   };
   return (
     <Wrapper>
@@ -66,17 +66,8 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   TitleImage: {
-    ...Platform.select({
-      ios: {
-        width: 170,
-        height: 70,
-      },
-      android: {
-        width: 160,
-        height: 70,
-        marginTop: 10,
-      },
-    }),
+    width: 170,
+    height: 70,
   },
   TitleText: {
     color: '#2a3037',
@@ -85,7 +76,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
       },
       android: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: '600',
       },
     }),
@@ -93,95 +84,51 @@ const styles = StyleSheet.create({
   loginImage1: {
     borderRadius: 10,
     width: '95%',
-    ...Platform.select({
-      ios: {
-        height: 95,
-      },
-      android: {
-        height: 88,
-      },
-    }),
+    height: 95,
     top: -65,
   },
   loginImage2: {
     borderRadius: 10,
     width: '43%',
-    ...Platform.select({
-      ios: {
-        height: 192,
-      },
-      android: {
-        height: 185,
-      },
-    }),
+    height: 192,
     top: -55,
   },
   loginImage3: {
     borderRadius: 10,
     width: '49%',
-    ...Platform.select({
-      ios: {
-        height: 192,
-      },
-      android: {
-        height: 185,
-      },
-    }),
+    height: 192,
     top: -55,
     marginLeft: 10,
   },
   loginImage4: {
     borderRadius: 10,
     width: '49%',
-    ...Platform.select({
-      ios: {
-        height: 120,
-      },
-      android: {
-        height: 113,
-      },
-    }),
+    height: 120,
     top: -45,
   },
   loginImage5: {
     borderRadius: 10,
     width: '43%',
-    ...Platform.select({
-      ios: {
-        height: 120,
-      },
-      android: {
-        height: 113,
-      },
-    }),
+    height: 120,
     top: -45,
     marginLeft: 10,
   },
   loginImage6: {
     borderRadius: 10,
     width: '95%',
-    ...Platform.select({
-      ios: {
-        height: 95,
-      },
-      android: {
-        height: 88,
-      },
-    }),
+    height: 95,
     top: -35,
   },
   kakaoLoginBtn: {
     borderRadius: 30,
+    height: 48,
     ...Platform.select({
       ios: {
         width: 300,
-        height: 48,
       },
       android: {
         width: '100%',
-        height: 43,
-        marginBottom: 25,
-        marginTop: 2,
+        marginTop: 5,
       },
     }),
     top: -18,

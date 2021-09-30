@@ -24,7 +24,14 @@ const SignupCompleteScreen = () => {
           },
         }),
       },
-      headerStyle: { borderBottomWidth: 0.2, borderColor: '#dfe2e5' },
+      headerStyle: {
+        ...Platform.select({
+          android: {
+            borderWidth: 0.8,
+          },
+        }),
+        borderColor: '#dfe2e5',
+      },
       headerLeft: () => <></>,
     });
   };
@@ -35,14 +42,13 @@ const SignupCompleteScreen = () => {
     <Wrapper>
       <Image
         style={{
+          width: '100%',
           ...Platform.select({
             ios: {
-              width: '100%',
               height: 430,
             },
             android: {
-              width: '100%',
-              height: 390,
+              height: 455,
             },
           }),
         }}

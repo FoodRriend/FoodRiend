@@ -11,6 +11,27 @@ const SettingsScreen = () => {
     navigation.setOptions({
       headerShown: true,
       title: '설정',
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        ...Platform.select({
+          ios: {
+            fontWeight: '600',
+            fontSize: 17,
+          },
+          android: {
+            fontWeight: 'bold',
+            fontSize: 15,
+          },
+        }),
+      },
+      headerStyle: {
+        ...Platform.select({
+          android: {
+            borderWidth: 0.8,
+          },
+        }),
+        borderColor: '#dfe2e5',
+      },
       headerLeft: () => (
         <Pressable
           style={styles.backIcon}
@@ -103,7 +124,9 @@ const SettingsScreen = () => {
             borderBottomColor: '#dfe2e5',
             borderBottomWidth: 0.6,
           }}>
-          <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+          <Pressable
+            onPress={() => navigation.navigate('TermsPolicy')}
+            style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
             <Text style={styles.mySettingCatagory}>약관 및 정책</Text>
             <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
           </Pressable>
@@ -148,7 +171,14 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   mySettingCatagory: {
-    fontWeight: '400',
+    ...Platform.select({
+      ios: {
+        fontWeight: '400',
+      },
+      android: {
+        fontWeight: '500',
+      },
+    }),
     fontSize: 15,
     marginLeft: 35,
     marginVertical: 16,
