@@ -9,9 +9,6 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 const AddStyleScreen = () => {
   const navigation = useNavigation();
 
-  const [checkbox, setCheckbox] = useState(false);
-  console.log(checkbox);
-
   const headerStyle = () => {
     navigation.setOptions({
       headerShown: true,
@@ -47,18 +44,86 @@ const AddStyleScreen = () => {
         </Pressable>
       ),
       headerRight: () => (
-        <Pressable
-          style={styles.RightIcon}
-          onPress={() => {
-            navigation.navigate('AddFavFood');
-          }}>
-          <Image source={require(`../assets/icons/RightVector.png`)}></Image>
-        </Pressable>
+        <>
+          {checkNextBtn ? (
+            <Pressable
+              style={styles.RightIcon}
+              onPress={() => {
+                navigation.navigate('AddFavFood');
+              }}>
+              <Image source={require(`../assets/icons/RightVector.png`)}></Image>
+            </Pressable>
+          ) : (
+            <Pressable
+              style={styles.RightIcon}
+              onPress={() => {
+                alert('원하는 스타일을 선택해주세요.');
+              }}>
+              <Image source={require(`../assets/icons/RightVector.png`)}></Image>
+            </Pressable>
+          )}
+        </>
       ),
     });
   };
 
   headerStyle();
+
+  const [checkbox1, setCheckbox1] = useState(false);
+  const [checkbox2, setCheckbox2] = useState(false);
+  const [checkbox3, setCheckbox3] = useState(false);
+  const [checkbox4, setCheckbox4] = useState(false);
+  const [checkbox5, setCheckbox5] = useState(false);
+
+  const [checkNextBtn, setCheckNextBtn] = useState(false);
+
+  const handleCheckbox = (index) => {
+    switch (index) {
+      case '1':
+        setCheckbox1(true);
+        setCheckbox2(false);
+        setCheckbox3(false);
+        setCheckbox4(false);
+        setCheckbox5(false);
+        break;
+      case '2':
+        setCheckbox1(false);
+        setCheckbox2(true);
+        setCheckbox3(false);
+        setCheckbox4(false);
+        setCheckbox5(false);
+        break;
+      case '3':
+        setCheckbox1(false);
+        setCheckbox2(false);
+        setCheckbox3(true);
+        setCheckbox4(false);
+        setCheckbox5(false);
+        break;
+      case '4':
+        setCheckbox1(false);
+        setCheckbox2(false);
+        setCheckbox3(false);
+        setCheckbox4(true);
+        setCheckbox5(false);
+        break;
+      case '5':
+        setCheckbox1(false);
+        setCheckbox2(false);
+        setCheckbox3(false);
+        setCheckbox4(false);
+        setCheckbox5(true);
+        break;
+    }
+  };
+
+  useEffect(() => {
+    if (checkbox1 || checkbox2 || checkbox3 || checkbox4 || checkbox5) {
+      setCheckNextBtn(true);
+    } else {
+      setCheckNextBtn(false);
+    }
+  }, [checkbox1, checkbox2, checkbox3, checkbox4, checkbox5]);
 
   return (
     <Wrapper>
@@ -82,10 +147,11 @@ const AddStyleScreen = () => {
               <BouncyCheckbox
                 size={18}
                 style={{ paddingLeft: 10 }}
+                disableBuiltInState
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
-                isChecked={checkbox}
-                onPress={() => setCheckbox(!checkbox)}
+                isChecked={checkbox1}
+                onPress={() => handleCheckbox('1')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>
@@ -108,10 +174,11 @@ const AddStyleScreen = () => {
               <BouncyCheckbox
                 size={18}
                 style={{ paddingLeft: 10 }}
+                disableBuiltInState
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
-                isChecked={checkbox}
-                onPress={() => setCheckbox(!checkbox)}
+                isChecked={checkbox2}
+                onPress={() => handleCheckbox('2')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>
@@ -134,10 +201,11 @@ const AddStyleScreen = () => {
               <BouncyCheckbox
                 size={18}
                 style={{ paddingLeft: 10 }}
+                disableBuiltInState
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
-                isChecked={checkbox}
-                onPress={() => setCheckbox(!checkbox)}
+                isChecked={checkbox3}
+                onPress={() => handleCheckbox('3')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>
@@ -160,10 +228,11 @@ const AddStyleScreen = () => {
               <BouncyCheckbox
                 size={18}
                 style={{ paddingLeft: 10 }}
+                disableBuiltInState
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
-                isChecked={checkbox}
-                onPress={() => setCheckbox(!checkbox)}
+                isChecked={checkbox4}
+                onPress={() => handleCheckbox('4')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>
@@ -186,10 +255,11 @@ const AddStyleScreen = () => {
               <BouncyCheckbox
                 size={18}
                 style={{ paddingLeft: 10 }}
+                disableBuiltInState
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
-                isChecked={checkbox}
-                onPress={() => setCheckbox(!checkbox)}
+                isChecked={checkbox5}
+                onPress={() => handleCheckbox('5')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>

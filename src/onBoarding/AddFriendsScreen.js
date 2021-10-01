@@ -53,6 +53,8 @@ const AddFriendsScreen = () => {
   const [friendChecked5, setFriendChecked5] = useState(false);
   const [friendChecked6, setFriendChecked6] = useState(false);
 
+  // const [friendCheckedBtn, setFriendCheckedBtn] = useState(false);
+
   const friendsData = [
     { name: '최현', checked: false },
     { name: '김대먼', checked: false },
@@ -64,6 +66,30 @@ const AddFriendsScreen = () => {
     { name: '소녀', checked: false },
     { name: '소년', checked: false },
   ];
+
+  // useEffect(() => {
+  //   if (
+  //     friendChecked1 ||
+  //     friendChecked2 ||
+  //     friendChecked3 ||
+  //     friendChecked4 ||
+  //     friendChecked5 ||
+  //     friendChecked6
+  //   ) {
+  //     console.log('요청');
+  //     setFriendCheckedBtn(true);
+  //   } else {
+  //     console.log('요청 안함');
+  //     setFriendCheckedBtn(false);
+  //   }
+  // }, [
+  //   friendChecked1,
+  //   friendChecked2,
+  //   friendChecked3,
+  //   friendChecked4,
+  //   friendChecked5,
+  //   friendChecked6,
+  // ]);
 
   // const onUnChecked = (index) => {
   //   friendsData[index].checked = true;

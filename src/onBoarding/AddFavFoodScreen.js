@@ -57,13 +57,25 @@ const AddFavFoodScreen = () => {
         </Pressable>
       ),
       headerRight: () => (
-        <Pressable
-          style={styles.rightIcon}
-          onPress={() => {
-            navigation.navigate('AddFriends');
-          }}>
-          <Image source={require(`../assets/icons/RightVector.png`)}></Image>
-        </Pressable>
+        <>
+          {foodSelect ? (
+            <Pressable
+              style={styles.rightIcon}
+              onPress={() => {
+                navigation.navigate('AddFriends');
+              }}>
+              <Image source={require(`../assets/icons/RightVector.png`)}></Image>
+            </Pressable>
+          ) : (
+            <Pressable
+              style={styles.rightIcon}
+              onPress={() => {
+                alert('좋아하는 음식을 선택해주세요.');
+              }}>
+              <Image source={require(`../assets/icons/RightVector.png`)}></Image>
+            </Pressable>
+          )}
+        </>
       ),
     });
   };
@@ -75,6 +87,10 @@ const AddFavFoodScreen = () => {
   const hadleFavFood = (food) => {
     setFoodSelect(food);
   };
+
+  // useEffect(() => {
+  //   console.log('foodSelect', foodSelect);
+  // }, [foodSelect]);
 
   const renderItem = ({ item, index }) => {
     if (item.empty === true) {

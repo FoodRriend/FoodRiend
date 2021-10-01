@@ -7,15 +7,6 @@ import { useNavigation } from '@react-navigation/native';
 const SignupScreen = () => {
   const navigation = useNavigation();
 
-  const refNickname = useRef(null);
-
-  const [inputID, setInputID] = useState('사용자 이름');
-  const [inputNickname, setInputNickname] = useState('');
-
-  useEffect(() => {
-    refNickname.current.focus();
-  }, []);
-
   const headerStyle = () => {
     navigation.setOptions({
       headerShown: true,
@@ -55,6 +46,17 @@ const SignupScreen = () => {
 
   headerStyle();
 
+  const refNickname = useRef(null);
+
+  const [inputID, setInputID] = useState('사용자 이름');
+  const [inputNickname, setInputNickname] = useState('');
+
+  const [inputCheck, setInputCheck] = useState(false);
+
+  useEffect(() => {
+    refNickname.current.focus();
+  }, []);
+
   const onPress = () => {
     navigation.navigate('AddStyle');
   };
@@ -75,12 +77,24 @@ const SignupScreen = () => {
     [inputNickname],
   );
 
-  // 중복확인의 경우 즉시 유효성을 판별 가능하도록 구현하기
+  useEffect(() => {
+    if (inputNickname.length > 0) {
+      setInputCheck(true);
+    } else {
+      setInputCheck(false);
+    }
+  }, [inputNickname]);
 
   return (
     <Wrapper>
       <Text style={styles.TextTitle}>이름/닉네임 작성하기</Text>
       <InputContainer>
+        <View style={styles.inputImage}>
+          <Image
+            style={{ width: 24, height: 24, borderRadius: 12 }}
+            source={require(`../assets/icons/profile_black.png`)}
+          />
+        </View>
         <TextInput
           autoCapitalize={'none'}
           onChangeText={handleInputID}
@@ -91,6 +105,12 @@ const SignupScreen = () => {
       </InputContainer>
       <InputContainer style={{ marginTop: 20 }}>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+          <View style={styles.inputImage}>
+            <Image
+              style={{ width: 24, height: 24, borderRadius: 12 }}
+              source={require(`../assets/icons/profile_black.png`)}
+            />
+          </View>
           <TextInput
             autoCapitalize={'none'}
             onChangeText={handleInputNickname}
@@ -99,12 +119,25 @@ const SignupScreen = () => {
             ref={refNickname}
             placeholder="닉네임"
           />
-          <Text style={styles.NicknameCheck}>중복확인</Text>
+          {/* <Text style={styles.NicknameCheck}>중복확인</Text> */}
         </View>
       </InputContainer>
-      <Pressable onPress={onPress} style={styles.SignupComplete}>
-        <Text style={styles.SignupCompleteText}>완료</Text>
-      </Pressable>
+      <View style={styles.inputValidity}>
+        {inputCheck ? (
+          <Text style={styles.inputValidityText}>닉네임을 사용할 수 있습니다.</Text>
+        ) : (
+          <Text style={styles.inputValidityFalseText}>닉네임을 사용 중입니다.</Text>
+        )}
+      </View>
+      {inputCheck ? (
+        <Pressable onPress={onPress} style={styles.SignupComplete}>
+          <Text style={styles.SignupCompleteText}>완료</Text>
+        </Pressable>
+      ) : (
+        <Pressable style={styles.SignupFalse}>
+          <Text style={styles.SignupCompleteText}>완료</Text>
+        </Pressable>
+      )}
     </Wrapper>
   );
 };
@@ -119,7 +152,7 @@ const styles = StyleSheet.create({
     color: '#2a3037',
   },
   InPutID: {
-    paddingLeft: 58,
+    paddingLeft: 15,
     fontStyle: 'normal',
     color: '#2a3037',
     fontSize: 15,
@@ -134,7 +167,7 @@ const styles = StyleSheet.create({
   },
   InPutNickname: {
     width: '75%',
-    paddingLeft: 58,
+    paddingLeft: 15,
     fontSize: 15,
     fontWeight: '500',
     fontStyle: 'normal',
@@ -160,7 +193,15 @@ const styles = StyleSheet.create({
     height: 56,
     borderRadius: 32,
     backgroundColor: '#fe554a',
-    marginTop: 32,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  SignupFalse: {
+    width: 327,
+    height: 56,
+    borderRadius: 32,
+    backgroundColor: '#DFE2E6',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -179,6 +220,49 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 13,
     paddingRight: 20,
+  },
+  inputImage: {
+    width: 43,
+    height: 44,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  inputValidity: {
+    width: '100%',
+    height: 40,
+    justifyContent: 'center',
+    ...Platform.select({
+      ios: {
+        paddingLeft: 55,
+      },
+      android: {
+        paddingLeft: 65,
+      },
+    }),
+  },
+  inputValidityText: {
+    fontSize: 12,
+    ...Platform.select({
+      ios: {
+        fontWeight: '500',
+      },
+      android: {
+        fontWeight: '600',
+      },
+    }),
+    color: '#04E85F',
+  },
+  inputValidityFalseText: {
+    fontSize: 12,
+    ...Platform.select({
+      ios: {
+        fontWeight: '500',
+      },
+      android: {
+        fontWeight: '600',
+      },
+    }),
+    color: '#FA4A0C',
   },
 });
 
@@ -199,4 +283,5 @@ const InputContainer = styled.View({
   marginTop: 36,
   display: 'flex',
   justifyContent: 'center',
+  flexWrap: 'wrap',
 });
