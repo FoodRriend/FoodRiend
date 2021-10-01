@@ -1,6 +1,9 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
 
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
 import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -14,16 +17,16 @@ import {
   AddFavFoodScreen,
   AddFriendsScreen,
   SignupCompleteScreen,
-} from '@/onBoarding';
-import { FeedScreen } from '@/feed';
+} from './onBoarding';
+import { FeedScreen } from './feed';
 import {
   MyEditScreen,
   MyFriendListScreen,
   MyScreen,
   MyPostReviewScreen,
   AlertScreen,
-} from '@/profile';
-import { SearchScreen } from '@/search';
+} from './profile';
+import { SearchScreen } from './search';
 import {
   SettingsScreen,
   AccountScreen,
@@ -32,13 +35,13 @@ import {
   CustomerServiceScreen,
   NoticeScreen,
   NoticeDetailScreen,
-} from '@/setting';
+} from './setting';
 import {
   TermsAgreementScreen,
   TermsDetailScreen,
   PersonalInfoScreen,
   InfoProcessScreen,
-} from '@/termsAgreement';
+} from './termsAgreement';
 
 // import test from './shared/hooks/test';
 
@@ -145,31 +148,33 @@ const App = () => {
   // const loding = test();
   // setTimeout(isTrue, 3000);
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-        headerMode="screen"
-        // initialRouteName={loding ? 'Login' : 'Splash'}
-        initialRouteName="Splash">
-        <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+          headerMode="screen"
+          // initialRouteName={loding ? 'Login' : 'Splash'}
+          initialRouteName="Splash">
+          <Stack.Screen name="Splash" component={SplashScreen} />
+          <Stack.Screen name="Login" component={LoginScreen} />
 
-        <Stack.Screen name="Signup" component={SignupContainer} />
+          <Stack.Screen name="Signup" component={SignupContainer} />
 
-        <Stack.Screen name="Feed" component={BottomTap} />
+          <Stack.Screen name="Feed" component={BottomTap} />
 
-        <Stack.Screen name="MyEdit" component={MyEditScreen} />
+          <Stack.Screen name="MyEdit" component={MyEditScreen} />
 
-        <Stack.Screen name="Account" component={AccountScreen} />
+          <Stack.Screen name="Account" component={AccountScreen} />
 
-        <Stack.Screen name="Terms" component={TermsAgreementScreen} />
-        <Stack.Screen name="TermsDetail" component={TermsDetailScreen} />
-        <Stack.Screen name="PersonalInfo" component={PersonalInfoScreen} />
-        <Stack.Screen name="InfoProcess" component={InfoProcessScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen name="Terms" component={TermsAgreementScreen} />
+          <Stack.Screen name="TermsDetail" component={TermsDetailScreen} />
+          <Stack.Screen name="PersonalInfo" component={PersonalInfoScreen} />
+          <Stack.Screen name="InfoProcess" component={InfoProcessScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 

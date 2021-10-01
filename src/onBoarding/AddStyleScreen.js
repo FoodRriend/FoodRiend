@@ -6,6 +6,9 @@ import { useNavigation } from '@react-navigation/native';
 // import AddStyleData from './components/AddStyleData';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { addFoodStyle } from '../redux/userSlice';
+
 const AddStyleScreen = () => {
   const navigation = useNavigation();
 
@@ -69,45 +72,49 @@ const AddStyleScreen = () => {
 
   headerStyle();
 
+  const dispatch = useAppDispatch();
+
   const [checkbox1, setCheckbox1] = useState(false);
   const [checkbox2, setCheckbox2] = useState(false);
   const [checkbox3, setCheckbox3] = useState(false);
   const [checkbox4, setCheckbox4] = useState(false);
   const [checkbox5, setCheckbox5] = useState(false);
 
+  const [checkState, setCheckState] = useState(null);
   const [checkNextBtn, setCheckNextBtn] = useState(false);
 
-  const handleCheckbox = (index) => {
-    switch (index) {
-      case '1':
+  const handleCheckbox = (style) => {
+    setCheckState(style);
+    switch (style) {
+      case 'ExploreStyle':
         setCheckbox1(true);
         setCheckbox2(false);
         setCheckbox3(false);
         setCheckbox4(false);
         setCheckbox5(false);
         break;
-      case '2':
+      case 'AdventureStyle':
         setCheckbox1(false);
         setCheckbox2(true);
         setCheckbox3(false);
         setCheckbox4(false);
         setCheckbox5(false);
         break;
-      case '3':
+      case 'ExpertStyle':
         setCheckbox1(false);
         setCheckbox2(false);
         setCheckbox3(true);
         setCheckbox4(false);
         setCheckbox5(false);
         break;
-      case '4':
+      case 'PioneStyle':
         setCheckbox1(false);
         setCheckbox2(false);
         setCheckbox3(false);
         setCheckbox4(true);
         setCheckbox5(false);
         break;
-      case '5':
+      case 'ArtistStyle':
         setCheckbox1(false);
         setCheckbox2(false);
         setCheckbox3(false);
@@ -119,6 +126,7 @@ const AddStyleScreen = () => {
 
   useEffect(() => {
     if (checkbox1 || checkbox2 || checkbox3 || checkbox4 || checkbox5) {
+      dispatch(addFoodStyle(checkState));
       setCheckNextBtn(true);
     } else {
       setCheckNextBtn(false);
@@ -151,7 +159,7 @@ const AddStyleScreen = () => {
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
                 isChecked={checkbox1}
-                onPress={() => handleCheckbox('1')}
+                onPress={() => handleCheckbox('ExploreStyle')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>
@@ -178,7 +186,7 @@ const AddStyleScreen = () => {
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
                 isChecked={checkbox2}
-                onPress={() => handleCheckbox('2')}
+                onPress={() => handleCheckbox('AdventureStyle')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>
@@ -205,7 +213,7 @@ const AddStyleScreen = () => {
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
                 isChecked={checkbox3}
-                onPress={() => handleCheckbox('3')}
+                onPress={() => handleCheckbox('ExpertStyle')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>
@@ -232,7 +240,7 @@ const AddStyleScreen = () => {
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
                 isChecked={checkbox4}
-                onPress={() => handleCheckbox('4')}
+                onPress={() => handleCheckbox('PioneStyle')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>
@@ -259,7 +267,7 @@ const AddStyleScreen = () => {
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
                 isChecked={checkbox5}
-                onPress={() => handleCheckbox('5')}
+                onPress={() => handleCheckbox('ArtistStyle')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>
