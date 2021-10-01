@@ -1,7 +1,16 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Image,
+  FlatList,
+  Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const MyFriendListScreen = () => {
@@ -20,6 +29,17 @@ const MyFriendListScreen = () => {
           <Image source={require(`../assets/icons/Left.png`)}></Image>
         </Pressable>
       ),
+      headerTitleAlign: 'center',
+      headerStyle: {
+        ...Platform.select({
+          ios: {
+            borderBottomWidth: 0,
+          },
+          android: {
+            borderBottomWidth: 0.3,
+          },
+        }),
+      },
     });
   };
 

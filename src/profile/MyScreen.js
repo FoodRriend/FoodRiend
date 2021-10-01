@@ -1,7 +1,16 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, Image, FlatList, Dimensions } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  Image,
+  FlatList,
+  Dimensions,
+  Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { myScreenData, myScreenData2, myScreenData3, myScreenFirstData } from './constants';
@@ -402,7 +411,14 @@ const styles = StyleSheet.create({
     color: '#2a3037',
   },
   myScreenInfoFriendItem: {
-    width: 135,
+    ...Platform.select({
+      ios: {
+        width: 135,
+      },
+      android: {
+        width: 155,
+      },
+    }),
     height: 95,
     paddingLeft: 9,
     justifyContent: 'space-between',
@@ -498,7 +514,14 @@ const styles = StyleSheet.create({
 });
 
 const Wrapper = styled.View({
-  paddingTop: 44,
+  ...Platform.select({
+    ios: {
+      paddingTop: 44,
+    },
+    android: {
+      paddingTop: 0,
+    },
+  }),
   backgroundColor: '#fff',
   width: '100%',
   height: '100%',
@@ -510,7 +533,14 @@ const MyScreenInfoContainer = styled.View({
   width: '100%',
   height: 160,
   justifyContent: 'center',
-  paddingHorizontal: 17,
+  ...Platform.select({
+    ios: {
+      paddingHorizontal: 17,
+    },
+    android: {
+      paddingHorizontal: 27,
+    },
+  }),
   flexWrap: 'wrap',
   borderBottomWidth: 0.4,
   borderBottomColor: '#FE554A',
