@@ -104,16 +104,60 @@ const AddFavFoodScreen: React.FC = () => {
 
   const [foodSelect, setFoodSelect] = useState<string>('');
 
-  const hadleFavFood = (food: string): void => {
-    setFoodSelect(food);
-  };
-
   useEffect(() => {
     console.log('foodSelect', foodSelect);
     dispatch(addFoodType(foodSelect));
   }, [foodSelect]);
 
-  const renderItem = ({ item, index }: { item: IRenderItemProps; index: number }) => {
+  const hadleFavFood = (food: string): void => {
+    setFoodSelect(food);
+  };
+
+  const HandleFavFoodImage = (name: string) => {
+    let FavFoodImagePath;
+    switch (name) {
+      case '술':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/grapes.png');
+        break;
+      case '커피':
+        FavFoodImagePath = require(`../assets/images/onBoading/favFood/coffee.png`);
+        break;
+      case '베이커리/디저트':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/pudding.png');
+        break;
+      case '해산물':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/octopus.png');
+        break;
+      case '치킨':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/friedChicken.png');
+        break;
+      case '피자':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/pizza.png');
+        break;
+      case '면':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/noodles.png');
+        break;
+      case '분식':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/tteokbokki.png');
+        break;
+      case '샐러드':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/salad.png');
+        break;
+      case '국밥':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/riceSoup.png');
+        break;
+      case '찌개/탕':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/stew.png');
+        break;
+      case '고기':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/chop.png');
+        break;
+    }
+
+    return <Image source={FavFoodImagePath} style={styles.itemLargeText} />;
+  };
+
+  const renderItem = ({ item }: { item: IRenderItemProps }) => {
     if (item.empty === true) {
       return <View style={[styles.favFoodItem, styles.itemInvisible]} />;
     }
@@ -121,169 +165,21 @@ const AddFavFoodScreen: React.FC = () => {
       return (
         <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
           <View style={styles.itemSelectImage}>
-            {/* <Image source={require(`../assets/images/onBoading/favFood/grapes.png`)} /> */}
+            <View style={styles.itemSelectImageCheck}>
+              <Image source={require('../assets/icons/Checkmark.png')} />
+            </View>
+            {HandleFavFoodImage(item.title)}
           </View>
           <Text style={styles.itemLargeText}>{item.title}</Text>
         </Pressable>
       );
     }
-    if (index === 0) {
-      return (
-        <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
-          <View style={styles.itemImage}>
-            <Image
-              style={styles.platformImage}
-              source={require(`../assets/images/onBoading/favFood/grapes.png`)}
-            />
-          </View>
-          <Text style={styles.itemLargeText}>{item.title}</Text>
-        </Pressable>
-      );
-    }
-    if (index === 1) {
-      return (
-        <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
-          <View style={styles.itemImage}>
-            <Image
-              style={styles.platformImage}
-              source={require(`../assets/images/onBoading/favFood/coffee.png`)}
-            />
-          </View>
-          <Text style={styles.itemLargeText}>{item.title}</Text>
-        </Pressable>
-      );
-    }
-    if (index === 2) {
-      return (
-        <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
-          <View style={styles.itemImage}>
-            <Image
-              style={styles.platformImage}
-              source={require(`../assets/images/onBoading/favFood/pudding.png`)}
-            />
-          </View>
-          <Text style={styles.itemSmallText}>{item.title}</Text>
-        </Pressable>
-      );
-    }
-    if (index === 3) {
-      return (
-        <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
-          <View style={styles.itemImage}>
-            <Image
-              style={styles.platformImage}
-              source={require(`../assets/images/onBoading/favFood/octopus.png`)}
-            />
-          </View>
-          <Text style={styles.itemLargeText}>{item.title}</Text>
-        </Pressable>
-      );
-    }
-    if (index === 4) {
-      return (
-        <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
-          <View style={styles.itemImage}>
-            <Image
-              style={styles.platformImage}
-              source={require(`../assets/images/onBoading/favFood/friedChicken.png`)}
-            />
-          </View>
-          <Text style={styles.itemLargeText}>{item.title}</Text>
-        </Pressable>
-      );
-    }
-    if (index === 5) {
-      return (
-        <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
-          <View style={styles.itemImage}>
-            <Image
-              style={styles.platformImage}
-              source={require(`../assets/images/onBoading/favFood/pizza.png`)}
-            />
-          </View>
-          <Text style={styles.itemLargeText}>{item.title}</Text>
-        </Pressable>
-      );
-    }
-    if (index === 6) {
-      return (
-        <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
-          <View style={styles.itemImage}>
-            <Image
-              style={styles.platformImage}
-              source={require(`../assets/images/onBoading/favFood/noodles.png`)}
-            />
-          </View>
-          <Text style={styles.itemLargeText}>{item.title}</Text>
-        </Pressable>
-      );
-    }
-    if (index === 7) {
-      return (
-        <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
-          <View style={styles.itemImage}>
-            <Image
-              style={styles.platformImage}
-              source={require(`../assets/images/onBoading/favFood/tteokbokki.png`)}
-            />
-          </View>
-          <Text style={styles.itemLargeText}>{item.title}</Text>
-        </Pressable>
-      );
-    }
-    if (index === 8) {
-      return (
-        <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
-          <View style={styles.itemImage}>
-            <Image
-              style={styles.platformImage}
-              source={require(`../assets/images/onBoading/favFood/salad.png`)}
-            />
-          </View>
-          <Text style={styles.itemLargeText}>{item.title}</Text>
-        </Pressable>
-      );
-    }
-    if (index === 9) {
-      return (
-        <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
-          <View style={styles.itemImage}>
-            <Image
-              style={styles.platformImage}
-              source={require(`../assets/images/onBoading/favFood/riceSoup.png`)}
-            />
-          </View>
-          <Text style={styles.itemLargeText}>{item.title}</Text>
-        </Pressable>
-      );
-    }
-    if (index === 10) {
-      return (
-        <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
-          <View style={styles.itemImage}>
-            <Image
-              style={styles.platformImage}
-              source={require(`../assets/images/onBoading/favFood/stew.png`)}
-            />
-          </View>
-          <Text style={styles.itemLargeText}>{item.title}</Text>
-        </Pressable>
-      );
-    }
-    if (index === 11) {
-      return (
-        <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
-          <View style={styles.itemImage}>
-            <Image
-              style={styles.platformImage}
-              source={require(`../assets/images/onBoading/favFood/chop.png`)}
-            />
-          </View>
-          <Text style={styles.itemLargeText}>{item.title}</Text>
-        </Pressable>
-      );
-    }
-    return <></>;
+    return (
+      <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
+        <View style={styles.itemImage}>{HandleFavFoodImage(item.title)}</View>
+        <Text style={styles.itemLargeText}>{item.title}</Text>
+      </Pressable>
+    );
   };
 
   return (
@@ -291,7 +187,6 @@ const AddFavFoodScreen: React.FC = () => {
       <Text style={styles.textTitle}>내가 좋아하는 음식 선택</Text>
       <FlatList
         data={fomatFavFoodData(favFoodData, numColumns)}
-        keyExtractor={(item) => item.toString()}
         style={styles.favFoodContainer}
         renderItem={renderItem}
         numColumns={numColumns}
@@ -425,6 +320,14 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
       },
     }),
+  },
+  itemSelectImageCheck: {
+    width: '80%',
+    height: '80%',
+    position: 'absolute',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

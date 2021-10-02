@@ -17,6 +17,73 @@ import { myScreenData, myScreenData2, myScreenData3, myScreenFirstData } from '.
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 
+const HandleFavFoodImage = (name: any) => {
+  let FavFoodImagePath;
+  switch (name) {
+    case '술':
+      FavFoodImagePath = require('../assets/images/onBoading/favFood/grapes.png');
+      break;
+    case '커피':
+      FavFoodImagePath = require(`../assets/images/onBoading/favFood/coffee.png`);
+      break;
+    case '베이커리/디저트':
+      FavFoodImagePath = require('../assets/images/onBoading/favFood/pudding.png');
+      break;
+    case '해산물':
+      FavFoodImagePath = require('../assets/images/onBoading/favFood/octopus.png');
+      break;
+    case '치킨':
+      FavFoodImagePath = require('../assets/images/onBoading/favFood/friedChicken.png');
+      break;
+    case '피자':
+      FavFoodImagePath = require('../assets/images/onBoading/favFood/pizza.png');
+      break;
+    case '면':
+      FavFoodImagePath = require('../assets/images/onBoading/favFood/noodles.png');
+      break;
+    case '분식':
+      FavFoodImagePath = require('../assets/images/onBoading/favFood/tteokbokki.png');
+      break;
+    case '샐러드':
+      FavFoodImagePath = require('../assets/images/onBoading/favFood/salad.png');
+      break;
+    case '국밥':
+      FavFoodImagePath = require('../assets/images/onBoading/favFood/riceSoup.png');
+      break;
+    case '찌개/탕':
+      FavFoodImagePath = require('../assets/images/onBoading/favFood/stew.png');
+      break;
+    case '고기':
+      FavFoodImagePath = require('../assets/images/onBoading/favFood/chop.png');
+      break;
+  }
+
+  return <Image source={FavFoodImagePath} style={{ width: 28, height: 28 }} />;
+};
+
+const HandleFoodStyleImage = (name: any) => {
+  let FoodStyleImagePath;
+  switch (name) {
+    case '지역 맛집 탐험가':
+      FoodStyleImagePath = require('../assets/images/onBoading/addStyle/addStyleImage0.png');
+      break;
+    case '새로운 음식 모험가':
+      FoodStyleImagePath = require(`../assets/images/onBoading/addStyle/addStyleImage4.png`);
+      break;
+    case '분야별 맛집 전문가':
+      FoodStyleImagePath = require('../assets/images/onBoading/addStyle/addStyleImage1.png');
+      break;
+    case '숨은 맛집 개척자':
+      FoodStyleImagePath = require('../assets/images/onBoading/addStyle/addStyleImage2.png');
+      break;
+    case '분위기 맛집 예술가':
+      FoodStyleImagePath = require('../assets/images/onBoading/addStyle/addStyleImage3.png');
+      break;
+  }
+
+  return <Image source={FoodStyleImagePath} style={{ width: 28, height: 28 }} />;
+};
+
 const MyScreen: React.FC = () => {
   const navigation = useNavigation();
 
@@ -29,7 +96,6 @@ const MyScreen: React.FC = () => {
   headerStyle();
 
   const { foodStyle, foodType, nickname } = useAppSelector((state) => state.users);
-  console.log('나오나?', foodStyle, foodType, nickname);
 
   const [favListTitle, setFavListTitle] = useState('먹어봤어요');
 
@@ -216,14 +282,8 @@ const MyScreen: React.FC = () => {
           <Text style={styles.myScreenInfoText}>김민아</Text>
           <Text style={styles.myScreenInfoText}>바른맛집사나이</Text>
           <View style={{ width: '100%', height: 28, flexWrap: 'wrap' }}>
-            <Image
-              source={require(`../assets/images/onBoading/favFood/chop.png`)}
-              style={{ width: 28, height: 28 }}
-            />
-            <Image
-              source={require(`../assets/images/onBoading/addStyle/addStyleImage0.png`)}
-              style={{ width: 28, height: 28, marginLeft: 10 }}
-            />
+            {HandleFavFoodImage(foodType)}
+            {HandleFoodStyleImage(foodStyle)}
           </View>
         </View>
         <View style={styles.myScreenInfoFriendItem}>
