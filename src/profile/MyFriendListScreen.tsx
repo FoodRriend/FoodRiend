@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const MyFriendListScreen = () => {
+const MyFriendListScreen: React.FC  = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
@@ -68,11 +68,16 @@ const MyFriendListScreen = () => {
     { name: '크리스티나', friend: false },
   ];
 
-  const fomatListData = (data) => {
-    let friendTrueData = data.filter((el) => {
+  interface IMyFriendProps {
+    name: string;
+    friend: boolean;
+  }
+
+  const fomatListData = (data: any) => {
+    let friendTrueData = data.filter((el: IMyFriendProps) => {
       return el.friend === true;
     });
-    let friendFalseData = data.filter((el) => {
+    let friendFalseData = data.filter((el: IMyFriendProps) => {
       return el.friend === false;
     });
     let fomatData = [...friendTrueData, ...friendFalseData];
@@ -80,7 +85,7 @@ const MyFriendListScreen = () => {
     return fomatData;
   };
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({ item, index }: { item: IMyFriendProps; index: number }) => {
     if (item.friend) {
       return (
         <MyFriendListItem>
@@ -128,6 +133,7 @@ const MyFriendListScreen = () => {
         </MyFriendListItem>
       );
     }
+    return <></>;
   };
 
   return (

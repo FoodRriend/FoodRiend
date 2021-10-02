@@ -1,12 +1,21 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Image,
+  FlatList,
+  Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-const TermsAgreementScreen = () => {
+const TermsAgreementScreen: React.FC  = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
@@ -55,21 +64,21 @@ const TermsAgreementScreen = () => {
 
   const [checkBtn, setCheckBtn] = useState(false);
 
-  const handleCheckbox = (index) => {
-    switch (index) {
-      case '0':
+  const handleCheckbox = (props: string) => {
+    switch (props) {
+      case '전체 약관 동의':
         setCheckbox0(!checkbox0);
         setCheckbox1(!checkbox0);
         setCheckbox2(!checkbox0);
         setCheckbox3(!checkbox0);
         break;
-      case '1':
+      case '만 14세 이상 확인 동의':
         setCheckbox1(!checkbox1);
         break;
-      case '2':
+      case '이용약관 동의':
         setCheckbox2(!checkbox2);
         break;
-      case '3':
+      case '개인정보 수집 및 이용 동의':
         setCheckbox3(!checkbox3);
         break;
     }
@@ -95,7 +104,7 @@ const TermsAgreementScreen = () => {
             fillColor="#dfe2e5"
             unfillColor="#FFFFFF"
             isChecked={checkbox0}
-            onPress={() => handleCheckbox('0')}
+            onPress={() => handleCheckbox('전체 약관 동의')}
             iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
           />
         </TermsContentItem>
@@ -109,7 +118,7 @@ const TermsAgreementScreen = () => {
             disableBuiltInState
             unfillColor="#FFFFFF"
             isChecked={checkbox1}
-            onPress={() => handleCheckbox('1')}
+            onPress={() => handleCheckbox('만 14세 이상 확인 동의')}
             iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
           />
         </TermsContentItem>
@@ -129,7 +138,7 @@ const TermsAgreementScreen = () => {
             disableBuiltInState
             unfillColor="#FFFFFF"
             isChecked={checkbox2}
-            onPress={() => handleCheckbox('2')}
+            onPress={() => handleCheckbox('이용약관 동의')}
             iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
           />
         </TermsContentItem>
@@ -154,7 +163,7 @@ const TermsAgreementScreen = () => {
             disableBuiltInState
             unfillColor="#FFFFFF"
             isChecked={checkbox3}
-            onPress={() => handleCheckbox('3')}
+            onPress={() => handleCheckbox('개인정보 수집 및 이용 동의')}
             iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
           />
         </TermsContentItem>

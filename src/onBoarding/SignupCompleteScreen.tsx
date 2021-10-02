@@ -1,10 +1,19 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, StyleSheet, TextInput, Image, Button, Pressable } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  Image,
+  Button,
+  Pressable,
+  Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const SignupCompleteScreen = () => {
+const SignupCompleteScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {

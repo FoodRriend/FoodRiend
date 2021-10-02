@@ -1,10 +1,10 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, StyleSheet, Image, Pressable, FlatList } from 'react-native';
+import { Text, View, StyleSheet, Image, Pressable, FlatList, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const AddFriendsScreen = () => {
+const AddFriendsScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
@@ -111,7 +111,11 @@ const AddFriendsScreen = () => {
   //   setFriendChecked(!friendsData[index].checked);
   // };
 
-  const renderItem = ({ item, index }) => {
+  interface IItemProps {
+    name: string;
+  }
+
+  const renderItem = ({ item, index }: { item: IItemProps; index: number }) => {
     if (index === 0) {
       return (
         <AddFriendsItems>
@@ -353,11 +357,11 @@ const AddFriendsScreen = () => {
           <View style={styles.friendInfoImageItem}>
             <Image
               style={styles.friendInfoImage}
-              // source={require(`../assets/images/onBoading/favFood/octopus.png`)}
+              source={require(`../assets/images/onBoading/favFood/octopus.png`)}
             />
             <Image
               style={styles.friendInfoImageTwo}
-              // source={require(`../assets/images/onBoading/addStyle/addStyleImage4.png`)}
+              source={require(`../assets/images/onBoading/addStyle/addStyleImage4.png`)}
             />
           </View>
         </AddFriendsInfo>
@@ -414,7 +418,7 @@ const AddFriendsScreen = () => {
               <Text style={styles.phoneNumberItemTitle}>연락처 연결</Text>
               <Text style={styles.phoneNumberItemcontent}>내 친구를 연결해보세요</Text>
             </View>
-            <Pressable onPress={() => alert('연결해줭')} style={styles.phoneNumberButton}>
+            <Pressable style={styles.phoneNumberButton}>
               <Text style={styles.phoneNumberButtonText}>연결</Text>
             </Pressable>
           </PhoneNumberConnectItem>

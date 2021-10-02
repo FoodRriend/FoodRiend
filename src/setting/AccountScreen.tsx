@@ -1,10 +1,19 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Image,
+  FlatList,
+  Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const AccountScreen = () => {
+const AccountScreen: React.FC  = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
@@ -57,9 +66,7 @@ const AccountScreen = () => {
           borderBottomWidth: 0.6,
           marginTop: 32,
         }}>
-        <Pressable
-          onPress={() => alert('카카오계정')}
-          style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <View
             style={{
               width: '90%',
@@ -82,9 +89,7 @@ const AccountScreen = () => {
           borderBottomColor: '#dfe2e5',
           borderBottomWidth: 0.6,
         }}>
-        <Pressable
-          onPress={() => alert('로그아웃')}
-          style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <Text style={styles.accountCatagory}>로그아웃</Text>
           <Image source={require('../assets/icons/click.png')} style={styles.accountButton} />
         </Pressable>
@@ -97,9 +102,7 @@ const AccountScreen = () => {
           borderBottomColor: '#dfe2e5',
           borderBottomWidth: 0.6,
         }}>
-        <Pressable
-          onPress={() => alert('회원탈퇴')}
-          style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <Text style={styles.accountCatagory}>회원탈퇴</Text>
           <Image source={require('../assets/icons/click.png')} style={styles.accountButton} />
         </Pressable>

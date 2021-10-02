@@ -1,11 +1,29 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, StyleSheet, Image, Pressable, FlatList, Dimensions } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Pressable,
+  FlatList,
+  Dimensions,
+  Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import favFoodData from './constants/FavFoodData';
 
-const fomatFavFoodData = (favFoodData, numColumns) => {
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { addFoodType } from '../redux/userSlice';
+
+interface IRenderItemProps {
+  title: string;
+  empty: boolean;
+  usl?: string;
+}
+
+const fomatFavFoodData = (favFoodData: any, numColumns: number) => {
   const numberOfFullRows = Math.floor(favFoodData.length / numColumns);
   let numberOfElementsLastRow = favFoodData.length - numberOfFullRows * numColumns;
 
@@ -19,7 +37,7 @@ const fomatFavFoodData = (favFoodData, numColumns) => {
 
 const numColumns = 3;
 
-const AddFavFoodScreen = () => {
+const AddFavFoodScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
@@ -70,7 +88,7 @@ const AddFavFoodScreen = () => {
             <Pressable
               style={styles.rightIcon}
               onPress={() => {
-                alert('좋아하는 음식을 선택해주세요.');
+                // alert('좋아하는 음식을 선택해주세요.');
               }}>
               <Image source={require(`../assets/icons/RightVector.png`)}></Image>
             </Pressable>
@@ -82,17 +100,20 @@ const AddFavFoodScreen = () => {
 
   headerStyle();
 
-  const [foodSelect, setFoodSelect] = useState('');
+  const dispatch = useAppDispatch();
 
-  const hadleFavFood = (food) => {
+  const [foodSelect, setFoodSelect] = useState<string>('');
+
+  const hadleFavFood = (food: string): void => {
     setFoodSelect(food);
   };
 
-  // useEffect(() => {
-  //   console.log('foodSelect', foodSelect);
-  // }, [foodSelect]);
+  useEffect(() => {
+    console.log('foodSelect', foodSelect);
+    dispatch(addFoodType(foodSelect));
+  }, [foodSelect]);
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({ item, index }: { item: IRenderItemProps; index: number }) => {
     if (item.empty === true) {
       return <View style={[styles.favFoodItem, styles.itemInvisible]} />;
     }
@@ -262,14 +283,7 @@ const AddFavFoodScreen = () => {
         </Pressable>
       );
     }
-    // return (
-    //   <View style={styles.favFoodItem}>
-    //     <View style={styles.itemImage}>
-    //       <Image source={require('../assets/images/onBoading/favFood/grapes.png')} />
-    //     </View>
-    //     <Text style={styles.itemLargeText}>{item.title}</Text>
-    //   </View>
-    // );
+    return <></>;
   };
 
   return (
@@ -277,6 +291,7 @@ const AddFavFoodScreen = () => {
       <Text style={styles.textTitle}>내가 좋아하는 음식 선택</Text>
       <FlatList
         data={fomatFavFoodData(favFoodData, numColumns)}
+        keyExtractor={(item) => item.toString()}
         style={styles.favFoodContainer}
         renderItem={renderItem}
         numColumns={numColumns}

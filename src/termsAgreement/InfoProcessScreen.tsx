@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const InfoProcessScreen = () => {
+const InfoProcessScreen: React.FC  = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
@@ -91,7 +91,11 @@ const InfoProcessScreen = () => {
     },
   ];
 
-  const renderItem = ({ item, index }) => {
+  interface IInfoProcessProps {
+    listTitle: string;
+  }
+
+  const renderItem = ({ item, index }: { item: IInfoProcessProps; index: number }) => {
     if (index === 0) {
       return (
         <>
@@ -359,6 +363,7 @@ const InfoProcessScreen = () => {
         </>
       );
     }
+    return <></>;
   };
 
   return (
