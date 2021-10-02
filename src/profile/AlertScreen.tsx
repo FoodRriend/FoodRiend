@@ -4,7 +4,7 @@ import styled from '@emotion/native';
 import { Text, View, Pressable, StyleSheet, Image, FlatList, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const AlertScreen = () => {
+const AlertScreen: React.FC  = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {

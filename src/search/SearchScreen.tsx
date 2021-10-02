@@ -4,7 +4,7 @@ import styled from '@emotion/native';
 import { Text, View, Pressable, StyleSheet, TextInput, Image, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const SearchScreen = () => {
+const SearchScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {

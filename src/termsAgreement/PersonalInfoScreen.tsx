@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const PersonalInfoScreen = () => {
+const PersonalInfoScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {

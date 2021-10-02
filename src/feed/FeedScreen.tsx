@@ -14,7 +14,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { feedData, feedDataFirst } from './constants';
 
-const FeedScreen = () => {
+const FeedScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {

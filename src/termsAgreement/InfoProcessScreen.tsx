@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const InfoProcessScreen = () => {
+const InfoProcessScreen: React.FC  = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {

@@ -4,7 +4,7 @@ import styled from '@emotion/native';
 import { Text, View, Pressable, StyleSheet, TextInput, Image, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const MyEditScreen = () => {
+const MyEditScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {

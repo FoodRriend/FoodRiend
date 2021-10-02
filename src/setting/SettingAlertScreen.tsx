@@ -15,7 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import SwitchToggle from 'react-native-switch-toggle';
 
-const SettingAlertScreen = () => {
+const SettingAlertScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {

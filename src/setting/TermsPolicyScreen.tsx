@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const TermsPolicyScreen = () => {
+const TermsPolicyScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {

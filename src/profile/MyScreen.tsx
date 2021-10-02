@@ -15,7 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { myScreenData, myScreenData2, myScreenData3, myScreenFirstData } from './constants';
 
-const MyScreen = () => {
+const MyScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {

@@ -15,7 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-const TermsAgreementScreen = () => {
+const TermsAgreementScreen: React.FC  = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
