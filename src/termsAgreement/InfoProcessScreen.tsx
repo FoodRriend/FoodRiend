@@ -91,7 +91,11 @@ const InfoProcessScreen = () => {
     },
   ];
 
-  const renderItem = ({ item, index }) => {
+  interface IInfoProcessProps {
+    listTitle: string;
+  }
+
+  const renderItem = ({ item, index }: { item: IInfoProcessProps; index: number }) => {
     if (index === 0) {
       return (
         <>
@@ -359,6 +363,7 @@ const InfoProcessScreen = () => {
         </>
       );
     }
+    return <></>;
   };
 
   return (

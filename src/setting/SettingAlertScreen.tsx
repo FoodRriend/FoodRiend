@@ -1,7 +1,16 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Image,
+  FlatList,
+  Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import SwitchToggle from 'react-native-switch-toggle';

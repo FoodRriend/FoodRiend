@@ -74,7 +74,11 @@ const PersonalInfoScreen = () => {
     },
   ];
 
-  const renderItem = ({ item, index }) => {
+  interface IPersonalInfoProps {
+    listTitle: string;
+  }
+
+  const renderItem = ({ item, index }: { item: IPersonalInfoProps; index: number }) => {
     if (index === 0) {
       return <Text style={styles.personalInfoListContent}>{item.listTitle}</Text>;
     }
@@ -158,6 +162,7 @@ const PersonalInfoScreen = () => {
         </>
       );
     }
+    return <></>;
   };
 
   return (

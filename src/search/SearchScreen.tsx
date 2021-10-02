@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image } from 'react-native';
+import { Text, View, Pressable, StyleSheet, TextInput, Image, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const SearchScreen = () => {
@@ -38,13 +38,7 @@ const SearchScreen = () => {
 
   headerStyle();
 
-  const refSearch = useRef(null);
-
   const [searchInput, setSearchInput] = useState('');
-
-  useEffect(() => {
-    refSearch.current.focus();
-  }, []);
 
   const handleSearchInput = useCallback(
     (e) => {
@@ -67,7 +61,6 @@ const SearchScreen = () => {
           value={searchInput}
           onChangeText={handleSearchInput}
           style={styles.searchInputText}
-          ref={refSearch}
         />
       </View>
     </Wrapper>

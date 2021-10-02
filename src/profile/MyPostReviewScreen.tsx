@@ -59,7 +59,15 @@ const FriendPostReviewScreen = () => {
     outputRange: [0, -45],
   });
 
-  const renderItem = ({ item, index }) => {
+  interface IMyPostProps {
+    name: string;
+    title: string;
+    adress: string;
+    tag: string;
+    content: string;
+  }
+
+  const renderItem = ({ item, index }: { item: IMyPostProps; index: number }) => {
     return (
       <>
         {index === 0 ? <View style={{ width: '100%', height: 50 }}></View> : <></>}
@@ -88,7 +96,7 @@ const FriendPostReviewScreen = () => {
                 />
               </View>
             </View>
-            <Pressable onPress={() => alert('Share')} style={styles.myReviewShareButton}>
+            <Pressable style={styles.myReviewShareButton}>
               <Image
                 source={require(`../assets/icons/share.png`)}
                 style={{ width: 20, height: 18 }}
@@ -103,7 +111,7 @@ const FriendPostReviewScreen = () => {
             <View style={{ width: 173, height: 187, paddingLeft: 7 }}>
               <View style={styles.MyReviewRestaurantBox}>
                 <Text style={styles.myReviewRestaurantTitle}>{item.title}</Text>
-                <Pressable onPress={() => alert('Edit')} style={styles.MyReviewRestaurantShare}>
+                <Pressable style={styles.MyReviewRestaurantShare}>
                   <Image
                     source={require(`../assets/icons/dot.png`)}
                     style={{ width: 18, height: 18 }}
@@ -269,15 +277,6 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     color: '#424242',
     marginLeft: 6,
-  },
-  BackIcon: {
-    width: 50,
-    height: 30,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingLeft: 13,
-    paddingRight: 20,
   },
 });
 

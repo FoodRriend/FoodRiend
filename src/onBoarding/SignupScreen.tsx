@@ -46,16 +46,11 @@ const SignupScreen = () => {
 
   headerStyle();
 
-  const refNickname = useRef(null);
-
   const [inputID, setInputID] = useState('사용자 이름');
   const [inputNickname, setInputNickname] = useState('');
 
   const [inputCheck, setInputCheck] = useState(false);
-
-  useEffect(() => {
-    refNickname.current.focus();
-  }, []);
+  const [inputEmptyCheck, setInputEmptyCheck] = useState(false);
 
   const onPress = () => {
     navigation.navigate('AddStyle');
@@ -80,10 +75,16 @@ const SignupScreen = () => {
   useEffect(() => {
     if (inputNickname.length > 0) {
       setInputCheck(true);
+      setInputEmptyCheck(false);
     } else {
+      setInputEmptyCheck(true);
       setInputCheck(false);
     }
   }, [inputNickname]);
+
+  useEffect(() => {
+    setInputEmptyCheck(false);
+  }, []);
 
   return (
     <Wrapper>
@@ -116,17 +117,26 @@ const SignupScreen = () => {
             onChangeText={handleInputNickname}
             style={styles.InPutNickname}
             value={inputNickname}
-            ref={refNickname}
             placeholder="닉네임"
           />
           {/* <Text style={styles.NicknameCheck}>중복확인</Text> */}
         </View>
       </InputContainer>
       <View style={styles.inputValidity}>
-        {inputCheck ? (
+        {inputEmptyCheck ? (
+          <Text style={styles.inputEmptyText}>닉네임을 입력해주세요.</Text>
+        ) : (
+          <></>
+        )}
+        {inputNickname.length >= 2 ? (
           <Text style={styles.inputValidityText}>닉네임을 사용할 수 있습니다.</Text>
         ) : (
+          <></>
+        )}
+        {inputNickname.length >= 1 && inputNickname.length < 2 ? (
           <Text style={styles.inputValidityFalseText}>닉네임을 사용 중입니다.</Text>
+        ) : (
+          <></>
         )}
       </View>
       {inputCheck ? (
@@ -239,6 +249,18 @@ const styles = StyleSheet.create({
         paddingLeft: 65,
       },
     }),
+  },
+  inputEmptyText: {
+    fontSize: 12,
+    ...Platform.select({
+      ios: {
+        fontWeight: '500',
+      },
+      android: {
+        fontWeight: '600',
+      },
+    }),
+    color: '#2A3037',
   },
   inputValidityText: {
     fontSize: 12,

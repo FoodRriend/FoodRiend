@@ -28,11 +28,11 @@ const MyScreen = () => {
 
   const [favListTitle, setFavListTitle] = useState('먹어봤어요');
 
-  const handleFavList = (title) => {
+  const handleFavList = (title: string) => {
     setFavListTitle(title);
   };
 
-  const fomatRenderItem = (data) => {
+  const fomatRenderItem = (data: any) => {
     if (favListTitle === '먹어봤어요' && Object.keys(data[0]).length === 0) {
       return '먹어봤어요_null';
     } else if (favListTitle === '먹어봤어요' && Object.keys(data[0]).length !== 0) {
@@ -50,7 +50,13 @@ const MyScreen = () => {
     }
   };
 
-  const renderItem = ({ item, index }) => {
+  interface IMyProps {
+    address: string;
+    name: string;
+    score: number;
+  }
+
+  const renderItem = ({ item, index }: { item: IMyProps; index: number }) => {
     if (index === 0 && favListTitle === '먹어봤어요') {
       return (
         <View style={styles.myScreenRestaurantCover}>
@@ -333,7 +339,7 @@ const MyScreen = () => {
               <Text style={{ fontSize: 15, fontWeight: '500', marginBottom: 30 }}>
                 여러분의 경험을 간직하세요.
               </Text>
-              <Pressable onPress={() => alert('기록해줭')} style={styles.myScreenFirstReviewButton}>
+              <Pressable style={styles.myScreenFirstReviewButton}>
                 <Text style={{ fontSize: 15, fontWeight: '900', color: '#ffffff' }}>기록하기</Text>
               </Pressable>
             </MyscreenFirstReviewCover>
@@ -384,7 +390,7 @@ const MyScreen = () => {
             <Text style={{ fontSize: 15, fontWeight: '500', marginBottom: 30 }}>
               최고의 맛집을 알려주세요.
             </Text>
-            <Pressable onPress={() => alert('기록해줭')} style={styles.myScreenFirstReviewButton}>
+            <Pressable style={styles.myScreenFirstReviewButton}>
               <Text style={{ fontSize: 15, fontWeight: '900', color: '#ffffff' }}>
                 인생맛집 기록하기
               </Text>

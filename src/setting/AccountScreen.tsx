@@ -1,16 +1,25 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Image,
+  FlatList,
+  Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const TermsPolicyScreen = () => {
+const AccountScreen = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
     navigation.setOptions({
       headerShown: true,
-      title: '약관 및 정책',
+      title: '계정',
       headerTitleAlign: 'center',
       headerTitleStyle: {
         ...Platform.select({
@@ -57,11 +66,7 @@ const TermsPolicyScreen = () => {
           borderBottomWidth: 0.6,
           marginTop: 32,
         }}>
-        <Pressable
-          onPress={() => {
-            navigation.navigate('TermsDetail');
-          }}
-          style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <View
             style={{
               width: '90%',
@@ -70,9 +75,10 @@ const TermsPolicyScreen = () => {
               alignContent: 'space-between',
               justifyContent: 'center',
             }}>
-            <Text style={styles.termsPolicyCatagory}>이용약관</Text>
+            <Text style={styles.accountCatagory}>카카오계정</Text>
+            <Text style={styles.accountCatagoryID}>asdsdsf@kakao.com</Text>
           </View>
-          <Image source={require('../assets/icons/click.png')} style={styles.termsPolicyButton} />
+          <Image source={require('../assets/icons/click.png')} style={styles.accountButton} />
         </Pressable>
       </View>
       <View
@@ -83,20 +89,29 @@ const TermsPolicyScreen = () => {
           borderBottomColor: '#dfe2e5',
           borderBottomWidth: 0.6,
         }}>
-        <Pressable
-          onPress={() => {
-            navigation.navigate('InfoProcess');
-          }}
-          style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
-          <Text style={styles.termsPolicyCatagory}>개인정보 처리방침</Text>
-          <Image source={require('../assets/icons/click.png')} style={styles.termsPolicyButton} />
+        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+          <Text style={styles.accountCatagory}>로그아웃</Text>
+          <Image source={require('../assets/icons/click.png')} style={styles.accountButton} />
+        </Pressable>
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 50,
+          backgroundColor: '#fff',
+          borderBottomColor: '#dfe2e5',
+          borderBottomWidth: 0.6,
+        }}>
+        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+          <Text style={styles.accountCatagory}>회원탈퇴</Text>
+          <Image source={require('../assets/icons/click.png')} style={styles.accountButton} />
         </Pressable>
       </View>
     </View>
   );
 };
 
-export default TermsPolicyScreen;
+export default AccountScreen;
 
 const styles = StyleSheet.create({
   backIcon: {
@@ -108,7 +123,7 @@ const styles = StyleSheet.create({
     paddingLeft: 13,
     paddingRight: 20,
   },
-  termsPolicyCatagory: {
+  accountCatagory: {
     ...Platform.select({
       ios: {
         fontWeight: '400',
@@ -122,10 +137,15 @@ const styles = StyleSheet.create({
     marginVertical: 16,
     width: '30%',
   },
-  termsPolicyButton: {
+  accountButton: {
     width: 8,
     height: 15,
     marginTop: 16,
     marginRight: 15,
+  },
+  accountCatagoryID: {
+    fontWeight: '400',
+    fontSize: 12,
+    color: '#7E8389',
   },
 });

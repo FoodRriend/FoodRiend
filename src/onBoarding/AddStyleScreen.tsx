@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, StyleSheet, Image, Pressable, Platform } from 'react-native';
+import { Text, View, StyleSheet, Image, Pressable, Platform, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 // import AddStyleData from './components/AddStyleData';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
@@ -9,7 +9,9 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { addFoodStyle } from '../redux/userSlice';
 
-const AddStyleScreen = () => {
+import Modal from 'react-native-modal';
+
+const AddStyleScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
@@ -60,7 +62,7 @@ const AddStyleScreen = () => {
             <Pressable
               style={styles.RightIcon}
               onPress={() => {
-                alert('원하는 스타일을 선택해주세요.');
+                // setModalVisible(true);
               }}>
               <Image source={require(`../assets/icons/RightVector.png`)}></Image>
             </Pressable>
@@ -80,41 +82,43 @@ const AddStyleScreen = () => {
   const [checkbox4, setCheckbox4] = useState(false);
   const [checkbox5, setCheckbox5] = useState(false);
 
-  const [checkState, setCheckState] = useState(null);
+  const [checkState, setCheckState] = useState('');
   const [checkNextBtn, setCheckNextBtn] = useState(false);
 
-  const handleCheckbox = (style) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleCheckbox = (style: string) => {
     setCheckState(style);
     switch (style) {
-      case 'ExploreStyle':
+      case '지역 맛집 탐험가':
         setCheckbox1(true);
         setCheckbox2(false);
         setCheckbox3(false);
         setCheckbox4(false);
         setCheckbox5(false);
         break;
-      case 'AdventureStyle':
+      case '새로운 음식 모험가':
         setCheckbox1(false);
         setCheckbox2(true);
         setCheckbox3(false);
         setCheckbox4(false);
         setCheckbox5(false);
         break;
-      case 'ExpertStyle':
+      case '분야별 맛집 전문가':
         setCheckbox1(false);
         setCheckbox2(false);
         setCheckbox3(true);
         setCheckbox4(false);
         setCheckbox5(false);
         break;
-      case 'PioneStyle':
+      case '숨은 맛집 개척자':
         setCheckbox1(false);
         setCheckbox2(false);
         setCheckbox3(false);
         setCheckbox4(true);
         setCheckbox5(false);
         break;
-      case 'ArtistStyle':
+      case '분위기 맛집 예술가':
         setCheckbox1(false);
         setCheckbox2(false);
         setCheckbox3(false);
@@ -135,6 +139,22 @@ const AddStyleScreen = () => {
 
   return (
     <Wrapper>
+      {/* <Modal onBackdropPress={() => setModalVisible(false)} isVisible={modalVisible}>
+        <View
+          style={{
+            alignSelf: 'center',
+            width: 270,
+            height: 122,
+            borderRadius: 10,
+            backgroundColor: '#fff',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{ fontSize: 17, fontWeight: '600' }}>취향 선택</Text>
+          <Text style={{ fontSize: 13, marginTop: 10 }}>체크박스를 선택해주세요</Text>
+        </View>
+      </Modal> */}
+
       <Text style={styles.TextTitle}>나의 맛집 스타일 선택</Text>
 
       <View style={styles.styleListContainer}>
@@ -159,7 +179,7 @@ const AddStyleScreen = () => {
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
                 isChecked={checkbox1}
-                onPress={() => handleCheckbox('ExploreStyle')}
+                onPress={() => handleCheckbox('지역 맛집 탐험가')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>
@@ -186,7 +206,7 @@ const AddStyleScreen = () => {
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
                 isChecked={checkbox2}
-                onPress={() => handleCheckbox('AdventureStyle')}
+                onPress={() => handleCheckbox('새로운 음식 모험가')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>
@@ -213,7 +233,7 @@ const AddStyleScreen = () => {
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
                 isChecked={checkbox3}
-                onPress={() => handleCheckbox('ExpertStyle')}
+                onPress={() => handleCheckbox('분야별 맛집 전문가')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>
@@ -240,7 +260,7 @@ const AddStyleScreen = () => {
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
                 isChecked={checkbox4}
-                onPress={() => handleCheckbox('PioneStyle')}
+                onPress={() => handleCheckbox('숨은 맛집 개척자')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>
@@ -267,7 +287,7 @@ const AddStyleScreen = () => {
                 fillColor="#dfe2e5"
                 unfillColor="#FFFFFF"
                 isChecked={checkbox5}
-                onPress={() => handleCheckbox('ArtistStyle')}
+                onPress={() => handleCheckbox('분위기 맛집 예술가')}
                 iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
               />
             </View>

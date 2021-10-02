@@ -29,37 +29,42 @@ const AlertScreen = () => {
     {
       content: '박지현님이 서울시 종로구에 새로운 치킨 가게를 방문했습니다',
       time: '4시간',
-      freind: true,
+      friend: true,
     },
     {
       content: '박지현님이 서울시 종로구에 새로운 치킨 가게를 방문했습니다',
       time: '4시간',
-      freind: true,
+      friend: true,
     },
     {
       content: '쿨럭쿨럭님이 친구요청을 보냈습니다.',
       time: '4시간',
-      freind: false,
+      friend: false,
     },
     {
       content: '박지현님이 서울시 종로구에 새로운 치킨 가게를 방문했습니다',
       time: '4시간',
-      freind: true,
+      friend: true,
     },
     {
       content: '쿨럭쿨럭님이 친구요청을 보냈습니다.',
       time: '4시간',
-      freind: false,
+      friend: false,
     },
     {
       content: '박지현님이 서울시 종로구에 새로운 치킨 가게를 방문했습니다',
       time: '4시간',
-      freind: true,
+      friend: true,
     },
   ];
 
-  const renderItem = ({ item, index }) => {
-    if (item.freind) {
+  interface IAlertRenderItemProps {
+    friend: boolean;
+    content: string;
+  }
+
+  const renderItem = ({ item, index }: { item: IAlertRenderItemProps; index: number }) => {
+    if (item.friend) {
       return (
         <AlertScreenListItem>
           <Image
@@ -81,7 +86,7 @@ const AlertScreen = () => {
         </AlertScreenListItem>
       );
     }
-    if (!item.freind) {
+    if (!item.friend) {
       return (
         <AlertScreenListItem>
           <Image
@@ -100,12 +105,13 @@ const AlertScreen = () => {
             </Text>
             <Text style={{ fontSize: 12, fontWeight: '300', color: '#aaacae' }}>4시간</Text>
           </View>
-          <Pressable onPress={() => alert('수락')} style={styles.alertListButton}>
+          <Pressable style={styles.alertListButton}>
             <Text style={{ fontSize: 12, fontWeight: '500', color: '#fcfcfc' }}>수락</Text>
           </Pressable>
         </AlertScreenListItem>
       );
     }
+    return <></>;
   };
 
   return (

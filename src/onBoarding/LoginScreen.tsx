@@ -3,7 +3,7 @@ import styled from '@emotion/native';
 import { Text, Pressable, StyleSheet, Image, View, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const LoginScreen = () => {
+const LoginScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const onPress = () => {

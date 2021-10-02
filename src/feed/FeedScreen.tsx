@@ -27,7 +27,14 @@ const FeedScreen = () => {
 
   const [bounce, setBounce] = useState(0);
 
-  const renderItem = ({ item, index }) => {
+  interface IFeedRenderItemProps {
+    name?: string;
+    score?: number;
+    time?: string;
+    content?: string;
+  }
+
+  const renderItem = ({ item, index }: { item: IFeedRenderItemProps; index: number }) => {
     if (index === 0) {
       return (
         <FeedListItem>
@@ -140,6 +147,7 @@ const FeedScreen = () => {
         </FeedListItem>
       );
     }
+    return <></>;
   };
 
   return (
@@ -159,7 +167,7 @@ const FeedScreen = () => {
               친구를 초대하면 피드에서 친구가 방문한 가게와
             </Text>
             <Text style={{ fontSize: 15, fontWeight: '500' }}>리뷰를 볼 수 있습니다.</Text>
-            <Pressable onPress={() => alert('초대하기')} style={styles.renderItemFirstBtn}>
+            <Pressable style={styles.renderItemFirstBtn}>
               <Text style={{ fontSize: 15, fontWeight: '900', color: '#ffffff' }}>초대하기</Text>
             </Pressable>
           </View>

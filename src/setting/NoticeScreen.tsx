@@ -1,7 +1,16 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Image,
+  FlatList,
+  Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const NoticeScreen = () => {
@@ -61,7 +70,12 @@ const NoticeScreen = () => {
     },
   ];
 
-  const renderItem = ({ item, index }) => {
+  interface INoticeProps {
+    content: string;
+    date: string;
+  }
+
+  const renderItem = ({ item, index }: { item: INoticeProps; index: number }) => {
     if (index === 0) {
       return (
         <>

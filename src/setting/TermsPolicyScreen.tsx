@@ -1,16 +1,25 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Image,
+  FlatList,
+  Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const AccountScreen = () => {
+const TermsPolicyScreen = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
     navigation.setOptions({
       headerShown: true,
-      title: '계정',
+      title: '약관 및 정책',
       headerTitleAlign: 'center',
       headerTitleStyle: {
         ...Platform.select({
@@ -58,7 +67,9 @@ const AccountScreen = () => {
           marginTop: 32,
         }}>
         <Pressable
-          onPress={() => alert('카카오계정')}
+          onPress={() => {
+            navigation.navigate('TermsDetail');
+          }}
           style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <View
             style={{
@@ -68,10 +79,9 @@ const AccountScreen = () => {
               alignContent: 'space-between',
               justifyContent: 'center',
             }}>
-            <Text style={styles.accountCatagory}>카카오계정</Text>
-            <Text style={styles.accountCatagoryID}>asdsdsf@kakao.com</Text>
+            <Text style={styles.termsPolicyCatagory}>이용약관</Text>
           </View>
-          <Image source={require('../assets/icons/click.png')} style={styles.accountButton} />
+          <Image source={require('../assets/icons/click.png')} style={styles.termsPolicyButton} />
         </Pressable>
       </View>
       <View
@@ -83,32 +93,19 @@ const AccountScreen = () => {
           borderBottomWidth: 0.6,
         }}>
         <Pressable
-          onPress={() => alert('로그아웃')}
+          onPress={() => {
+            navigation.navigate('InfoProcess');
+          }}
           style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
-          <Text style={styles.accountCatagory}>로그아웃</Text>
-          <Image source={require('../assets/icons/click.png')} style={styles.accountButton} />
-        </Pressable>
-      </View>
-      <View
-        style={{
-          width: '100%',
-          height: 50,
-          backgroundColor: '#fff',
-          borderBottomColor: '#dfe2e5',
-          borderBottomWidth: 0.6,
-        }}>
-        <Pressable
-          onPress={() => alert('회원탈퇴')}
-          style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
-          <Text style={styles.accountCatagory}>회원탈퇴</Text>
-          <Image source={require('../assets/icons/click.png')} style={styles.accountButton} />
+          <Text style={styles.termsPolicyCatagory}>개인정보 처리방침</Text>
+          <Image source={require('../assets/icons/click.png')} style={styles.termsPolicyButton} />
         </Pressable>
       </View>
     </View>
   );
 };
 
-export default AccountScreen;
+export default TermsPolicyScreen;
 
 const styles = StyleSheet.create({
   backIcon: {
@@ -120,7 +117,7 @@ const styles = StyleSheet.create({
     paddingLeft: 13,
     paddingRight: 20,
   },
-  accountCatagory: {
+  termsPolicyCatagory: {
     ...Platform.select({
       ios: {
         fontWeight: '400',
@@ -134,15 +131,10 @@ const styles = StyleSheet.create({
     marginVertical: 16,
     width: '30%',
   },
-  accountButton: {
+  termsPolicyButton: {
     width: 8,
     height: 15,
     marginTop: 16,
     marginRight: 15,
-  },
-  accountCatagoryID: {
-    fontWeight: '400',
-    fontSize: 12,
-    color: '#7E8389',
   },
 });

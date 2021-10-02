@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 
 import { Provider } from 'react-redux';
 import store from './redux/store';
@@ -54,7 +54,7 @@ const SearchStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 // 탭 아이콘 함수
-const TabBarIcon = (focused, name) => {
+const TabBarIcon = (focused: boolean, name: string) => {
   let iconImagePath;
   if (name === 'Feed') {
     iconImagePath = focused
@@ -140,7 +140,7 @@ const SearchStackScreen = () => {
   );
 };
 
-const App = () => {
+const App: React.FC<void> = () => {
   // const [loding, setLoding] = useState(false);
   // const isTrue = () => {
   //   setLoding(true);

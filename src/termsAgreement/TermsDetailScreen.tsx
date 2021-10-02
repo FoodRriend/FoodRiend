@@ -1,7 +1,16 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Image,
+  FlatList,
+  Platform,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const TermsDetailScreen = () => {
@@ -104,7 +113,7 @@ const TermsDetailScreen = () => {
     },
   ];
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({ item, index }: { item: any; index: number }) => {
     if (index === 0) {
       return <Text style={styles.termsDetailTitle}>{item.title}</Text>;
     }
@@ -509,6 +518,7 @@ const TermsDetailScreen = () => {
         </>
       );
     }
+    return <></>;
   };
 
   return (
