@@ -3,6 +3,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 interface UserState {
   foodStyle: string | null;
   foodType: string | null;
+  nickname: string | null;
 }
 
 const initialState = { foodStyle: null, foodType: null } as UserState;
@@ -17,8 +18,11 @@ const userSlice = createSlice({
     addFoodType: (state, action: PayloadAction<string>) => {
       state.foodType = action.payload;
     },
+    addNickname: (state, action: PayloadAction<string>) => {
+      state.nickname = action.payload;
+    },
   },
 });
 
-export const { addFoodStyle, addFoodType } = userSlice.actions;
+export const { addFoodStyle, addFoodType, addNickname } = userSlice.actions;
 export default userSlice.reducer;

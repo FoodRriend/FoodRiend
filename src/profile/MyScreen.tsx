@@ -15,6 +15,8 @@ import { useNavigation } from '@react-navigation/native';
 
 import { myScreenData, myScreenData2, myScreenData3, myScreenFirstData } from './constants';
 
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+
 const MyScreen: React.FC = () => {
   const navigation = useNavigation();
 
@@ -25,6 +27,9 @@ const MyScreen: React.FC = () => {
   };
 
   headerStyle();
+
+  const { foodStyle, foodType, nickname } = useAppSelector((state) => state.users);
+  console.log('나오나?', foodStyle, foodType, nickname);
 
   const [favListTitle, setFavListTitle] = useState('먹어봤어요');
 

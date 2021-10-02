@@ -4,6 +4,9 @@ import styled from '@emotion/native';
 import { Text, View, Pressable, StyleSheet, TextInput, Image, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { addNickname } from '../redux/userSlice';
+
 const SignupScreen: React.FC = () => {
   const navigation = useNavigation();
 
@@ -46,6 +49,8 @@ const SignupScreen: React.FC = () => {
 
   headerStyle();
 
+  const dispatch = useAppDispatch();
+
   const [inputID, setInputID] = useState('사용자 이름');
   const [inputNickname, setInputNickname] = useState('');
 
@@ -54,6 +59,7 @@ const SignupScreen: React.FC = () => {
 
   const onPress = () => {
     navigation.navigate('AddStyle');
+    dispatch(addNickname(inputNickname));
   };
 
   const handleInputID = useCallback(
