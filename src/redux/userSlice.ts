@@ -6,7 +6,7 @@ interface UserState {
   nickname: string | null;
 }
 
-const initialState = { foodStyle: null, foodType: null } as UserState;
+const initialState = { foodStyle: null, foodType: null, nickname: null } as UserState;
 
 const userSlice = createSlice({
   name: 'users',

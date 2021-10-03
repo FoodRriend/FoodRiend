@@ -102,7 +102,6 @@ const MyScreen: React.FC = () => {
 
   // 스크롤 이벤트
   const scrollY = new Animated.Value(0);
-  const diffClamp = Animated.diffClamp(scrollY, 0, 50);
   const translateIosY = scrollY.interpolate({
     inputRange: [0, 205],
     outputRange: [205, 40],
