@@ -10,6 +10,7 @@ import {
   FlatList,
   Dimensions,
   Platform,
+  Animated,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -81,7 +82,7 @@ const HandleFoodStyleImage = (name: any) => {
       break;
   }
 
-  return <Image source={FoodStyleImagePath} style={{ width: 28, height: 28 }} />;
+  return <Image source={FoodStyleImagePath} style={{ width: 28, height: 28, marginLeft: 5 }} />;
 };
 
 const MyScreen: React.FC = () => {
@@ -98,6 +99,22 @@ const MyScreen: React.FC = () => {
   const { foodStyle, foodType, nickname } = useAppSelector((state) => state.users);
 
   const [favListTitle, setFavListTitle] = useState('먹어봤어요');
+
+  // 스크롤 이벤트
+  const scrollY = new Animated.Value(0);
+  const diffClamp = Animated.diffClamp(scrollY, 0, 50);
+  const translateIosY = scrollY.interpolate({
+    inputRange: [0, 205],
+    outputRange: [205, 40],
+    extrapolateLeft: 'extend',
+    extrapolateRight: 'clamp',
+  });
+  const translateAndroidY = scrollY.interpolate({
+    inputRange: [0, 160],
+    outputRange: [160, 0],
+    extrapolateLeft: 'extend',
+    extrapolateRight: 'clamp',
+  });
 
   const handleFavList = (title: string) => {
     setFavListTitle(title);
@@ -121,161 +138,13 @@ const MyScreen: React.FC = () => {
     }
   };
 
-  interface IMyProps {
-    address: string;
-    name: string;
-    score: number;
-  }
-
-  const renderItem = ({ item, index }: { item: IMyProps; index: number }) => {
-    if (index === 0 && favListTitle === '먹어봤어요') {
-      return (
-        <View style={styles.myScreenRestaurantCover}>
-          <View style={{ width: '100%', height: 37, justifyContent: 'center' }}>
-            <Pressable
-              style={styles.myScreenReviewButton}
-              onPress={() => navigation.navigate('MyPostReview')}>
-              <Image
-                style={{ width: 18, height: 18, borderRadius: 16 }}
-                source={require(`../assets/icons/write.png`)}
-              />
-            </Pressable>
-          </View>
-          <View style={{ width: 160 }}>
-            <Image
-              style={{ width: '100%', height: 153, borderRadius: 16 }}
-              source={require(`../assets/images/profile/Rectangle1.png`)}
-            />
-            <View style={{ flexWrap: 'wrap' }}>
-              <View style={{ width: '70%' }}>
-                <Text style={styles.myScreenRestaurantAddress}>{item.address}</Text>
-                {item.name.length > 7 ? (
-                  <Text style={styles.myScreenRestaurantName}>{`${item.name.slice(0, 6)}...`}</Text>
-                ) : (
-                  <Text style={styles.myScreenRestaurantName}>{item.name}</Text>
-                )}
-                <View style={styles.myScreenRestaurantContent}>
-                  <Image
-                    style={{ width: 20, height: 20, marginLeft: 2 }}
-                    source={require(`../assets/icons/star.png`)}
-                  />
-                  <Text
-                    style={{ fontSize: 12, fontWeight: '500', color: '#2A3037', marginLeft: 3 }}>
-                    {item.score}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-      );
-    }
-    if (index === 0 && favListTitle !== '먹어봤어요') {
-      return (
-        <View style={styles.myScreenRestaurantCover}>
-          <View style={{ width: '100%', height: 37, justifyContent: 'center' }} />
-          <View style={{ width: 160 }}>
-            <Image
-              style={{ width: '100%', height: 153, borderRadius: 16 }}
-              source={require(`../assets/images/profile/Rectangle1.png`)}
-            />
-            <View style={{ flexWrap: 'wrap' }}>
-              <View style={{ width: '70%' }}>
-                <Text style={styles.myScreenRestaurantAddress}>{item.address}</Text>
-                {item.name.length > 7 ? (
-                  <Text style={styles.myScreenRestaurantName}>{`${item.name.slice(0, 6)}...`}</Text>
-                ) : (
-                  <Text style={styles.myScreenRestaurantName}>{item.name}</Text>
-                )}
-                <View style={styles.myScreenRestaurantContent}>
-                  <Image
-                    style={{ width: 20, height: 20, marginLeft: 2 }}
-                    source={require(`../assets/icons/star.png`)}
-                  />
-                  <Text
-                    style={{ fontSize: 12, fontWeight: '500', color: '#2A3037', marginLeft: 3 }}>
-                    {item.score}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-      );
-    }
-    if (index === 1) {
-      return (
-        <View style={styles.myScreenRestaurantCover}>
-          <View style={{ width: '100%', height: 37 }}></View>
-          <View style={{ width: 160 }}>
-            <Image
-              style={{ width: '100%', height: 153, borderRadius: 16 }}
-              source={require(`../assets/images/profile/Rectangle1.png`)}
-            />
-            <View style={{ flexWrap: 'wrap' }}>
-              <View style={{ width: '70%' }}>
-                <Text style={styles.myScreenRestaurantAddress}>{item.address}</Text>
-                {item.name.length > 7 ? (
-                  <Text style={styles.myScreenRestaurantName}>{`${item.name.slice(0, 6)}...`}</Text>
-                ) : (
-                  <Text style={styles.myScreenRestaurantName}>{item.name}</Text>
-                )}
-                <View style={styles.myScreenRestaurantContent}>
-                  <Image
-                    style={{ width: 20, height: 20, marginLeft: 2 }}
-                    source={require(`../assets/icons/star.png`)}
-                  />
-                  <Text
-                    style={{ fontSize: 12, fontWeight: '500', color: '#2A3037', marginLeft: 3 }}>
-                    {item.score}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-      );
-    }
+  const MySreenHeader = () => {
     return (
-      <View style={styles.myScreenRestaurantCover}>
-        <View style={{ width: 160 }}>
-          <Image
-            style={{ width: '100%', height: 153, borderRadius: 16 }}
-            source={require(`../assets/images/profile/Rectangle3.png`)}
-          />
-          <View style={{ flexWrap: 'wrap' }}>
-            <View style={{ width: '70%' }}>
-              <Text style={styles.myScreenRestaurantAddress}>{item.address}</Text>
-              {item.name.length > 7 ? (
-                <Text style={styles.myScreenRestaurantName}>{`${item.name.slice(0, 6)}...`}</Text>
-              ) : (
-                <Text style={styles.myScreenRestaurantName}>{item.name}</Text>
-              )}
-              <View style={styles.myScreenRestaurantContent}>
-                <Image
-                  style={{ width: 20, height: 20, marginLeft: 2 }}
-                  source={require(`../assets/icons/star.png`)}
-                />
-                <Text style={{ fontSize: 12, fontWeight: '500', color: '#2A3037', marginLeft: 3 }}>
-                  {item.score}
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-    );
-  };
-
-  const numColumns = 2;
-
-  return (
-    <Wrapper>
       <MyScreenInfoContainer>
         <Pressable onPress={() => navigation.navigate('MyEdit')}>
           <Image
             source={require(`../assets/images/onBoading/friends/friend6.png`)}
-            style={{ width: 95, height: 95 }}
+            style={{ width: 95, height: 95, marginLeft: 10 }}
           />
         </Pressable>
         <View style={styles.myScreenInfoItem}>
@@ -338,47 +207,265 @@ const MyScreen: React.FC = () => {
           </Pressable>
         </View>
       </MyScreenInfoContainer>
-      <MyScreenFavInfoContainer>
-        <Pressable onPress={() => handleFavList('먹어봤어요')} style={styles.myScreenFavInfoItem}>
-          <Text style={styles.myScreenFavInfoNumber}>232</Text>
-          {favListTitle === '먹어봤어요' && (
-            <Text style={styles.myScreenFavInfoTouchText}>먹어봤어요</Text>
-          )}
-          {favListTitle !== '먹어봤어요' && (
-            <Text style={styles.myScreenFavInfoText}>먹어봤어요</Text>
-          )}
-        </Pressable>
-        <Pressable
-          onPress={() => handleFavList('가보고 싶어요')}
-          style={styles.myScreenFavInfoItem}>
-          <Text style={styles.myScreenFavInfoNumber}>33</Text>
-          {favListTitle === '가보고 싶어요' && (
-            <Text style={styles.myScreenFavInfoTouchText}>가보고 싶어요</Text>
-          )}
-          {favListTitle !== '가보고 싶어요' && (
-            <Text style={styles.myScreenFavInfoText}>가보고 싶어요</Text>
-          )}
-        </Pressable>
-        <Pressable onPress={() => handleFavList('인생맛집')} style={styles.myScreenFavInfoItem}>
-          <Text style={styles.myScreenFavInfoNumber}>5</Text>
-          {favListTitle === '인생맛집' && (
-            <Text style={styles.myScreenFavInfoTouchText}>인생맛집</Text>
-          )}
-          {favListTitle !== '인생맛집' && <Text style={styles.myScreenFavInfoText}>인생맛집</Text>}
-        </Pressable>
-      </MyScreenFavInfoContainer>
-      <MyScreenRestaurantContainer>
+    );
+  };
+
+  const MyScreenTap = () => {
+    return (
+      <Animated.View
+        style={{
+          ...Platform.select({
+            ios: {
+              transform: [{ translateY: translateIosY }],
+            },
+            android: {
+              transform: [{ translateY: translateAndroidY }],
+            },
+          }),
+
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          top: 0,
+        }}>
+        <MyScreenFavInfoContainer>
+          <Pressable onPress={() => handleFavList('먹어봤어요')} style={styles.myScreenFavInfoItem}>
+            <Text style={styles.myScreenFavInfoNumber}>232</Text>
+            {favListTitle === '먹어봤어요' && (
+              <Text style={styles.myScreenFavInfoTouchText}>먹어봤어요</Text>
+            )}
+            {favListTitle !== '먹어봤어요' && (
+              <Text style={styles.myScreenFavInfoText}>먹어봤어요</Text>
+            )}
+          </Pressable>
+          <Pressable
+            onPress={() => handleFavList('가보고 싶어요')}
+            style={styles.myScreenFavInfoItem}>
+            <Text style={styles.myScreenFavInfoNumber}>33</Text>
+            {favListTitle === '가보고 싶어요' && (
+              <Text style={styles.myScreenFavInfoTouchText}>가보고 싶어요</Text>
+            )}
+            {favListTitle !== '가보고 싶어요' && (
+              <Text style={styles.myScreenFavInfoText}>가보고 싶어요</Text>
+            )}
+          </Pressable>
+          <Pressable onPress={() => handleFavList('인생맛집')} style={styles.myScreenFavInfoItem}>
+            <Text style={styles.myScreenFavInfoNumber}>5</Text>
+            {favListTitle === '인생맛집' && (
+              <Text style={styles.myScreenFavInfoTouchText}>인생맛집</Text>
+            )}
+            {favListTitle !== '인생맛집' && (
+              <Text style={styles.myScreenFavInfoText}>인생맛집</Text>
+            )}
+          </Pressable>
+        </MyScreenFavInfoContainer>
+      </Animated.View>
+    );
+  };
+
+  interface IMyProps {
+    address: string;
+    name: string;
+    score: number;
+  }
+
+  const renderItem = ({ item, index }: { item: IMyProps; index: number }) => {
+    if (index === 0 && favListTitle === '먹어봤어요') {
+      return (
+        <>
+          <View style={{ flexWrap: 'wrap' }}>
+            <MySreenHeader />
+            <View style={{ marginTop: 70 }}>
+              <View style={styles.myScreenRestaurantCover}>
+                <View style={{ width: '100%', height: 37, justifyContent: 'center' }}>
+                  <Pressable
+                    style={styles.myScreenReviewButton}
+                    onPress={() => navigation.navigate('MyPostReview')}>
+                    <Image
+                      style={{ width: 18, height: 18, borderRadius: 16 }}
+                      source={require(`../assets/icons/write.png`)}
+                    />
+                  </Pressable>
+                </View>
+                <View style={{ width: 160 }}>
+                  <Image
+                    style={{ width: '100%', height: 153, borderRadius: 16 }}
+                    source={require(`../assets/images/profile/Rectangle1.png`)}
+                  />
+                  <View style={{ flexWrap: 'wrap' }}>
+                    <View style={{ width: '70%' }}>
+                      <Text style={styles.myScreenRestaurantAddress}>{item.address}</Text>
+                      {item.name.length > 7 ? (
+                        <Text style={styles.myScreenRestaurantName}>{`${item.name.slice(
+                          0,
+                          6,
+                        )}...`}</Text>
+                      ) : (
+                        <Text style={styles.myScreenRestaurantName}>{item.name}</Text>
+                      )}
+                      <View style={styles.myScreenRestaurantContent}>
+                        <Image
+                          style={{ width: 20, height: 20, marginLeft: 2 }}
+                          source={require(`../assets/icons/star.png`)}
+                        />
+                        <Text
+                          style={{
+                            fontSize: 12,
+                            fontWeight: '500',
+                            color: '#2A3037',
+                            marginLeft: 3,
+                          }}>
+                          {item.score}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </>
+      );
+    }
+    if (index === 0 && favListTitle !== '먹어봤어요') {
+      return (
+        <>
+          <View style={{ flexWrap: 'wrap' }}>
+            <MySreenHeader />
+            <View style={{ marginTop: 70 }}>
+              <View style={styles.myScreenRestaurantCover}>
+                <View style={{ width: '100%', height: 37, justifyContent: 'center' }} />
+                <View style={{ width: 160 }}>
+                  <Image
+                    style={{ width: '100%', height: 153, borderRadius: 16 }}
+                    source={require(`../assets/images/profile/Rectangle1.png`)}
+                  />
+                  <View style={{ flexWrap: 'wrap' }}>
+                    <View style={{ width: '70%' }}>
+                      <Text style={styles.myScreenRestaurantAddress}>{item.address}</Text>
+                      {item.name.length > 7 ? (
+                        <Text style={styles.myScreenRestaurantName}>{`${item.name.slice(
+                          0,
+                          6,
+                        )}...`}</Text>
+                      ) : (
+                        <Text style={styles.myScreenRestaurantName}>{item.name}</Text>
+                      )}
+                      <View style={styles.myScreenRestaurantContent}>
+                        <Image
+                          style={{ width: 20, height: 20, marginLeft: 2 }}
+                          source={require(`../assets/icons/star.png`)}
+                        />
+                        <Text
+                          style={{
+                            fontSize: 12,
+                            fontWeight: '500',
+                            color: '#2A3037',
+                            marginLeft: 3,
+                          }}>
+                          {item.score}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </>
+      );
+    }
+    if (index === 1) {
+      return (
+        <View style={{ marginTop: 230, position: 'absolute', right: 24 }}>
+          <View style={styles.myScreenRestaurantCover}>
+            <View style={{ width: '100%', height: 37 }}></View>
+            <View style={{ width: 160 }}>
+              <Image
+                style={{ width: '100%', height: 153, borderRadius: 16 }}
+                source={require(`../assets/images/profile/Rectangle1.png`)}
+              />
+              <View style={{ flexWrap: 'wrap' }}>
+                <View style={{ width: '70%' }}>
+                  <Text style={styles.myScreenRestaurantAddress}>{item.address}</Text>
+                  {item.name.length > 7 ? (
+                    <Text style={styles.myScreenRestaurantName}>{`${item.name.slice(
+                      0,
+                      6,
+                    )}...`}</Text>
+                  ) : (
+                    <Text style={styles.myScreenRestaurantName}>{item.name}</Text>
+                  )}
+                  <View style={styles.myScreenRestaurantContent}>
+                    <Image
+                      style={{ width: 20, height: 20, marginLeft: 2 }}
+                      source={require(`../assets/icons/star.png`)}
+                    />
+                    <Text
+                      style={{ fontSize: 12, fontWeight: '500', color: '#2A3037', marginLeft: 3 }}>
+                      {item.score}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      );
+    }
+    return (
+      <View style={styles.myScreenRestaurantCover}>
+        <View style={{ width: 160 }}>
+          <Image
+            style={{ width: '100%', height: 153, borderRadius: 16 }}
+            source={require(`../assets/images/profile/Rectangle3.png`)}
+          />
+          <View style={{ flexWrap: 'wrap' }}>
+            <View style={{ width: '70%' }}>
+              <Text style={styles.myScreenRestaurantAddress}>{item.address}</Text>
+              {item.name.length > 7 ? (
+                <Text style={styles.myScreenRestaurantName}>{`${item.name.slice(0, 6)}...`}</Text>
+              ) : (
+                <Text style={styles.myScreenRestaurantName}>{item.name}</Text>
+              )}
+              <View style={styles.myScreenRestaurantContent}>
+                <Image
+                  style={{ width: 20, height: 20, marginLeft: 2 }}
+                  source={require(`../assets/icons/star.png`)}
+                />
+                <Text style={{ fontSize: 12, fontWeight: '500', color: '#2A3037', marginLeft: 3 }}>
+                  {item.score}
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
+  const numColumns = 2;
+
+  return (
+    <Wrapper>
+      <MyScreenScrollContainer>
         {fomatRenderItem(myScreenData) === '먹어봤어요' && (
           <FlatList
             showsVerticalScrollIndicator={false}
             data={myScreenData}
             renderItem={renderItem}
             numColumns={numColumns}
+            onScroll={(e) => {
+              scrollY.setValue(e.nativeEvent.contentOffset.y);
+            }}
+            bounces={false}
+            scrollEventThrottle={16}
           />
         )}
         {fomatRenderItem(myScreenData) === '먹어봤어요_null' && (
           <>
-            <View style={{ width: '100%', height: 37, justifyContent: 'center' }}>
+            <MySreenHeader />
+            <View style={{ width: '100%', height: 37, justifyContent: 'center', marginTop: 60 }}>
               <Pressable
                 style={styles.myScreenReviewButton}
                 onPress={() => navigation.navigate('MyPostReview')}>
@@ -416,53 +503,70 @@ const MyScreen: React.FC = () => {
             data={myScreenData2}
             renderItem={renderItem}
             numColumns={numColumns}
+            onScroll={(e) => {
+              scrollY.setValue(e.nativeEvent.contentOffset.y);
+            }}
+            bounces={false}
+            scrollEventThrottle={16}
           />
         )}
-        {fomatRenderItem(myScreenData2) === '가보고 싶어요_null' && (
-          <View style={{ width: '100%', height: '100%', alignItems: 'center' }}>
-            <Text style={{ fontSize: 20, fontWeight: '700', marginTop: 44 }}>가보고 싶어요</Text>
-            <Text style={{ fontSize: 15, fontWeight: '500', marginTop: 20 }}>
-              가게를 검색하고 북마트 버튼을 클릭 해보세요
-            </Text>
-            <Text style={{ fontSize: 15, fontWeight: '500' }}>
-              저장된 가게를 모아서 볼 수 있어요.
-            </Text>
-            <Text></Text>
-          </View>
+        {fomatRenderItem(myScreenData) === '가보고 싶어요_null' && (
+          <>
+            <MySreenHeader />
+            <View style={{ width: '100%', height: '100%', alignItems: 'center', marginTop: 60 }}>
+              <Text style={{ fontSize: 20, fontWeight: '700', marginTop: 44 }}>가보고 싶어요</Text>
+              <Text style={{ fontSize: 15, fontWeight: '500', marginTop: 20 }}>
+                가게를 검색하고 북마트 버튼을 클릭 해보세요
+              </Text>
+              <Text style={{ fontSize: 15, fontWeight: '500' }}>
+                저장된 가게를 모아서 볼 수 있어요.
+              </Text>
+              <Text></Text>
+            </View>
+          </>
         )}
-        {fomatRenderItem(myScreenFirstData) === '인생맛집' && (
+        {fomatRenderItem(myScreenData3) === '인생맛집' && (
           <FlatList
             showsVerticalScrollIndicator={false}
             data={myScreenData3}
             renderItem={renderItem}
             numColumns={numColumns}
+            onScroll={(e) => {
+              scrollY.setValue(e.nativeEvent.contentOffset.y);
+            }}
+            bounces={false}
+            scrollEventThrottle={16}
           />
         )}
-        {fomatRenderItem(myScreenFirstData) === '인생맛집_null' && (
-          <MyscreenFirstReviewCover2>
-            <View style={styles.myscreenFirstReviewItem}>
-              <Image
-                style={{ width: 33, height: 45 }}
-                source={require(`../assets/icons/best.png`)}
-              />
-            </View>
-            <Text style={{ marginTop: 11, fontSize: 20, fontWeight: '700' }}>
-              인생맛집을 기록해주세요
-            </Text>
-            <Text style={{ marginTop: 12, fontSize: 15, fontWeight: '500' }}>
-              여러분이 가장 좋은 경험을 하였던
-            </Text>
-            <Text style={{ fontSize: 15, fontWeight: '500', marginBottom: 30 }}>
-              최고의 맛집을 알려주세요.
-            </Text>
-            <Pressable style={styles.myScreenFirstReviewButton}>
-              <Text style={{ fontSize: 15, fontWeight: '900', color: '#ffffff' }}>
-                인생맛집 기록하기
+        {fomatRenderItem(myScreenData3) === '인생맛집_null' && (
+          <>
+            <MySreenHeader />
+            <MyscreenFirstReviewCover2>
+              <View style={styles.myscreenFirstReviewItem}>
+                <Image
+                  style={{ width: 33, height: 45 }}
+                  source={require(`../assets/icons/best.png`)}
+                />
+              </View>
+              <Text style={{ marginTop: 11, fontSize: 20, fontWeight: '700' }}>
+                인생맛집을 남겨주세요
               </Text>
-            </Pressable>
-          </MyscreenFirstReviewCover2>
+              <Text style={{ marginTop: 12, fontSize: 15, fontWeight: '500' }}>
+                여러분이 가장 좋은 경험을 하였던
+              </Text>
+              <Text style={{ fontSize: 15, fontWeight: '500', marginBottom: 30 }}>
+                최고의 맛집을 알려주세요.
+              </Text>
+              <Pressable style={styles.myScreenFirstReviewButton}>
+                <Text style={{ fontSize: 15, fontWeight: '900', color: '#ffffff' }}>
+                  인생맛집 기록하기
+                </Text>
+              </Pressable>
+            </MyscreenFirstReviewCover2>
+          </>
         )}
-      </MyScreenRestaurantContainer>
+      </MyScreenScrollContainer>
+      <MyScreenTap />
     </Wrapper>
   );
 };
@@ -534,6 +638,16 @@ const styles = StyleSheet.create({
     width: 183,
     alignItems: 'center',
     paddingTop: 6,
+    ...Platform.select({
+      ios: {
+        marginLeft: 10,
+        marginRight: -10,
+      },
+      android: {
+        marginLeft: 20,
+        marginRight: -10,
+      },
+    }),
   },
   myScreenRestaurantAddress: {
     fontSize: 12,
@@ -601,7 +715,7 @@ const Wrapper = styled.View({
 });
 
 const MyScreenInfoContainer = styled.View({
-  width: '100%',
+  width: Dimensions.get('window').width,
   height: 160,
   justifyContent: 'center',
   ...Platform.select({
@@ -626,12 +740,14 @@ const MyScreenFavInfoContainer = styled.View({
   justifyContent: 'center',
   alignContent: 'stretch',
   paddingHorizontal: 30,
+  backgroundColor: '#fff',
 });
 
-const MyScreenRestaurantContainer = styled.View({
+const MyScreenScrollContainer = styled.View({
   width: '100%',
-  height: '67.6%',
-  paddingHorizontal: 11,
+  // height: '67.6%',
+  height: '99.5%',
+  // paddingHorizontal: 11,
   alignItems: 'center',
 });
 
@@ -645,9 +761,9 @@ const MyscreenFirstReviewCover = styled.View({
 });
 
 const MyscreenFirstReviewCover2 = styled.View({
-  marginTop: 42,
+  marginTop: 100,
   width: Dimensions.get('window').width,
-  height: '66%',
+  height: '46%',
   backgroundColor: '#f5f6f7',
   borderRadius: 10,
   alignItems: 'center',

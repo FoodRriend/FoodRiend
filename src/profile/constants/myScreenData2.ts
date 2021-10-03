@@ -11,7 +11,9 @@ const myScreenData2 = [
   },
   { address: '부산시 서초구', name: '샤쿠란', score: 3 },
   { address: '부산시 서초구', name: '샤쿠란', score: 4 },
-  { address: '부산시 종로구', name: '팬케익', score: 2 },
+  { address: '부산시 서초구', name: '샤쿠란', score: 4 },
+  { address: '부산시 서초구', name: '샤쿠란', score: 4 },
+  { address: '부산시 서초구', name: '샤쿠란', score: 4 },
 ];
 
 export default myScreenData2;
