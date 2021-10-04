@@ -346,7 +346,6 @@ const AddFriendsScreen: React.FC = () => {
         </AddFriendsItems>
       );
     }
-
     return (
       <AddFriendsItems>
         <View style={styles.friendImageItem}>

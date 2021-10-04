@@ -9,8 +9,6 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { addFoodStyle } from '../redux/userSlice';
 
-import Modal from 'react-native-modal';
-
 const AddStyleScreen: React.FC = () => {
   const navigation = useNavigation();
 
@@ -59,11 +57,7 @@ const AddStyleScreen: React.FC = () => {
               <Image source={require(`../assets/icons/RightVector.png`)}></Image>
             </Pressable>
           ) : (
-            <Pressable
-              style={styles.RightIcon}
-              onPress={() => {
-                // setModalVisible(true);
-              }}>
+            <Pressable style={styles.RightIcon}>
               <Image source={require(`../assets/icons/RightVector.png`)}></Image>
             </Pressable>
           )}
@@ -84,8 +78,6 @@ const AddStyleScreen: React.FC = () => {
 
   const [checkState, setCheckState] = useState('');
   const [checkNextBtn, setCheckNextBtn] = useState(false);
-
-  const [modalVisible, setModalVisible] = useState(false);
 
   const handleCheckbox = (style: string) => {
     setCheckState(style);
@@ -139,22 +131,6 @@ const AddStyleScreen: React.FC = () => {
 
   return (
     <Wrapper>
-      {/* <Modal onBackdropPress={() => setModalVisible(false)} isVisible={modalVisible}>
-        <View
-          style={{
-            alignSelf: 'center',
-            width: 270,
-            height: 122,
-            borderRadius: 10,
-            backgroundColor: '#fff',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text style={{ fontSize: 17, fontWeight: '600' }}>취향 선택</Text>
-          <Text style={{ fontSize: 13, marginTop: 10 }}>체크박스를 선택해주세요</Text>
-        </View>
-      </Modal> */}
-
       <Text style={styles.TextTitle}>나의 맛집 스타일 선택</Text>
 
       <View style={styles.styleListContainer}>
