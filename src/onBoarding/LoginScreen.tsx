@@ -2,11 +2,16 @@ import React from 'react';
 import styled from '@emotion/native';
 import { Text, Pressable, StyleSheet, Image, View, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { KakaoOAuthToken, login } from '@react-native-seoul/kakao-login';
+import axios from 'axios';
 
 const LoginScreen: React.FC = () => {
   const navigation = useNavigation();
 
-  const onPress = () => {
+  const onPress = async () => {
+    const token: KakaoOAuthToken = await login();
+    console.log(token);
+    // const test = await axios.get();
     navigation.navigate('Terms');
   };
   return (
