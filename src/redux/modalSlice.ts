@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
-interface UserState {
+interface ModalSlice {
   alertModal?: boolean;
   selectModal?: boolean;
 }
 
-const initialState = { alertModal: false, selectModal: false } as UserState;
+const initialState = { alertModal: false, selectModal: false } as ModalSlice;
 
 const modalSlice = createSlice({
   name: 'modals',

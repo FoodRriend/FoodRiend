@@ -4,10 +4,11 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-import { Image } from 'react-native';
+import { Image, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import {
   SignupScreen,
@@ -42,8 +43,7 @@ import {
   PersonalInfoScreen,
   InfoProcessScreen,
 } from './termsAgreement';
-
-// import test from './shared/hooks/test';
+import { MyFirstList, MySecondList, MyThirdList } from './profile/components';
 
 // 아이콘 사용 시
 // import Ionicons from 'react-native-vector-icons/dist/Ionicons';
@@ -52,6 +52,7 @@ const Stack = createStackNavigator();
 const MyPageStack = createStackNavigator();
 const SearchStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const TopTab = createMaterialTopTabNavigator();
 
 // 탭 아이콘 함수
 const TabBarIcon = (focused: boolean, name: string) => {
@@ -84,12 +85,35 @@ const SignupContainer = () => {
 };
 
 // tap 메뉴
+const TopTap = () => {
+  return (
+    <TopTab.Navigator tabBar={(props) => <MyScreen {...props} />}>
+      <TopTab.Screen name="먹어봤어요" component={MyFirstList} />
+      <TopTab.Screen name="가보고 싶어요" component={MySecondList} />
+      <TopTab.Screen name="인생맛집" component={MyThirdList} />
+    </TopTab.Navigator>
+  );
+};
+
 const BottomTap = () => {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
       tabBarOptions={{
-        style: { height: 85, paddingTop: 25, marginTop: 1 },
+        style: {
+          ...Platform.select({
+            ios: {
+              height: 85,
+              paddingTop: 25,
+              marginTop: 1,
+            },
+            android: {
+              height: 60,
+              paddingTop: 10,
+              marginTop: 1,
+            },
+          }),
+        },
       }}
       screenOptions={({ route }) => ({
         tabBarLabel: '',
@@ -106,7 +130,13 @@ const BottomTap = () => {
 const MyPageStackScreen = () => {
   return (
     <MyPageStack.Navigator>
-      <MyPageStack.Screen name="MyPage" component={MyScreen} />
+      <MyPageStack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="MyPage"
+        component={TopTap}
+      />
       <MyPageStack.Screen name="MyFriendList" component={MyFriendListScreen} />
       <MyPageStack.Screen
         options={{
@@ -147,6 +177,7 @@ const App: React.FC<void> = () => {
   // };
   // const loding = test();
   // setTimeout(isTrue, 3000);
+
   return (
     <Provider store={store}>
       <NavigationContainer>

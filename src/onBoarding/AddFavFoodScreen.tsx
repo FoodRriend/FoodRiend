@@ -109,7 +109,7 @@ const AddFavFoodScreen: React.FC = () => {
     dispatch(addFoodType(foodSelect));
   }, [foodSelect]);
 
-  const hadleFavFood = (food: string): void => {
+  const handleFavFood = (food: string): void => {
     setFoodSelect(food);
   };
 
@@ -163,7 +163,7 @@ const AddFavFoodScreen: React.FC = () => {
     }
     if (item.title === foodSelect) {
       return (
-        <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
+        <Pressable style={styles.favFoodItem} onPress={() => handleFavFood(item.title)}>
           <View style={styles.itemSelectImage}>
             <View style={styles.itemSelectImageCheck}>
               <Image source={require('../assets/icons/Checkmark.png')} />
@@ -175,7 +175,7 @@ const AddFavFoodScreen: React.FC = () => {
       );
     }
     return (
-      <Pressable style={styles.favFoodItem} onPress={() => hadleFavFood(item.title)}>
+      <Pressable style={styles.favFoodItem} onPress={() => handleFavFood(item.title)}>
         <View style={styles.itemImage}>{HandleFavFoodImage(item.title)}</View>
         <Text style={styles.itemLargeText}>{item.title}</Text>
       </Pressable>
