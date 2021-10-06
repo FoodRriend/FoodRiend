@@ -9,8 +9,8 @@ const LoginScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const onPress = async () => {
-    const token: KakaoOAuthToken = await login();
-    console.log(token);
+    // const token: any = await login();
+    // console.log(token);
     // const test = await axios.get();
     navigation.navigate('Terms');
   };

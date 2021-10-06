@@ -316,11 +316,11 @@ const FeedListContainer = styled.View({
   ...Platform.select({
     ios: {
       width: 350,
-      height: 660,
+      height: 665,
     },
     android: {
       width: 360,
-      height: 618,
+      height: 645,
     },
   }),
 });

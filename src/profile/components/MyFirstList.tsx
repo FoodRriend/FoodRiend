@@ -26,14 +26,14 @@ const MyFirstList = () => {
   const [begin, setBegin] = useState(false);
 
   useEffect(() => {
-    if (num > 20) {
+    if (num > 50) {
       if (end && begin) {
         dispatch(changeScrollState('Up'));
         setEnd(false);
         setBegin(false);
       }
     }
-    if (num < 20) {
+    if (num < 50) {
       if (end && begin) {
         dispatch(changeScrollState('Down'));
         setEnd(false);
@@ -55,6 +55,59 @@ const MyFirstList = () => {
       dataLeng++;
     }
     return data;
+  };
+
+  const renderFirstItem = ({ item }: { item: any }) => {
+    if (item.empty) {
+      return (
+        <View
+          style={{
+            width: Dimensions.get('window').width / 2 - 12,
+            height: 150,
+          }}
+        />
+      );
+    }
+    return (
+      <>
+        <View style={{ width: '100%', height: 37, justifyContent: 'center' }}>
+          <Pressable
+            style={styles.myScreenReviewButton}
+            onPress={() => navigation.navigate('MyPostReview')}>
+            <Image
+              style={{
+                width: 18,
+                height: 18,
+                borderRadius: 16,
+                marginTop: 12,
+                marginLeft: 2,
+              }}
+              source={require(`../../assets/icons/write.png`)}
+            />
+          </Pressable>
+        </View>
+        <MyscreenFirstReviewCover>
+          <View style={styles.myscreenFirstReviewItem}>
+            <Image
+              style={{ width: 36, height: 36 }}
+              source={require(`../../assets/icons/write2.png`)}
+            />
+          </View>
+          <Text style={{ marginTop: 11, fontSize: 20, fontWeight: '700' }}>
+            맛집을 기록해주세요
+          </Text>
+          <Text style={{ marginTop: 12, fontSize: 15, fontWeight: '500' }}>
+            친구와 함께 한 맛집, 분위기 좋은 카페 등
+          </Text>
+          <Text style={{ fontSize: 15, fontWeight: '500', marginBottom: 30 }}>
+            여러분의 경험을 간직하세요.
+          </Text>
+          <Pressable style={styles.myScreenFirstReviewButton}>
+            <Text style={{ fontSize: 15, fontWeight: '900', color: '#ffffff' }}>기록하기</Text>
+          </Pressable>
+        </MyscreenFirstReviewCover>
+      </>
+    );
   };
 
   const renderItem = ({ item, index }: { item: any; index: number }) => {
@@ -203,42 +256,17 @@ const MyFirstList = () => {
       )}
       {Object.keys(myScreenData[0]).length === 0 && (
         <>
-          <View style={{ width: '100%', height: 37, justifyContent: 'center' }}>
-            <Pressable
-              style={styles.myScreenReviewButton}
-              onPress={() => navigation.navigate('MyPostReview')}>
-              <Image
-                style={{
-                  width: 18,
-                  height: 18,
-                  borderRadius: 16,
-                  marginTop: 12,
-                  marginLeft: 2,
-                }}
-                source={require(`../../assets/icons/write.png`)}
-              />
-            </Pressable>
-          </View>
-          <MyscreenFirstReviewCover>
-            <View style={styles.myscreenFirstReviewItem}>
-              <Image
-                style={{ width: 36, height: 36 }}
-                source={require(`../../assets/icons/write2.png`)}
-              />
-            </View>
-            <Text style={{ marginTop: 11, fontSize: 20, fontWeight: '700' }}>
-              맛집을 기록해주세요
-            </Text>
-            <Text style={{ marginTop: 12, fontSize: 15, fontWeight: '500' }}>
-              친구와 함께 한 맛집, 분위기 좋은 카페 등
-            </Text>
-            <Text style={{ fontSize: 15, fontWeight: '500', marginBottom: 30 }}>
-              여러분의 경험을 간직하세요.
-            </Text>
-            <Pressable style={styles.myScreenFirstReviewButton}>
-              <Text style={{ fontSize: 15, fontWeight: '900', color: '#ffffff' }}>기록하기</Text>
-            </Pressable>
-          </MyscreenFirstReviewCover>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={fomatMyListData(myScreenFirstData)}
+            renderItem={renderFirstItem}
+            onScroll={(e) => {
+              handleNum(e.nativeEvent.contentOffset.y);
+            }}
+            onScrollEndDrag={() => setEnd(true)}
+            onScrollBeginDrag={() => setBegin(true)}
+            bounces={false}
+          />
         </>
       )}
     </View>

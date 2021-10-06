@@ -15,14 +15,14 @@ const MySecondList = () => {
   const [begin, setBegin] = useState(false);
 
   useEffect(() => {
-    if (num > 20) {
+    if (num > 50) {
       if (end && begin) {
         dispatch(changeScrollState('Up'));
         setEnd(false);
         setBegin(false);
       }
     }
-    if (num < 20) {
+    if (num < 50) {
       if (end && begin) {
         dispatch(changeScrollState('Down'));
         setEnd(false);
@@ -44,6 +44,28 @@ const MySecondList = () => {
       dataLeng++;
     }
     return data;
+  };
+
+  const renderFirstItem = ({ item }: { item: any }) => {
+    if (item.empty) {
+      return (
+        <View
+          style={{
+            width: Dimensions.get('window').width / 2 - 12,
+            height: 150,
+          }}
+        />
+      );
+    }
+    return (
+      <View style={{ width: '100%', height: '100%', alignItems: 'center' }}>
+        <Text style={{ fontSize: 20, fontWeight: '700', marginTop: 44 }}>가보고 싶어요</Text>
+        <Text style={{ fontSize: 15, fontWeight: '500', marginTop: 20 }}>
+          가게를 검색하고 북마트 버튼을 클릭 해보세요.
+        </Text>
+        <Text style={{ fontSize: 15, fontWeight: '500' }}>저장된 가게를 모아서 볼 수 있어요.</Text>
+      </View>
+    );
   };
 
   const renderItem = ({ item, index }: { item: any; index: number }) => {
@@ -177,15 +199,17 @@ const MySecondList = () => {
       )}
       {Object.keys(myScreenData2[0]).length === 0 && (
         <>
-          <View style={{ width: '100%', height: '100%', alignItems: 'center' }}>
-            <Text style={{ fontSize: 20, fontWeight: '700', marginTop: 44 }}>가보고 싶어요</Text>
-            <Text style={{ fontSize: 15, fontWeight: '500', marginTop: 20 }}>
-              가게를 검색하고 북마트 버튼을 클릭 해보세요.
-            </Text>
-            <Text style={{ fontSize: 15, fontWeight: '500' }}>
-              저장된 가게를 모아서 볼 수 있어요.
-            </Text>
-          </View>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={fomatMyListData(myScreenFirstData)}
+            renderItem={renderFirstItem}
+            onScroll={(e) => {
+              handleNum(e.nativeEvent.contentOffset.y);
+            }}
+            onScrollEndDrag={() => setEnd(true)}
+            onScrollBeginDrag={() => setBegin(true)}
+            bounces={false}
+          />
         </>
       )}
     </View>

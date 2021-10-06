@@ -16,6 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
+import { Tap } from './components';
 
 const HandleFavFoodImage = (name: any) => {
   let FavFoodImagePath;
@@ -99,30 +100,74 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
   const { scrollState } = useAppSelector((state) => state.profiles);
 
   const [scrollNum, setScrollNum] = useState(0);
+  const [scrollHeightNum, setScrollHeightNum] = useState(0);
+
+  const [translateValue] = useState(new Animated.Value(0));
+  const [scrollY] = useState(new Animated.Value(160));
+  const scrollHeightY = useState(new Animated.Value(230))[0];
+  const [width, setWidth] = useState(0);
+  const [toValue, setToValue] = useState(0);
 
   // 스크롤 이벤트
-  const scrollY = new Animated.Value(scrollNum);
+
   useEffect(() => {
-    if (scrollState === 'Up') {
-      setScrollNum(160);
-    }
     if (scrollState === 'Down') {
+      setScrollNum(160);
+      setScrollHeightNum(226);
+    }
+    if (scrollState === 'Up') {
       setScrollNum(0);
+      setScrollHeightNum(66);
     }
   }, [scrollState]);
 
-  const translateIosY = scrollY.interpolate({
-    inputRange: [0, 165],
-    outputRange: [165, 0],
-    extrapolateLeft: 'extend',
-    extrapolateRight: 'clamp',
-  });
-  const translateAndroidY = scrollY.interpolate({
-    inputRange: [0, 160],
-    outputRange: [160, 0],
-    extrapolateLeft: 'extend',
-    extrapolateRight: 'clamp',
-  });
+  useEffect(() => {
+    Animated.spring(scrollY, {
+      toValue: scrollNum,
+      damping: 100,
+      mass: 1,
+      stiffness: 100,
+      overshootClamping: true,
+      restDisplacementThreshold: 0.001,
+      restSpeedThreshold: 0.001,
+      useNativeDriver: true,
+    }).start();
+  }, [scrollY, scrollNum]);
+
+  useEffect(() => {
+    if (Platform.OS === 'ios') {
+      if (scrollState === 'Down') {
+        Animated.timing(scrollHeightY, {
+          toValue: scrollHeightNum,
+          duration: 0,
+          useNativeDriver: false,
+        }).start();
+      }
+      if (scrollState === 'Up') {
+        Animated.timing(scrollHeightY, {
+          toValue: scrollHeightNum,
+          duration: 500,
+          useNativeDriver: false,
+        }).start();
+      }
+    }
+    if (Platform.OS === 'android') {
+      if (scrollState === 'Down') {
+        Animated.timing(scrollHeightY, {
+          toValue: scrollHeightNum + 5,
+          duration: 0,
+          useNativeDriver: false,
+        }).start();
+      }
+      if (scrollState === 'Up') {
+        Animated.timing(scrollHeightY, {
+          toValue: scrollHeightNum + 5,
+          duration: 500,
+          useNativeDriver: false,
+        }).start();
+      }
+    }
+  }, [scrollHeightNum, scrollHeightY]);
 
   const MySreenHeader = () => {
     return (
@@ -130,11 +175,11 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
         style={{
           ...Platform.select({
             ios: {
-              transform: [{ translateY: translateIosY }],
+              transform: [{ translateY: scrollY }],
               top: -170,
             },
             android: {
-              transform: [{ translateY: translateAndroidY }],
+              transform: [{ translateY: scrollY }],
               top: -159,
             },
           }),
@@ -222,23 +267,35 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
   };
 
   const MyScreenTap = () => {
+    useEffect(() => {
+      Animated.spring(translateValue, {
+        toValue,
+        damping: 10,
+        mass: 1,
+        stiffness: 100,
+        overshootClamping: true,
+        restDisplacementThreshold: 0.001,
+        restSpeedThreshold: 0.001,
+        useNativeDriver: true,
+      }).start();
+    }, [state, translateValue, toValue]);
     return (
       <Animated.View
         style={{
           ...Platform.select({
             ios: {
-              transform: [{ translateY: translateIosY }],
+              transform: [{ translateY: scrollY }],
               top: -3.5,
             },
             android: {
-              transform: [{ translateY: translateAndroidY }],
+              transform: [{ translateY: scrollY }],
               top: 1,
             },
           }),
           position: 'absolute',
           left: 0,
           right: 0,
-          zIndex: 1000,
+          zIndex: 100,
         }}>
         <MyScreenFavInfoContainer>
           {state.routes &&
@@ -257,17 +314,24 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
                 }
               };
               return (
-                <Pressable onPress={() => onPress()} style={styles.myScreenFavInfoItem}>
-                  <Text style={styles.myScreenFavInfoNumber}>5</Text>
-                  {isFocused ? (
-                    <Text style={styles.myScreenFavInfoTouchText}>{label}</Text>
-                  ) : (
-                    <Text style={styles.myScreenFavInfoText}>{label}</Text>
-                  )}
-                </Pressable>
+                <Tap
+                  isFocused={isFocused}
+                  label={label}
+                  onPress={onPress}
+                  setToValue={setToValue}
+                  setWidth={setWidth}
+                />
               );
             })}
         </MyScreenFavInfoContainer>
+        <Animated.View
+          style={{
+            transform: [{ translateX: translateValue }],
+            backgroundColor: '#5d004a',
+            height: 2,
+            width,
+          }}
+        />
       </Animated.View>
     );
   };
@@ -289,18 +353,40 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
         <></>
       )}
       {scrollState === 'Down' && (
-        <DownWrapper>
+        <Animated.View
+          style={[
+            {
+              backgroundColor: '#fff',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+            },
+            {
+              height: scrollHeightY,
+            },
+          ]}>
           <MyScreenScrollContainer />
           <MySreenHeader />
           <MyScreenTap />
-        </DownWrapper>
+        </Animated.View>
       )}
       {scrollState === 'Up' && (
-        <UpWrapper>
+        <Animated.View
+          style={[
+            {
+              backgroundColor: '#fff',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+            },
+            {
+              height: scrollHeightY,
+            },
+          ]}>
           <MyScreenScrollContainer />
           <MySreenHeader />
           <MyScreenTap />
-        </UpWrapper>
+        </Animated.View>
       )}
     </SafeAreaView>
   );

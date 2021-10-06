@@ -33,14 +33,14 @@ const MyThirdList = () => {
   const [begin, setBegin] = useState(false);
 
   useEffect(() => {
-    if (num > 20) {
+    if (num > 50) {
       if (end && begin) {
         dispatch(changeScrollState('Up'));
         setEnd(false);
         setBegin(false);
       }
     }
-    if (num < 20) {
+    if (num < 50) {
       if (end && begin) {
         dispatch(changeScrollState('Down'));
         setEnd(false);
@@ -62,6 +62,43 @@ const MyThirdList = () => {
       dataLeng++;
     }
     return data;
+  };
+
+  const renderFirstItem = ({ item }: { item: any }) => {
+    if (item.empty) {
+      return (
+        <View
+          style={{
+            width: Dimensions.get('window').width / 2 - 12,
+            height: 150,
+          }}
+        />
+      );
+    }
+    return (
+      <MyscreenFirstReviewCover2>
+        <View style={styles.myscreenFirstReviewItem}>
+          <Image
+            style={{ width: 33, height: 45 }}
+            source={require(`../../assets/icons/best.png`)}
+          />
+        </View>
+        <Text style={{ marginTop: 11, fontSize: 20, fontWeight: '700' }}>
+          인생맛집을 남겨주세요
+        </Text>
+        <Text style={{ marginTop: 12, fontSize: 15, fontWeight: '500' }}>
+          여러분이 가장 좋은 경험을 하였던
+        </Text>
+        <Text style={{ fontSize: 15, fontWeight: '500', marginBottom: 30 }}>
+          최고의 맛집을 알려주세요.
+        </Text>
+        <Pressable style={styles.myScreenFirstReviewButton}>
+          <Text style={{ fontSize: 15, fontWeight: '900', color: '#ffffff' }}>
+            인생맛집 기록하기
+          </Text>
+        </Pressable>
+      </MyscreenFirstReviewCover2>
+    );
   };
 
   const renderItem = ({ item, index }: { item: any; index: number }) => {
@@ -194,28 +231,17 @@ const MyThirdList = () => {
         />
       )}
       {Object.keys(myScreenData3[0]).length === 0 && (
-        <MyscreenFirstReviewCover2>
-          <View style={styles.myscreenFirstReviewItem}>
-            <Image
-              style={{ width: 33, height: 45 }}
-              source={require(`../../assets/icons/best.png`)}
-            />
-          </View>
-          <Text style={{ marginTop: 11, fontSize: 20, fontWeight: '700' }}>
-            인생맛집을 남겨주세요
-          </Text>
-          <Text style={{ marginTop: 12, fontSize: 15, fontWeight: '500' }}>
-            여러분이 가장 좋은 경험을 하였던
-          </Text>
-          <Text style={{ fontSize: 15, fontWeight: '500', marginBottom: 30 }}>
-            최고의 맛집을 알려주세요.
-          </Text>
-          <Pressable style={styles.myScreenFirstReviewButton}>
-            <Text style={{ fontSize: 15, fontWeight: '900', color: '#ffffff' }}>
-              인생맛집 기록하기
-            </Text>
-          </Pressable>
-        </MyscreenFirstReviewCover2>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={fomatMyListData(myScreenFirstData)}
+          renderItem={renderFirstItem}
+          onScroll={(e) => {
+            handleNum(e.nativeEvent.contentOffset.y);
+          }}
+          onScrollEndDrag={() => setEnd(true)}
+          onScrollBeginDrag={() => setBegin(true)}
+          bounces={false}
+        />
       )}
     </View>
   );
