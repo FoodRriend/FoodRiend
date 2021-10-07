@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/native';
 import { Text, Pressable, StyleSheet, Image, View, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -8,12 +8,24 @@ import axios from 'axios';
 const LoginScreen: React.FC = () => {
   const navigation = useNavigation();
 
+  const [result, setResult] = useState<string>('');
+
+  const signInWithKakao = async (): Promise<void> => {
+    const token: KakaoOAuthToken = await login();
+
+    setResult(JSON.stringify(token));
+  };
+
   const onPress = async () => {
-    // const token: any = await login();
-    // console.log(token);
-    // const test = await axios.get();
+    // await signInWithKakao();
+    signInWithKakao();
     navigation.navigate('Terms');
   };
+
+  useEffect(() => {
+    // console.log(JSON.parse(result));
+  }, [result]);
+
   return (
     <Wrapper>
       <View style={styles.platformWrapper}>
