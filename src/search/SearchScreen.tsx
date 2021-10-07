@@ -3,6 +3,7 @@ import styled from '@emotion/native';
 
 import { Text, View, Pressable, StyleSheet, TextInput, Image, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
 const SearchScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -43,10 +44,14 @@ const SearchScreen: React.FC = () => {
   const handleSearchInput = useCallback(
     (e) => {
       setSearchInput(e);
-      console.log(e);
     },
     [searchInput],
   );
+
+  const onSubmitHandler = () => {
+    const URL = '/constants/mainSearchScreen.json';
+    axios.get(URL).then((res) => console.log(res));
+  };
 
   return (
     <Wrapper>
@@ -59,6 +64,7 @@ const SearchScreen: React.FC = () => {
           autoCapitalize={'none'}
           placeholder="음식점/ 닉네임 검색"
           value={searchInput}
+          onSubmitEditing={onSubmitHandler}
           onChangeText={handleSearchInput}
           style={styles.searchInputText}
         />

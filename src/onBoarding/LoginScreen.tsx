@@ -3,17 +3,29 @@ import styled from '@emotion/native';
 import { Text, Pressable, StyleSheet, Image, View, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { KakaoOAuthToken, login } from '@react-native-seoul/kakao-login';
+
 import axios from 'axios';
 
 const LoginScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const onPress = async () => {
-    // const token: any = await login();
-    // console.log(token);
-    // const test = await axios.get();
+    // try {
+    //   const result = await login();
+    //   console.log(result);
+    // } catch (e) {
+    //   console.log(e);
+    // }
+
+    // try {
+    //   await login().then((res) => console.log(res));
+    //   navigation.navigate('Terms');
+    // } catch (err) {
+    //   console.log(err);
+    // }
     navigation.navigate('Terms');
   };
+
   return (
     <Wrapper>
       <View style={styles.platformWrapper}>

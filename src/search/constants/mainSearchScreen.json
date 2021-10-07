@@ -1,0 +1,37 @@
+{
+  "data": {
+    "user": [
+      {
+        "userId": "number",
+        "name": "string",
+        "nickName": "string",
+        "profileImg": "string",
+        "foodType": "string",
+        "foodStyle": "string",
+        "commentCount": "number"
+      }
+    ],
+    "shop": [
+      {
+        "title": "string",
+        "mainImg": "string",
+        "foodCategory": "string",
+        "location": "string",
+        "relatedImg": "array",
+        "aveRating": "number",
+        "menu": "object",
+        "friends": [
+          {
+            "userId": "number",
+            "name": "string",
+            "nickName": "string",
+            "profileImg": "string",
+            "rating": "number",
+            "comments": "string"
+          }
+        ]
+      }
+    ]
+  },
+  "status": 200
+}
