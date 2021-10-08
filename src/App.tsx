@@ -27,7 +27,7 @@ import {
   MyPostReviewScreen,
   AlertScreen,
 } from './profile';
-import { SearchScreen } from './search';
+import { SearchScreen, ResultSearchScreen } from './search';
 import {
   SettingsScreen,
   AccountScreen,
@@ -164,9 +164,12 @@ const MyPageStackScreen = () => {
 // map 가게 상세정보
 const SearchStackScreen = () => {
   return (
-    <SearchStack.Navigator>
-      <SearchStack.Screen name="Search" component={SearchScreen} />
-    </SearchStack.Navigator>
+    <Provider store={store}>
+      <SearchStack.Navigator>
+        <SearchStack.Screen name="Search" component={SearchScreen} />
+        <SearchStack.Screen name="ResultSearch" component={ResultSearchScreen} />
+      </SearchStack.Navigator>
+    </Provider>
   );
 };
 

@@ -1,8 +1,12 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { fetchSearchData } from '@/redux/searchSlice';
+import SearchTextInput from './components/SearchTextInput';
 
 const SearchScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -38,81 +42,34 @@ const SearchScreen: React.FC = () => {
 
   headerStyle();
 
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState<string>('');
+  const dispatch = useAppDispatch();
 
-  const handleSearchInput = useCallback(
-    (e) => {
-      setSearchInput(e);
-      console.log(e);
-    },
-    [searchInput],
-  );
+  const handleSearchInput = useCallback((e: string) => {
+    setSearchInput(e);
+  }, []);
+
+  const onSubmitHandler = async () => {
+    setSearchInput('');
+    dispatch(fetchSearchData({ searchInput: searchInput }));
+    navigation.navigate('ResultSearch');
+  };
 
   return (
     <Wrapper>
-      <View style={styles.searchInputItem}>
-        <Image
-          source={require(`../assets/icons/search_gray.png`)}
-          style={styles.searchInputImage}
-        />
-        <TextInput
-          autoCapitalize={'none'}
-          placeholder="음식점/ 닉네임 검색"
-          value={searchInput}
-          onChangeText={handleSearchInput}
-          style={styles.searchInputText}
-        />
-      </View>
+      <SearchTextInput
+        searchInput={searchInput}
+        onSubmitHandler={onSubmitHandler}
+        handleSearchInput={handleSearchInput}
+        styleIosMargin={0}
+        styleAndroidMargin={0}
+        styleAndroidWidth={320}
+      />
     </Wrapper>
   );
 };
 
 export default SearchScreen;
-
-const styles = StyleSheet.create({
-  searchInputItem: {
-    ...Platform.select({
-      ios: {
-        width: 309,
-      },
-      android: {
-        width: 320,
-      },
-    }),
-    ...Platform.select({
-      ios: {
-        height: 37,
-      },
-      android: {
-        height: 41,
-      },
-    }),
-    borderRadius: 10,
-    backgroundColor: '#f0f0f0',
-    flexWrap: 'wrap',
-  },
-  searchInputImage: {
-    width: 16,
-    height: 16,
-    marginTop: 10,
-    marginLeft: 12,
-  },
-  searchInputText: {
-    width: '80%',
-    height: '100%',
-    marginLeft: 10,
-    fontSize: 14,
-    ...Platform.select({
-      ios: {
-        fontWeight: '500',
-      },
-      android: {
-        fontWeight: '600',
-      },
-    }),
-    color: '#2a3037',
-  },
-});
 
 const Wrapper = styled.View({
   paddingTop: 17,
