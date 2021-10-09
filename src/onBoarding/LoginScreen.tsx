@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/native';
-import { Text, Pressable, StyleSheet, Image, View, Platform } from 'react-native';
+import { Text, Pressable, StyleSheet, Image, View, Platform, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { KakaoOAuthToken, login } from '@react-native-seoul/kakao-login';
 import axios from 'axios';
@@ -66,13 +66,24 @@ const LoginScreen: React.FC = () => {
             source={require('../assets/images/onBoading/login/loginImage6.png')}
             style={styles.loginImage6}
           />
-          <Pressable onPress={onPress}>
+
+          <TouchableOpacity onPress={onPress}>
             <Image
               source={require('../assets/images/onBoading/login/kakao_login.png')}
               style={styles.kakaoLoginBtn}
               resizeMode="contain"
             />
-          </Pressable>
+          </TouchableOpacity>
+
+          <Image
+            source={require('../assets/images/onBoading/login/Rectangle.png')}
+            style={{
+              width: '95%',
+              height: 95,
+              position: 'absolute',
+              bottom: 83,
+            }}
+          />
         </LoginImageContainer>
       </View>
     </Wrapper>
@@ -174,11 +185,14 @@ const Wrapper = styled.View({
   alignContent: 'center',
   justifyContent: 'center',
   alignItems: 'center',
+  backgroundColor: '#fff',
 });
 
 const LoginTitleContainer = styled.View({
   // paddingTop: 80,
+  width: '60%',
   paddingLeft: 18,
+  backgroundColor: '#fff',
 });
 
 const LoginImageContainer = styled.View({

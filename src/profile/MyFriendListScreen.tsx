@@ -10,36 +10,47 @@ import {
   Image,
   FlatList,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const MyFriendListScreen: React.FC  = () => {
+const MyFriendListScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
     navigation.setOptions({
       headerShown: true,
       title: '친구 목록',
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        ...Platform.select({
+          ios: {
+            fontWeight: '600',
+            fontSize: 17,
+          },
+          android: {
+            fontWeight: 'bold',
+            fontSize: 15,
+          },
+        }),
+      },
+      headerStyle: {
+        ...Platform.select({
+          android: {
+            borderWidth: 0.8,
+          },
+        }),
+        borderColor: '#dfe2e5',
+      },
       headerLeft: () => (
-        <Pressable
+        <TouchableOpacity
           style={styles.BackIcon}
           onPress={() => {
             navigation.navigate('MyPage');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
+        </TouchableOpacity>
       ),
-      headerTitleAlign: 'center',
-      headerStyle: {
-        ...Platform.select({
-          ios: {
-            borderBottomWidth: 0,
-          },
-          android: {
-            borderBottomWidth: 0.3,
-          },
-        }),
-      },
     });
   };
 

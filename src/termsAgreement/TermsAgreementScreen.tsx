@@ -10,12 +10,13 @@ import {
   Image,
   FlatList,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-const TermsAgreementScreen: React.FC  = () => {
+const TermsAgreementScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
@@ -44,13 +45,13 @@ const TermsAgreementScreen: React.FC  = () => {
         borderColor: '#dfe2e5',
       },
       headerLeft: () => (
-        <Pressable
+        <TouchableOpacity
           style={styles.backIcon}
           onPress={() => {
             navigation.navigate('Login');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
+        </TouchableOpacity>
       ),
     });
   };
@@ -170,13 +171,13 @@ const TermsAgreementScreen: React.FC  = () => {
       </TermsContentContainer>
       <TermsButtonContainer>
         {checkBtn ? (
-          <Pressable
+          <TouchableOpacity
             onPress={() => {
               navigation.navigate('Signup');
             }}
             style={styles.termsButtenTrueItem}>
             <Text style={styles.termsButtenText}>다음</Text>
-          </Pressable>
+          </TouchableOpacity>
         ) : (
           <Pressable style={styles.termsButtenFalseItem}>
             <Text style={styles.termsButtenText}>다음</Text>

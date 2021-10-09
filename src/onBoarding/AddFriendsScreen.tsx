@@ -1,7 +1,16 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, StyleSheet, Image, Pressable, FlatList, Platform } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Pressable,
+  FlatList,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const AddFriendsScreen: React.FC = () => {
@@ -33,13 +42,13 @@ const AddFriendsScreen: React.FC = () => {
         borderColor: '#dfe2e5',
       },
       headerLeft: () => (
-        <Pressable
+        <TouchableOpacity
           style={styles.BackIcon}
           onPress={() => {
             navigation.navigate('AddFavFood');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
+        </TouchableOpacity>
       ),
     });
   };
@@ -140,23 +149,23 @@ const AddFriendsScreen: React.FC = () => {
           </AddFriendsInfo>
           <FriendButtonItem>
             {friendChecked1 ? (
-              <Pressable
+              <TouchableOpacity
                 onPress={() => {
                   setFriendChecked1(false);
                 }}>
                 <View style={styles.friendButtonChecked}>
                   <Text style={styles.friendButtonCheckedText}>요청완료</Text>
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             ) : (
-              <Pressable
+              <TouchableOpacity
                 onPress={() => {
                   setFriendChecked1(true);
                 }}>
                 <View style={styles.friendButtonUnChecked}>
                   <Text style={styles.friendButtonUnCheckedText}>친구요청</Text>
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             )}
           </FriendButtonItem>
         </AddFriendsItems>
@@ -186,23 +195,23 @@ const AddFriendsScreen: React.FC = () => {
           </AddFriendsInfo>
           <FriendButtonItem>
             {friendChecked2 ? (
-              <Pressable
+              <TouchableOpacity
                 onPress={() => {
                   setFriendChecked2(false);
                 }}>
                 <View style={styles.friendButtonChecked}>
                   <Text style={styles.friendButtonCheckedText}>요청완료</Text>
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             ) : (
-              <Pressable
+              <TouchableOpacity
                 onPress={() => {
                   setFriendChecked2(true);
                 }}>
                 <View style={styles.friendButtonUnChecked}>
                   <Text style={styles.friendButtonUnCheckedText}>친구요청</Text>
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             )}
           </FriendButtonItem>
         </AddFriendsItems>
@@ -232,23 +241,23 @@ const AddFriendsScreen: React.FC = () => {
           </AddFriendsInfo>
           <FriendButtonItem>
             {friendChecked3 ? (
-              <Pressable
+              <TouchableOpacity
                 onPress={() => {
                   setFriendChecked3(false);
                 }}>
                 <View style={styles.friendButtonChecked}>
                   <Text style={styles.friendButtonCheckedText}>요청완료</Text>
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             ) : (
-              <Pressable
+              <TouchableOpacity
                 onPress={() => {
                   setFriendChecked3(true);
                 }}>
                 <View style={styles.friendButtonUnChecked}>
                   <Text style={styles.friendButtonUnCheckedText}>친구요청</Text>
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             )}
           </FriendButtonItem>
         </AddFriendsItems>
@@ -278,23 +287,23 @@ const AddFriendsScreen: React.FC = () => {
           </AddFriendsInfo>
           <FriendButtonItem>
             {friendChecked4 ? (
-              <Pressable
+              <TouchableOpacity
                 onPress={() => {
                   setFriendChecked4(false);
                 }}>
                 <View style={styles.friendButtonChecked}>
                   <Text style={styles.friendButtonCheckedText}>요청완료</Text>
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             ) : (
-              <Pressable
+              <TouchableOpacity
                 onPress={() => {
                   setFriendChecked4(true);
                 }}>
                 <View style={styles.friendButtonUnChecked}>
                   <Text style={styles.friendButtonUnCheckedText}>친구요청</Text>
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             )}
           </FriendButtonItem>
         </AddFriendsItems>
@@ -324,23 +333,23 @@ const AddFriendsScreen: React.FC = () => {
           </AddFriendsInfo>
           <FriendButtonItem>
             {friendChecked5 ? (
-              <Pressable
+              <TouchableOpacity
                 onPress={() => {
                   setFriendChecked5(false);
                 }}>
                 <View style={styles.friendButtonChecked}>
                   <Text style={styles.friendButtonCheckedText}>요청완료</Text>
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             ) : (
-              <Pressable
+              <TouchableOpacity
                 onPress={() => {
                   setFriendChecked5(true);
                 }}>
                 <View style={styles.friendButtonUnChecked}>
                   <Text style={styles.friendButtonUnCheckedText}>친구요청</Text>
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             )}
           </FriendButtonItem>
         </AddFriendsItems>
@@ -366,23 +375,23 @@ const AddFriendsScreen: React.FC = () => {
         </AddFriendsInfo>
         <FriendButtonItem>
           {friendChecked6 ? (
-            <Pressable
+            <TouchableOpacity
               onPress={() => {
                 setFriendChecked6(false);
               }}>
               <View style={styles.friendButtonChecked}>
                 <Text style={styles.friendButtonCheckedText}>요청완료</Text>
               </View>
-            </Pressable>
+            </TouchableOpacity>
           ) : (
-            <Pressable
+            <TouchableOpacity
               onPress={() => {
                 setFriendChecked6(true);
               }}>
               <View style={styles.friendButtonUnChecked}>
                 <Text style={styles.friendButtonUnCheckedText}>친구요청</Text>
               </View>
-            </Pressable>
+            </TouchableOpacity>
           )}
         </FriendButtonItem>
       </AddFriendsItems>
@@ -417,27 +426,27 @@ const AddFriendsScreen: React.FC = () => {
               <Text style={styles.phoneNumberItemTitle}>연락처 연결</Text>
               <Text style={styles.phoneNumberItemcontent}>내 친구를 연결해보세요</Text>
             </View>
-            <Pressable style={styles.phoneNumberButton}>
+            <TouchableOpacity style={styles.phoneNumberButton}>
               <Text style={styles.phoneNumberButtonText}>연결</Text>
-            </Pressable>
+            </TouchableOpacity>
           </PhoneNumberConnectItem>
         </PhoneNumberConnectContainer>
       </AddFriendsContainer>
       <AddFriendsButton>
-        <Pressable
+        <TouchableOpacity
           onPress={() => {
             navigation.navigate('SignupComplete');
           }}
           style={styles.addFriendsButton}>
           <Text style={styles.addFriendsButtonText}>다음에 하기</Text>
-        </Pressable>
-        <Pressable
+        </TouchableOpacity>
+        <TouchableOpacity
           onPress={() => {
             navigation.navigate('SignupComplete');
           }}
           style={styles.addFriendsButton}>
           <Text style={styles.addFriendsButtonText}>완료</Text>
-        </Pressable>
+        </TouchableOpacity>
       </AddFriendsButton>
     </Wrapper>
   );

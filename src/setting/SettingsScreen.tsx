@@ -10,10 +10,11 @@ import {
   Image,
   FlatList,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const SettingsScreen: React.FC  = () => {
+const SettingsScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
@@ -42,13 +43,13 @@ const SettingsScreen: React.FC  = () => {
         borderColor: '#dfe2e5',
       },
       headerLeft: () => (
-        <Pressable
+        <TouchableOpacity
           style={styles.backIcon}
           onPress={() => {
             navigation.navigate('MyPage');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
+        </TouchableOpacity>
       ),
     });
   };
@@ -65,12 +66,12 @@ const SettingsScreen: React.FC  = () => {
             marginTop: 17,
             justifyContent: 'center',
           }}>
-          <Pressable
+          <TouchableOpacity
             onPress={() => navigation.navigate('Account')}
             style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
             <Text style={styles.mySettingCatagory}>계정</Text>
             <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </MySettingTopCover>
       <View
@@ -80,12 +81,12 @@ const SettingsScreen: React.FC  = () => {
           marginTop: 13,
           backgroundColor: '#fff',
         }}>
-        <Pressable
+        <TouchableOpacity
           onPress={() => navigation.navigate('SettingAlert')}
           style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <Text style={styles.mySettingCatagory}>알림</Text>
           <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
-        </Pressable>
+        </TouchableOpacity>
       </View>
       <View
         style={{
@@ -96,12 +97,12 @@ const SettingsScreen: React.FC  = () => {
           borderBottomColor: '#dfe2e5',
           borderBottomWidth: 0.6,
         }}>
-        <Pressable
+        <TouchableOpacity
           onPress={() => navigation.navigate('Notice')}
           style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <Text style={styles.mySettingCatagory}>공지사항</Text>
           <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
-        </Pressable>
+        </TouchableOpacity>
       </View>
       <View
         style={{
@@ -111,12 +112,12 @@ const SettingsScreen: React.FC  = () => {
           borderBottomColor: '#dfe2e5',
           borderBottomWidth: 0.6,
         }}>
-        <Pressable
+        <TouchableOpacity
           onPress={() => navigation.navigate('CustomerService')}
           style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <Text style={styles.mySettingCatagory}>고객센터</Text>
           <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
-        </Pressable>
+        </TouchableOpacity>
       </View>
       <View
         style={{
@@ -124,10 +125,10 @@ const SettingsScreen: React.FC  = () => {
           height: 50,
           backgroundColor: '#fff',
         }}>
-        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+        <TouchableOpacity style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <Text style={styles.mySettingCatagory}>도움말</Text>
           <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
-        </Pressable>
+        </TouchableOpacity>
       </View>
       <MySettingBottomCover>
         <View
@@ -137,12 +138,12 @@ const SettingsScreen: React.FC  = () => {
             borderBottomColor: '#dfe2e5',
             borderBottomWidth: 0.6,
           }}>
-          <Pressable
+          <TouchableOpacity
             onPress={() => navigation.navigate('TermsPolicy')}
             style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
             <Text style={styles.mySettingCatagory}>약관 및 정책</Text>
             <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
-          </Pressable>
+          </TouchableOpacity>
         </View>
         <View
           style={{
@@ -151,20 +152,20 @@ const SettingsScreen: React.FC  = () => {
             borderBottomColor: '#dfe2e5',
             borderBottomWidth: 0.6,
           }}>
-          <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+          <TouchableOpacity style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
             <Text style={styles.mySettingCatagory}>접근권한 설정</Text>
             <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
-          </Pressable>
+          </TouchableOpacity>
         </View>
         <View
           style={{
             width: '100%',
             height: 50,
           }}>
-          <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+          <TouchableOpacity style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
             <Text style={styles.mySettingCatagory}>정보</Text>
             <Image source={require('../assets/icons/click.png')} style={styles.mySettingButton} />
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </MySettingBottomCover>
     </View>

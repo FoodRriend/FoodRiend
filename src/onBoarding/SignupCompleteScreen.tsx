@@ -10,6 +10,7 @@ import {
   Button,
   Pressable,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -71,13 +72,13 @@ const SignupCompleteScreen: React.FC = () => {
           <Text style={styles.signupEndContent}>맛있는 순간을 함께 해요!</Text>
         </View>
       </SignupEndTextContainer>
-      <Pressable
+      <TouchableOpacity
         onPress={() => {
           navigation.navigate('Feed');
         }}
         style={styles.signupEndButton}>
         <Text style={styles.signupEndButtonText}>이용하러 가기</Text>
-      </Pressable>
+      </TouchableOpacity>
     </Wrapper>
   );
 };

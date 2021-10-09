@@ -30,24 +30,21 @@ const MyThirdList = () => {
 
   const [num, setNum] = useState(0);
   const [end, setEnd] = useState(false);
-  const [begin, setBegin] = useState(false);
 
   useEffect(() => {
-    if (num > 50) {
-      if (end && begin) {
+    if (num > 20) {
+      if (end) {
         dispatch(changeScrollState('Up'));
         setEnd(false);
-        setBegin(false);
       }
     }
-    if (num < 50) {
-      if (end && begin) {
+    if (num < 20) {
+      if (end) {
         dispatch(changeScrollState('Down'));
         setEnd(false);
-        setBegin(false);
       }
     }
-  }, [num, end, begin]);
+  }, [num, end]);
 
   const handleNum = (state: number) => {
     let numstate = Math.round(state);
@@ -92,11 +89,11 @@ const MyThirdList = () => {
         <Text style={{ fontSize: 15, fontWeight: '500', marginBottom: 30 }}>
           최고의 맛집을 알려주세요.
         </Text>
-        <Pressable style={styles.myScreenFirstReviewButton}>
+        <TouchableOpacity style={styles.myScreenFirstReviewButton}>
           <Text style={{ fontSize: 15, fontWeight: '900', color: '#ffffff' }}>
             인생맛집 기록하기
           </Text>
-        </Pressable>
+        </TouchableOpacity>
       </MyscreenFirstReviewCover2>
     );
   };
@@ -116,37 +113,42 @@ const MyThirdList = () => {
       return (
         <View style={styles.myScreenRestaurantCover}>
           <View style={{ width: '100%', height: 37, justifyContent: 'center' }} />
-          <View style={{ width: 160 }}>
-            <Image
-              style={{ width: '100%', height: 153, borderRadius: 16 }}
-              source={require(`../../assets/images/profile/Rectangle1.png`)}
-            />
-            <View style={{ flexWrap: 'wrap' }}>
-              <View style={{ width: '70%' }}>
-                <Text style={styles.myScreenRestaurantAddress}>{item.address}</Text>
-                {item.name.length > 7 ? (
-                  <Text style={styles.myScreenRestaurantName}>{`${item.name.slice(0, 6)}...`}</Text>
-                ) : (
-                  <Text style={styles.myScreenRestaurantName}>{item.name}</Text>
-                )}
-                <View style={styles.myScreenRestaurantContent}>
-                  <Image
-                    style={{ width: 20, height: 20, marginLeft: 2 }}
-                    source={require(`../../assets/icons/star.png`)}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      fontWeight: '500',
-                      color: '#2A3037',
-                      marginLeft: 3,
-                    }}>
-                    {item.score}
-                  </Text>
+          <TouchableOpacity>
+            <View style={{ width: 160 }}>
+              <Image
+                style={{ width: '100%', height: 153, borderRadius: 16 }}
+                source={require(`../../assets/images/profile/Rectangle1.png`)}
+              />
+              <View style={{ flexWrap: 'wrap' }}>
+                <View style={{ width: '70%' }}>
+                  <Text style={styles.myScreenRestaurantAddress}>{item.address}</Text>
+                  {item.name.length > 7 ? (
+                    <Text style={styles.myScreenRestaurantName}>{`${item.name.slice(
+                      0,
+                      6,
+                    )}...`}</Text>
+                  ) : (
+                    <Text style={styles.myScreenRestaurantName}>{item.name}</Text>
+                  )}
+                  <View style={styles.myScreenRestaurantContent}>
+                    <Image
+                      style={{ width: 20, height: 20, marginLeft: 2 }}
+                      source={require(`../../assets/icons/star.png`)}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        fontWeight: '500',
+                        color: '#2A3037',
+                        marginLeft: 3,
+                      }}>
+                      {item.score}
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
       );
     }
@@ -154,10 +156,47 @@ const MyThirdList = () => {
       return (
         <View style={styles.myScreenRestaurantCover}>
           <View style={{ width: '100%', height: 37 }}></View>
+          <TouchableOpacity>
+            <View style={{ width: 160 }}>
+              <Image
+                style={{ width: '100%', height: 153, borderRadius: 16 }}
+                source={require(`../../assets/images/profile/Rectangle1.png`)}
+              />
+              <View style={{ flexWrap: 'wrap' }}>
+                <View style={{ width: '70%' }}>
+                  <Text style={styles.myScreenRestaurantAddress}>{item.address}</Text>
+                  {item.name.length > 7 ? (
+                    <Text style={styles.myScreenRestaurantName}>{`${item.name.slice(
+                      0,
+                      6,
+                    )}...`}</Text>
+                  ) : (
+                    <Text style={styles.myScreenRestaurantName}>{item.name}</Text>
+                  )}
+                  <View style={styles.myScreenRestaurantContent}>
+                    <Image
+                      style={{ width: 20, height: 20, marginLeft: 2 }}
+                      source={require(`../../assets/icons/star.png`)}
+                    />
+                    <Text
+                      style={{ fontSize: 12, fontWeight: '500', color: '#2A3037', marginLeft: 3 }}>
+                      {item.score}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+    return (
+      <View style={styles.myScreenRestaurantCover}>
+        <TouchableOpacity>
           <View style={{ width: 160 }}>
             <Image
               style={{ width: '100%', height: 153, borderRadius: 16 }}
-              source={require(`../../assets/images/profile/Rectangle1.png`)}
+              source={require(`../../assets/images/profile/Rectangle3.png`)}
             />
             <View style={{ flexWrap: 'wrap' }}>
               <View style={{ width: '70%' }}>
@@ -180,36 +219,7 @@ const MyThirdList = () => {
               </View>
             </View>
           </View>
-        </View>
-      );
-    }
-    return (
-      <View style={styles.myScreenRestaurantCover}>
-        <View style={{ width: 160 }}>
-          <Image
-            style={{ width: '100%', height: 153, borderRadius: 16 }}
-            source={require(`../../assets/images/profile/Rectangle3.png`)}
-          />
-          <View style={{ flexWrap: 'wrap' }}>
-            <View style={{ width: '70%' }}>
-              <Text style={styles.myScreenRestaurantAddress}>{item.address}</Text>
-              {item.name.length > 7 ? (
-                <Text style={styles.myScreenRestaurantName}>{`${item.name.slice(0, 6)}...`}</Text>
-              ) : (
-                <Text style={styles.myScreenRestaurantName}>{item.name}</Text>
-              )}
-              <View style={styles.myScreenRestaurantContent}>
-                <Image
-                  style={{ width: 20, height: 20, marginLeft: 2 }}
-                  source={require(`../../assets/icons/star.png`)}
-                />
-                <Text style={{ fontSize: 12, fontWeight: '500', color: '#2A3037', marginLeft: 3 }}>
-                  {item.score}
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -226,7 +236,6 @@ const MyThirdList = () => {
             handleNum(e.nativeEvent.contentOffset.y);
           }}
           onScrollEndDrag={() => setEnd(true)}
-          onScrollBeginDrag={() => setBegin(true)}
           bounces={false}
         />
       )}
@@ -239,7 +248,6 @@ const MyThirdList = () => {
             handleNum(e.nativeEvent.contentOffset.y);
           }}
           onScrollEndDrag={() => setEnd(true)}
-          onScrollBeginDrag={() => setBegin(true)}
           bounces={false}
         />
       )}

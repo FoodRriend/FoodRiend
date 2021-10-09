@@ -10,6 +10,7 @@ import {
   FlatList,
   Dimensions,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import favFoodData from './constants/FavFoodData';
@@ -66,24 +67,24 @@ const AddFavFoodScreen: React.FC = () => {
         borderColor: '#dfe2e5',
       },
       headerLeft: () => (
-        <Pressable
+        <TouchableOpacity
           style={styles.backIcon}
           onPress={() => {
             navigation.navigate('AddStyle');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
+        </TouchableOpacity>
       ),
       headerRight: () => (
         <>
           {foodSelect ? (
-            <Pressable
+            <TouchableOpacity
               style={styles.rightIcon}
               onPress={() => {
                 navigation.navigate('AddFriends');
               }}>
               <Image source={require(`../assets/icons/RightVector.png`)}></Image>
-            </Pressable>
+            </TouchableOpacity>
           ) : (
             <Pressable
               style={styles.rightIcon}
@@ -175,10 +176,10 @@ const AddFavFoodScreen: React.FC = () => {
       );
     }
     return (
-      <Pressable style={styles.favFoodItem} onPress={() => handleFavFood(item.title)}>
+      <TouchableOpacity style={styles.favFoodItem} onPress={() => handleFavFood(item.title)}>
         <View style={styles.itemImage}>{HandleFavFoodImage(item.title)}</View>
         <Text style={styles.itemLargeText}>{item.title}</Text>
-      </Pressable>
+      </TouchableOpacity>
     );
   };
 

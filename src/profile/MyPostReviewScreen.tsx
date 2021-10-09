@@ -10,6 +10,8 @@ import {
   FlatList,
   Animated,
   Platform,
+  TouchableOpacity,
+  Touchable,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -73,10 +75,13 @@ const FriendPostReviewScreen: React.FC = () => {
         {index === 0 ? <View style={{ width: '100%', height: 50 }}></View> : <></>}
         <MyReviewContainer>
           <MyReviewProfileItem>
-            <Image
-              source={require(`../assets/images/onBoading/friends/friend6.png`)}
-              style={{ width: 48, height: 48 }}
-            />
+            <TouchableOpacity>
+              <Image
+                source={require(`../assets/images/onBoading/friends/friend6.png`)}
+                style={{ width: 48, height: 48 }}
+              />
+            </TouchableOpacity>
+
             <View
               style={{
                 width: 250,
@@ -96,30 +101,36 @@ const FriendPostReviewScreen: React.FC = () => {
                 />
               </View>
             </View>
-            <Pressable style={styles.myReviewShareButton}>
+            <TouchableOpacity style={styles.myReviewShareButton}>
               <Image
                 source={require(`../assets/icons/share.png`)}
                 style={{ width: 20, height: 18 }}
               />
-            </Pressable>
+            </TouchableOpacity>
           </MyReviewProfileItem>
           <MyReviewRestaurantItem>
-            <Image
-              source={require(`../assets/images/profile/Rectangle5.png`)}
-              style={{ width: 187, height: 187, borderRadius: 15 }}
-            />
+            <TouchableOpacity>
+              <Image
+                source={require(`../assets/images/profile/Rectangle5.png`)}
+                style={{ width: 187, height: 187, borderRadius: 15 }}
+              />
+            </TouchableOpacity>
+
             <View style={{ width: 173, height: 187, paddingLeft: 7 }}>
               <View style={styles.MyReviewRestaurantBox}>
                 <Text style={styles.myReviewRestaurantTitle}>{item.title}</Text>
-                <Pressable style={styles.MyReviewRestaurantShare}>
+                <TouchableOpacity style={styles.MyReviewRestaurantShare}>
                   <Image
                     source={require(`../assets/icons/dot.png`)}
                     style={{ width: 18, height: 18 }}
                   />
-                </Pressable>
+                </TouchableOpacity>
               </View>
-              <Text style={styles.myReviewRestaurantAdress}>{item.adress}</Text>
-              <Text style={styles.myReviewRestaurantTag}>{item.tag}</Text>
+              <TouchableOpacity>
+                <Text style={styles.myReviewRestaurantAdress}>{item.adress}</Text>
+                <Text style={styles.myReviewRestaurantTag}>{item.tag}</Text>
+              </TouchableOpacity>
+
               <View style={{ width: 40, height: 20, flexWrap: 'wrap', marginTop: 10 }}>
                 <Image
                   source={require(`../assets/icons/star.png`)}
@@ -139,6 +150,20 @@ const FriendPostReviewScreen: React.FC = () => {
 
   return (
     <Wrapper>
+      {Platform.OS === 'ios' ? (
+        <View
+          style={{
+            width: '100%',
+            height: 44,
+            backgroundColor: '#fff',
+            position: 'absolute',
+            top: 0,
+            zIndex: 999,
+          }}
+        />
+      ) : (
+        <></>
+      )}
       <View
         style={{
           zIndex: 200,
@@ -181,13 +206,13 @@ const FriendPostReviewScreen: React.FC = () => {
             },
           }),
         }}>
-        <Pressable
+        <TouchableOpacity
           style={styles.BackIcon}
           onPress={() => {
             navigation.navigate('MyPage');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
+        </TouchableOpacity>
       </Animated.View>
       <FlatList
         showsVerticalScrollIndicator={false}

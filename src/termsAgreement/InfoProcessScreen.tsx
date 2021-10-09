@@ -10,10 +10,11 @@ import {
   Image,
   FlatList,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const InfoProcessScreen: React.FC  = () => {
+const InfoProcessScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
@@ -42,13 +43,13 @@ const InfoProcessScreen: React.FC  = () => {
         borderColor: '#dfe2e5',
       },
       headerLeft: () => (
-        <Pressable
+        <TouchableOpacity
           style={styles.backIcon}
           onPress={() => {
             navigation.navigate('TermsPolicy');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
+        </TouchableOpacity>
       ),
     });
   };
