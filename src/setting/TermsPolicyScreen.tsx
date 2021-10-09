@@ -10,6 +10,7 @@ import {
   Image,
   FlatList,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -42,13 +43,13 @@ const TermsPolicyScreen: React.FC = () => {
         borderColor: '#dfe2e5',
       },
       headerLeft: () => (
-        <Pressable
+        <TouchableOpacity
           style={styles.backIcon}
           onPress={() => {
             navigation.navigate('Setting');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
+        </TouchableOpacity>
       ),
     });
   };
@@ -66,7 +67,7 @@ const TermsPolicyScreen: React.FC = () => {
           borderBottomWidth: 0.6,
           marginTop: 32,
         }}>
-        <Pressable
+        <TouchableOpacity
           onPress={() => {
             navigation.navigate('TermsDetail');
           }}
@@ -82,7 +83,7 @@ const TermsPolicyScreen: React.FC = () => {
             <Text style={styles.termsPolicyCatagory}>이용약관</Text>
           </View>
           <Image source={require('../assets/icons/click.png')} style={styles.termsPolicyButton} />
-        </Pressable>
+        </TouchableOpacity>
       </View>
       <View
         style={{
@@ -92,14 +93,14 @@ const TermsPolicyScreen: React.FC = () => {
           borderBottomColor: '#dfe2e5',
           borderBottomWidth: 0.6,
         }}>
-        <Pressable
+        <TouchableOpacity
           onPress={() => {
             navigation.navigate('InfoProcess');
           }}
           style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <Text style={styles.termsPolicyCatagory}>개인정보 처리방침</Text>
           <Image source={require('../assets/icons/click.png')} style={styles.termsPolicyButton} />
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   );

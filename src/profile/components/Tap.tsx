@@ -10,6 +10,7 @@ import {
   Platform,
   Animated,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 
 interface ITab {
@@ -35,14 +36,17 @@ const Tap = ({ isFocused, label, onPress, setToValue, setWidth }: ITab) => {
     setLayout({ x, width });
   };
   return (
-    <Pressable onLayout={onLayout} onPress={() => onPress()} style={styles.myScreenFavInfoItem}>
+    <TouchableOpacity
+      onLayout={onLayout}
+      onPress={() => onPress()}
+      style={styles.myScreenFavInfoItem}>
       <Text style={styles.myScreenFavInfoNumber}>5</Text>
       {isFocused ? (
         <Text style={styles.myScreenFavInfoTouchText}>{label}</Text>
       ) : (
         <Text style={styles.myScreenFavInfoText}>{label}</Text>
       )}
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 

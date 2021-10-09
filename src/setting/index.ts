@@ -5,3 +5,4 @@ export { default as TermsPolicyScreen } from './TermsPolicyScreen';
 export { default as CustomerServiceScreen } from './CustomerServiceScreen';
 export { default as NoticeScreen } from './NoticeScreen';
 export { default as NoticeDetailScreen } from './NoticeDetailScreen';
+export { default as WithdrawalScreen } from './WithdrawalScreen';

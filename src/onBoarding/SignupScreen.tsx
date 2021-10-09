@@ -1,7 +1,16 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image, Platform } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Image,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
@@ -36,13 +45,13 @@ const SignupScreen: React.FC = () => {
         borderColor: '#dfe2e5',
       },
       headerLeft: () => (
-        <Pressable
+        <TouchableOpacity
           style={styles.BackIcon}
           onPress={() => {
             navigation.navigate('Login');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
+        </TouchableOpacity>
       ),
     });
   };
@@ -55,42 +64,82 @@ const SignupScreen: React.FC = () => {
   const [inputNickname, setInputNickname] = useState('');
 
   const [inputCheck, setInputCheck] = useState(false);
-  const [inputEmptyCheck, setInputEmptyCheck] = useState(false);
-
-  const onPress = () => {
-    navigation.navigate('AddStyle');
-    dispatch(addNickname(inputNickname));
-  };
+  const [denyMessage, setDenyMessage] = useState('');
 
   const handleInputID = useCallback(
     (e) => {
       setInputID(e);
-      console.log(e);
     },
     [inputID],
   );
 
   const handleInputNickname = useCallback(
     (e) => {
-      setInputNickname(e);
-      console.log(e);
+      let lower = e.toLowerCase();
+      setInputNickname(lower);
     },
     [inputNickname],
   );
 
   useEffect(() => {
-    if (inputNickname.length > 0) {
-      setInputCheck(true);
-      setInputEmptyCheck(false);
-    } else {
-      setInputEmptyCheck(true);
-      setInputCheck(false);
-    }
+    handleCheckForm(inputNickname);
   }, [inputNickname]);
 
   useEffect(() => {
-    setInputEmptyCheck(false);
+    if (inputNickname === null || inputNickname === '') {
+      setDenyMessage('');
+    }
   }, []);
+
+  const checkNicknameLeng = useCallback(
+    (nickname) => {
+      let nickLength = 0;
+      for (let i = 0; i < nickname.length; i++) {
+        let nick = nickname.charAt(i);
+        if (escape(nick).length > 4) {
+          nickLength += 2;
+        } else {
+          nickLength += 1;
+        }
+      }
+      return nickLength;
+    },
+    [inputNickname],
+  );
+
+  const handleCheckForm = (nickname: string) => {
+    if (/^[가-힣a-z0-9_.]+$/.test(nickname)) {
+      if (checkNicknameLeng(nickname) >= 3 && checkNicknameLeng(nickname) <= 12) {
+        setInputCheck(true);
+        setDenyMessage('닉네임을 사용할 수 있습니다.');
+      } else {
+        setInputCheck(false);
+        setDenyMessage('닉네임은 한글, 영문, 숫자, 밑줄, 마침표만 가능합니다.');
+      }
+    } else {
+      if (inputNickname === null || inputNickname === '') {
+        setInputCheck(false);
+        setDenyMessage(`닉네임을 입력해주세요.`);
+      } else if (/[`~!@#$%^&*|\\\'\";:\/?]/gi.test(nickname)) {
+        setInputCheck(false);
+        setDenyMessage(`닉네임은 한글, 영문, 숫자, 밑줄, 마침표만 가능합니다.`);
+      } else if (/[A-Z]/.test(nickname)) {
+        setInputCheck(false);
+        setDenyMessage(`닉네임은 한글, 영문, 숫자, 밑줄, 마침표만 가능합니다.`);
+      } else if (/[ㄱ-ㅎ|ㅏ-ㅣ]/.test(nickname)) {
+        setInputCheck(false);
+        setDenyMessage(`닉네임은 한글, 영문, 숫자, 밑줄, 마침표만 가능합니다.`);
+      } else if (nickname.search(/\s/) != -1) {
+        setInputCheck(false);
+        setDenyMessage(`닉네임은 한글, 영문, 숫자, 밑줄, 마침표만 가능합니다.`);
+      }
+    }
+  };
+
+  const onPress = () => {
+    navigation.navigate('AddStyle');
+    dispatch(addNickname(inputNickname));
+  };
 
   return (
     <Wrapper>
@@ -129,26 +178,16 @@ const SignupScreen: React.FC = () => {
         </View>
       </InputContainer>
       <View style={styles.inputValidity}>
-        {inputEmptyCheck ? (
-          <Text style={styles.inputEmptyText}>닉네임을 입력해주세요.</Text>
+        {inputCheck ? (
+          <Text style={styles.inputValidityText}>{denyMessage}</Text>
         ) : (
-          <></>
-        )}
-        {inputNickname.length >= 2 ? (
-          <Text style={styles.inputValidityText}>닉네임을 사용할 수 있습니다.</Text>
-        ) : (
-          <></>
-        )}
-        {inputNickname.length >= 1 && inputNickname.length < 2 ? (
-          <Text style={styles.inputValidityFalseText}>닉네임을 사용 중입니다.</Text>
-        ) : (
-          <></>
+          <Text style={styles.inputValidityFalseText}>{denyMessage}</Text>
         )}
       </View>
       {inputCheck ? (
-        <Pressable onPress={onPress} style={styles.SignupComplete}>
+        <TouchableOpacity onPress={onPress} style={styles.SignupComplete}>
           <Text style={styles.SignupCompleteText}>완료</Text>
-        </Pressable>
+        </TouchableOpacity>
       ) : (
         <Pressable style={styles.SignupFalse}>
           <Text style={styles.SignupCompleteText}>완료</Text>
@@ -291,6 +330,7 @@ const styles = StyleSheet.create({
       },
     }),
     color: '#FA4A0C',
+    width: '80%',
   },
 });
 

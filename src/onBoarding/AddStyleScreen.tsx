@@ -1,7 +1,16 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, StyleSheet, Image, Pressable, Platform, Dimensions } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Pressable,
+  Platform,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 // import AddStyleData from './components/AddStyleData';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
@@ -38,24 +47,24 @@ const AddStyleScreen: React.FC = () => {
         borderColor: '#dfe2e5',
       },
       headerLeft: () => (
-        <Pressable
+        <TouchableOpacity
           style={styles.BackIcon}
           onPress={() => {
             navigation.navigate('Signup');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
+        </TouchableOpacity>
       ),
       headerRight: () => (
         <>
           {checkNextBtn ? (
-            <Pressable
+            <TouchableOpacity
               style={styles.RightIcon}
               onPress={() => {
                 navigation.navigate('AddFavFood');
               }}>
               <Image source={require(`../assets/icons/RightVector.png`)}></Image>
-            </Pressable>
+            </TouchableOpacity>
           ) : (
             <Pressable style={styles.RightIcon}>
               <Image source={require(`../assets/icons/RightVector.png`)}></Image>

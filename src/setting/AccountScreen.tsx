@@ -10,10 +10,11 @@ import {
   Image,
   FlatList,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const AccountScreen: React.FC  = () => {
+const AccountScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
@@ -42,13 +43,13 @@ const AccountScreen: React.FC  = () => {
         borderColor: '#dfe2e5',
       },
       headerLeft: () => (
-        <Pressable
+        <TouchableOpacity
           style={styles.backIcon}
           onPress={() => {
             navigation.navigate('Setting');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
+        </TouchableOpacity>
       ),
     });
   };
@@ -66,7 +67,7 @@ const AccountScreen: React.FC  = () => {
           borderBottomWidth: 0.6,
           marginTop: 32,
         }}>
-        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+        <TouchableOpacity style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <View
             style={{
               width: '90%',
@@ -79,7 +80,7 @@ const AccountScreen: React.FC  = () => {
             <Text style={styles.accountCatagoryID}>asdsdsf@kakao.com</Text>
           </View>
           <Image source={require('../assets/icons/click.png')} style={styles.accountButton} />
-        </Pressable>
+        </TouchableOpacity>
       </View>
       <View
         style={{
@@ -89,10 +90,10 @@ const AccountScreen: React.FC  = () => {
           borderBottomColor: '#dfe2e5',
           borderBottomWidth: 0.6,
         }}>
-        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+        <TouchableOpacity style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <Text style={styles.accountCatagory}>로그아웃</Text>
           <Image source={require('../assets/icons/click.png')} style={styles.accountButton} />
-        </Pressable>
+        </TouchableOpacity>
       </View>
       <View
         style={{
@@ -102,10 +103,14 @@ const AccountScreen: React.FC  = () => {
           borderBottomColor: '#dfe2e5',
           borderBottomWidth: 0.6,
         }}>
-        <Pressable style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Withdrawal');
+          }}
+          style={{ flexWrap: 'wrap', alignContent: 'space-between' }}>
           <Text style={styles.accountCatagory}>회원탈퇴</Text>
           <Image source={require('../assets/icons/click.png')} style={styles.accountButton} />
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   );

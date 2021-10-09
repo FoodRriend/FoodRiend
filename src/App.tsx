@@ -36,6 +36,7 @@ import {
   CustomerServiceScreen,
   NoticeScreen,
   NoticeDetailScreen,
+  WithdrawalScreen,
 } from './setting';
 import {
   TermsAgreementScreen,
@@ -153,6 +154,7 @@ const MyPageStackScreen = () => {
 
       <MyPageStack.Screen name="Setting" component={SettingsScreen} />
       <MyPageStack.Screen name="SettingAlert" component={SettingAlertScreen} />
+
       <MyPageStack.Screen name="Notice" component={NoticeScreen} />
       <MyPageStack.Screen name="NoticeDetail" component={NoticeDetailScreen} />
       <MyPageStack.Screen name="CustomerService" component={CustomerServiceScreen} />
@@ -198,6 +200,7 @@ const App: React.FC<void> = () => {
           <Stack.Screen name="MyEdit" component={MyEditScreen} />
 
           <Stack.Screen name="Account" component={AccountScreen} />
+          <Stack.Screen name="Withdrawal" component={WithdrawalScreen} />
 
           <Stack.Screen name="Terms" component={TermsAgreementScreen} />
           <Stack.Screen name="TermsDetail" component={TermsDetailScreen} />

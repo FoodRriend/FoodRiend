@@ -1,7 +1,16 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, TextInput, Image, Platform } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Image,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const MyEditScreen: React.FC = () => {
@@ -11,26 +20,36 @@ const MyEditScreen: React.FC = () => {
     navigation.setOptions({
       headerShown: true,
       title: '프로필 수정',
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        ...Platform.select({
+          ios: {
+            fontWeight: '600',
+            fontSize: 17,
+          },
+          android: {
+            fontWeight: 'bold',
+            fontSize: 15,
+          },
+        }),
+      },
+      headerStyle: {
+        ...Platform.select({
+          android: {
+            borderWidth: 0.8,
+          },
+        }),
+        borderColor: '#dfe2e5',
+      },
       headerLeft: () => (
-        <Pressable
+        <TouchableOpacity
           style={styles.BackIcon}
           onPress={() => {
             navigation.navigate('MyPage');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
+        </TouchableOpacity>
       ),
-      headerTitleAlign: 'center',
-      headerStyle: {
-        ...Platform.select({
-          ios: {
-            borderBottomWidth: 0,
-          },
-          android: {
-            borderBottomWidth: 0.3,
-          },
-        }),
-      },
     });
   };
 
@@ -42,21 +61,24 @@ const MyEditScreen: React.FC = () => {
 
   return (
     <Wrapper>
-      <Image
-        source={require(`../assets/images/onBoading/friends/friend6.png`)}
-        style={styles.myEditProfileImage}
-      />
+      <TouchableOpacity>
+        <Image
+          source={require(`../assets/images/onBoading/friends/friend6.png`)}
+          style={styles.myEditProfileImage}
+        />
+      </TouchableOpacity>
+
       <Text style={styles.myEditName}>김민아</Text>
       <Text style={styles.myEditNickname}>바른맛집사나이</Text>
       <MyEditInfoStyleContainer>
         <View style={styles.myEditItemTitle}>
           <Text style={styles.myEditItemTitleText}>나의 맛집 스타일</Text>
-          <Pressable onPress={() => navigation.navigate('AddStyle')}>
+          <TouchableOpacity onPress={() => navigation.navigate('AddStyle')}>
             <Image
               source={require(`../assets/icons/click.png`)}
               style={styles.myEditItemTitleBtn}
             />
-          </Pressable>
+          </TouchableOpacity>
         </View>
         <View style={styles.myEditItemBox}>
           <Text style={styles.myEditItemBoxText}>새로운 음식 모험가</Text>
@@ -69,12 +91,12 @@ const MyEditScreen: React.FC = () => {
       <MyEditInfoFoodContainer>
         <View style={styles.myEditItemTitle}>
           <Text style={styles.myEditItemTitleText}>나의 음식 취향</Text>
-          <Pressable onPress={() => navigation.navigate('AddFavFood')}>
+          <TouchableOpacity onPress={() => navigation.navigate('AddFavFood')}>
             <Image
               source={require(`../assets/icons/click.png`)}
               style={styles.myEditItemTitleBtn}
             />
-          </Pressable>
+          </TouchableOpacity>
         </View>
         <View style={styles.myEditItemBox}>
           <Text style={styles.myEditItemBoxText}>국밥</Text>
@@ -84,9 +106,9 @@ const MyEditScreen: React.FC = () => {
           />
         </View>
       </MyEditInfoFoodContainer>
-      <Pressable onPress={onPress} style={styles.myEditButton}>
+      <TouchableOpacity onPress={onPress} style={styles.myEditButton}>
         <Text style={styles.myEditButtonText}>완료</Text>
-      </Pressable>
+      </TouchableOpacity>
     </Wrapper>
   );
 };
@@ -172,7 +194,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fe554a',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 148,
+
+    ...Platform.select({
+      ios: { marginTop: 138 },
+      android: { marginTop: 108 },
+    }),
   },
   myEditButtonText: {
     fontSize: 15,

@@ -11,6 +11,7 @@ import {
   Platform,
   Animated,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -188,12 +189,12 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
           right: 0,
         }}>
         <MyScreenInfoContainer>
-          <Pressable onPress={() => navigations.navigate('MyEdit')}>
+          <TouchableOpacity onPress={() => navigations.navigate('MyEdit')}>
             <Image
               source={require(`../assets/images/onBoading/friends/friend6.png`)}
               style={{ width: 95, height: 95, marginLeft: 10 }}
             />
-          </Pressable>
+          </TouchableOpacity>
           <View style={styles.myScreenInfoItem}>
             <Text style={styles.myScreenInfoText}>김민아</Text>
             <Text style={styles.myScreenInfoText}>바른맛집사나이</Text>
@@ -212,7 +213,7 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
                 bottom: 20,
                 alignContent: 'space-between',
               }}>
-              <Pressable
+              <TouchableOpacity
                 onPress={() => navigations.navigate('Alert')}
                 style={{
                   width: 40,
@@ -224,8 +225,8 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
                   style={styles.myScreenInfoAlertImage}
                   source={require(`../assets/icons/alarm(n).png`)}
                 />
-              </Pressable>
-              <Pressable
+              </TouchableOpacity>
+              <TouchableOpacity
                 onPress={() => navigations.navigate('Setting')}
                 style={{
                   width: 40,
@@ -237,12 +238,12 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
                   style={styles.myScreenInfoAlertImage}
                   source={require(`../assets/icons/setting.png`)}
                 />
-              </Pressable>
+              </TouchableOpacity>
             </View>
             <View style={styles.myScreenInfoFriend}>
               <Text style={{ fontSize: 14, fontWeight: '500', color: '#2a3037' }}>친구</Text>
             </View>
-            <Pressable
+            <TouchableOpacity
               onPress={() => navigations.navigate('MyFriendList')}
               style={{
                 width: 60,
@@ -251,7 +252,7 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
                 justifyContent: 'center',
               }}>
               <Text style={{ fontSize: 17, fontWeight: '500', color: '#3e5481' }}>5</Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </MyScreenInfoContainer>
       </Animated.View>
@@ -456,22 +457,6 @@ const styles = StyleSheet.create({
     color: '#2A3037',
     marginTop: 3,
   },
-});
-
-const UpWrapper = styled.View({
-  backgroundColor: '#fff',
-  width: '100%',
-  height: 70,
-  display: 'flex',
-  alignItems: 'center',
-});
-
-const DownWrapper = styled.View({
-  backgroundColor: '#fff',
-  width: '100%',
-  height: 230,
-  display: 'flex',
-  alignItems: 'center',
 });
 
 const MyScreenInfoContainer = styled.View({

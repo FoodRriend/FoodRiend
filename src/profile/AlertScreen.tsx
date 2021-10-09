@@ -1,24 +1,55 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Text, View, Pressable, StyleSheet, Image, FlatList, Animated } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  Image,
+  FlatList,
+  Animated,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const AlertScreen: React.FC  = () => {
+const AlertScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
     navigation.setOptions({
       headerShown: true,
       title: '알림',
+      headerTitleAlign: 'center',
+      headerTitleStyle: {
+        ...Platform.select({
+          ios: {
+            fontWeight: '600',
+            fontSize: 17,
+          },
+          android: {
+            fontWeight: 'bold',
+            fontSize: 15,
+          },
+        }),
+      },
+      headerStyle: {
+        ...Platform.select({
+          android: {
+            borderWidth: 0.8,
+          },
+        }),
+        borderColor: '#dfe2e5',
+      },
       headerLeft: () => (
-        <Pressable
+        <TouchableOpacity
           style={styles.BackIcon}
           onPress={() => {
             navigation.navigate('MyPage');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
-        </Pressable>
+        </TouchableOpacity>
       ),
     });
   };
