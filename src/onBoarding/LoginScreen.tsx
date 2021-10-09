@@ -18,7 +18,7 @@ const LoginScreen: React.FC = () => {
 
   const onPress = async () => {
     // await signInWithKakao();
-    signInWithKakao();
+    // signInWithKakao();
     navigation.navigate('Terms');
   };
 

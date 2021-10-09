@@ -1,0 +1,317 @@
+{
+  "data": {
+    "user": [
+      {
+        "userId": 6,
+        "name": "서현 권",
+        "nickName": "East 하은구",
+        "profileImg": "http://lorempixel.com/640/480/서현 권?16323",
+        "foodType": "샐러드",
+        "foodStyle": "숨은 맛집 개척자",
+        "commentCount": 4
+      },
+      {
+        "userId": 8,
+        "name": "지후 홍",
+        "nickName": "지훈구",
+        "profileImg": "http://lorempixel.com/640/480/지후 홍?67149",
+        "foodType": "고기",
+        "foodStyle": "분위기 맛집 예술가",
+        "commentCount": 0
+      },
+      {
+        "userId": 21,
+        "name": "은주 강",
+        "nickName": "서구",
+        "profileImg": "http://lorempixel.com/640/480/은주 강?13144",
+        "foodType": "치킨",
+        "foodStyle": "분야별 맛집 전문가",
+        "commentCount": 0
+      }
+    ],
+    "shopInfo": [
+      {
+        "isDB": true,
+        "title": "구우소",
+        "mainImg": "http://lorempixel.com/640/480/구우소?80076",
+        "foodCategory": "울산",
+        "location": "07988 서울 양천구 목동서로 133-4 (스카이포레) ",
+        "relatedImg": [],
+        "aveRating": 5,
+        "menu": "아몬드피칸와플, 버터핑거스페이보릿, 와플러버스스페셜",
+        "friends": [
+          {
+            "userId": 6,
+            "name": "서현 권",
+            "profileImg": "http://lorempixel.com/640/480/서현 권?16323",
+            "rating": 4,
+            "comments": "확정될 의하여 의무교육은.",
+            "hashtag": [
+              "사생활의 권리는 있다.",
+              "의하여 죄를 유죄의",
+              "가진다. 판결이 해당하는",
+              "신체의 저작자·발명가·과학기술자와 기능을"
+            ]
+          },
+          {
+            "userId": 6,
+            "name": "서현 권",
+            "profileImg": "http://lorempixel.com/640/480/서현 권?16323",
+            "rating": 0,
+            "comments": "진다. 한다. 같은 해당하는 유죄의 진흥하여야 판결이 창달에 죄를.",
+            "hashtag": [
+              "가진다. 다만, 구성하지",
+              "국제법규는 모든 효력을",
+              "모성의 법률로써 사후에"
+            ]
+          },
+          {
+            "userId": 6,
+            "name": "서현 권",
+            "profileImg": "http://lorempixel.com/640/480/서현 권?16323",
+            "rating": 0,
+            "comments": "진다. 한다. 같은 해당하는 유죄의 진흥하여야 판결이 창달에 죄를.",
+            "hashtag": [
+              "가진다. 다만, 구성하지",
+              "국제법규는 모든 효력을",
+              "모성의 법률로써 사후에"
+            ]
+          },
+          {
+            "userId": 6,
+            "name": "서현 권",
+            "profileImg": "http://lorempixel.com/640/480/서현 권?16323",
+            "rating": 0,
+            "comments": "진다. 한다. 같은 해당하는 유죄의 진흥하여야 판결이 창달에 죄를.",
+            "hashtag": [
+              "가진다. 다만, 구성하지",
+              "국제법규는 모든 효력을",
+              "모성의 법률로써 사후에"
+            ]
+          },
+          {
+            "userId": 6,
+            "name": "서현 권",
+            "profileImg": "http://lorempixel.com/640/480/서현 권?16323",
+            "rating": 0,
+            "comments": "진다. 한다. 같은 해당하는 유죄의 진흥하여야 판결이 창달에 죄를.",
+            "hashtag": [
+              "가진다. 다만, 구성하지",
+              "국제법규는 모든 효력을",
+              "모성의 법률로써 사후에"
+            ]
+          },
+          {
+            "userId": 6,
+            "name": "서현 권",
+            "profileImg": "http://lorempixel.com/640/480/서현 권?16323",
+            "rating": 0,
+            "comments": "진다. 한다. 같은 해당하는 유죄의 진흥하여야 판결이 창달에 죄를.",
+            "hashtag": [
+              "가진다. 다만, 구성하지",
+              "국제법규는 모든 효력을",
+              "모성의 법률로써 사후에"
+            ]
+          },
+          {
+            "userId": 6,
+            "name": "서현 권",
+            "profileImg": "http://lorempixel.com/640/480/서현 권?16323",
+            "rating": 0,
+            "comments": "진다. 한다. 같은 해당하는 유죄의 진흥하여야 판결이 창달에 죄를.",
+            "hashtag": [
+              "가진다. 다만, 구성하지",
+              "국제법규는 모든 효력을",
+              "모성의 법률로써 사후에"
+            ]
+          },
+          {
+            "userId": 6,
+            "name": "서현 권",
+            "profileImg": "http://lorempixel.com/640/480/서현 권?16323",
+            "rating": 0,
+            "comments": "진다. 한다. 같은 해당하는 유죄의 진흥하여야 판결이 창달에 죄를.",
+            "hashtag": [
+              "가진다. 다만, 구성하지",
+              "국제법규는 모든 효력을",
+              "모성의 법률로써 사후에"
+            ]
+          }
+        ]
+      },
+      {
+        "isDB": true,
+        "title": "구우소",
+        "mainImg": "http://lorempixel.com/640/480/구우소?73317",
+        "foodCategory": "서울",
+        "location": "04715 서울 성동구 왕십리로 331 (공영빌딩) ",
+        "relatedImg": [],
+        "aveRating": 2,
+        "menu": "소고기국밥",
+        "friends": [
+          {
+            "userId": 6,
+            "name": "서현 권",
+            "profileImg": "http://lorempixel.com/640/480/서현 권?16323",
+            "rating": 0,
+            "comments": "진다. 한다. 같은 해당하는 유죄의 진흥하여야 판결이 창달에 죄를.",
+            "hashtag": [
+              "가진다. 다만, 구성하지",
+              "국제법규는 모든 효력을",
+              "모성의 법률로써 사후에"
+            ]
+          },
+          {
+            "userId": 6,
+            "name": "서현 권",
+            "profileImg": "http://lorempixel.com/640/480/서현 권?16323",
+            "rating": 0,
+            "comments": "진다. 한다. 같은 해당하는 유죄의 진흥하여야 판결이 창달에 죄를.",
+            "hashtag": [
+              "가진다. 다만, 구성하지",
+              "국제법규는 모든 효력을",
+              "모성의 법률로써 사후에"
+            ]
+          }
+        ]
+      },
+      {
+        "isDB": false,
+        "title": "구백냥곱창소하점",
+        "mainImg": null,
+        "foodCategory": ["restaurant", "food", "point_of_interest", "establishment"],
+        "location": "대한민국 경기도 광명시 소하동 1273",
+        "relatedImg": [
+          {
+            "photo_reference": null,
+            "height": 640,
+            "width": 400,
+            "html_attributions": []
+          }
+        ],
+        "aveRating": 4,
+        "menu": null,
+        "friends": null
+      },
+      {
+        "isDB": false,
+        "title": "회랑구이랑",
+        "mainImg": null,
+        "foodCategory": ["restaurant", "food", "point_of_interest", "establishment"],
+        "location": "대한민국 경기 안양시 만안구 석수동 417-3",
+        "relatedImg": [
+          {
+            "photo_reference": null,
+            "height": 640,
+            "width": 400,
+            "html_attributions": []
+          }
+        ],
+        "aveRating": 0,
+        "menu": null,
+        "friends": null
+      },
+      {
+        "isDB": false,
+        "title": "구옥천생태",
+        "mainImg": null,
+        "foodCategory": ["restaurant", "food", "point_of_interest", "establishment"],
+        "location": "대한민국 경기도 광명시 하안3동 37-1",
+        "relatedImg": [
+          {
+            "photo_reference": null,
+            "height": 640,
+            "width": 400,
+            "html_attributions": []
+          }
+        ],
+        "aveRating": 0,
+        "menu": null,
+        "friends": null
+      },
+      {
+        "isDB": false,
+        "title": "구어스치킨하안점",
+        "mainImg": "Aap_uEBHK5Iho2P3e28mIhSQy3MCYcK2ioLAvfeo_qSUTpNhitdHqTmFfyLpqhkvSj6CU3an5e59kJxFnwpWsziJH8h-OcBUftm6lz9OZ4pA2sVkZrcG2q5IUt_tGitHkyD16wS3QKg68pjSVX7fxbrTHGCvOF2Dql_z9LCUEBf9SN6-_69k",
+        "foodCategory": [
+          "meal_takeaway",
+          "restaurant",
+          "food",
+          "point_of_interest",
+          "establishment"
+        ],
+        "location": "대한민국 경기도 광명시 하안동 110-5",
+        "relatedImg": [
+          {
+            "height": 4032,
+            "html_attributions": [
+              "<a href=\"https://maps.google.com/maps/contrib/116897120951171159518\">이강토</a>"
+            ],
+            "photo_reference": "Aap_uEBHK5Iho2P3e28mIhSQy3MCYcK2ioLAvfeo_qSUTpNhitdHqTmFfyLpqhkvSj6CU3an5e59kJxFnwpWsziJH8h-OcBUftm6lz9OZ4pA2sVkZrcG2q5IUt_tGitHkyD16wS3QKg68pjSVX7fxbrTHGCvOF2Dql_z9LCUEBf9SN6-_69k",
+            "width": 3024
+          }
+        ],
+        "aveRating": 4.1,
+        "menu": null,
+        "friends": null
+      },
+      {
+        "isDB": false,
+        "title": "구일동 벽화",
+        "mainImg": null,
+        "foodCategory": ["cafe", "food", "point_of_interest", "establishment"],
+        "location": "대한민국 서울특별시 구로구 구로동 700-57",
+        "relatedImg": [
+          {
+            "photo_reference": null,
+            "height": 640,
+            "width": 400,
+            "html_attributions": []
+          }
+        ],
+        "aveRating": 0,
+        "menu": null,
+        "friends": null
+      },
+      {
+        "isDB": false,
+        "title": "구마네포차",
+        "mainImg": null,
+        "foodCategory": ["restaurant", "food", "point_of_interest", "establishment"],
+        "location": "대한민국 가산동 48-11번지 1층 금천구 서울특별시 KR",
+        "relatedImg": [
+          {
+            "photo_reference": null,
+            "height": 640,
+            "width": 400,
+            "html_attributions": []
+          }
+        ],
+        "aveRating": 0,
+        "menu": null,
+        "friends": null
+      },
+      {
+        "isDB": false,
+        "title": "(구)동원참치",
+        "mainImg": null,
+        "foodCategory": ["restaurant", "food", "point_of_interest", "establishment"],
+        "location": "대한민국 소하동 897-3번지 1층 광명시 경기도 KR",
+        "relatedImg": [
+          {
+            "photo_reference": null,
+            "height": 640,
+            "width": 400,
+            "html_attributions": []
+          }
+        ],
+        "aveRating": 0,
+        "menu": null,
+        "friends": null
+      }
+    ]
+  },
+  "status": 200,
+  "isUserData": true,
+  "isShopData": true
+}
