@@ -18,6 +18,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import foodTypeImage from '@/assets/images/onBoading/favFood';
 import foodStyleFile from '@/assets/images/onBoading/addStyle';
 import { shopInfoType, userType } from '@/redux/searchSlice';
+import { shortLoction } from './helper';
 
 const ResultSearchScreen: React.FC = () => {
   const [searchInput, setSearchInput] = useState<string>('');
@@ -32,11 +33,7 @@ const ResultSearchScreen: React.FC = () => {
 
   headerStyle();
 
-  //   interface IFoodStyle {
-  //     foodStyle: '지역맛집탐험가' | '새로운음식모험가';
-  //   }
   const usersRenderItem: ListRenderItem<userType> = ({ item, index }) => {
-    // console.log(item.foodType);
     const foodStyle = item.foodStyle.replace(/ /g, '') as '지역맛집탐험가';
     const foodType = item.foodType as '고기';
 
@@ -106,7 +103,7 @@ const ResultSearchScreen: React.FC = () => {
   };
 
   const shopRenderItem: ListRenderItem<shopInfoType> = ({ item, index }) => {
-    const loaction = item.location.substring(item.location.indexOf(' '), item.location.length);
+    const loaction = shortLoction(item.location);
     let imgStyleZIndex: any = null;
     let friendListLength = 0;
     let leakFriendList = 0;
@@ -119,63 +116,74 @@ const ResultSearchScreen: React.FC = () => {
       }
     }
     return (
-      <View style={{ width: '90%', marginTop: 10 }}>
-        <View style={{ display: 'flex', flexDirection: 'row' }}>
-          <View style={{ width: '70%', justifyContent: 'center' }}>
+      <View style={{ width: '85%', marginTop: 10 }}>
+        <Pressable
+          onPress={() =>
+            navigation.navigate('RestaurantDetail', {
+              index: index,
+            })
+          }>
+          <View style={{ display: 'flex', flexDirection: 'row' }}>
+            <View style={{ width: '70%', justifyContent: 'center' }}>
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginBottom: 5,
+                }}>
+                <Text style={{ fontWeight: '600', fontSize: 15, marginRight: 15 }}>
+                  {item.title}
+                </Text>
+                <Image
+                  source={require('../assets/icons/star.png')}
+                  style={{ marginRight: 5, marginBottom: 2 }}
+                />
+                <Text>{item.aveRating}</Text>
+              </View>
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={{ color: '#AAACAE', fontSize: 12 }}>
+                {loaction}
+              </Text>
+            </View>
             <View
               style={{
                 display: 'flex',
                 flexDirection: 'row',
+                width: '40%',
                 alignItems: 'center',
-                marginBottom: 5,
+                justifyContent: 'flex-end',
               }}>
-              <Text style={{ fontWeight: '600', fontSize: 15, marginRight: 15 }}>{item.title}</Text>
-              <Image
-                source={require('../assets/icons/star.png')}
-                style={{ marginRight: 5, marginBottom: 2 }}
-              />
-              <Text>{item.aveRating}</Text>
+              {item.friends &&
+                item.friends?.map((el, index) => {
+                  if (index > 3) {
+                    return null;
+                  } else {
+                    imgStyleZIndex -= 30;
+                    return (
+                      <Image
+                        source={require('../assets/images/onBoading/friends/friend4.png')}
+                        style={{ zIndex: friendListLength - index, left: imgStyleZIndex }}
+                      />
+                    );
+                  }
+                })}
+              {leakFriendList !== 0 && (
+                <Text style={{ position: 'absolute', zIndex: 999, color: 'red' }}>
+                  +{leakFriendList}
+                </Text>
+              )}
             </View>
-            <Text numberOfLines={1} ellipsizeMode="tail" style={{ color: '#AAACAE', fontSize: 12 }}>
-              {loaction.trim()}
-            </Text>
           </View>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              width: '40%',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-            }}>
-            {item.friends &&
-              item.friends?.map((el, index) => {
-                console.log(index);
-                if (index > 3) {
-                  return null;
-                } else {
-                  imgStyleZIndex -= 30;
-                  return (
-                    <Image
-                      source={require('../assets/images/onBoading/friends/friend4.png')}
-                      style={{ zIndex: friendListLength - index, left: imgStyleZIndex }}
-                    />
-                  );
-                }
-              })}
-            {leakFriendList !== 0 && (
-              <Text style={{ position: 'absolute', zIndex: 999, color: 'red' }}>
-                +{leakFriendList}
-              </Text>
-            )}
+          <View style={{ width: '100%', left: 1 }}>
+            <Image
+              source={require('../assets/images/feed/Restaurant2.png')}
+              style={{ width: '110%', height: 190, resizeMode: 'contain' }}
+            />
           </View>
-        </View>
-        <View style={{ width: '110%', left: 1 }}>
-          <Image
-            source={require('../assets/images/feed/Restaurant2.png')}
-            style={{ width: '100%', height: 190, resizeMode: 'contain' }}
-          />
-        </View>
+        </Pressable>
       </View>
     );
   };
@@ -241,7 +249,7 @@ const ResultSearchScreen: React.FC = () => {
         }}>
         {searchData.data?.isShopData && (
           <FlatList
-            style={{ width: '95%' }}
+            style={{ width: '94%', display: 'flex', left: 10 }}
             data={searchData.data.data.shopInfo}
             renderItem={shopRenderItem}
           />

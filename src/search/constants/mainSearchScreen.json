@@ -191,7 +191,21 @@
         ],
         "aveRating": 4,
         "menu": null,
-        "friends": null
+        "friends": [
+          {
+            "userId": 6,
+            "name": "서현 권",
+            "profileImg": "http://lorempixel.com/640/480/서현 권?16323",
+            "rating": 4,
+            "comments": "확정될 의하여 의무교육은.",
+            "hashtag": [
+              "사생활의 권리는 있다.",
+              "의하여 죄를 유죄의",
+              "가진다. 판결이 해당하는",
+              "신체의 저작자·발명가·과학기술자와 기능을"
+            ]
+          }
+        ]
       },
       {
         "isDB": false,
