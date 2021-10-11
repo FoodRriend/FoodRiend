@@ -9,8 +9,8 @@ const foodTypeImage = {
   분식: require('./tteokbokki.png'),
   국밥: require('./riceSoup.png'),
   해산물: require('./octopus.png'),
-  찌개: require('./stew.png'),
-  베이커리: require('./pudding.png'),
+  '찌개/탕': require('./stew.png'),
+  '베이커리/디저트': require('./pudding.png'),
 };
 
 export default foodTypeImage;
