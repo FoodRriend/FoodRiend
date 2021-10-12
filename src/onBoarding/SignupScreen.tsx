@@ -114,7 +114,7 @@ const SignupScreen: React.FC = () => {
         setDenyMessage('닉네임을 사용할 수 있습니다.');
       } else {
         setInputCheck(false);
-        setDenyMessage('닉네임은 한글, 영문, 숫자, 밑줄, 마침표만 가능합니다.');
+        setDenyMessage('닉네임은 영어 3~12자 한글 2~6자로 입력이 가능합니다.');
       }
     } else {
       if (inputNickname === null || inputNickname === '') {
@@ -144,6 +144,9 @@ const SignupScreen: React.FC = () => {
   return (
     <Wrapper>
       <Text style={styles.TextTitle}>이름/닉네임 작성하기</Text>
+      <Text style={{ marginTop: 10, fontWeight: '400', fontSize: 13 }}>
+        친구 관계 확인을 위해 실명을 사용해주세요
+      </Text>
       <InputContainer>
         <View style={styles.inputImage}>
           <Image
@@ -168,10 +171,12 @@ const SignupScreen: React.FC = () => {
             />
           </View>
           <TextInput
+            maxLength={15}
             autoCapitalize={'none'}
             onChangeText={handleInputNickname}
             style={styles.InPutNickname}
             value={inputNickname}
+            autoFocus={true}
             placeholder="닉네임"
           />
           {/* <Text style={styles.NicknameCheck}>중복확인</Text> */}
@@ -330,7 +335,7 @@ const styles = StyleSheet.create({
       },
     }),
     color: '#FA4A0C',
-    width: '80%',
+    width: '90%',
   },
 });
 
@@ -348,7 +353,7 @@ const InputContainer = styled.View({
   height: 56,
   borderRadius: 32,
   borderColor: '#d0dbea',
-  marginTop: 36,
+  marginTop: 26,
   display: 'flex',
   justifyContent: 'center',
   flexWrap: 'wrap',

@@ -125,7 +125,7 @@ const MyFirstList = () => {
           <View style={{ width: '100%', height: 37, justifyContent: 'center' }}>
             <TouchableOpacity
               style={styles.myScreenReviewButton}
-              onPress={() => navigation.navigate('MyPostReview')}>
+              onPress={() => navigation.navigate('Post')}>
               <Image
                 style={{ width: 18, height: 18, borderRadius: 16 }}
                 source={require(`../../assets/icons/write.png`)}

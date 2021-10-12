@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styled from '@emotion/native';
 import { Text, Pressable, StyleSheet, Image, View, Platform, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { KakaoOAuthToken, login } from '@react-native-seoul/kakao-login';
+import {
+  KakaoOAuthToken,
+  login,
+  getProfile as getKakaoProfile,
+  KakaoProfile,
+  // unlink,
+} from '@react-native-seoul/kakao-login';
 import axios from 'axios';
 
 const LoginScreen: React.FC = () => {
@@ -12,19 +18,24 @@ const LoginScreen: React.FC = () => {
 
   const signInWithKakao = async (): Promise<void> => {
     const token: KakaoOAuthToken = await login();
+  };
 
-    setResult(JSON.stringify(token));
+  const getProfile = async (): Promise<void> => {
+    const profile: KakaoProfile = await getKakaoProfile();
+    console.log(profile);
+    setResult(JSON.stringify(profile));
   };
 
   const onPress = async () => {
-    // await signInWithKakao();
-    // signInWithKakao();
-    navigation.navigate('Terms');
+    if (Platform.OS === 'android') {
+      await signInWithKakao();
+      await getProfile();
+      // await unlink();
+      navigation.navigate('Terms');
+    } else {
+      navigation.navigate('Terms');
+    }
   };
-
-  useEffect(() => {
-    // console.log(JSON.parse(result));
-  }, [result]);
 
   return (
     <Wrapper>

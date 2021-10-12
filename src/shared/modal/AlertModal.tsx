@@ -7,23 +7,15 @@ import { showAlertModal } from '../../redux/modalSlice';
 const AlertModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const { alertModal } = useAppSelector((state) => state.modals);
-  const [modalVisible, setModalVisible] = useState(false);
-
-  useEffect(() => {
-    if (alertModal) {
-      setModalVisible(true);
-    }
-  }, [alertModal]);
 
   const closeModal = () => {
-    setModalVisible(false);
     dispatch(showAlertModal(false));
   };
 
   return (
     <Modal
       onBackdropPress={() => closeModal()}
-      isVisible={modalVisible}
+      isVisible={alertModal}
       animationIn={'fadeIn'}
       animationOut={'fadeOut'}>
       <View

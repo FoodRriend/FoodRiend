@@ -7,23 +7,15 @@ import { showBoardModal } from '../../redux/modalSlice';
 const BoardModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const { boardModal } = useAppSelector((state) => state.modals);
-  const [modalVisible, setModalVisible] = useState(false);
-
-  useEffect(() => {
-    if (boardModal) {
-      setModalVisible(true);
-    }
-  }, [boardModal]);
 
   const closeModal = () => {
-    setModalVisible(false);
     dispatch(showBoardModal(false));
   };
 
   return (
     <Modal
       onBackdropPress={() => closeModal()}
-      isVisible={modalVisible}
+      isVisible={boardModal}
       animationIn={'fadeIn'}
       animationOut={'fadeOut'}>
       <View
