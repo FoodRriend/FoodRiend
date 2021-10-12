@@ -26,6 +26,7 @@ import {
   MyScreen,
   MyPostReviewScreen,
   AlertScreen,
+  PostScreen,
 } from './profile';
 import { SearchScreen, ResultSearchScreen, RestaurantDetailScreen } from './search';
 import {
@@ -150,6 +151,7 @@ const MyPageStackScreen = () => {
         name="MyPostReview"
         component={MyPostReviewScreen}
       />
+
       <MyPageStack.Screen name="Alert" component={AlertScreen} />
 
       <MyPageStack.Screen name="Setting" component={SettingsScreen} />
@@ -202,6 +204,7 @@ const App: React.FC<void> = () => {
           <Stack.Screen name="Feed" component={BottomTap} />
 
           <Stack.Screen name="MyEdit" component={MyEditScreen} />
+          <Stack.Screen name="Post" component={PostScreen} />
 
           <Stack.Screen name="Account" component={AccountScreen} />
           <Stack.Screen name="Withdrawal" component={WithdrawalScreen} />
