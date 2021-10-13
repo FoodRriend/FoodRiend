@@ -34,7 +34,7 @@ const ResultSearchScreen: React.FC = () => {
   headerStyle();
 
   const usersRenderItem: ListRenderItem<userType> = ({ item, index }) => {
-    const foodStyle = item.foodStyle.replace(/ /g, '') as '지역맛집탐험가';
+    const foodStyle = item.foodStyle as '지역 맛집 탐험가';
     const foodType = item.foodType as '고기';
 
     if (index >= 2 && !showFriendList) {

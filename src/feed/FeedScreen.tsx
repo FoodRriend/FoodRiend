@@ -12,9 +12,11 @@ import {
   Platform,
   Animated,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { feedData, feedDataFirst } from './constants';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { fetchFeedData, userType } from '@/redux/feedSlice';
 
 const FeedScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -27,6 +29,14 @@ const FeedScreen: React.FC = () => {
 
   headerStyle();
 
+  const dispatch = useAppDispatch();
+
+  const { data: feedData2, loading } = useAppSelector((state) => state.feed);
+
+  useEffect(() => {
+    dispatch(fetchFeedData());
+  }, []);
+
   const scrollY = new Animated.Value(0);
   const translateY = scrollY.interpolate({
     inputRange: [0, 90],
@@ -36,13 +46,6 @@ const FeedScreen: React.FC = () => {
     inputRange: [0, 90],
     outputRange: [1, 0],
   });
-
-  interface IFeedRenderItemProps {
-    name?: string;
-    score?: number;
-    time?: string;
-    content?: string;
-  }
 
   const SlideData = [
     { name: '' },
@@ -88,10 +91,11 @@ const FeedScreen: React.FC = () => {
     );
   };
 
-  const renderItem = ({ item, index }: { item: IFeedRenderItemProps; index: number }) => {
-    if (index === 0) {
-      return (
-        <>
+  const renderItem = ({ item, index }: { item: userType; index: number }) => {
+    return (
+      <>
+        {/* 여기 원리가 뭔지 궁금하네요  flatList에 index가 왜 0번째에 추가해야만 UI가안꺠지는 궁금합니다.*/}
+        {!index && (
           <View
             style={{
               width: '30%',
@@ -103,59 +107,21 @@ const FeedScreen: React.FC = () => {
               <Text style={{ fontSize: 12, fontWeight: '600' }}>전체보기</Text>
             </TouchableOpacity>
           </View>
-          <FeedListItem>
-            <TouchableOpacity>
-              <Image
-                source={require(`../assets/images/feed/Restaurant1.png`)}
-                style={styles.feedListImage}
-              />
-            </TouchableOpacity>
-
-            <FeedListInfoContainer>
-              <TouchableOpacity>
-                <Image
-                  source={require(`../assets/images/onBoading/friends/friend4.png`)}
-                  style={styles.feedListInfoImage}
-                />
-              </TouchableOpacity>
-
-              <View style={{ paddingLeft: 10, width: '87%', height: 70 }}>
-                <FeedListInfoItem>
-                  <Text style={styles.feedListInfoName}>{item.name}</Text>
-                  <Image
-                    style={{ width: 18, height: 18 }}
-                    source={require(`../assets/icons/star.png`)}
-                  />
-                  <Text style={styles.feedListInfoNumber}>{item.score}</Text>
-                  <Text style={styles.feedListInfoTime}>{item.time}</Text>
-                </FeedListInfoItem>
-                <TouchableOpacity>
-                  <Text style={styles.feedListInfoContent}>{item.content}</Text>
-                </TouchableOpacity>
-              </View>
-            </FeedListInfoContainer>
-          </FeedListItem>
-        </>
-      );
-    }
-    if (index === 1) {
-      return (
+        )}
         <FeedListItem>
-          <TouchableOpacity>
-            <Image
-              source={require(`../assets/images/feed/Restaurant2.png`)}
-              style={styles.feedListImage}
-            />
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('PostReview', {
+                type: 'feed',
+                index: index,
+              });
+            }}>
+            <Image source={{ uri: item.profileImg }} style={styles.feedListImage} />
           </TouchableOpacity>
-
           <FeedListInfoContainer>
             <TouchableOpacity>
-              <Image
-                source={require(`../assets/images/onBoading/friends/friend2.png`)}
-                style={styles.feedListInfoImage}
-              />
+              <Image source={{ uri: item.profileImg }} style={styles.feedListInfoImage} />
             </TouchableOpacity>
-
             <View style={{ paddingLeft: 10, width: '87%', height: 70 }}>
               <FeedListInfoItem>
                 <Text style={styles.feedListInfoName}>{item.name}</Text>
@@ -163,94 +129,30 @@ const FeedScreen: React.FC = () => {
                   style={{ width: 18, height: 18 }}
                   source={require(`../assets/icons/star.png`)}
                 />
-                <Text style={styles.feedListInfoNumber}>{item.score}</Text>
-                <Text style={styles.feedListInfoTime}>{item.time}</Text>
+                <Text style={styles.feedListInfoNumber}>{item.rating}</Text>
+                <Text style={styles.feedListInfoTime}>{item.created_at}</Text>
               </FeedListInfoItem>
               <TouchableOpacity>
-                <Text style={styles.feedListInfoContent}>{item.content}</Text>
+                <Text style={styles.feedListInfoContent}>{item.comments}</Text>
               </TouchableOpacity>
             </View>
           </FeedListInfoContainer>
         </FeedListItem>
-      );
-    }
-    if (index === 2) {
-      return (
-        <FeedListItem>
-          <TouchableOpacity>
-            <Image
-              source={require(`../assets/images/feed/Restaurant3.png`)}
-              style={styles.feedListImage}
-            />
-          </TouchableOpacity>
-
-          <FeedListInfoContainer>
-            <TouchableOpacity>
-              <Image
-                source={require(`../assets/images/onBoading/friends/friend1.png`)}
-                style={styles.feedListInfoImage}
-              />
-            </TouchableOpacity>
-
-            <View style={{ paddingLeft: 10, width: '87%', height: 70 }}>
-              <FeedListInfoItem>
-                <Text style={styles.feedListInfoName}>{item.name}</Text>
-                <Image
-                  style={{ width: 18, height: 18 }}
-                  source={require(`../assets/icons/star.png`)}
-                />
-                <Text style={styles.feedListInfoNumber}>{item.score}</Text>
-                <Text style={styles.feedListInfoTime}>{item.time}</Text>
-              </FeedListInfoItem>
-              <TouchableOpacity>
-                <Text style={styles.feedListInfoContent}>{item.content}</Text>
-              </TouchableOpacity>
-            </View>
-          </FeedListInfoContainer>
-        </FeedListItem>
-      );
-    }
-    if (index === 3) {
-      return (
-        <FeedListItem>
-          <TouchableOpacity>
-            <Image
-              source={require(`../assets/images/feed/Restaurant3.png`)}
-              style={styles.feedListImage}
-            />
-          </TouchableOpacity>
-
-          <FeedListInfoContainer>
-            <TouchableOpacity>
-              <Image
-                source={require(`../assets/images/onBoading/friends/friend5.png`)}
-                style={styles.feedListInfoImage}
-              />
-            </TouchableOpacity>
-
-            <View style={{ paddingLeft: 10, width: '87%', height: 70 }}>
-              <FeedListInfoItem>
-                <Text style={styles.feedListInfoName}>{item.name}</Text>
-                <Image
-                  style={{ width: 18, height: 18 }}
-                  source={require(`../assets/icons/star.png`)}
-                />
-                <Text style={styles.feedListInfoNumber}>{item.score}</Text>
-                <Text style={styles.feedListInfoTime}>{item.time}</Text>
-              </FeedListInfoItem>
-              <TouchableOpacity>
-                <Text style={styles.feedListInfoContent}>{item.content}</Text>
-              </TouchableOpacity>
-            </View>
-          </FeedListInfoContainer>
-        </FeedListItem>
-      );
-    }
-    return <></>;
+      </>
+    );
   };
+
+  if (loading) {
+    return (
+      <View style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center' }}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
 
   return (
     <Wrapper>
+      {/* 상단 프로필 이미지가 안보이게 가리시는 용도로 사용하셨네요 ㅋㅋ 뭔지 한참 찾았습니다 */}
       {Platform.OS === 'ios' ? (
         <View
           style={{
@@ -259,7 +161,7 @@ const FeedScreen: React.FC = () => {
             backgroundColor: '#fff',
             position: 'absolute',
             top: 0,
-            zIndex: 999,
+            zIndex: 3,
           }}
         />
       ) : (
@@ -271,7 +173,7 @@ const FeedScreen: React.FC = () => {
           width: '100%',
 
           position: 'absolute',
-          zIndex: 100,
+          zIndex: 2,
           backgroundColor: '#fff',
           ...Platform.select({
             ios: {
@@ -291,62 +193,60 @@ const FeedScreen: React.FC = () => {
           source={require(`../assets/images/onBoading/login/FoodRiend.png`)}
         />
       </View>
-
-      <Animated.View
-        style={{
-          transform: [{ translateY: translateY }],
-          position: 'absolute',
-          left: 0,
-          zIndex: 50,
-          right: 0,
-          ...Platform.select({
-            ios: {
-              top: 0,
-            },
-            android: {
-              top: -34,
-            },
-          }),
-          opacity: translateOpacity,
-        }}>
-        <FeedSlideContainer>
-          <FlatList
-            showsHorizontalScrollIndicator={false}
-            bounces={false}
-            data={SlideData}
-            renderItem={renderSliceItem}
-            horizontal
-          />
-        </FeedSlideContainer>
-      </Animated.View>
-
-      <FeedListContainer>
-        {Object.keys(feedData[0]).length === 0 ? (
-          <View style={styles.rederItemFirstCover}>
-            <Text style={{ fontSize: 18, fontWeight: '600' }}>
-              FoodRiend에 오신 것을 환영합니다.
-            </Text>
-            <Text style={{ marginTop: 20, fontSize: 15, fontWeight: '500' }}>
-              친구를 초대하면 피드에서 친구가 방문한 가게와
-            </Text>
-            <Text style={{ fontSize: 15, fontWeight: '500' }}>리뷰를 볼 수 있습니다.</Text>
-            <Pressable style={styles.renderItemFirstBtn}>
-              <Text style={{ fontSize: 15, fontWeight: '900', color: '#ffffff' }}>초대하기</Text>
-            </Pressable>
-          </View>
-        ) : (
-          <FlatList
-            onScroll={(e) => {
-              scrollY.setValue(e.nativeEvent.contentOffset.y);
-            }}
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-            data={feedData}
-            renderItem={renderItem}
-            scrollEventThrottle={16}
-          />
-        )}
-      </FeedListContainer>
+      {!feedData2?.data?.isData ? (
+        <View style={styles.rederItemFirstCover}>
+          <Text style={{ fontSize: 18, fontWeight: '600' }}>FoodRiend에 오신 것을 환영합니다.</Text>
+          <Text style={{ marginTop: 20, fontSize: 15, fontWeight: '500' }}>
+            친구를 초대하면 피드에서 친구가 방문한 가게와
+          </Text>
+          <Text style={{ fontSize: 15, fontWeight: '500' }}>리뷰를 볼 수 있습니다.</Text>
+          <Pressable style={styles.renderItemFirstBtn}>
+            <Text style={{ fontSize: 15, fontWeight: '900', color: '#ffffff' }}>초대하기</Text>
+          </Pressable>
+        </View>
+      ) : (
+        <>
+          <Animated.View
+            style={{
+              transform: [{ translateY: translateY }],
+              position: 'absolute',
+              left: 0,
+              zIndex: 1,
+              right: 0,
+              ...Platform.select({
+                ios: {
+                  top: 0,
+                },
+                android: {
+                  top: -34,
+                },
+              }),
+              opacity: translateOpacity,
+            }}>
+            <FeedSlideContainer>
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                bounces={false}
+                data={SlideData}
+                renderItem={renderSliceItem}
+                horizontal
+              />
+            </FeedSlideContainer>
+          </Animated.View>
+          <FeedListContainer>
+            <FlatList
+              onScroll={(e) => {
+                scrollY.setValue(e.nativeEvent.contentOffset.y);
+              }}
+              bounces={false}
+              showsVerticalScrollIndicator={false}
+              data={feedData2.data.users}
+              renderItem={renderItem}
+              scrollEventThrottle={16}
+            />
+          </FeedListContainer>
+        </>
+      )}
     </Wrapper>
   );
 };
@@ -375,6 +275,7 @@ const styles = StyleSheet.create({
   feedListInfoImage: {
     width: 48,
     height: 48,
+    borderRadius: 25,
     marginTop: 8,
   },
   feedListInfoContent: {
@@ -433,6 +334,14 @@ const styles = StyleSheet.create({
   rederItemFirstCover: {
     display: 'flex',
     width: '100%',
+    ...Platform.select({
+      ios: {
+        top: '10%',
+      },
+      android: {
+        top: '5%',
+      },
+    }),
     height: Dimensions.get('window').height / 2,
     alignItems: 'center',
     paddingTop: 60,

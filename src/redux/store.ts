@@ -4,6 +4,7 @@ import userReducer from './userSlice';
 import modalReducer from './modalSlice';
 import profileReducer from './profileSlice';
 import searchReducer from './searchSlice';
+import feedReducer from './feedSlice';
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     modals: modalReducer,
     profiles: profileReducer,
     search: searchReducer,
+    feed: feedReducer,
   },
 });
 
