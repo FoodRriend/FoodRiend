@@ -27,7 +27,12 @@ import {
   MyPostReviewScreen,
   AlertScreen,
 } from './profile';
-import { SearchScreen, ResultSearchScreen, RestaurantDetailScreen } from './search';
+import {
+  SearchScreen,
+  ResultSearchScreen,
+  RestaurantDetailScreen,
+  RestaurantPhotoDetailScreen,
+} from './search';
 import {
   SettingsScreen,
   AccountScreen,
@@ -171,6 +176,7 @@ const SearchStackScreen = () => {
         <SearchStack.Screen name="Search" component={SearchScreen} />
         <SearchStack.Screen name="ResultSearch" component={ResultSearchScreen} />
         <SearchStack.Screen name="RestaurantDetail" component={RestaurantDetailScreen} />
+        <SearchStack.Screen name="RestaurantPhotoDetail" component={RestaurantPhotoDetailScreen} />
       </SearchStack.Navigator>
     </Provider>
   );

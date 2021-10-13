@@ -1,9 +1,10 @@
-import { Animated, Platform, StyleSheet, View } from 'react-native';
+import { Animated, Platform, StyleSheet, View, TouchableOpacity } from 'react-native';
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { Text } from 'react-native-elements';
 import { useAppSelector } from '@/redux/hooks';
 import { Image } from 'react-native-elements/dist/Image';
 import { shortLoction } from '../helper';
+import { useNavigation } from '@react-navigation/core';
 
 interface DetailBottomProps {
   param: any;
@@ -11,6 +12,7 @@ interface DetailBottomProps {
 }
 
 const DetailBottom: React.FC<DetailBottomProps> = ({ param, scrollY }) => {
+  const navigation = useNavigation();
   const shopInfo = useAppSelector((state) => state.search.data);
   const detailShopInfo = shopInfo?.data.shopInfo[param.index];
 
@@ -196,7 +198,13 @@ const DetailBottom: React.FC<DetailBottomProps> = ({ param, scrollY }) => {
           />
           <View style={{ display: 'flex', flexDirection: 'row' }}>
             <Text style={styles.componentSubject}>사진</Text>
-            <Text style={{ textAlign: 'right', width: '86.5%', color: '#0057FF' }}>더보기</Text>
+            <TouchableOpacity
+              style={{ width: '86.5%' }}
+              onPress={() => {
+                navigation.navigate('RestaurantPhotoDetail');
+              }}>
+              <Text style={{ textAlign: 'right', color: '#0057FF' }}>더보기</Text>
+            </TouchableOpacity>
           </View>
           {/* 수정 */}
           <View style={{ display: 'flex', flexDirection: 'row', marginTop: 12 }}>
