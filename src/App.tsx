@@ -45,6 +45,7 @@ import {
   PersonalInfoScreen,
   InfoProcessScreen,
 } from './termsAgreement';
+import FriendPostReviewScreen from './shared/hooks/PostReviewScreen';
 import { MyFirstList, MySecondList, MyThirdList } from './profile/components';
 
 // 아이콘 사용 시
@@ -52,6 +53,7 @@ import { MyFirstList, MySecondList, MyThirdList } from './profile/components';
 
 const Stack = createStackNavigator();
 const MyPageStack = createStackNavigator();
+const FeedStack = createStackNavigator();
 const SearchStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
@@ -121,10 +123,19 @@ const BottomTap = () => {
         tabBarLabel: '',
         tabBarIcon: ({ focused }) => TabBarIcon(focused, route.name),
       })}>
-      <Tab.Screen name="Feed" component={FeedScreen} />
+      <Tab.Screen name="Feed" component={FeedStackScreen} />
       <Tab.Screen name="Search" component={SearchStackScreen} />
       <Tab.Screen name="MyPage" component={MyPageStackScreen} />
     </Tab.Navigator>
+  );
+};
+
+const FeedStackScreen = () => {
+  return (
+    <FeedStack.Navigator>
+      <FeedStack.Screen name="Feed" component={FeedScreen} />
+      <FeedStack.Screen name="PostReview" component={FriendPostReviewScreen} />
+    </FeedStack.Navigator>
   );
 };
 
@@ -202,6 +213,7 @@ const App: React.FC<void> = () => {
           <Stack.Screen name="Signup" component={SignupContainer} />
 
           <Stack.Screen name="Feed" component={BottomTap} />
+          <Stack.Screen name="PostReview" component={FriendPostReviewScreen} />
 
           <Stack.Screen name="MyEdit" component={MyEditScreen} />
           <Stack.Screen name="Post" component={PostScreen} />

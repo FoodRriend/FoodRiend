@@ -1,0 +1,176 @@
+{
+  "data": {
+    "users": [
+      {
+        "title": "벤티커피",
+        "foodCategory": "null",
+        "location": "경기도 부천시 원미구",
+        "userId": 1,
+        "name": "김성현",
+        "foodType": "고기",
+        "foodStyle": "숨은 맛집 개척자",
+        "nickname": "맛집 전문가",
+        "comments": "분위기가 좋고 커플끼리와서 인생 컷할 수 있는 공간",
+        "rating": 1,
+        "hashtag": [],
+        "created_at": "2021-10-12T15:30",
+        "profileImg": "https://images.unsplash.com/photo-1634099256464-b4c57809db96?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2MXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        "relatedImg": [
+          {
+            "img": "https://media.istockphoto.com/photos/korean-food-pickled-ginseng-honey-picture-id1130808162?s=612x612",
+            "created_at": "2021-10-12T15:30"
+          },
+          {
+            "img": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+            "created_at": "2021-10-12T11:30"
+          },
+          {
+            "img": " https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+            "created_at": "2021-10-12T11:30"
+          }
+        ],
+        "friends": [
+          {
+            "userId": 2,
+            "name": "김민아",
+            "nickname": "벤티커피조앙",
+            "foodType": "샐러드",
+            "foodStyle": "분야별 맛집 전문가",
+            "profileImg": "https://images.unsplash.com/photo-1634052328882-eb611683bf32?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+            "rating": "3",
+            "hashtag": ["#독서", "#혼자만의 공간"],
+            "comments": "분위기가 좋고 커플끼리와서 인생 컷할 수 있는 공간",
+            "relatedImg": [
+              {
+                "img": "https://images.unsplash.com/photo-1634052328882-eb611683bf32?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                "created_at": "2021-10-12T15:30"
+              }
+            ]
+          },
+          {
+            "userId": 2,
+            "name": "서윤경",
+            "nickname": "벤티커피조앙",
+            "foodStyle": "분위기 맛집 예술가",
+            "foodType": "베이커리/디저트",
+            "profileImg": "https://images.unsplash.com/photo-1634052328882-eb611683bf32?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+            "rating": "3",
+            "hashtag": ["#분위기", "#인생"],
+            "comments": "분위기가 좋고 커플끼리와서 인생 컷할 수 있는 공간",
+            "relatedImg": [
+              {
+                "img": "https://media.istockphoto.com/photos/korean-food-pickled-ginseng-honey-picture-id1130808162?s=612x612",
+                "created_at": "2021-10-12T15:30"
+              },
+              {
+                "img": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                "created_at": "2021-10-12T11:30"
+              },
+              {
+                "img": " https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+                "created_at": "2021-10-12T11:30"
+              }
+            ]
+          },
+          {
+            "userId": 2,
+            "name": "박진우",
+            "nickname": "벤티커피조앙",
+            "foodStyle": "지역맛집탐험가",
+            "foodType": "찌개/탕",
+            "profileImg": "https://images.unsplash.com/photo-1634052328882-eb611683bf32?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+            "rating": "3",
+            "comments": "분위기가 좋고 커플끼리와서 인생 컷할 수 있는 공간",
+            "hashtag": ["#따뜻함", "#겨울"],
+            "relatedImg": [
+              {
+                "img": "https://media.istockphoto.com/photos/korean-food-pickled-ginseng-honey-picture-id1130808162?s=612x612",
+                "created_at": "2021-10-12T15:30"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "벤티커피",
+        "foodCategory": "null",
+        "location": "경기도 부천시 원미구",
+        "userId": 1,
+        "name": "송고기",
+        "foodType": "고기",
+        "foodStyle": "숨은 맛집 개척자",
+        "nickname": "맛집 전문가",
+        "comments": "분위기가 좋고 커플끼리와서 인생 컷할 수 있는 공간",
+        "rating": 3,
+        "hashtag": [],
+        "created_at": "2021-10-12T15:30",
+        "profileImg": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        "relatedImg": [
+          {
+            "img": "https://media.istockphoto.com/photos/korean-food-pickled-ginseng-honey-picture-id1130808162?s=612x612",
+            "created_at": "2021-10-12T15:30"
+          },
+          {
+            "img": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+            "created_at": "2021-10-12T11:30"
+          },
+          {
+            "img": " https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+            "created_at": "2021-10-12T11:30"
+          }
+        ],
+        "friends": []
+      },
+      {
+        "title": "벤티커피",
+        "foodCategory": "null",
+        "location": "경기도 부천시 원미구",
+        "userId": 1,
+        "name": "장백반",
+        "foodType": "고기",
+        "foodStyle": "숨은 맛집 개척자",
+        "nickname": "맛집 전문가",
+        "comments": "분위기가 좋고 커플끼리와서 인생 컷할 수 있는 공간",
+        "rating": 2,
+        "hashtag": [],
+        "created_at": "2021-10-12T15:30",
+        "profileImg": "https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+        "relatedImg": [
+          {
+            "img": "https://media.istockphoto.com/photos/korean-food-pickled-ginseng-honey-picture-id1130808162?s=612x612",
+            "created_at": "2021-10-12T15:30"
+          },
+          {
+            "img": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+            "created_at": "2021-10-12T11:30"
+          },
+          {
+            "img": " https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+            "created_at": "2021-10-12T11:30"
+          }
+        ],
+        "friends": [
+          {
+            "userId": 2,
+            "name": "김민아",
+            "nickname": "벤티커피조앙",
+            "foodType": "샐러드",
+            "foodStyle": "분야별 맛집 전문가",
+            "profileImg": "https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+            "rating": "3",
+            "hashtag": ["#독서", "#혼자만의 공간"],
+            "comments": "분위기가 좋고 커플끼리와서 인생 컷할 수 있는 공간",
+            "relatedImg": [
+              {
+                "img": "https://media.istockphoto.com/photos/korean-food-pickled-ginseng-honey-picture-id1130808162?s=612x612",
+                "created_at": "2021-10-12T15:30"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "status": 200,
+    "isData": true
+  }
+}
