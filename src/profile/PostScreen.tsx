@@ -164,6 +164,7 @@ const PostScreen: React.FC = () => {
       if (response.assets !== undefined) {
         let uri = response.assets[0].uri;
         if (uri !== undefined) {
+          console.log(uri, '????');
           setAvatar(uri);
           setImageBol(true);
           dispatch(showPhotoModal(false));

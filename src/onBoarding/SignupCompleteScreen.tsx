@@ -22,7 +22,7 @@ const SignupCompleteScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const dispatch = useAppDispatch();
-  const { name, accessToken, nickname, loading, foodStyle, foodType } = useAppSelector(
+  const { name, accessToken, loading, nickname, foodStyle, foodType } = useAppSelector(
     (state) => state.users,
   );
 
@@ -58,15 +58,17 @@ const SignupCompleteScreen: React.FC = () => {
   headerStyle();
 
   const onPress = async () => {
-    await dispatch(
-      kakaoSignupInStorage({
-        accessToken: accessToken,
-        nickname: nickname,
-        name: name,
-        foodType: foodType,
-        foodStyle: foodStyle,
-      }),
-    );
+    if (name && foodType && foodStyle) {
+      await dispatch(
+        kakaoSignupInStorage({
+          accessToken: accessToken,
+          nickname: nickname,
+          name: name,
+          foodType: foodType,
+          foodStyle: foodStyle,
+        }),
+      );
+    }
     navigation.navigate('Feed');
   };
 

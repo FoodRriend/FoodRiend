@@ -16,7 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 import favFoodData from '../onBoarding/constants/FavFoodData';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import { addFoodType } from '../redux/userSlice';
+import {  addFoodEditType, addFoodEditStateType } from '../redux/userSlice';
 
 interface IRenderItemProps {
   title: string;
@@ -68,11 +68,7 @@ const EditFavFoodScreen: React.FC = () => {
       },
       headerLeft: () => (
         <>
-          <TouchableOpacity
-            style={styles.backIcon}
-            onPress={() => {
-              navigation.navigate('MyEdit');
-            }}>
+          <TouchableOpacity style={styles.backIcon} onPress={() => onPress()}>
             <Image source={require(`../assets/icons/Left.png`)}></Image>
           </TouchableOpacity>
         </>
@@ -83,18 +79,29 @@ const EditFavFoodScreen: React.FC = () => {
   headerStyle();
 
   const dispatch = useAppDispatch();
-  const { foodType } = useAppSelector((state) => state.users);
+  const { foodType, foodEditStateType, foodEditType } = useAppSelector((state) => state.users);
 
-  const [foodSelect, setFoodSelect] = useState<string | undefined>(foodType);
+  const [foodSelect, setFoodSelect] = useState<string | undefined>('');
 
   useEffect(() => {
-    if (foodSelect) {
-      dispatch(addFoodType(foodSelect));
+    if (!foodEditStateType && foodType) {
+      setFoodSelect(foodType);
     }
-  }, [foodSelect]);
+    if (foodEditStateType && foodEditType) {
+      setFoodSelect(foodEditType);
+    }
+  }, []);
 
   const handleFavFood = (food: string): void => {
     setFoodSelect(food);
+  };
+
+  const onPress = () => {
+    if (foodSelect) {
+      dispatch(addFoodEditType(foodSelect));
+      dispatch(addFoodEditStateType(true));
+      navigation.navigate('MyEdit');
+    }
   };
 
   const HandleFavFoodImage = (name: string) => {

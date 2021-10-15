@@ -3,30 +3,38 @@ import axios from 'axios';
 
 interface UserState {
   foodStyle: string | undefined;
+  foodEditStyle: string | undefined;
+  foodEditStateStyle: boolean;
   foodType: string | undefined;
+  foodEditType: string | undefined;
+  foodEditStateType: boolean;
   nickname: string | undefined;
   nicknameCheck: boolean;
+  nicknameFalseCheck: boolean;
   kakaoId: number | undefined;
   loginType: string | undefined;
   accessToken: Array<string> | undefined;
   name: string | undefined;
   isNewMember: boolean;
-  isLogin: boolean;
   loading: boolean;
   error: string | undefined;
 }
 
 const initialState = {
   foodStyle: undefined,
+  foodEditStyle: undefined,
+  foodEditStateStyle: false,
   foodType: undefined,
+  foodEditType: undefined,
+  foodEditStateType: false,
   nickname: undefined,
   nicknameCheck: false,
+  nicknameFalseCheck: false,
   kakaoId: undefined,
   loginType: undefined,
   accessToken: undefined,
   name: undefined,
   isNewMember: true,
-  isLogin: false,
   loading: false,
   error: undefined,
 } as UserState;
@@ -42,6 +50,7 @@ export const kakaoLoginInStorage = createAsyncThunk(
         withCredentials: true,
       },
     );
+    console.log('??', response.data);
     return [
       response.headers['set-cookie'][0].split(' ')[0].split('=')[1].slice(0, -1),
       response.data,
@@ -60,7 +69,7 @@ export const kakaoSignupInStorage = createAsyncThunk(
   }: {
     accessToken: Array<string> | undefined;
     name?: string | undefined;
-    nickname: string | undefined;
+    nickname?: string | undefined;
     foodType?: string | undefined;
     foodStyle?: string | undefined;
   }) => {
@@ -83,8 +92,20 @@ const userSlice = createSlice({
     addFoodStyle: (state, action: PayloadAction<string>) => {
       state.foodStyle = action.payload;
     },
+    addFoodEditStyle: (state, action: PayloadAction<string>) => {
+      state.foodEditStyle = action.payload;
+    },
+    addfoodEditStateStyle: (state, action: PayloadAction<boolean>) => {
+      state.foodEditStateStyle = action.payload;
+    },
     addFoodType: (state, action: PayloadAction<string>) => {
       state.foodType = action.payload;
+    },
+    addFoodEditType: (state, action: PayloadAction<string>) => {
+      state.foodEditType = action.payload;
+    },
+    addFoodEditStateType: (state, action: PayloadAction<boolean>) => {
+      state.foodEditStateType = action.payload;
     },
     addNickname: (state, action: PayloadAction<string>) => {
       state.nickname = action.payload;
@@ -97,9 +118,6 @@ const userSlice = createSlice({
     },
     kakaoIdUpdate: (state, action: PayloadAction<number>) => {
       state.kakaoId = action.payload;
-    },
-    isLoginState: (state, action: PayloadAction<boolean>) => {
-      state.isLogin = action.payload;
     },
   },
   extraReducers: {
@@ -118,14 +136,17 @@ const userSlice = createSlice({
     [kakaoSignupInStorage.pending.type]: (state, action) => {
       state.loading = true;
       state.nicknameCheck = false;
+      state.nicknameFalseCheck = false;
     },
     [kakaoSignupInStorage.fulfilled.type]: (state, action) => {
       state.loading = false;
       state.nicknameCheck = true;
+      state.nicknameFalseCheck = false;
     },
     [kakaoSignupInStorage.rejected.type]: (state, action) => {
       state.loading = false;
       state.nicknameCheck = false;
+      state.nicknameFalseCheck = true;
       state.error = action.payload;
     },
   },
@@ -133,11 +154,14 @@ const userSlice = createSlice({
 
 export const {
   addFoodStyle,
+  addFoodEditStyle,
+  addfoodEditStateStyle,
   addFoodType,
+  addFoodEditType,
+  addFoodEditStateType,
   addNickname,
   loginTypeUpdate,
   kakaoNameUpdate,
   kakaoIdUpdate,
-  isLoginState,
 } = userSlice.actions;
 export default userSlice.reducer;
