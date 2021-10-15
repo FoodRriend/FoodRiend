@@ -10,14 +10,23 @@ import {
   Image,
   FlatList,
   Platform,
+  ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { kakaoLoginInStorage } from '../redux/userSlice';
+
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const TermsAgreementScreen: React.FC = () => {
   const navigation = useNavigation();
+
+  const dispatch = useAppDispatch();
+  const { kakaoId, loginType, loading, isNewMember } = useAppSelector((state) => state.users);
 
   const headerStyle = () => {
     navigation.setOptions({
@@ -92,6 +101,37 @@ const TermsAgreementScreen: React.FC = () => {
       setCheckBtn(false);
     }
   }, [checkbox0, checkbox1, checkbox2, checkbox3]);
+
+  useEffect(() => {
+    let userId = kakaoId;
+    let userType = loginType;
+    if (userId && userType) {
+      dispatch(kakaoLoginInStorage({ kakaoId: userId, loginType: userType }));
+    }
+  }, [kakaoId, loginType]);
+
+  // useEffect(() => {
+  //   if (isNewMember === false) {
+  //     navigation.navigate('Feed');
+  //   }
+  // }, [isNewMember]);
+
+  // useEffect(() => {
+  //   AsyncStorage.setItem(
+  //     'accessToken',
+  //     JSON.stringify({
+  //       accessToken,
+  //     }),
+  //   );
+  // }, accessToken);
+
+  if (loading) {
+    return (
+      <View style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center' }}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
 
   return (
     <Wrapper>

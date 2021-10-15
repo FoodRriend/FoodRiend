@@ -13,7 +13,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import favFoodData from './constants/FavFoodData';
+import favFoodData from '../onBoarding/constants/FavFoodData';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { addFoodType } from '../redux/userSlice';
@@ -38,7 +38,7 @@ const fomatFavFoodData = (favFoodData: any, numColumns: number) => {
 
 const numColumns = 3;
 
-const AddFavFoodScreen: React.FC = () => {
+const EditFavFoodScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const headerStyle = () => {
@@ -71,27 +71,10 @@ const AddFavFoodScreen: React.FC = () => {
           <TouchableOpacity
             style={styles.backIcon}
             onPress={() => {
-              navigation.navigate('AddStyle');
+              navigation.navigate('MyEdit');
             }}>
             <Image source={require(`../assets/icons/Left.png`)}></Image>
           </TouchableOpacity>
-        </>
-      ),
-      headerRight: () => (
-        <>
-          {foodSelect ? (
-            <TouchableOpacity
-              style={styles.rightIcon}
-              onPress={() => {
-                navigation.navigate('AddFriends');
-              }}>
-              <Image source={require(`../assets/icons/RightVector.png`)}></Image>
-            </TouchableOpacity>
-          ) : (
-            <Pressable style={styles.rightIcon}>
-              <Image source={require(`../assets/icons/RightVector.png`)}></Image>
-            </Pressable>
-          )}
         </>
       ),
     });
@@ -100,12 +83,14 @@ const AddFavFoodScreen: React.FC = () => {
   headerStyle();
 
   const dispatch = useAppDispatch();
+  const { foodType } = useAppSelector((state) => state.users);
 
-  const [foodSelect, setFoodSelect] = useState<string>('');
+  const [foodSelect, setFoodSelect] = useState<string | undefined>(foodType);
 
   useEffect(() => {
-    console.log('foodSelect', foodSelect);
-    dispatch(addFoodType(foodSelect));
+    if (foodSelect) {
+      dispatch(addFoodType(foodSelect));
+    }
   }, [foodSelect]);
 
   const handleFavFood = (food: string): void => {
@@ -195,7 +180,7 @@ const AddFavFoodScreen: React.FC = () => {
   );
 };
 
-export default AddFavFoodScreen;
+export default EditFavFoodScreen;
 
 const styles = StyleSheet.create({
   backIcon: {

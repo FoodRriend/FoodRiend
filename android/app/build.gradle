@@ -121,6 +121,29 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
+    packagingOptions {
+
+        exclude 'META-INF/DEPENDENCIES.txt'
+
+        exclude 'META-INF/LICENSE.txt'
+
+        exclude 'META-INF/NOTICE.txt'
+
+        exclude 'META-INF/NOTICE'
+
+        exclude 'META-INF/LICENSE'
+
+        exclude 'META-INF/DEPENDENCIES'
+
+        exclude 'META-INF/notice.txt'
+
+        exclude 'META-INF/license.txt'
+
+        exclude 'META-INF/dependencies.txt'
+
+        exclude 'META-INF/LGPL2.1'
+
+    }
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -179,6 +202,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-contacts')
     implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion

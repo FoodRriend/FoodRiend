@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/native';
-import { Text, Pressable, StyleSheet, Image, View, Platform, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  Pressable,
+  StyleSheet,
+  Image,
+  View,
+  Platform,
+  TouchableOpacity,
+  PermissionsAndroid,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {
   KakaoOAuthToken,
@@ -10,29 +19,83 @@ import {
   // unlink,
 } from '@react-native-seoul/kakao-login';
 import axios from 'axios';
+import Contacts from 'react-native-contacts';
+
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { loginTypeUpdate, kakaoNameUpdate, kakaoIdUpdate } from '../redux/userSlice';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen: React.FC = () => {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
 
-  const [result, setResult] = useState<string>('');
+  const [contacts, setContacts] = useState<string>('');
+  const [kakaoId, setKakaoId] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [loginType, setLoginType] = useState<string>('');
+
+  const [token, setToken] = useState('');
+
+  // useEffect(() => {}, [contacts]);
+
+  useEffect(() => {
+    dispatch(kakaoIdUpdate(Number(kakaoId)));
+  }, [kakaoId]);
+
+  useEffect(() => {
+    dispatch(kakaoNameUpdate(name));
+  }, [name]);
+
+  useEffect(() => {
+    dispatch(loginTypeUpdate(loginType));
+  }, [loginType]);
 
   const signInWithKakao = async (): Promise<void> => {
     const token: KakaoOAuthToken = await login();
+    // 카카오 토큰 : 필요시 나중에 수정
   };
 
   const getProfile = async (): Promise<void> => {
     const profile: KakaoProfile = await getKakaoProfile();
-    console.log(profile);
-    setResult(JSON.stringify(profile));
+    setKakaoId(profile.id);
+    setName(profile.nickname);
+    setLoginType('Kakao');
   };
+
+  useEffect(() => {
+    userTokenHandler();
+  }, []);
+
+  const getList = async () => {
+    let contacts = await Contacts.getAll();
+    // console.log(contacts, 'contacts???');
+  };
+
+  const userTokenHandler = async () => {
+    const userData = await AsyncStorage.getItem('accessToken');
+    if (userData) {
+      const token = JSON.parse(userData);
+      setToken(token.accessToken);
+    }
+  };
+
+  // console.log(token, '????');
 
   const onPress = async () => {
     if (Platform.OS === 'android') {
       await signInWithKakao();
       await getProfile();
-      // await unlink();
+      PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
+        title: 'Contacts',
+        message: 'This app would like to view your contacts.',
+        buttonPositive: 'Please accept bare mortal',
+      }).then(() => {
+        getList();
+      });
       navigation.navigate('Terms');
     } else {
+      getList();
       navigation.navigate('Terms');
     }
   };
