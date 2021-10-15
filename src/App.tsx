@@ -27,6 +27,8 @@ import {
   MyPostReviewScreen,
   AlertScreen,
   PostScreen,
+  EditFavFoodScreen,
+  EditStyleScreen,
 } from './profile';
 import {
   SearchScreen,
@@ -222,6 +224,8 @@ const App: React.FC<void> = () => {
           <Stack.Screen name="PostReview" component={FriendPostReviewScreen} />
 
           <Stack.Screen name="MyEdit" component={MyEditScreen} />
+          <Stack.Screen name="EditFavFood" component={EditFavFoodScreen} />
+          <Stack.Screen name="EditStyle" component={EditStyleScreen} />
           <Stack.Screen name="Post" component={PostScreen} />
 
           <Stack.Screen name="Account" component={AccountScreen} />

@@ -97,7 +97,7 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
 
   headerStyle();
 
-  const { foodStyle, foodType, nickname } = useAppSelector((state) => state.users);
+  const { foodStyle, foodType, nickname, name } = useAppSelector((state) => state.users);
   const { scrollState } = useAppSelector((state) => state.profiles);
 
   const [scrollNum, setScrollNum] = useState(0);
@@ -191,13 +191,13 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
         <MyScreenInfoContainer>
           <TouchableOpacity onPress={() => navigations.navigate('MyEdit')}>
             <Image
-              source={require(`../assets/images/onBoading/friends/friend6.png`)}
+              source={require(`../assets/icons/defaultProfile.png`)}
               style={{ width: 95, height: 95, marginLeft: 10 }}
             />
           </TouchableOpacity>
           <View style={styles.myScreenInfoItem}>
-            <Text style={styles.myScreenInfoText}>김민아</Text>
-            <Text style={styles.myScreenInfoText}>바른맛집사나이</Text>
+            <Text style={styles.myScreenInfoText}>{name}</Text>
+            <Text style={styles.myScreenInfoText}>{nickname}</Text>
             <View style={{ width: '100%', height: 28, flexWrap: 'wrap' }}>
               {HandleFavFoodImage(foodType)}
               {HandleFoodStyleImage(foodStyle)}

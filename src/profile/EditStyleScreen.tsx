@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/native';
 
 import {
@@ -18,9 +18,8 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { addFoodStyle } from '../redux/userSlice';
 
-const AddStyleScreen: React.FC = () => {
+const EditStyleScreen: React.FC = () => {
   const navigation = useNavigation();
-
 
   const headerStyle = () => {
     navigation.setOptions({
@@ -51,27 +50,10 @@ const AddStyleScreen: React.FC = () => {
         <TouchableOpacity
           style={styles.BackIcon}
           onPress={() => {
-            navigation.navigate('Signup');
+            navigation.navigate('MyEdit');
           }}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
         </TouchableOpacity>
-      ),
-      headerRight: () => (
-        <>
-          {checkNextBtn ? (
-            <TouchableOpacity
-              style={styles.RightIcon}
-              onPress={() => {
-                navigation.navigate('AddFavFood');
-              }}>
-              <Image source={require(`../assets/icons/RightVector.png`)}></Image>
-            </TouchableOpacity>
-          ) : (
-            <Pressable style={styles.RightIcon}>
-              <Image source={require(`../assets/icons/RightVector.png`)}></Image>
-            </Pressable>
-          )}
-        </>
       ),
     });
   };
@@ -79,6 +61,7 @@ const AddStyleScreen: React.FC = () => {
   headerStyle();
 
   const dispatch = useAppDispatch();
+  const { foodStyle } = useAppSelector((state) => state.users);
 
   const [checkbox1, setCheckbox1] = useState(false);
   const [checkbox2, setCheckbox2] = useState(false);
@@ -87,7 +70,12 @@ const AddStyleScreen: React.FC = () => {
   const [checkbox5, setCheckbox5] = useState(false);
 
   const [checkState, setCheckState] = useState('');
-  const [checkNextBtn, setCheckNextBtn] = useState(false);
+
+  useEffect(() => {
+    if (foodStyle) {
+      handleCheckbox(foodStyle);
+    }
+  }, []);
 
   const handleCheckbox = (style: string) => {
     setCheckState(style);
@@ -133,9 +121,6 @@ const AddStyleScreen: React.FC = () => {
   useEffect(() => {
     if (checkbox1 || checkbox2 || checkbox3 || checkbox4 || checkbox5) {
       dispatch(addFoodStyle(checkState));
-      setCheckNextBtn(true);
-    } else {
-      setCheckNextBtn(false);
     }
   }, [checkbox1, checkbox2, checkbox3, checkbox4, checkbox5]);
 
@@ -287,7 +272,7 @@ const AddStyleScreen: React.FC = () => {
   );
 };
 
-export default AddStyleScreen;
+export default EditStyleScreen;
 
 const styles = StyleSheet.create({
   TextTitle: {

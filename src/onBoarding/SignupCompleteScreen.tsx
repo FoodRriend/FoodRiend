@@ -11,11 +11,20 @@ import {
   Pressable,
   Platform,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { kakaoSignupInStorage } from '../redux/userSlice';
+
 const SignupCompleteScreen: React.FC = () => {
   const navigation = useNavigation();
+
+  const dispatch = useAppDispatch();
+  const { name, accessToken, nickname, loading, foodStyle, foodType } = useAppSelector(
+    (state) => state.users,
+  );
 
   const headerStyle = () => {
     navigation.setOptions({
@@ -48,6 +57,27 @@ const SignupCompleteScreen: React.FC = () => {
 
   headerStyle();
 
+  const onPress = async () => {
+    await dispatch(
+      kakaoSignupInStorage({
+        accessToken: accessToken,
+        nickname: nickname,
+        name: name,
+        foodType: foodType,
+        foodStyle: foodStyle,
+      }),
+    );
+    navigation.navigate('Feed');
+  };
+
+  if (loading) {
+    return (
+      <View style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center' }}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
   return (
     <Wrapper>
       <Image
@@ -72,11 +102,7 @@ const SignupCompleteScreen: React.FC = () => {
           <Text style={styles.signupEndContent}>맛있는 순간을 함께 해요!</Text>
         </View>
       </SignupEndTextContainer>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('Feed');
-        }}
-        style={styles.signupEndButton}>
+      <TouchableOpacity onPress={() => onPress()} style={styles.signupEndButton}>
         <Text style={styles.signupEndButtonText}>이용하러 가기</Text>
       </TouchableOpacity>
     </Wrapper>

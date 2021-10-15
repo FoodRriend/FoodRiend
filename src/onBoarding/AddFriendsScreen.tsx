@@ -16,6 +16,8 @@ import { useNavigation } from '@react-navigation/native';
 const AddFriendsScreen: React.FC = () => {
   const navigation = useNavigation();
 
+  
+
   const headerStyle = () => {
     navigation.setOptions({
       headerShown: true,

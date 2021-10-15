@@ -28,7 +28,7 @@ const RestaurantPhotoDetailScreen: React.FC = () => {
 
   return (
     <View style={{ alignItems: 'center', backgroundColor: '#fff', height: '100%' }}>
-      <Image source={require('../assets/icons/closeButton.svg')} style={styles.headerIcon} />
+      {/* <Image source={require('../assets/icons/closeButton.svg')} style={styles.headerIcon} /> */}
       <View style={styles.headerText}>
         <Text style={{ fontSize: 15, fontWeight: '600' }}>전통 삼겹살</Text>
       </View>
@@ -71,7 +71,7 @@ const RestaurantPhotoDetailScreen: React.FC = () => {
                     style={{ width: 33, height: 62, resizeMode: 'contain', marginRight: 5 }}
                   />
                   <Image
-                    source={foodStyleFile['분야별맛집전문가']}
+                    source={foodStyleFile['분야별 맛집 전문가']}
                     style={{ width: 33, resizeMode: 'contain', marginRight: 5 }}
                   />
                 </View>
@@ -98,7 +98,7 @@ const RestaurantPhotoDetailScreen: React.FC = () => {
                     style={{ width: 33, height: 62, resizeMode: 'contain', marginRight: 5 }}
                   />
                   <Image
-                    source={foodStyleFile['분야별맛집전문가']}
+                    source={foodStyleFile['분야별 맛집 전문가']}
                     style={{ width: 33, resizeMode: 'contain', marginRight: 5 }}
                   />
                 </View>
@@ -125,7 +125,7 @@ const RestaurantPhotoDetailScreen: React.FC = () => {
                     style={{ width: 33, height: 62, resizeMode: 'contain', marginRight: 5 }}
                   />
                   <Image
-                    source={foodStyleFile['분야별맛집전문가']}
+                    source={foodStyleFile['분야별 맛집 전문가']}
                     style={{ width: 33, resizeMode: 'contain', marginRight: 5 }}
                   />
                 </View>
@@ -152,7 +152,7 @@ const RestaurantPhotoDetailScreen: React.FC = () => {
                     style={{ width: 33, height: 62, resizeMode: 'contain', marginRight: 5 }}
                   />
                   <Image
-                    source={foodStyleFile['분야별맛집전문가']}
+                    source={foodStyleFile['분야별 맛집 전문가']}
                     style={{ width: 33, resizeMode: 'contain', marginRight: 5 }}
                   />
                 </View>

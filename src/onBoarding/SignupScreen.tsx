@@ -10,11 +10,17 @@ import {
   Image,
   Platform,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import { addNickname } from '../redux/userSlice';
+import {
+  addNickname,
+  kakaoNameUpdate,
+  kakaoSignupInStorage,
+  isLoginState,
+} from '../redux/userSlice';
 
 const SignupScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -59,11 +65,13 @@ const SignupScreen: React.FC = () => {
   headerStyle();
 
   const dispatch = useAppDispatch();
+  const { name, accessToken, nicknameCheck, loading } = useAppSelector((state) => state.users);
 
-  const [inputID, setInputID] = useState('사용자 이름');
+  const [inputID, setInputID] = useState<string | undefined>(name);
   const [inputNickname, setInputNickname] = useState('');
 
   const [inputCheck, setInputCheck] = useState(false);
+  const [inputNameCheck, setInputNameCheck] = useState(false);
   const [denyMessage, setDenyMessage] = useState('');
 
   const handleInputID = useCallback(
@@ -82,10 +90,23 @@ const SignupScreen: React.FC = () => {
   );
 
   useEffect(() => {
+    if (inputID) {
+      handleNameCheckForm(inputID);
+    }
+  }, [inputID]);
+
+  useEffect(() => {
     handleCheckForm(inputNickname);
   }, [inputNickname]);
 
   useEffect(() => {
+    setInputCheck(true);
+    setDenyMessage('닉네임을 사용할 수 있습니다.');
+  }, [nicknameCheck]);
+
+  useEffect(() => {
+    setInputCheck(false);
+    dispatch(isLoginState(false));
     if (inputNickname === null || inputNickname === '') {
       setDenyMessage('');
     }
@@ -110,8 +131,12 @@ const SignupScreen: React.FC = () => {
   const handleCheckForm = (nickname: string) => {
     if (/^[가-힣a-z0-9_.]+$/.test(nickname)) {
       if (checkNicknameLeng(nickname) >= 3 && checkNicknameLeng(nickname) <= 12) {
-        setInputCheck(true);
-        setDenyMessage('닉네임을 사용할 수 있습니다.');
+        dispatch(
+          kakaoSignupInStorage({
+            accessToken: accessToken,
+            nickname: nickname,
+          }),
+        );
       } else {
         setInputCheck(false);
         setDenyMessage('닉네임은 영어 3~12자 한글 2~6자로 입력이 가능합니다.');
@@ -136,9 +161,34 @@ const SignupScreen: React.FC = () => {
     }
   };
 
+  const handleNameCheckForm = (nickname: string) => {
+    if (/^[가-힣a-z0-9_.]+$/.test(nickname)) {
+      if (checkNicknameLeng(nickname) >= 3 && checkNicknameLeng(nickname) <= 12) {
+        setInputNameCheck(true);
+      } else {
+        setInputNameCheck(false);
+      }
+    } else {
+      if (inputNickname === null || inputNickname === '') {
+        setInputNameCheck(false);
+      } else if (/[`~!@#$%^&*|\\\'\";:\/?]/gi.test(nickname)) {
+        setInputNameCheck(false);
+      } else if (/[A-Z]/.test(nickname)) {
+        setInputNameCheck(false);
+      } else if (/[ㄱ-ㅎ|ㅏ-ㅣ]/.test(nickname)) {
+        setInputNameCheck(false);
+      } else if (nickname.search(/\s/) != -1) {
+        setInputNameCheck(false);
+      }
+    }
+  };
+
   const onPress = () => {
-    navigation.navigate('AddStyle');
     dispatch(addNickname(inputNickname));
+    if (inputID) {
+      dispatch(kakaoNameUpdate(inputID));
+    }
+    navigation.navigate('AddStyle');
   };
 
   return (
@@ -155,15 +205,15 @@ const SignupScreen: React.FC = () => {
           />
         </View>
         <TextInput
+          maxLength={10}
           autoCapitalize={'none'}
           onChangeText={handleInputID}
           style={styles.InPutID}
           value={inputID}
-          editable={false}
         />
       </InputContainer>
       <InputContainer style={{ marginTop: 20 }}>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        <View style={{ flexDirection: 'row' }}>
           <View style={styles.inputImage}>
             <Image
               style={{ width: 24, height: 24, borderRadius: 12 }}
@@ -179,7 +229,19 @@ const SignupScreen: React.FC = () => {
             autoFocus={true}
             placeholder="닉네임"
           />
-          {/* <Text style={styles.NicknameCheck}>중복확인</Text> */}
+          {loading ? (
+            <View
+              style={{
+                width: 50,
+                height: 43,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <ActivityIndicator />
+            </View>
+          ) : (
+            <></>
+          )}
         </View>
       </InputContainer>
       <View style={styles.inputValidity}>
@@ -189,7 +251,7 @@ const SignupScreen: React.FC = () => {
           <Text style={styles.inputValidityFalseText}>{denyMessage}</Text>
         )}
       </View>
-      {inputCheck ? (
+      {inputCheck && inputNameCheck && nicknameCheck ? (
         <TouchableOpacity onPress={onPress} style={styles.SignupComplete}>
           <Text style={styles.SignupCompleteText}>완료</Text>
         </TouchableOpacity>
@@ -212,6 +274,7 @@ const styles = StyleSheet.create({
     color: '#2a3037',
   },
   InPutID: {
+    width: '75%',
     paddingLeft: 15,
     fontStyle: 'normal',
     color: '#2a3037',
@@ -224,14 +287,17 @@ const styles = StyleSheet.create({
         fontWeight: '600',
       },
     }),
+    marginLeft: 5,
   },
   InPutNickname: {
-    width: '75%',
+    width: '70%',
+    height: 44,
     paddingLeft: 15,
     fontSize: 15,
     fontWeight: '500',
     fontStyle: 'normal',
     color: '#2a3037',
+    marginLeft: 5,
   },
   NicknameCheck: {
     fontStyle: 'normal',

@@ -13,8 +13,12 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+
 const MyEditScreen: React.FC = () => {
   const navigation = useNavigation();
+
+  const { foodStyle, foodType, nickname, name } = useAppSelector((state) => state.users);
 
   const headerStyle = () => {
     navigation.setOptions({
@@ -55,6 +59,73 @@ const MyEditScreen: React.FC = () => {
 
   headerStyle();
 
+  const HandleFavFoodImage = (name: any) => {
+    let FavFoodImagePath;
+    switch (name) {
+      case '술':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/grapes.png');
+        break;
+      case '커피':
+        FavFoodImagePath = require(`../assets/images/onBoading/favFood/coffee.png`);
+        break;
+      case '베이커리/디저트':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/pudding.png');
+        break;
+      case '해산물':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/octopus.png');
+        break;
+      case '치킨':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/friedChicken.png');
+        break;
+      case '피자':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/pizza.png');
+        break;
+      case '면':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/noodles.png');
+        break;
+      case '분식':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/tteokbokki.png');
+        break;
+      case '샐러드':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/salad.png');
+        break;
+      case '국밥':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/riceSoup.png');
+        break;
+      case '찌개/탕':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/stew.png');
+        break;
+      case '고기':
+        FavFoodImagePath = require('../assets/images/onBoading/favFood/chop.png');
+        break;
+    }
+
+    return <Image source={FavFoodImagePath} style={styles.myEditItemBoxImage} />;
+  };
+
+  const HandleFoodStyleImage = (name: any) => {
+    let FoodStyleImagePath;
+    switch (name) {
+      case '지역 맛집 탐험가':
+        FoodStyleImagePath = require('../assets/images/onBoading/addStyle/addStyleImage0.png');
+        break;
+      case '새로운 음식 모험가':
+        FoodStyleImagePath = require(`../assets/images/onBoading/addStyle/addStyleImage4.png`);
+        break;
+      case '분야별 맛집 전문가':
+        FoodStyleImagePath = require('../assets/images/onBoading/addStyle/addStyleImage1.png');
+        break;
+      case '숨은 맛집 개척자':
+        FoodStyleImagePath = require('../assets/images/onBoading/addStyle/addStyleImage2.png');
+        break;
+      case '분위기 맛집 예술가':
+        FoodStyleImagePath = require('../assets/images/onBoading/addStyle/addStyleImage3.png');
+        break;
+    }
+
+    return <Image source={FoodStyleImagePath} style={styles.myEditItemBoxImage} />;
+  };
+
   const onPress = () => {
     navigation.navigate('MyPage');
   };
@@ -63,17 +134,17 @@ const MyEditScreen: React.FC = () => {
     <Wrapper>
       <TouchableOpacity>
         <Image
-          source={require(`../assets/images/onBoading/friends/friend6.png`)}
+          source={require(`../assets/icons/defaultProfile.png`)}
           style={styles.myEditProfileImage}
         />
       </TouchableOpacity>
 
-      <Text style={styles.myEditName}>김민아</Text>
-      <Text style={styles.myEditNickname}>바른맛집사나이</Text>
+      <Text style={styles.myEditName}>{name}</Text>
+      <Text style={styles.myEditNickname}>{nickname}</Text>
       <MyEditInfoStyleContainer>
         <View style={styles.myEditItemTitle}>
           <Text style={styles.myEditItemTitleText}>나의 맛집 스타일</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('AddStyle')}>
+          <TouchableOpacity onPress={() => navigation.navigate('EditStyle')}>
             <Image
               source={require(`../assets/icons/click.png`)}
               style={styles.myEditItemTitleBtn}
@@ -81,17 +152,14 @@ const MyEditScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.myEditItemBox}>
-          <Text style={styles.myEditItemBoxText}>새로운 음식 모험가</Text>
-          <Image
-            source={require(`../assets/images/onBoading/addStyle/addStyleImage1.png`)}
-            style={styles.myEditItemBoxImage}
-          />
+          <Text style={styles.myEditItemBoxText}>{foodStyle}</Text>
+          {HandleFoodStyleImage(foodStyle)}
         </View>
       </MyEditInfoStyleContainer>
       <MyEditInfoFoodContainer>
         <View style={styles.myEditItemTitle}>
           <Text style={styles.myEditItemTitleText}>나의 음식 취향</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('AddFavFood')}>
+          <TouchableOpacity onPress={() => navigation.navigate('EditFavFood')}>
             <Image
               source={require(`../assets/icons/click.png`)}
               style={styles.myEditItemTitleBtn}
@@ -99,14 +167,11 @@ const MyEditScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.myEditItemBox}>
-          <Text style={styles.myEditItemBoxText}>국밥</Text>
-          <Image
-            source={require(`../assets/images/onBoading/favFood/chop.png`)}
-            style={styles.myEditItemBoxImage}
-          />
+          <Text style={styles.myEditItemBoxText}>{foodType}</Text>
+          {HandleFavFoodImage(foodType)}
         </View>
       </MyEditInfoFoodContainer>
-      <TouchableOpacity onPress={onPress} style={styles.myEditButton}>
+      <TouchableOpacity onPress={() => onPress()} style={styles.myEditButton}>
         <Text style={styles.myEditButtonText}>완료</Text>
       </TouchableOpacity>
     </Wrapper>
