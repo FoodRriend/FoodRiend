@@ -18,8 +18,6 @@ import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { fetchFeedData, userType } from '@/redux/feedSlice';
 
-import { isLoginState } from '../redux/userSlice';
-
 const FeedScreen: React.FC = () => {
   const navigation = useNavigation();
 
@@ -37,7 +35,6 @@ const FeedScreen: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchFeedData());
-    dispatch(isLoginState(true));
   }, []);
 
   const scrollY = new Animated.Value(0);

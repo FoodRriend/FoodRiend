@@ -15,12 +15,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import {
-  addNickname,
-  kakaoNameUpdate,
-  kakaoSignupInStorage,
-  isLoginState,
-} from '../redux/userSlice';
+import { addNickname, kakaoNameUpdate, kakaoSignupInStorage } from '../redux/userSlice';
 
 const SignupScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -65,7 +60,9 @@ const SignupScreen: React.FC = () => {
   headerStyle();
 
   const dispatch = useAppDispatch();
-  const { name, accessToken, nicknameCheck, loading } = useAppSelector((state) => state.users);
+  const { name, accessToken, nicknameCheck, loading, nicknameFalseCheck } = useAppSelector(
+    (state) => state.users,
+  );
 
   const [inputID, setInputID] = useState<string | undefined>(name);
   const [inputNickname, setInputNickname] = useState('');
@@ -100,13 +97,19 @@ const SignupScreen: React.FC = () => {
   }, [inputNickname]);
 
   useEffect(() => {
-    setInputCheck(true);
-    setDenyMessage('닉네임을 사용할 수 있습니다.');
+    if (nicknameCheck) {
+      setInputCheck(true);
+      setDenyMessage('닉네임을 사용할 수 있습니다.');
+    }
   }, [nicknameCheck]);
 
   useEffect(() => {
     setInputCheck(false);
-    dispatch(isLoginState(false));
+    setDenyMessage('닉네임이 사용중입니다.');
+  }, [nicknameFalseCheck]);
+
+  useEffect(() => {
+    setInputCheck(false);
     if (inputNickname === null || inputNickname === '') {
       setDenyMessage('');
     }
@@ -131,12 +134,14 @@ const SignupScreen: React.FC = () => {
   const handleCheckForm = (nickname: string) => {
     if (/^[가-힣a-z0-9_.]+$/.test(nickname)) {
       if (checkNicknameLeng(nickname) >= 3 && checkNicknameLeng(nickname) <= 12) {
-        dispatch(
-          kakaoSignupInStorage({
-            accessToken: accessToken,
-            nickname: nickname,
-          }),
-        );
+        if (nickname) {
+          dispatch(
+            kakaoSignupInStorage({
+              accessToken: accessToken,
+              nickname: nickname,
+            }),
+          );
+        }
       } else {
         setInputCheck(false);
         setDenyMessage('닉네임은 영어 3~12자 한글 2~6자로 입력이 가능합니다.');

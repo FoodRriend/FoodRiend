@@ -1,24 +1,43 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import {
-  Text,
-  View,
-  Pressable,
-  StyleSheet,
-  TextInput,
-  Image,
-  Platform,
-  TouchableOpacity,
-} from 'react-native';
+import { Text, View, StyleSheet, Image, Platform, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 
+import { launchCamera, launchImageLibrary, ImagePickerResponse } from 'react-native-image-picker';
+
+import { ProfilePhotoModal } from '../shared/modal';
+import {
+  showProfilePhotoModal,
+  changeModalProfileUri,
+  isdefaultImageState,
+} from '../redux/modalSlice';
+import {
+  addFoodEditStyle,
+  addfoodEditStateStyle,
+  addFoodEditType,
+  addFoodEditStateType,
+  addFoodStyle,
+  addFoodType,
+} from '../redux/userSlice';
+
 const MyEditScreen: React.FC = () => {
   const navigation = useNavigation();
 
-  const { foodStyle, foodType, nickname, name } = useAppSelector((state) => state.users);
+  const dispatch = useAppDispatch();
+  const {
+    foodStyle,
+    foodType,
+    nickname,
+    name,
+    foodEditStyle,
+    foodEditStateStyle,
+    foodEditStateType,
+    foodEditType,
+  } = useAppSelector((state) => state.users);
+  const { profileUri, defaultImageState } = useAppSelector((state) => state.modals);
 
   const headerStyle = () => {
     navigation.setOptions({
@@ -46,11 +65,7 @@ const MyEditScreen: React.FC = () => {
         borderColor: '#dfe2e5',
       },
       headerLeft: () => (
-        <TouchableOpacity
-          style={styles.BackIcon}
-          onPress={() => {
-            navigation.navigate('MyPage');
-          }}>
+        <TouchableOpacity style={styles.BackIcon} onPress={() => onBackPress()}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
         </TouchableOpacity>
       ),
@@ -126,17 +141,102 @@ const MyEditScreen: React.FC = () => {
     return <Image source={FoodStyleImagePath} style={styles.myEditItemBoxImage} />;
   };
 
+  const [avatar, setAvatar] = useState<string | undefined>(profileUri);
+  const [defaultImage, setDefalutImage] = useState(defaultImageState);
+
   const onPress = () => {
+    if (avatar) {
+      dispatch(changeModalProfileUri(avatar));
+      dispatch(isdefaultImageState(defaultImage));
+    }
+    if (foodEditStateStyle && foodEditStyle) {
+      dispatch(addFoodStyle(foodEditStyle));
+    }
+    if (foodEditStateType && foodEditType) {
+      dispatch(addFoodType(foodEditType));
+    }
+    dispatch(addFoodEditStyle(''));
+    dispatch(addfoodEditStateStyle(false));
+    dispatch(addFoodEditType(''));
+    dispatch(addFoodEditStateType(false));
     navigation.navigate('MyPage');
+  };
+
+  const onBackPress = () => {
+    dispatch(addFoodEditStyle(''));
+    dispatch(addfoodEditStateStyle(false));
+    dispatch(addFoodEditType(''));
+    dispatch(addFoodEditStateType(false));
+    navigation.navigate('MyPage');
+  };
+
+  const openModal = () => {
+    dispatch(showProfilePhotoModal(true));
+  };
+
+  const defaultImageHandler = () => {
+    setDefalutImage(false);
+    dispatch(showProfilePhotoModal(false));
+  };
+
+  const openCamara = () => {
+    let options: any = {
+      storageOption: {
+        path: 'images',
+        mediaType: 'photo',
+      },
+      includeBase64: true,
+      saveToPhotos: true,
+    };
+    launchCamera(options, (response: ImagePickerResponse) => {
+      if (response.assets !== undefined) {
+        let uri = response.assets[0].uri;
+        if (uri !== undefined) {
+          setAvatar(uri);
+          setDefalutImage(true);
+          dispatch(showProfilePhotoModal(false));
+        }
+      }
+    });
+  };
+
+  const openImageLibrary = () => {
+    let options: any = {
+      storageOption: {
+        path: 'images',
+        mediaType: 'photo',
+      },
+      includeBase64: true,
+      saveToPhotos: true,
+    };
+    launchImageLibrary(options, (response: ImagePickerResponse) => {
+      if (response.assets !== undefined) {
+        let uri = response.assets[0].uri;
+        if (uri !== undefined) {
+          setAvatar(uri);
+          setDefalutImage(true);
+          dispatch(showProfilePhotoModal(false));
+        }
+      }
+    });
   };
 
   return (
     <Wrapper>
-      <TouchableOpacity>
-        <Image
-          source={require(`../assets/icons/defaultProfile.png`)}
-          style={styles.myEditProfileImage}
-        />
+      <ProfilePhotoModal
+        openCamara={openCamara}
+        openImageLibrary={openImageLibrary}
+        defaultImageHandler={defaultImageHandler}
+      />
+      <TouchableOpacity onPress={() => openModal()}>
+        {defaultImage ? (
+          <Image source={{ uri: avatar }} style={styles.myEditProfileImage} />
+        ) : (
+          <Image
+            source={require(`../assets/icons/defaultProfile.png`)}
+            style={styles.myEditProfileImage}
+          />
+        )}
       </TouchableOpacity>
 
       <Text style={styles.myEditName}>{name}</Text>
@@ -152,8 +252,13 @@ const MyEditScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.myEditItemBox}>
-          <Text style={styles.myEditItemBoxText}>{foodStyle}</Text>
-          {HandleFoodStyleImage(foodStyle)}
+          {foodEditStateStyle ? (
+            <Text style={styles.myEditItemBoxText}>{foodEditStyle}</Text>
+          ) : (
+            <Text style={styles.myEditItemBoxText}>{foodStyle}</Text>
+          )}
+          {foodEditStateStyle && HandleFoodStyleImage(foodEditStyle)}
+          {!foodEditStateStyle && HandleFoodStyleImage(foodStyle)}
         </View>
       </MyEditInfoStyleContainer>
       <MyEditInfoFoodContainer>
@@ -167,8 +272,13 @@ const MyEditScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.myEditItemBox}>
-          <Text style={styles.myEditItemBoxText}>{foodType}</Text>
-          {HandleFavFoodImage(foodType)}
+          {foodEditStateType ? (
+            <Text style={styles.myEditItemBoxText}>{foodEditType}</Text>
+          ) : (
+            <Text style={styles.myEditItemBoxText}>{foodType}</Text>
+          )}
+          {foodEditStateType && HandleFavFoodImage(foodEditType)}
+          {!foodEditStateType && HandleFavFoodImage(foodType)}
         </View>
       </MyEditInfoFoodContainer>
       <TouchableOpacity onPress={() => onPress()} style={styles.myEditButton}>
@@ -193,6 +303,7 @@ const styles = StyleSheet.create({
   myEditProfileImage: {
     width: 110,
     height: 110,
+    borderRadius: 60,
   },
   myEditName: {
     marginTop: 30,

@@ -16,7 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import { addFoodStyle } from '../redux/userSlice';
+import { addFoodEditStyle, addfoodEditStateStyle } from '../redux/userSlice';
 
 const EditStyleScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -47,11 +47,7 @@ const EditStyleScreen: React.FC = () => {
         borderColor: '#dfe2e5',
       },
       headerLeft: () => (
-        <TouchableOpacity
-          style={styles.BackIcon}
-          onPress={() => {
-            navigation.navigate('MyEdit');
-          }}>
+        <TouchableOpacity style={styles.BackIcon} onPress={() => onPress()}>
           <Image source={require(`../assets/icons/Left.png`)}></Image>
         </TouchableOpacity>
       ),
@@ -61,7 +57,7 @@ const EditStyleScreen: React.FC = () => {
   headerStyle();
 
   const dispatch = useAppDispatch();
-  const { foodStyle } = useAppSelector((state) => state.users);
+  const { foodStyle, foodEditStateStyle, foodEditStyle } = useAppSelector((state) => state.users);
 
   const [checkbox1, setCheckbox1] = useState(false);
   const [checkbox2, setCheckbox2] = useState(false);
@@ -72,7 +68,10 @@ const EditStyleScreen: React.FC = () => {
   const [checkState, setCheckState] = useState('');
 
   useEffect(() => {
-    if (foodStyle) {
+    if (foodEditStateStyle && foodEditStyle) {
+      handleCheckbox(foodEditStyle);
+    }
+    if (!foodEditStateStyle && foodStyle) {
       handleCheckbox(foodStyle);
     }
   }, []);
@@ -118,11 +117,11 @@ const EditStyleScreen: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    if (checkbox1 || checkbox2 || checkbox3 || checkbox4 || checkbox5) {
-      dispatch(addFoodStyle(checkState));
-    }
-  }, [checkbox1, checkbox2, checkbox3, checkbox4, checkbox5]);
+  const onPress = () => {
+    dispatch(addFoodEditStyle(checkState));
+    dispatch(addfoodEditStateStyle(true));
+    navigation.navigate('MyEdit');
+  };
 
   return (
     <Wrapper>

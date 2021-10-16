@@ -98,6 +98,7 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
   headerStyle();
 
   const { foodStyle, foodType, nickname, name } = useAppSelector((state) => state.users);
+  const { profileUri, defaultImageState } = useAppSelector((state) => state.modals);
   const { scrollState } = useAppSelector((state) => state.profiles);
 
   const [scrollNum, setScrollNum] = useState(0);
@@ -190,10 +191,17 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
         }}>
         <MyScreenInfoContainer>
           <TouchableOpacity onPress={() => navigations.navigate('MyEdit')}>
-            <Image
-              source={require(`../assets/icons/defaultProfile.png`)}
-              style={{ width: 95, height: 95, marginLeft: 10 }}
-            />
+            {defaultImageState ? (
+              <Image
+                source={{ uri: profileUri }}
+                style={{ width: 95, height: 95, marginLeft: 10, borderRadius: 60 }}
+              />
+            ) : (
+              <Image
+                source={require(`../assets/icons/defaultProfile.png`)}
+                style={{ width: 95, height: 95, marginLeft: 10, borderRadius: 60 }}
+              />
+            )}
           </TouchableOpacity>
           <View style={styles.myScreenInfoItem}>
             <Text style={styles.myScreenInfoText}>{name}</Text>

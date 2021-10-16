@@ -80,8 +80,6 @@ const LoginScreen: React.FC = () => {
     }
   };
 
-  // console.log(token, '????');
-
   const onPress = async () => {
     if (Platform.OS === 'android') {
       await signInWithKakao();
