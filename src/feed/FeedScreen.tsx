@@ -24,6 +24,7 @@ const FeedScreen: React.FC = () => {
   const headerStyle = () => {
     navigation.setOptions({
       headerShown: false,
+      headerLeft: null,
     });
   };
 
@@ -37,6 +38,15 @@ const FeedScreen: React.FC = () => {
     dispatch(fetchFeedData());
   }, []);
 
+  useEffect(() => {
+    if (navigation.getState()?.routeNames[0] === 'Feed') {
+      navigation.addListener('beforeRemove', (e) => {
+        e.preventDefault();
+      });
+    }
+  }, []);
+
+  // 스크롤 이벤트
   const scrollY = new Animated.Value(0);
   const translateY = scrollY.interpolate({
     inputRange: [0, 90],
