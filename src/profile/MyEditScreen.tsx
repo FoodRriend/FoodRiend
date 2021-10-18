@@ -326,7 +326,7 @@ const styles = StyleSheet.create({
     alignContent: 'space-between',
   },
   myEditItemBox: {
-    width: 327,
+    width: '100%',
     height: 56,
     marginTop: 8,
     borderRadius: 32,
@@ -364,7 +364,7 @@ const styles = StyleSheet.create({
     marginLeft: 16,
   },
   myEditButton: {
-    width: 327,
+    width: '80%',
     height: 56,
     borderRadius: 32,
     backgroundColor: '#fe554a',
@@ -393,13 +393,13 @@ const Wrapper = styled.View({
 });
 
 const MyEditInfoStyleContainer = styled.View({
-  width: 327,
+  width: '80%',
   height: 93,
   marginTop: 43,
 });
 
 const MyEditInfoFoodContainer = styled.View({
-  width: 327,
+  width: '80%',
   height: 93,
   marginTop: 34,
 });

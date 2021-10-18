@@ -405,7 +405,7 @@ export default MyScreen;
 
 const styles = StyleSheet.create({
   myScreenInfoItem: {
-    width: 135,
+    width: '38%',
     height: 95,
     paddingLeft: 23,
     justifyContent: 'space-between',
@@ -416,14 +416,7 @@ const styles = StyleSheet.create({
     color: '#2a3037',
   },
   myScreenInfoFriendItem: {
-    ...Platform.select({
-      ios: {
-        width: 135,
-      },
-      android: {
-        width: 155,
-      },
-    }),
+    width: '25%',
     height: 95,
     paddingLeft: 9,
     justifyContent: 'space-between',
@@ -468,21 +461,20 @@ const styles = StyleSheet.create({
 });
 
 const MyScreenInfoContainer = styled.View({
-  width: Dimensions.get('window').width,
+  width: '100%',
   height: 160,
   justifyContent: 'center',
   ...Platform.select({
     ios: {
-      paddingHorizontal: 17,
+      paddingLeft: '6%',
     },
     android: {
-      paddingHorizontal: 27,
+      paddingLeft: '8%',
     },
   }),
   flexWrap: 'wrap',
   borderBottomWidth: 0.4,
   borderBottomColor: '#FE554A',
-  backgroundColor: '#fff',
 });
 
 const MyScreenFavInfoContainer = styled.View({

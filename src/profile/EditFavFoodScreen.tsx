@@ -16,7 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 import favFoodData from '../onBoarding/constants/FavFoodData';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import {  addFoodEditType, addFoodEditStateType } from '../redux/userSlice';
+import { addFoodEditType, addFoodEditStateType } from '../redux/userSlice';
 
 interface IRenderItemProps {
   title: string;
@@ -272,10 +272,10 @@ const styles = StyleSheet.create({
   favFoodContainer: {
     ...Platform.select({
       ios: {
-        marginTop: 61,
+        marginTop: '10%',
       },
       android: {
-        marginTop: 31,
+        marginTop: '7%',
       },
     }),
   },

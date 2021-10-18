@@ -82,15 +82,15 @@ const LoginScreen: React.FC = () => {
 
   const onPress = async () => {
     if (Platform.OS === 'android') {
-      await signInWithKakao();
-      await getProfile();
-      PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
-        title: 'Contacts',
-        message: 'This app would like to view your contacts.',
-        buttonPositive: 'Please accept bare mortal',
-      }).then(() => {
-        getList();
-      });
+      //   await signInWithKakao();
+      //   await getProfile();
+      //   PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
+      //     title: 'Contacts',
+      //     message: 'This app would like to view your contacts.',
+      //     buttonPositive: 'Please accept bare mortal',
+      //   }).then(() => {
+      //     getList();
+      //   });
       navigation.navigate('Terms');
     } else {
       getList();
@@ -110,11 +110,20 @@ const LoginScreen: React.FC = () => {
           <Text style={styles.TitleText}>맛있는 순간을 함께 하다!</Text>
         </LoginTitleContainer>
         <LoginImageContainer>
-          <Image
-            source={require('../assets/images/onBoading/login/loginImage1.png')}
-            style={styles.loginImage1}
-          />
-          <LoginImageItems>
+          <View style={styles.loginImage1}>
+            <Image
+              source={require('../assets/images/onBoading/login/loginImage1.png')}
+              style={{ width: '100%', height: '100%', borderRadius: 10 }}
+            />
+          </View>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              marginTop: 10,
+              width: '95%',
+              height: '34%',
+            }}>
             <Image
               source={require('../assets/images/onBoading/login/loginImage2.png')}
               style={styles.loginImage2}
@@ -123,8 +132,16 @@ const LoginScreen: React.FC = () => {
               source={require('../assets/images/onBoading/login/loginImage3.png')}
               style={styles.loginImage3}
             />
-          </LoginImageItems>
-          <LoginImageItems>
+          </View>
+
+          <View
+            style={{
+              width: '95%',
+              height: '20%',
+              display: 'flex',
+              flexDirection: 'row',
+              marginTop: 10,
+            }}>
             <Image
               source={require('../assets/images/onBoading/login/loginImage4.png')}
               style={styles.loginImage4}
@@ -133,30 +150,31 @@ const LoginScreen: React.FC = () => {
               source={require('../assets/images/onBoading/login/loginImage5.png')}
               style={styles.loginImage5}
             />
-          </LoginImageItems>
-          <Image
-            source={require('../assets/images/onBoading/login/loginImage6.png')}
-            style={styles.loginImage6}
-          />
-
-          <TouchableOpacity onPress={onPress}>
+          </View>
+          <View style={styles.loginImage6}>
             <Image
-              source={require('../assets/images/onBoading/login/kakao_login.png')}
-              style={styles.kakaoLoginBtn}
-              resizeMode="contain"
+              source={require('../assets/images/onBoading/login/loginImage6.png')}
+              style={{ width: '100%', height: '100%', borderRadius: 10 }}
             />
-          </TouchableOpacity>
-
-          <Image
-            source={require('../assets/images/onBoading/login/Rectangle.png')}
-            style={{
-              width: '95%',
-              height: 95,
-              position: 'absolute',
-              bottom: 83,
-            }}
-          />
+            <Image
+              source={require('../assets/images/onBoading/login/Rectangle.png')}
+              style={{
+                width: '100%',
+                height: '100%',
+                borderRadius: 10,
+                position: 'absolute',
+                top: 0,
+              }}
+            />
+          </View>
         </LoginImageContainer>
+        <TouchableOpacity onPress={onPress}>
+          <Image
+            source={require('../assets/images/onBoading/login/kakao_login.png')}
+            resizeMode="contain"
+            style={styles.kakaoLoginBtn}
+          />
+        </TouchableOpacity>
       </View>
     </Wrapper>
   );
@@ -166,8 +184,8 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   TitleImage: {
-    width: 170,
-    height: 70,
+    width: '80%',
+    height: '60%',
   },
   TitleText: {
     color: '#2a3037',
@@ -182,58 +200,40 @@ const styles = StyleSheet.create({
     }),
   },
   loginImage1: {
-    borderRadius: 10,
     width: '95%',
-    height: 95,
-    top: -65,
+    height: '18%',
   },
   loginImage2: {
     borderRadius: 10,
-    width: '43%',
-    height: 192,
-    top: -55,
+    width: '45.5%',
+    height: '100%',
   },
   loginImage3: {
     borderRadius: 10,
-    width: '49%',
-    height: 192,
-    top: -55,
-    marginLeft: 10,
+    width: '51.5%',
+    height: '100%',
+    marginLeft: '3%',
   },
   loginImage4: {
     borderRadius: 10,
-    width: '49%',
-    height: 120,
-    top: -45,
+    width: '51.5%',
+    height: '100%',
   },
   loginImage5: {
     borderRadius: 10,
-    width: '43%',
-    height: 120,
-    top: -45,
-    marginLeft: 10,
+    width: '45.5%',
+    height: '100%',
+    marginLeft: '3%',
   },
   loginImage6: {
-    borderRadius: 10,
     width: '95%',
-    height: 95,
-    top: -35,
+    height: '18%',
+    marginTop: 10,
   },
   kakaoLoginBtn: {
-    borderRadius: 30,
-    height: 48,
-    ...Platform.select({
-      ios: {
-        width: 300,
-      },
-      android: {
-        width: '100%',
-        marginTop: 5,
-      },
-    }),
-    top: -18,
-    alignSelf: 'center',
-    left: -9,
+    height: 50,
+    width: '100%',
+    alignItems: 'center',
   },
   platformWrapper: {
     ...Platform.select({
@@ -246,34 +246,34 @@ const styles = StyleSheet.create({
         height: '100%',
       },
     }),
-    justifyContent: 'center',
   },
 });
 
 const Wrapper = styled.View({
+  ...Platform.select({
+    ios: {
+      marginTop: 30,
+    },
+  }),
   position: 'relative',
-  // paddingTop: 44,
   flex: 1,
-  alignContent: 'center',
-  justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: '#fff',
 });
 
 const LoginTitleContainer = styled.View({
-  // paddingTop: 80,
   width: '60%',
+  height: '15%',
   paddingLeft: 18,
   backgroundColor: '#fff',
+  position: 'absolute',
+  top: '5%',
 });
 
 const LoginImageContainer = styled.View({
-  paddingTop: 10,
   paddingLeft: 18,
   zIndex: -1,
-});
-
-const LoginImageItems = styled.View({
-  display: 'flex',
-  flexDirection: 'row',
+  width: '100%',
+  height: '73%',
+  marginTop: '23%',
 });
