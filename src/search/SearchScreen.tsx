@@ -1,12 +1,14 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from '@emotion/native';
 
-import { Platform } from 'react-native';
+import { Alert, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { fetchSearchData } from '@/redux/searchSlice';
 import SearchTextInput from './components/SearchTextInput';
+
+import messaging from '@react-native-firebase/messaging';
 
 const SearchScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -48,6 +50,13 @@ const SearchScreen: React.FC = () => {
   const handleSearchInput = useCallback((e: string) => {
     setSearchInput(e);
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+    return unsubscribe;
+  });
 
   const onSubmitHandler = async () => {
     setSearchInput('');

@@ -21,7 +21,6 @@ import { addFoodStyle } from '../redux/userSlice';
 const AddStyleScreen: React.FC = () => {
   const navigation = useNavigation();
 
-
   const headerStyle = () => {
     navigation.setOptions({
       headerShown: true,
@@ -155,25 +154,27 @@ const AddStyleScreen: React.FC = () => {
               }}
             />
           </View>
-          <View style={styles.StyleText}>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.StyleItemTitle}>지역 맛집 탐험가</Text>
-              <BouncyCheckbox
-                size={18}
-                style={{ paddingLeft: 10 }}
-                disableBuiltInState
-                fillColor="#dfe2e5"
-                unfillColor="#FFFFFF"
-                isChecked={checkbox1}
-                onPress={() => handleCheckbox('지역 맛집 탐험가')}
-                iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
-              />
+          <Pressable onPress={() => handleCheckbox('지역 맛집 탐험가')}>
+            <View style={styles.StyleText}>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={styles.StyleItemTitle}>지역 맛집 탐험가</Text>
+                <BouncyCheckbox
+                  size={18}
+                  style={{ paddingLeft: 10 }}
+                  disableBuiltInState
+                  fillColor="#dfe2e5"
+                  unfillColor="#FFFFFF"
+                  isChecked={checkbox1}
+                  onPress={() => handleCheckbox('지역 맛집 탐험가')}
+                  iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
+                />
+              </View>
+              <Text style={styles.StyleItemContent}>
+                새로운 곳에 갔으면 그 지역 맛집을 찾아야지! {'\n'}전국 8도 그 지역에 있는 맛집을
+                먹어보는 것을 좋아해요.
+              </Text>
             </View>
-            <Text style={styles.StyleItemContent}>
-              새로운 곳에 갔으면 그 지역 맛집을 찾아야지! {'\n'}전국 8도 그 지역에 있는 맛집을
-              먹어보는 것을 좋아해요.
-            </Text>
-          </View>
+          </Pressable>
         </StyleListItem>
         <StyleListItem>
           <View style={styles.StyleImage}>
@@ -182,25 +183,27 @@ const AddStyleScreen: React.FC = () => {
               style={{ width: '80%', height: '80%', resizeMode: 'contain' }}
             />
           </View>
-          <View style={styles.StyleText}>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.StyleItemTitle}>새로운 음식 모험가</Text>
-              <BouncyCheckbox
-                size={18}
-                style={{ paddingLeft: 10 }}
-                disableBuiltInState
-                fillColor="#dfe2e5"
-                unfillColor="#FFFFFF"
-                isChecked={checkbox2}
-                onPress={() => handleCheckbox('새로운 음식 모험가')}
-                iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
-              />
+          <Pressable onPress={() => handleCheckbox('새로운 음식 모험가')}>
+            <View style={styles.StyleText}>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={styles.StyleItemTitle}>새로운 음식 모험가</Text>
+                <BouncyCheckbox
+                  size={18}
+                  style={{ paddingLeft: 10 }}
+                  disableBuiltInState
+                  fillColor="#dfe2e5"
+                  unfillColor="#FFFFFF"
+                  isChecked={checkbox2}
+                  onPress={() => handleCheckbox('새로운 음식 모험가')}
+                  iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
+                />
+              </View>
+              <Text style={styles.StyleItemContent}>
+                세상에 얼마나 많은 음식이 있는데... {'\n'}어떻게 같은 것만 먹어! {'\n'}평소에
+                먹어보지 못한 음식을 먹는 것을 좋아해요.
+              </Text>
             </View>
-            <Text style={styles.StyleItemContent}>
-              세상에 얼마나 많은 음식이 있는데... {'\n'}어떻게 같은 것만 먹어! {'\n'}평소에 먹어보지
-              못한 음식을 먹는 것을 좋아해요.
-            </Text>
-          </View>
+          </Pressable>
         </StyleListItem>
         <StyleListItem>
           <View style={styles.StyleImage}>
@@ -209,25 +212,27 @@ const AddStyleScreen: React.FC = () => {
               style={{ width: '80%', height: '80%', resizeMode: 'contain' }}
             />
           </View>
-          <View style={styles.StyleText}>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.StyleItemTitle}>분야별 맛집 전문가</Text>
-              <BouncyCheckbox
-                size={18}
-                style={{ paddingLeft: 10 }}
-                disableBuiltInState
-                fillColor="#dfe2e5"
-                unfillColor="#FFFFFF"
-                isChecked={checkbox3}
-                onPress={() => handleCheckbox('분야별 맛집 전문가')}
-                iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
-              />
+          <Pressable onPress={() => handleCheckbox('분야별 맛집 전문가')}>
+            <View style={styles.StyleText}>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={styles.StyleItemTitle}>분야별 맛집 전문가</Text>
+                <BouncyCheckbox
+                  size={18}
+                  style={{ paddingLeft: 10 }}
+                  disableBuiltInState
+                  fillColor="#dfe2e5"
+                  unfillColor="#FFFFFF"
+                  isChecked={checkbox3}
+                  onPress={() => handleCheckbox('분야별 맛집 전문가')}
+                  iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
+                />
+              </View>
+              <Text style={styles.StyleItemContent}>
+                내가 좋아하는 음식의 끝판왕을 만나고 싶어 특정 음식의 매니아로 한 음식만 먹는 것을
+                좋아해요.
+              </Text>
             </View>
-            <Text style={styles.StyleItemContent}>
-              내가 좋아하는 음식의 끝판왕을 만나고 싶어 특정 음식의 매니아로 한 음식만 먹는 것을
-              좋아해요.
-            </Text>
-          </View>
+          </Pressable>
         </StyleListItem>
         <StyleListItem>
           <View style={styles.StyleImage}>
@@ -236,25 +241,27 @@ const AddStyleScreen: React.FC = () => {
               style={{ width: '80%', height: '80%', resizeMode: 'contain' }}
             />
           </View>
-          <View style={styles.StyleText}>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.StyleItemTitle}>숨은 맛집 개척자</Text>
-              <BouncyCheckbox
-                size={18}
-                style={{ paddingLeft: 10 }}
-                disableBuiltInState
-                fillColor="#dfe2e5"
-                unfillColor="#FFFFFF"
-                isChecked={checkbox4}
-                onPress={() => handleCheckbox('숨은 맛집 개척자')}
-                iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
-              />
+          <Pressable onPress={() => handleCheckbox('숨은 맛집 개척자')}>
+            <View style={styles.StyleText}>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={styles.StyleItemTitle}>숨은 맛집 개척자</Text>
+                <BouncyCheckbox
+                  size={18}
+                  style={{ paddingLeft: 10 }}
+                  disableBuiltInState
+                  fillColor="#dfe2e5"
+                  unfillColor="#FFFFFF"
+                  isChecked={checkbox4}
+                  onPress={() => handleCheckbox('숨은 맛집 개척자')}
+                  iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
+                />
+              </View>
+              <Text style={styles.StyleItemContent}>
+                TV, SNS에 나오는 맛집 말고{'\n'} 진짜 맛집을 찾고 싶어{'\n'} 유명하지 않아도 진짜
+                맛집을 찾는 것을 좋아해요
+              </Text>
             </View>
-            <Text style={styles.StyleItemContent}>
-              TV, SNS에 나오는 맛집 말고{'\n'} 진짜 맛집을 찾고 싶어{'\n'} 유명하지 않아도 진짜
-              맛집을 찾는 것을 좋아해요
-            </Text>
-          </View>
+          </Pressable>
         </StyleListItem>
         <StyleListItem>
           <View style={styles.StyleImage}>
@@ -263,24 +270,26 @@ const AddStyleScreen: React.FC = () => {
               style={{ width: '80%', height: '80%', resizeMode: 'contain' }}
             />
           </View>
-          <View style={styles.StyleText}>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.StyleItemTitle}>분위기 맛집 예술가</Text>
-              <BouncyCheckbox
-                size={18}
-                style={{ paddingLeft: 10 }}
-                disableBuiltInState
-                fillColor="#dfe2e5"
-                unfillColor="#FFFFFF"
-                isChecked={checkbox5}
-                onPress={() => handleCheckbox('분위기 맛집 예술가')}
-                iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
-              />
+          <Pressable onPress={() => handleCheckbox('분위기 맛집 예술가')}>
+            <View style={styles.StyleText}>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={styles.StyleItemTitle}>분위기 맛집 예술가</Text>
+                <BouncyCheckbox
+                  size={18}
+                  style={{ paddingLeft: 10 }}
+                  disableBuiltInState
+                  fillColor="#dfe2e5"
+                  unfillColor="#FFFFFF"
+                  isChecked={checkbox5}
+                  onPress={() => handleCheckbox('분위기 맛집 예술가')}
+                  iconStyle={{ borderColor: '#dfe2e5', borderRadius: 5 }}
+                />
+              </View>
+              <Text style={styles.StyleItemContent}>
+                맛에 취하고 분위기에 취한다. {'\n'}맛집을 찾을 때 분위기도 중요하게 생각해요.
+              </Text>
             </View>
-            <Text style={styles.StyleItemContent}>
-              맛에 취하고 분위기에 취한다. {'\n'}맛집을 찾을 때 분위기도 중요하게 생각해요.
-            </Text>
-          </View>
+          </Pressable>
         </StyleListItem>
       </View>
     </Wrapper>

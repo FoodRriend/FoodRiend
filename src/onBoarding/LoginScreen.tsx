@@ -83,21 +83,22 @@ const LoginScreen: React.FC = () => {
   // console.log(token, '????');
 
   const onPress = async () => {
-    if (Platform.OS === 'android') {
-      await signInWithKakao();
-      await getProfile();
-      PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
-        title: 'Contacts',
-        message: 'This app would like to view your contacts.',
-        buttonPositive: 'Please accept bare mortal',
-      }).then(() => {
-        getList();
-      });
-      navigation.navigate('Terms');
-    } else {
-      getList();
-      navigation.navigate('Terms');
-    }
+    navigation.navigate('Terms');
+    // if (Platform.OS === 'android') {
+    //   await signInWithKakao();
+    //   await getProfile();
+    //   PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
+    //     title: 'Contacts',
+    //     message: 'This app would like to view your contacts.',
+    //     buttonPositive: 'Please accept bare mortal',
+    //   }).then(() => {
+    //     getList();
+    //   });
+    //   navigation.navigate('Terms');
+    // } else {
+    //   getList();
+    //   navigation.navigate('Terms');
+    // }
   };
 
   return (
