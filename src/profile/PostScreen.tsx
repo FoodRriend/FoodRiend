@@ -17,6 +17,8 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import { postWriteInStorage } from '../redux/postSlice';
+
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 // import ImagePicker from 'react-native-image-picker';
@@ -96,7 +98,7 @@ const HandleFoodStyleImage = (name: any) => {
 const PostScreen: React.FC = () => {
   const navigation = useNavigation();
 
-  const { foodStyle, foodType } = useAppSelector((state) => state.users);
+  const { foodStyle, foodType, accessToken, userId } = useAppSelector((state) => state.users);
   const dispatch = useAppDispatch();
 
   const headerStyle = () => {
@@ -150,6 +152,27 @@ const PostScreen: React.FC = () => {
     },
     [inputContent],
   );
+
+  const onPress = () => {
+    if (rating && inputContent && avatar) {
+      dispatch(
+        postWriteInStorage({
+          accessToken,
+          mainImage: undefined,
+          foodCategory: 'restaurant',
+          menu: undefined,
+          contact: undefined,
+          title: '돼지집22',
+          location: '대한민국 인천광역시 남구 주안동 206-32번지',
+          img: avatar,
+          rating: rating,
+          reviews: inputContent,
+          hashtag: undefined,
+          userId: Number(userId),
+        }),
+      );
+    }
+  };
 
   const openCamara = () => {
     let options: any = {
@@ -401,7 +424,7 @@ const PostScreen: React.FC = () => {
           />
         </View>
       </PostContainer>
-      <TouchableOpacity style={styles.myEditButton}>
+      <TouchableOpacity onPress={() => onPress()} style={styles.myEditButton}>
         <Text style={styles.myEditButtonText}>기록하기</Text>
       </TouchableOpacity>
     </Wrapper>
