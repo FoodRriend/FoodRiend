@@ -7,7 +7,6 @@ interface ModalSlice {
   photoModal?: boolean;
   profilePhotoModal?: boolean;
   profileUri: string | undefined;
-  defaultImageState: boolean;
 }
 
 const initialState = {
@@ -17,7 +16,6 @@ const initialState = {
   photoModal: false,
   profilePhotoModal: false,
   profileUri: undefined,
-  defaultImageState: false,
 } as ModalSlice;
 
 const modalSlice = createSlice({
@@ -42,9 +40,6 @@ const modalSlice = createSlice({
     changeModalProfileUri: (state, action: PayloadAction<string>) => {
       state.profileUri = action.payload;
     },
-    isdefaultImageState: (state, action: PayloadAction<boolean>) => {
-      state.defaultImageState = action.payload;
-    },
   },
 });
 
@@ -55,6 +50,5 @@ export const {
   showPhotoModal,
   showProfilePhotoModal,
   changeModalProfileUri,
-  isdefaultImageState,
 } = modalSlice.actions;
 export default modalSlice.reducer;

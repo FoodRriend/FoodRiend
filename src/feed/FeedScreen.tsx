@@ -35,7 +35,7 @@ const FeedScreen: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const { data: feedData2, loading } = useAppSelector((state) => state.feed);
-  const { accessToken } = useAppSelector((state) => state.users);
+  const { accessToken, userId } = useAppSelector((state) => state.users);
 
   useEffect(() => {
     dispatch(fetchFeedData());
@@ -72,14 +72,19 @@ const FeedScreen: React.FC = () => {
   ];
 
   useEffect(() => {
-    console.log('settoken?', accessToken);
     AsyncStorage.setItem(
       'accessToken',
       JSON.stringify({
         accessToken,
       }),
     );
-  }, accessToken);
+    AsyncStorage.setItem(
+      'userId',
+      JSON.stringify({
+        userId,
+      }),
+    );
+  }, [accessToken, userId]);
 
   const renderSliceItem = ({ item, index }: { item: any; index: number }) => {
     if (index === 0) {

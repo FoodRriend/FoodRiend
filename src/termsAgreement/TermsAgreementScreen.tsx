@@ -117,18 +117,15 @@ const TermsAgreementScreen: React.FC = () => {
     }
   }, [isNewMember]);
 
-  // useEffect(() => {
-  //   AsyncStorage.setItem(
-  //     'accessToken',
-  //     JSON.stringify({
-  //       accessToken,
-  //     }),
-  //   );
-  // }, accessToken);
-
   if (loading) {
     return (
-      <View style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center' }}>
+      <View
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}>
         <ActivityIndicator />
       </View>
     );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/native';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 
 import {
   Text,
@@ -16,12 +17,15 @@ import {
 interface ITab {
   isFocused: boolean;
   label: string;
+  index: number;
   onPress: () => void;
   setToValue: (params: number) => void;
   setWidth: (params: number) => void;
 }
 
-const Tap = ({ isFocused, label, onPress, setToValue, setWidth }: ITab) => {
+const Tap = ({ isFocused, label, onPress, setToValue, setWidth, index }: ITab) => {
+  const { countData } = useAppSelector((state) => state.profiles);
+
   const [layout, setLayout] = useState<any>(null);
 
   useEffect(() => {
@@ -40,7 +44,9 @@ const Tap = ({ isFocused, label, onPress, setToValue, setWidth }: ITab) => {
       onLayout={onLayout}
       onPress={() => onPress()}
       style={styles.myScreenFavInfoItem}>
-      <Text style={styles.myScreenFavInfoNumber}>5</Text>
+      {index === 0 && <Text style={styles.myScreenFavInfoNumber}>{countData?.ate}</Text>}
+      {index === 1 && <Text style={styles.myScreenFavInfoNumber}>{countData?.want}</Text>}
+      {index === 2 && <Text style={styles.myScreenFavInfoNumber}>{countData?.best}</Text>}
       {isFocused ? (
         <Text style={styles.myScreenFavInfoTouchText}>{label}</Text>
       ) : (

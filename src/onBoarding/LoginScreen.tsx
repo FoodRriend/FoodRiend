@@ -9,8 +9,6 @@ import {
   Platform,
   TouchableOpacity,
   PermissionsAndroid,
-  BackHandler,
-  ToastAndroid,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -24,7 +22,13 @@ import axios from 'axios';
 import Contacts from 'react-native-contacts';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import { loginTypeUpdate, kakaoNameUpdate, kakaoIdUpdate } from '../redux/userSlice';
+import {
+  loginTypeUpdate,
+  kakaoNameUpdate,
+  kakaoIdUpdate,
+  accessTokenUpdate,
+  userIdUpdate,
+} from '../redux/userSlice';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -38,8 +42,7 @@ const LoginScreen: React.FC = () => {
   const [loginType, setLoginType] = useState<string>('');
 
   const [token, setToken] = useState('');
-
-  // useEffect(() => {}, [contacts]);
+  const [userId, setUserId] = useState('');
 
   useEffect(() => {
     dispatch(kakaoIdUpdate(Number(kakaoId)));
@@ -57,6 +60,8 @@ const LoginScreen: React.FC = () => {
     navigation.addListener('beforeRemove', (e) => {
       e.preventDefault();
     });
+    userTokenHandler();
+    userIdHandler();
   }, []);
 
   const signInWithKakao = async (): Promise<void> => {
@@ -71,9 +76,9 @@ const LoginScreen: React.FC = () => {
     setLoginType('Kakao');
   };
 
+  // 연락처
   const getList = async () => {
     let contacts = await Contacts.getAll();
-    // console.log(contacts, 'contacts???');
   };
 
   const userTokenHandler = async () => {
@@ -84,18 +89,34 @@ const LoginScreen: React.FC = () => {
     }
   };
 
+  const userIdHandler = async () => {
+    const userData = await AsyncStorage.getItem('userId');
+    if (userData) {
+      const userId = JSON.parse(userData);
+      setUserId(userId.userId);
+    }
+  };
+
+  console.log(userId, 'user??');
+
   const onPress = async () => {
-    if (Platform.OS === 'android') {=
-      //   await signInWithKakao();
-      //   await getProfile();
-      //   PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
-      //     title: 'Contacts',
-      //     message: 'This app would like to view your contacts.',
-      //     buttonPositive: 'Please accept bare mortal',
-      //   }).then(() => {
-      //     getList();
-      //   });
-      navigation.navigate('Terms');
+    if (Platform.OS === 'android') {
+      if (token) {
+        dispatch(userIdUpdate(Number(userId)));
+        dispatch(accessTokenUpdate(token));
+        navigation.navigate('Feed');
+      } else {
+        await signInWithKakao();
+        await getProfile();
+        PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
+          title: 'Contacts',
+          message: 'This app would like to view your contacts.',
+          buttonPositive: 'Please accept bare mortal',
+        }).then(() => {
+          getList();
+        });
+        navigation.navigate('Terms');
+      }
     } else {
       //소셜 임시 대체
       setKakaoId('1111111111');
