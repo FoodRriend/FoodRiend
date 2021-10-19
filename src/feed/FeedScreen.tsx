@@ -18,6 +18,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { fetchFeedData, userType } from '@/redux/feedSlice';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const FeedScreen: React.FC = () => {
   const navigation = useNavigation();
 
@@ -33,6 +35,7 @@ const FeedScreen: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const { data: feedData2, loading } = useAppSelector((state) => state.feed);
+  const { accessToken } = useAppSelector((state) => state.users);
 
   useEffect(() => {
     dispatch(fetchFeedData());
@@ -67,6 +70,16 @@ const FeedScreen: React.FC = () => {
     { name: '' },
     { name: '' },
   ];
+
+  useEffect(() => {
+    console.log('settoken?', accessToken);
+    AsyncStorage.setItem(
+      'accessToken',
+      JSON.stringify({
+        accessToken,
+      }),
+    );
+  }, accessToken);
 
   const renderSliceItem = ({ item, index }: { item: any; index: number }) => {
     if (index === 0) {
@@ -104,7 +117,6 @@ const FeedScreen: React.FC = () => {
   const renderItem = ({ item, index }: { item: userType; index: number }) => {
     return (
       <>
-        {/* 여기 원리가 뭔지 궁금하네요  flatList에 index가 왜 0번째에 추가해야만 UI가안꺠지는 궁금합니다.*/}
         {!index && (
           <View
             style={{
@@ -162,7 +174,6 @@ const FeedScreen: React.FC = () => {
 
   return (
     <Wrapper>
-      {/* 상단 프로필 이미지가 안보이게 가리시는 용도로 사용하셨네요 ㅋㅋ 뭔지 한참 찾았습니다 */}
       {Platform.OS === 'ios' ? (
         <View
           style={{
@@ -181,7 +192,6 @@ const FeedScreen: React.FC = () => {
       <View
         style={{
           width: '100%',
-
           position: 'absolute',
           zIndex: 2,
           backgroundColor: '#fff',
@@ -395,12 +405,12 @@ const Wrapper = styled.View({
 const FeedListContainer = styled.View({
   ...Platform.select({
     ios: {
-      width: 350,
-      height: 670,
+      width: '90%',
+      height: '88.5%',
     },
     android: {
-      width: 360,
-      height: 657,
+      width: '90%',
+      height: '93.8%',
     },
   }),
   ...Platform.select({
@@ -408,7 +418,7 @@ const FeedListContainer = styled.View({
       marginTop: 85,
     },
     android: {
-      marginTop: 41,
+      marginTop: 40,
     },
   }),
 });

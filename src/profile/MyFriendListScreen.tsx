@@ -274,7 +274,7 @@ const Wrapper = styled.View({
 });
 
 const MyFriendListSearchBox = styled.View({
-  width: 335,
+  width: '82%',
   height: 45,
   borderRadius: 10,
   backgroundColor: '#f0f0f0',
@@ -283,7 +283,7 @@ const MyFriendListSearchBox = styled.View({
 });
 
 const MyFriendListContainer = styled.View({
-  width: 335,
+  width: '83%',
   marginTop: 33,
   borderRadius: 10,
   borderWidth: 1,

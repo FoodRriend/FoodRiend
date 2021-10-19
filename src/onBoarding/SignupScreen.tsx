@@ -256,15 +256,15 @@ const SignupScreen: React.FC = () => {
           <Text style={styles.inputValidityFalseText}>{denyMessage}</Text>
         )}
       </View>
-      {inputCheck && inputNameCheck && nicknameCheck ? (
-        <TouchableOpacity onPress={onPress} style={styles.SignupComplete}>
-          <Text style={styles.SignupCompleteText}>완료</Text>
-        </TouchableOpacity>
-      ) : (
+      {/* {inputCheck && inputNameCheck && nicknameCheck ? ( */}
+      <TouchableOpacity onPress={onPress} style={styles.SignupComplete}>
+        <Text style={styles.SignupCompleteText}>완료</Text>
+      </TouchableOpacity>
+      {/* ) : (
         <Pressable style={styles.SignupFalse}>
           <Text style={styles.SignupCompleteText}>완료</Text>
         </Pressable>
-      )}
+      )} */}
     </Wrapper>
   );
 };
@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
   },
   InPutNickname: {
     width: '70%',
-    height: 44,
+    height: '100%',
     paddingLeft: 15,
     fontSize: 15,
     fontWeight: '500',
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
     }),
   },
   SignupComplete: {
-    width: 327,
+    width: '80%',
     height: 56,
     borderRadius: 32,
     backgroundColor: '#fe554a',
@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   SignupFalse: {
-    width: 327,
+    width: '80%',
     height: 56,
     borderRadius: 32,
     backgroundColor: '#DFE2E6',
@@ -420,7 +420,7 @@ const Wrapper = styled.View({
 const InputContainer = styled.View({
   borderStyle: 'solid',
   borderWidth: 1,
-  width: 327,
+  width: '80%',
   height: 56,
   borderRadius: 32,
   borderColor: '#d0dbea',
