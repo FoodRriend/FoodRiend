@@ -9,6 +9,8 @@ import {
   Platform,
   TouchableOpacity,
   PermissionsAndroid,
+  BackHandler,
+  ToastAndroid,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -51,6 +53,12 @@ const LoginScreen: React.FC = () => {
     dispatch(loginTypeUpdate(loginType));
   }, [loginType]);
 
+  useEffect(() => {
+    navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault();
+    });
+  }, []);
+
   const signInWithKakao = async (): Promise<void> => {
     const token: KakaoOAuthToken = await login();
     // 카카오 토큰 : 필요시 나중에 수정
@@ -62,10 +70,6 @@ const LoginScreen: React.FC = () => {
     setName(profile.nickname);
     setLoginType('Kakao');
   };
-
-  useEffect(() => {
-    userTokenHandler();
-  }, []);
 
   const getList = async () => {
     let contacts = await Contacts.getAll();
@@ -81,7 +85,7 @@ const LoginScreen: React.FC = () => {
   };
 
   const onPress = async () => {
-    if (Platform.OS === 'android') {
+    if (Platform.OS === 'android') {=
       //   await signInWithKakao();
       //   await getProfile();
       //   PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
@@ -93,6 +97,10 @@ const LoginScreen: React.FC = () => {
       //   });
       navigation.navigate('Terms');
     } else {
+      //소셜 임시 대체
+      setKakaoId('1111111111');
+      setName('오우영');
+      setLoginType('Kakao');
       getList();
       navigation.navigate('Terms');
     }

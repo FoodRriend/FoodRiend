@@ -4,7 +4,9 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-import { Image, Platform } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+import { BackHandler, Image, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -198,13 +200,6 @@ const SearchStackScreen = () => {
 };
 
 const App: React.FC<void> = () => {
-  // const [loding, setLoding] = useState(false);
-  // const isTrue = () => {
-  //   setLoding(true);
-  // };
-  // const loding = test();
-  // setTimeout(isTrue, 3000);
-
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -213,14 +208,26 @@ const App: React.FC<void> = () => {
             headerShown: false,
           }}
           headerMode="screen"
-          // initialRouteName={loding ? 'Login' : 'Splash'}
           initialRouteName="Splash">
           <Stack.Screen name="Splash" component={SplashScreen} />
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen
+            name="Login"
+            key="LoginScreen"
+            component={LoginScreen}
+            options={() => ({
+              gestureEnabled: false,
+            })}
+          />
 
           <Stack.Screen name="Signup" component={SignupContainer} />
 
-          <Stack.Screen name="Feed" component={BottomTap} />
+          <Stack.Screen
+            name="Feed"
+            component={BottomTap}
+            options={() => ({
+              gestureEnabled: false,
+            })}
+          />
           <Stack.Screen name="PostReview" component={FriendPostReviewScreen} />
 
           <Stack.Screen name="MyEdit" component={MyEditScreen} />

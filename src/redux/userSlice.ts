@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import dev from '../config/env';
 
 interface UserState {
   foodStyle: string | undefined;
@@ -43,14 +44,13 @@ export const kakaoLoginInStorage = createAsyncThunk(
   'users/kakaoLoginInStorage',
   async ({ kakaoId, loginType }: { kakaoId: number; loginType: string }) => {
     const response = await axios.post(
-      `https://fat-impala-57.loca.lt/api/auth/kakao`,
+      `${dev.REACT_APP_SERVER_URI}/api/auth/kakao`,
       { kakaoId, loginType },
       {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
       },
     );
-    console.log('??', response.data);
     return [
       response.headers['set-cookie'][0].split(' ')[0].split('=')[1].slice(0, -1),
       response.data,
@@ -74,7 +74,7 @@ export const kakaoSignupInStorage = createAsyncThunk(
     foodStyle?: string | undefined;
   }) => {
     const response = await axios.post(
-      `https://fat-impala-57.loca.lt/api/auth/createInfo`,
+      `${dev.REACT_APP_SERVER_URI}/api/auth/createInfo`,
       { name, nickname, foodType, foodStyle },
       {
         headers: { authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
