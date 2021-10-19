@@ -22,7 +22,7 @@ const SignupCompleteScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const dispatch = useAppDispatch();
-  const { name, accessToken, nickname, loading, foodStyle, foodType } = useAppSelector(
+  const { name, accessToken, loading, nickname, foodStyle, foodType } = useAppSelector(
     (state) => state.users,
   );
 
@@ -58,15 +58,17 @@ const SignupCompleteScreen: React.FC = () => {
   headerStyle();
 
   const onPress = async () => {
-    await dispatch(
-      kakaoSignupInStorage({
-        accessToken: accessToken,
-        nickname: nickname,
-        name: name,
-        foodType: foodType,
-        foodStyle: foodStyle,
-      }),
-    );
+    if (name && foodType && foodStyle) {
+      await dispatch(
+        kakaoSignupInStorage({
+          accessToken: accessToken,
+          nickname: nickname,
+          name: name,
+          foodType: foodType,
+          foodStyle: foodStyle,
+        }),
+      );
+    }
     navigation.navigate('Feed');
   };
 
@@ -85,10 +87,10 @@ const SignupCompleteScreen: React.FC = () => {
           width: '100%',
           ...Platform.select({
             ios: {
-              height: 430,
+              height: '57%',
             },
             android: {
-              height: 455,
+              height: '64%',
             },
           }),
         }}
@@ -122,8 +124,6 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   signupEndTitle: {
-    width: 129,
-    height: 32,
     ...Platform.select({
       ios: {
         fontSize: 22,
@@ -137,8 +137,6 @@ const styles = StyleSheet.create({
     paddingLeft: 3,
   },
   signupEndContentBox: {
-    width: 200,
-    height: 50,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -167,13 +165,12 @@ const styles = StyleSheet.create({
   signupEndButton: {
     ...Platform.select({
       ios: {
-        marginTop: 38,
-        width: 327,
+        marginTop: 28,
+        width: '80%',
         height: 56,
       },
       android: {
-        marginTop: 0,
-        width: 313,
+        width: '80%',
         height: 48,
       },
     }),
@@ -192,30 +189,14 @@ const styles = StyleSheet.create({
 });
 
 const Wrapper = styled.View({
-  ...Platform.select({
-    ios: {
-      paddingTop: 12,
-    },
-    android: {
-      paddingTop: 0,
-    },
-  }),
   backgroundColor: '#fff',
   flex: 1,
   alignItems: 'center',
 });
 
 const SignupEndTextContainer = styled.View({
-  width: 390,
-  height: 160,
-  ...Platform.select({
-    ios: {
-      height: 160,
-    },
-    android: {
-      height: 140,
-    },
-  }),
+  width: '100%',
+  height: '20%',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',

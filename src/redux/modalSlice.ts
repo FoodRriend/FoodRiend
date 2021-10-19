@@ -5,6 +5,8 @@ interface ModalSlice {
   selectModal?: boolean;
   boardModal?: boolean;
   photoModal?: boolean;
+  profilePhotoModal?: boolean;
+  profileUri: string | undefined;
 }
 
 const initialState = {
@@ -12,6 +14,8 @@ const initialState = {
   selectModal: false,
   boardModal: false,
   photoModal: false,
+  profilePhotoModal: false,
+  profileUri: undefined,
 } as ModalSlice;
 
 const modalSlice = createSlice({
@@ -30,9 +34,21 @@ const modalSlice = createSlice({
     showPhotoModal: (state, action: PayloadAction<boolean>) => {
       state.photoModal = action.payload;
     },
+    showProfilePhotoModal: (state, action: PayloadAction<boolean>) => {
+      state.profilePhotoModal = action.payload;
+    },
+    changeModalProfileUri: (state, action: PayloadAction<string>) => {
+      state.profileUri = action.payload;
+    },
   },
 });
 
-export const { showAlertModal, showSelectModal, showBoardModal, showPhotoModal } =
-  modalSlice.actions;
+export const {
+  showAlertModal,
+  showSelectModal,
+  showBoardModal,
+  showPhotoModal,
+  showProfilePhotoModal,
+  changeModalProfileUri,
+} = modalSlice.actions;
 export default modalSlice.reducer;

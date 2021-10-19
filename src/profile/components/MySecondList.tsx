@@ -193,7 +193,14 @@ const MySecondList = () => {
   };
 
   return (
-    <View style={{ width: '100%', height: '99.8%', backgroundColor: '#fff', alignItems: 'center' }}>
+    <View
+      style={{
+        width: '100%',
+        height: '99.8%',
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        paddingHorizontal: '3%',
+      }}>
       {Object.keys(myScreenData2[0]).length > 0 && (
         <FlatList
           showsVerticalScrollIndicator={false}
@@ -229,7 +236,7 @@ export default MySecondList;
 
 const styles = StyleSheet.create({
   myScreenRestaurantCover: {
-    width: 183,
+    width: '50%',
     alignItems: 'center',
     paddingTop: 6,
   },

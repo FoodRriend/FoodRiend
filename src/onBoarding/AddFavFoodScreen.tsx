@@ -83,7 +83,7 @@ const AddFavFoodScreen: React.FC = () => {
             <TouchableOpacity
               style={styles.rightIcon}
               onPress={() => {
-                navigation.navigate('AddFriends');
+                navigation.navigate('SignupComplete');
               }}>
               <Image source={require(`../assets/icons/RightVector.png`)}></Image>
             </TouchableOpacity>
@@ -242,14 +242,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    // paddingBottom: 20,
-    // borderColor: 'red',
-    // borderWidth: 1,
   },
   itemImage: {
     backgroundColor: '#fe554a20',
     borderRadius: 50,
-    // padding: 10,
     ...Platform.select({
       ios: { width: '86%', height: '70%', alignItems: 'center', justifyContent: 'center' },
       android: {
@@ -280,10 +276,10 @@ const styles = StyleSheet.create({
   favFoodContainer: {
     ...Platform.select({
       ios: {
-        marginTop: 61,
+        marginTop: '10%',
       },
       android: {
-        marginTop: 31,
+        marginTop: '7%',
       },
     }),
   },

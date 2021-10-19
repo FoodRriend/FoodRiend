@@ -12,6 +12,7 @@ import {
   Platform,
   ActivityIndicator,
   TouchableOpacity,
+  BackHandler,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -110,24 +111,21 @@ const TermsAgreementScreen: React.FC = () => {
     }
   }, [kakaoId, loginType]);
 
-  // useEffect(() => {
-  //   if (isNewMember === false) {
-  //     navigation.navigate('Feed');
-  //   }
-  // }, [isNewMember]);
-
-  // useEffect(() => {
-  //   AsyncStorage.setItem(
-  //     'accessToken',
-  //     JSON.stringify({
-  //       accessToken,
-  //     }),
-  //   );
-  // }, accessToken);
+  useEffect(() => {
+    if (isNewMember === false) {
+      navigation.navigate('Feed');
+    }
+  }, [isNewMember]);
 
   if (loading) {
     return (
-      <View style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center' }}>
+      <View
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}>
         <ActivityIndicator />
       </View>
     );

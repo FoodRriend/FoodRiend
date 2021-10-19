@@ -4,7 +4,6 @@ import styled from '@emotion/native';
 import {
   Text,
   View,
-  Pressable,
   StyleSheet,
   Image,
   Dimensions,
@@ -12,12 +11,18 @@ import {
   Animated,
   SafeAreaView,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+import { changeModalProfileUri } from '../redux/modalSlice';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
 import { Tap } from './components';
+import { addFoodType, addFoodStyle, addNickname, kakaoNameUpdate } from '../redux/userSlice';
+
+import { profileInStorage } from '../redux/profileSlice';
 
 const HandleFavFoodImage = (name: any) => {
   let FavFoodImagePath;
@@ -97,8 +102,12 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
 
   headerStyle();
 
-  const { foodStyle, foodType, nickname, name } = useAppSelector((state) => state.users);
-  const { scrollState } = useAppSelector((state) => state.profiles);
+  const dispatch = useAppDispatch();
+
+  const { foodStyle, foodType, nickname, name, userId } = useAppSelector((state) => state.users);
+  const { profileUri } = useAppSelector((state) => state.modals);
+  const { scrollState, loading, userData } = useAppSelector((state) => state.profiles);
+
 
   const [scrollNum, setScrollNum] = useState(0);
   const [scrollHeightNum, setScrollHeightNum] = useState(0);
@@ -170,6 +179,35 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
     }
   }, [scrollHeightNum, scrollHeightY]);
 
+
+  useEffect(() => {
+    if (userId !== undefined) {
+      dispatch(profileInStorage({ userId: userId }));
+    }
+  }, [userId, foodStyle, foodType, profileUri]);
+
+  useEffect(() => {
+    console.log(userData?.profileImage);
+    if (userData?.profileImage) {
+      dispatch(changeModalProfileUri(userData?.profileImage));
+    }
+  }, [userData]);
+
+  useEffect(() => {
+    if (userData?.name) {
+      dispatch(kakaoNameUpdate(userData.name));
+    }
+    if (userData?.nickname) {
+      dispatch(addNickname(userData.nickname));
+    }
+    if (userData?.foodType) {
+      dispatch(addFoodType(userData.foodType));
+    }
+    if (userData?.foodStyle) {
+      dispatch(addFoodStyle(userData.foodStyle));
+    }
+  }, [userData, foodStyle, foodType]);
+
   const MySreenHeader = () => {
     return (
       <Animated.View
@@ -190,10 +228,17 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
         }}>
         <MyScreenInfoContainer>
           <TouchableOpacity onPress={() => navigations.navigate('MyEdit')}>
-            <Image
-              source={require(`../assets/icons/defaultProfile.png`)}
-              style={{ width: 95, height: 95, marginLeft: 10 }}
-            />
+            {profileUri && profileUri?.length > 0 ? (
+              <Image
+                source={{ uri: profileUri }}
+                style={{ width: 95, height: 95, marginLeft: 10, borderRadius: 60 }}
+              />
+            ) : (
+              <Image
+                source={require(`../assets/icons/defaultProfile.png`)}
+                style={{ width: 95, height: 95, marginLeft: 10, borderRadius: 60 }}
+              />
+            )}
           </TouchableOpacity>
           <View style={styles.myScreenInfoItem}>
             <Text style={styles.myScreenInfoText}>{name}</Text>
@@ -251,7 +296,9 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Text style={{ fontSize: 17, fontWeight: '500', color: '#3e5481' }}>5</Text>
+              <Text style={{ fontSize: 17, fontWeight: '500', color: '#3e5481' }}>
+                {userData?.cntFriend}
+              </Text>
             </TouchableOpacity>
           </View>
         </MyScreenInfoContainer>
@@ -321,6 +368,7 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
                   onPress={onPress}
                   setToValue={setToValue}
                   setWidth={setWidth}
+                  index={index}
                 />
               );
             })}
@@ -336,6 +384,20 @@ const MyScreen = ({ state, navigation }: MaterialTopTabBarProps) => {
       </Animated.View>
     );
   };
+
+  if (loading) {
+    return (
+      <View
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView style={{ backgroundColor: '#fff' }}>
@@ -397,7 +459,7 @@ export default MyScreen;
 
 const styles = StyleSheet.create({
   myScreenInfoItem: {
-    width: 135,
+    width: '38%',
     height: 95,
     paddingLeft: 23,
     justifyContent: 'space-between',
@@ -408,14 +470,7 @@ const styles = StyleSheet.create({
     color: '#2a3037',
   },
   myScreenInfoFriendItem: {
-    ...Platform.select({
-      ios: {
-        width: 135,
-      },
-      android: {
-        width: 155,
-      },
-    }),
+    width: '25%',
     height: 95,
     paddingLeft: 9,
     justifyContent: 'space-between',
@@ -460,21 +515,20 @@ const styles = StyleSheet.create({
 });
 
 const MyScreenInfoContainer = styled.View({
-  width: Dimensions.get('window').width,
+  width: '100%',
   height: 160,
   justifyContent: 'center',
   ...Platform.select({
     ios: {
-      paddingHorizontal: 17,
+      paddingLeft: '6%',
     },
     android: {
-      paddingHorizontal: 27,
+      paddingLeft: '8%',
     },
   }),
   flexWrap: 'wrap',
   borderBottomWidth: 0.4,
   borderBottomColor: '#FE554A',
-  backgroundColor: '#fff',
 });
 
 const MyScreenFavInfoContainer = styled.View({

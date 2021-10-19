@@ -332,8 +332,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   StyleText: {
-    width: 234,
-    height: 90,
+    width: '62%',
+    height: '100%',
     marginLeft: 22,
   },
   StyleItemTitle: {
