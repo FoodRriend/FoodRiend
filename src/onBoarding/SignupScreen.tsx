@@ -256,15 +256,15 @@ const SignupScreen: React.FC = () => {
           <Text style={styles.inputValidityFalseText}>{denyMessage}</Text>
         )}
       </View>
-      {/* {inputCheck && inputNameCheck && nicknameCheck ? ( */}
-      <TouchableOpacity onPress={onPress} style={styles.SignupComplete}>
-        <Text style={styles.SignupCompleteText}>완료</Text>
-      </TouchableOpacity>
-      {/* ) : (
+      {inputCheck && inputNameCheck && nicknameCheck ? (
+        <TouchableOpacity onPress={onPress} style={styles.SignupComplete}>
+          <Text style={styles.SignupCompleteText}>완료</Text>
+        </TouchableOpacity>
+      ) : (
         <Pressable style={styles.SignupFalse}>
           <Text style={styles.SignupCompleteText}>완료</Text>
         </Pressable>
-      )} */}
+      )}
     </Wrapper>
   );
 };

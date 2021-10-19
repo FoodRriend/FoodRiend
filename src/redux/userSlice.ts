@@ -14,9 +14,10 @@ interface UserState {
   nicknameFalseCheck: boolean;
   kakaoId: number | undefined;
   loginType: string | undefined;
-  accessToken: Array<string> | undefined;
+  accessToken: any;
   name: string | undefined;
   isNewMember: boolean;
+  userId: number | undefined;
   loading: boolean;
   error: string | undefined;
 }
@@ -36,6 +37,7 @@ const initialState = {
   accessToken: undefined,
   name: undefined,
   isNewMember: true,
+  userId: undefined,
   loading: false,
   error: undefined,
 } as UserState;
@@ -51,6 +53,7 @@ export const kakaoLoginInStorage = createAsyncThunk(
         withCredentials: true,
       },
     );
+    console.log(response.data, 'data?');
     return [
       response.headers['set-cookie'][0].split(' ')[0].split('=')[1].slice(0, -1),
       response.data,
@@ -67,7 +70,7 @@ export const kakaoSignupInStorage = createAsyncThunk(
     foodType,
     foodStyle,
   }: {
-    accessToken: Array<string> | undefined;
+    accessToken: string | undefined;
     name?: string | undefined;
     nickname?: string | undefined;
     foodType?: string | undefined;
@@ -119,6 +122,12 @@ const userSlice = createSlice({
     kakaoIdUpdate: (state, action: PayloadAction<number>) => {
       state.kakaoId = action.payload;
     },
+    accessTokenUpdate: (state, action: PayloadAction<string>) => {
+      state.accessToken = action.payload;
+    },
+    userIdUpdate: (state, action: PayloadAction<number>) => {
+      state.userId = action.payload;
+    },
   },
   extraReducers: {
     [kakaoLoginInStorage.pending.type]: (state, action) => {
@@ -128,6 +137,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.accessToken = action.payload[0];
       state.isNewMember = action.payload[1].isNewMember;
+      state.userId = action.payload[1].userId;
     },
     [kakaoLoginInStorage.rejected.type]: (state, action) => {
       state.loading = false;
@@ -163,5 +173,7 @@ export const {
   loginTypeUpdate,
   kakaoNameUpdate,
   kakaoIdUpdate,
+  accessTokenUpdate,
+  userIdUpdate,
 } = userSlice.actions;
 export default userSlice.reducer;

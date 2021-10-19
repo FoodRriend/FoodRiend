@@ -9,11 +9,7 @@ import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { launchCamera, launchImageLibrary, ImagePickerResponse } from 'react-native-image-picker';
 
 import { ProfilePhotoModal } from '../shared/modal';
-import {
-  showProfilePhotoModal,
-  changeModalProfileUri,
-  isdefaultImageState,
-} from '../redux/modalSlice';
+import { showProfilePhotoModal, changeModalProfileUri } from '../redux/modalSlice';
 import {
   addFoodEditStyle,
   addfoodEditStateStyle,
@@ -22,6 +18,7 @@ import {
   addFoodStyle,
   addFoodType,
 } from '../redux/userSlice';
+import { profileEditInStorage } from '../redux/profileSlice';
 
 const MyEditScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -36,8 +33,10 @@ const MyEditScreen: React.FC = () => {
     foodEditStateStyle,
     foodEditStateType,
     foodEditType,
+    accessToken,
+    userId,
   } = useAppSelector((state) => state.users);
-  const { profileUri, defaultImageState } = useAppSelector((state) => state.modals);
+  const { userData } = useAppSelector((state) => state.profiles);
 
   const headerStyle = () => {
     navigation.setOptions({
@@ -141,19 +140,52 @@ const MyEditScreen: React.FC = () => {
     return <Image source={FoodStyleImagePath} style={styles.myEditItemBoxImage} />;
   };
 
-  const [avatar, setAvatar] = useState<string | undefined>(profileUri);
-  const [defaultImage, setDefalutImage] = useState(defaultImageState);
+  const [avatar, setAvatar] = useState<string | undefined>('');
+
+  useEffect(() => {
+    if (userData?.profileImage) {
+      setAvatar(userData?.profileImage);
+    }
+  }, []);
 
   const onPress = () => {
     if (avatar) {
       dispatch(changeModalProfileUri(avatar));
-      dispatch(isdefaultImageState(defaultImage));
+    } else {
+      dispatch(changeModalProfileUri(''));
+    }
+    if (userId) {
+      dispatch(
+        profileEditInStorage({
+          token: accessToken,
+          userId: userId,
+          profileImage: avatar,
+        }),
+      );
     }
     if (foodEditStateStyle && foodEditStyle) {
       dispatch(addFoodStyle(foodEditStyle));
+      if (userId) {
+        dispatch(
+          profileEditInStorage({
+            token: accessToken,
+            userId: userId,
+            foodStyle: foodEditStyle,
+          }),
+        );
+      }
     }
     if (foodEditStateType && foodEditType) {
       dispatch(addFoodType(foodEditType));
+      if (userId) {
+        dispatch(
+          profileEditInStorage({
+            token: accessToken,
+            userId: userId,
+            foodType: foodEditType,
+          }),
+        );
+      }
     }
     dispatch(addFoodEditStyle(''));
     dispatch(addfoodEditStateStyle(false));
@@ -175,7 +207,7 @@ const MyEditScreen: React.FC = () => {
   };
 
   const defaultImageHandler = () => {
-    setDefalutImage(false);
+    setAvatar('');
     dispatch(showProfilePhotoModal(false));
   };
 
@@ -193,7 +225,6 @@ const MyEditScreen: React.FC = () => {
         let uri = response.assets[0].uri;
         if (uri !== undefined) {
           setAvatar(uri);
-          setDefalutImage(true);
           dispatch(showProfilePhotoModal(false));
         }
       }
@@ -214,7 +245,6 @@ const MyEditScreen: React.FC = () => {
         let uri = response.assets[0].uri;
         if (uri !== undefined) {
           setAvatar(uri);
-          setDefalutImage(true);
           dispatch(showProfilePhotoModal(false));
         }
       }
@@ -229,7 +259,7 @@ const MyEditScreen: React.FC = () => {
         defaultImageHandler={defaultImageHandler}
       />
       <TouchableOpacity onPress={() => openModal()}>
-        {defaultImage ? (
+        {avatar && avatar?.length > 0 ? (
           <Image source={{ uri: avatar }} style={styles.myEditProfileImage} />
         ) : (
           <Image
