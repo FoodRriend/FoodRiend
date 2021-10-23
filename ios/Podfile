@@ -12,7 +12,6 @@ target 'FoodRiend_client' do
     :hermes_enabled => false
   )
 
-  pod 'react-native-contacts', :path => '../node_modules/react-native-contacts'
 
   target 'FoodRiend_clientTests' do
     inherit! :complete

@@ -44,9 +44,12 @@ const Tap = ({ isFocused, label, onPress, setToValue, setWidth, index }: ITab) =
       onLayout={onLayout}
       onPress={() => onPress()}
       style={styles.myScreenFavInfoItem}>
-      {index === 0 && <Text style={styles.myScreenFavInfoNumber}>{countData?.ate}</Text>}
+      {index === 0 && <Text style={styles.myScreenFavInfoNumber}>4</Text>}
+      {index === 1 && <Text style={styles.myScreenFavInfoNumber}>2</Text>}
+      {index === 2 && <Text style={styles.myScreenFavInfoNumber}>1</Text>}
+      {/* {index === 0 && <Text style={styles.myScreenFavInfoNumber}>{countData?.ate}</Text>}
       {index === 1 && <Text style={styles.myScreenFavInfoNumber}>{countData?.want}</Text>}
-      {index === 2 && <Text style={styles.myScreenFavInfoNumber}>{countData?.best}</Text>}
+      {index === 2 && <Text style={styles.myScreenFavInfoNumber}>{countData?.best}</Text>} */}
       {isFocused ? (
         <Text style={styles.myScreenFavInfoTouchText}>{label}</Text>
       ) : (

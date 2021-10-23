@@ -98,7 +98,10 @@ const HandleFoodStyleImage = (name: any) => {
 const PostScreen: React.FC = () => {
   const navigation = useNavigation();
 
-  const { foodStyle, foodType, accessToken, userId } = useAppSelector((state) => state.users);
+  const { foodStyle, foodType, accessToken, userId, nickname } = useAppSelector(
+    (state) => state.users,
+  );
+  const { profileUri } = useAppSelector((state) => state.modals);
   const dispatch = useAppDispatch();
 
   const headerStyle = () => {
@@ -171,6 +174,7 @@ const PostScreen: React.FC = () => {
           userId: Number(userId),
         }),
       );
+      navigation.navigate('MyPage');
     }
   };
 
@@ -283,10 +287,7 @@ const PostScreen: React.FC = () => {
       <PhotoModal openCamara={openCamara} openImageLibrary={openImageLibrary} />
       <PostContainer>
         <PostUserInfoContainer>
-          <Image
-            style={{ width: 48, height: 48 }}
-            source={require(`../assets/images/onBoading/friends/friend6.png`)}
-          />
+          <Image style={{ width: 48, height: 48, borderRadius: 50 }} source={{ uri: profileUri }} />
           <View
             style={{
               width: 250,
@@ -301,7 +302,7 @@ const PostScreen: React.FC = () => {
                 height: 25,
                 justifyContent: 'center',
               }}>
-              <Text style={{ fontSize: 15, fontWeight: '600', color: '#2A3037' }}>김민아</Text>
+              <Text style={{ fontSize: 15, fontWeight: '600', color: '#2A3037' }}>{nickname}</Text>
             </View>
             <View
               style={{

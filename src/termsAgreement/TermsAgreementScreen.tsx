@@ -111,11 +111,11 @@ const TermsAgreementScreen: React.FC = () => {
     }
   }, [kakaoId, loginType]);
 
-  useEffect(() => {
-    if (isNewMember === false) {
-      navigation.navigate('Feed');
-    }
-  }, [isNewMember]);
+  // useEffect(() => {
+  //   if (isNewMember === false) {
+  //     navigation.navigate('Feed');
+  //   }
+  // }, [isNewMember]);
 
   if (loading) {
     return (
