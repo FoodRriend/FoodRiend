@@ -61,14 +61,41 @@ const FeedScreen: React.FC = () => {
   });
 
   const SlideData = [
-    { name: '' },
-    { name: '' },
-    { name: '' },
-    { name: '' },
-    { name: '' },
-    { name: '' },
-    { name: '' },
-    { name: '' },
+    {
+      name: '김성현',
+      profileImg:
+        'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    },
+    {
+      name: '송고기',
+      profileImg:
+        'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+    },
+    {
+      name: '장백반',
+      profileImg:
+        'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    },
+    {
+      name: '김민아',
+      profileImg:
+        'https://images.unsplash.com/photo-1634052328882-eb611683bf32?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+    },
+    {
+      name: '김대먼',
+      profileImg:
+        'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    },
+    {
+      name: '서윤경',
+      profileImg:
+        'https://images.unsplash.com/photo-1634052328882-eb611683bf32?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+    },
+    {
+      name: '크리스티나',
+      profileImg:
+        'https://images.unsplash.com/photo-1634052328882-eb611683bf32?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+    },
   ];
 
   useEffect(() => {
@@ -87,7 +114,7 @@ const FeedScreen: React.FC = () => {
   }, [accessToken, userId]);
 
   const renderSliceItem = ({ item, index }: { item: any; index: number }) => {
-    if (index === 0) {
+    if (index === 4) {
       return (
         <View
           style={{ width: 74, height: 76, alignItems: 'center', marginTop: 10, marginLeft: 12 }}>
@@ -99,7 +126,39 @@ const FeedScreen: React.FC = () => {
               />
             </View>
           </TouchableOpacity>
-          <Text style={{ fontSize: 12, fontWeight: '400', marginTop: 6 }}>김대먼</Text>
+          <Text style={{ fontSize: 12, fontWeight: '400', marginTop: 6 }}>{item.name}</Text>
+        </View>
+      );
+    }
+    if (index === 5) {
+      return (
+        <View
+          style={{ width: 74, height: 76, alignItems: 'center', marginTop: 10, marginLeft: 12 }}>
+          <TouchableOpacity>
+            <View style={styles.feedSlideImageBorder}>
+              <Image
+                source={require(`../assets/images/onBoading/friends/friend6.png`)}
+                style={{ width: 50, height: 50 }}
+              />
+            </View>
+          </TouchableOpacity>
+          <Text style={{ fontSize: 12, fontWeight: '400', marginTop: 6 }}>{item.name}</Text>
+        </View>
+      );
+    }
+    if (index === 6) {
+      return (
+        <View
+          style={{ width: 74, height: 76, alignItems: 'center', marginTop: 10, marginLeft: 12 }}>
+          <TouchableOpacity>
+            <View style={styles.feedSlideImageBorder}>
+              <Image
+                source={require(`../assets/images/onBoading/friends/friend4.png`)}
+                style={{ width: 50, height: 50 }}
+              />
+            </View>
+          </TouchableOpacity>
+          <Text style={{ fontSize: 12, fontWeight: '400', marginTop: 6 }}>{item.name}</Text>
         </View>
       );
     }
@@ -108,13 +167,13 @@ const FeedScreen: React.FC = () => {
         <TouchableOpacity>
           <View style={styles.feedSlideImageBorder}>
             <Image
-              source={require(`../assets/images/onBoading/friends/friend5.png`)}
-              style={{ width: 50, height: 50 }}
+              source={{ uri: item.profileImg }}
+              style={{ width: 50, height: 50, borderRadius: 50 }}
             />
           </View>
         </TouchableOpacity>
 
-        <Text style={{ fontSize: 12, fontWeight: '400', marginTop: 6 }}>김대먼</Text>
+        <Text style={{ fontSize: 12, fontWeight: '400', marginTop: 6 }}>{item.name}</Text>
       </FeedSlideItem>
     );
   };

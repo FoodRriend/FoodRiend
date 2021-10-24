@@ -85,7 +85,7 @@ const MySecondList = () => {
             <View style={{ width: 160 }}>
               <Image
                 style={{ width: '100%', height: 153, borderRadius: 16 }}
-                source={require(`../../assets/images/profile/Rectangle1.png`)}
+                source={require(`../../assets/images/profile/Rectangle5.png`)}
               />
               <View style={{ flexWrap: 'wrap' }}>
                 <View style={{ width: '70%' }}>
@@ -128,7 +128,7 @@ const MySecondList = () => {
             <View style={{ width: 160 }}>
               <Image
                 style={{ width: '100%', height: 153, borderRadius: 16 }}
-                source={require(`../../assets/images/profile/Rectangle1.png`)}
+                source={require(`../../assets/images/profile/Rectangle6.png`)}
               />
               <View style={{ flexWrap: 'wrap' }}>
                 <View style={{ width: '70%' }}>
@@ -164,7 +164,7 @@ const MySecondList = () => {
           <View style={{ width: 160 }}>
             <Image
               style={{ width: '100%', height: 153, borderRadius: 16 }}
-              source={require(`../../assets/images/profile/Rectangle3.png`)}
+              source={require(`../../assets/images/profile/Rectangle6.png`)}
             />
             <View style={{ flexWrap: 'wrap' }}>
               <View style={{ width: '70%' }}>

@@ -19,7 +19,7 @@ import {
   // unlink,
 } from '@react-native-seoul/kakao-login';
 import axios from 'axios';
-import Contacts from 'react-native-contacts';
+// import Contacts from 'react-native-contacts';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import {
@@ -78,7 +78,7 @@ const LoginScreen: React.FC = () => {
 
   // 연락처
   const getList = async () => {
-    let contacts = await Contacts.getAll();
+    // let contacts = await Contacts.getAll();
   };
 
   const userTokenHandler = async () => {
@@ -97,24 +97,22 @@ const LoginScreen: React.FC = () => {
     }
   };
 
-  console.log(userId, 'user??');
-
   const onPress = async () => {
     if (Platform.OS === 'android') {
-      if (token) {
+      if (!token) {
         dispatch(userIdUpdate(Number(userId)));
         dispatch(accessTokenUpdate(token));
         navigation.navigate('Feed');
       } else {
         await signInWithKakao();
         await getProfile();
-        PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
-          title: 'Contacts',
-          message: 'This app would like to view your contacts.',
-          buttonPositive: 'Please accept bare mortal',
-        }).then(() => {
-          getList();
-        });
+        // PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
+        //   title: 'Contacts',
+        //   message: 'This app would like to view your contacts.',
+        //   buttonPositive: 'Please accept bare mortal',
+        // }).then(() => {
+        //   getList();
+        // });
         navigation.navigate('Terms');
       }
     } else {
@@ -122,7 +120,7 @@ const LoginScreen: React.FC = () => {
       setKakaoId('1111111111');
       setName('오우영');
       setLoginType('Kakao');
-      getList();
+      // getList();
       navigation.navigate('Terms');
     }
   };

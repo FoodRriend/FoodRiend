@@ -136,7 +136,7 @@ const MyFirstList = () => {
             <View style={{ width: 160 }}>
               <Image
                 style={{ width: '100%', height: 153, borderRadius: 16 }}
-                source={require(`../../assets/images/profile/Rectangle1.png`)}
+                source={require(`../../assets/images/profile/Rectangle7.png`)}
               />
               <View style={{ flexWrap: 'wrap' }}>
                 <View style={{ width: '70%' }}>
@@ -179,7 +179,44 @@ const MyFirstList = () => {
             <View style={{ width: 160 }}>
               <Image
                 style={{ width: '100%', height: 153, borderRadius: 16 }}
-                source={require(`../../assets/images/profile/Rectangle1.png`)}
+                source={require(`../../assets/images/profile/Rectangle8.png`)}
+              />
+              <View style={{ flexWrap: 'wrap' }}>
+                <View style={{ width: '70%' }}>
+                  <Text style={styles.myScreenRestaurantAddress}>{item.address}</Text>
+                  {item.name.length > 7 ? (
+                    <Text style={styles.myScreenRestaurantName}>{`${item.name.slice(
+                      0,
+                      6,
+                    )}...`}</Text>
+                  ) : (
+                    <Text style={styles.myScreenRestaurantName}>{item.name}</Text>
+                  )}
+                  <View style={styles.myScreenRestaurantContent}>
+                    <Image
+                      style={{ width: 20, height: 20, marginLeft: 2 }}
+                      source={require(`../../assets/icons/star.png`)}
+                    />
+                    <Text
+                      style={{ fontSize: 12, fontWeight: '500', color: '#2A3037', marginLeft: 3 }}>
+                      {item.score}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+    if (index === 3) {
+      return (
+        <View style={styles.myScreenRestaurantCover}>
+          <TouchableOpacity>
+            <View style={{ width: 160 }}>
+              <Image
+                style={{ width: '100%', height: 153, borderRadius: 16 }}
+                source={require(`../../assets/images/profile/Rectangle9.png`)}
               />
               <View style={{ flexWrap: 'wrap' }}>
                 <View style={{ width: '70%' }}>
@@ -250,7 +287,7 @@ const MyFirstList = () => {
         height: '99.8%',
         alignItems: 'center',
         paddingHorizontal: '3%',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
       }}>
       {Object.keys(myScreenData[0]).length > 0 && (
         <FlatList

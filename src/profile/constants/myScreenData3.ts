@@ -1,7 +1,7 @@
 const myScreenData3 = [
   {
-    address: '세종시 소담동',
-    name: '뭐먹지뭐먹지뭐먹지뭐먹지',
+    address: '서울시 강남구',
+    name: '톰스텍',
     score: 1,
   },
 ];
