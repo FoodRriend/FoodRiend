@@ -1,0 +1,6 @@
+module Pods_FoodRiend_client_FoodRiend_clientTests {
+  umbrella header "Pods-FoodRiend_client-FoodRiend_clientTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

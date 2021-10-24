@@ -1,0 +1,6 @@
+module Pods_FoodRiend_client {
+  umbrella header "Pods-FoodRiend_client-umbrella.h"
+
+  export *
+  module * { export * }
+}
