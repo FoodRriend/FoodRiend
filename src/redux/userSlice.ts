@@ -2,6 +2,17 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import dev from '../config/env';
 
+interface IGetTokenData {
+  isNewMember: boolean;
+  userId: number;
+}
+
+interface IGetToken {
+  token?: string;
+  data: IGetTokenData | null;
+  message?: string;
+}
+
 interface UserState {
   foodStyle: string | undefined;
   foodEditStyle: string | undefined;
@@ -12,7 +23,6 @@ interface UserState {
   nickname: string | undefined;
   nicknameCheck: boolean;
   nicknameFalseCheck: boolean;
-  kakaoId: number | undefined;
   loginType: string | undefined;
   accessToken: any;
   name: string | undefined;
@@ -32,9 +42,8 @@ const initialState = {
   nickname: undefined,
   nicknameCheck: false,
   nicknameFalseCheck: false,
-  kakaoId: undefined,
-  loginType: undefined,
-  accessToken: undefined,
+  loginType: undefined, // kakaoid와 동일
+  accessToken: undefined, // redux , store 둘 중 하나
   name: undefined,
   isNewMember: true,
   userId: undefined,
@@ -60,6 +69,51 @@ export const kakaoLoginInStorage = createAsyncThunk(
     ];
   },
 );
+
+export const getToken = async ({
+  kakaoId,
+  loginType,
+}: {
+  kakaoId: number;
+  loginType: string;
+}): Promise<IGetToken> => {
+  try {
+    console.log(dev.TEST_URL);
+    const response = await axios({
+      url: `${dev.TEST_URL}/api/auth/kakao`,
+      method: 'POST',
+      data: {
+        kakaoId,
+        loginType,
+      },
+    });
+
+    if (response.status < 200 || response.status >= 400 || !response.data) {
+      throw Error('오류 발생');
+    }
+
+    const token = response.headers['set-cookie'][0].split(' ')[0].split('=')[1].slice(0, -1);
+    return { token: token, data: response.data };
+  } catch (e) {
+    return { data: null, message: 'error' };
+  }
+};
+
+export const verifyToken = async (token: string) => {
+  try {
+    const response = await axios({
+      url: `${dev.TEST_URL}/api/auth/checkTokenExpires`,
+      method: 'GET',
+      headers: { Authorization: token },
+    });
+    if (response.status < 200 || response.status >= 400 || !response.data) {
+      throw Error('오류 발생');
+    }
+    return { data: response.data };
+  } catch (e) {
+    return { data: null, message: 'error' };
+  }
+};
 
 export const kakaoSignupInStorage = createAsyncThunk(
   'users/kakaoSignupInStorage',
@@ -119,9 +173,6 @@ const userSlice = createSlice({
     kakaoNameUpdate: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
-    kakaoIdUpdate: (state, action: PayloadAction<number>) => {
-      state.kakaoId = action.payload;
-    },
     accessTokenUpdate: (state, action: PayloadAction<string>) => {
       state.accessToken = action.payload;
     },
@@ -172,8 +223,6 @@ export const {
   addNickname,
   loginTypeUpdate,
   kakaoNameUpdate,
-  kakaoIdUpdate,
   accessTokenUpdate,
-  userIdUpdate,
 } = userSlice.actions;
 export default userSlice.reducer;
