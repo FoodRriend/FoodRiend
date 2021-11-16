@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.foodriend_client">
+  package="com.foodriend">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -29,7 +29,7 @@
 
                 <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
                 <data android:host="oauth"
-                    android:scheme="kaka{API_KEY}" />
+                    android:scheme="kakao{API_KEY}" />
             </intent-filter>
         </activity>
     </application>

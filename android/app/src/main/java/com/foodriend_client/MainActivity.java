@@ -1,4 +1,4 @@
-package com.foodriend_client;
+package com.foodriend;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "FoodRiend_client";
+    return "FoodRiend";
   }
 }
